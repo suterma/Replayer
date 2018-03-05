@@ -1,0 +1,1 @@
+These are specially craftet quirli files, that replace some of the web variant files. They are optimized for offline use from a local file system.

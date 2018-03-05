@@ -1,0 +1,119 @@
+/*
+    quirli, replay with ease.
+    Copyright (C) 2012 by marcel suter, marcel@codeministry.ch
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*Modifications to bootstrap to make it more the way quirli should look like*/
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  padding: 70px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #777;
+}
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
+/*nicer blue for labels and badges that matches the blue primary buttons
+-------------------------------------------------- */
+.label-primary,
+.badge-primary {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #006dcc;
+  *background-color: #0044cc;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+  background-repeat: repeat-x;
+  border-color: #0044cc #0044cc #002a80;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+} 
+
+/*black dropdown background to comply with the black navbar
+-------------------------------------------------- */
+.dropdown-menu, .nav-pills, .dropdow,n .open/*,dropdown-toggle (not used to have the nice black shading on the menu toggle button)*/ {
+    background-color: #000000;
+}
+
+/*small triangle that combines toggle button and menu area set to black to comply with the black navbar
+-------------------------------------------------- */
+.navbar .nav > li > .dropdown-menu:after {
+    border-bottom: 6px solid #000000;
+}
+
+/*black-style dropdown divider to comply with the black dropdown background*/
+    .dropdown-menu .divider {
+        background-color: #000000;
+        border-bottom: 1px solid #999999;
+    }
+
+/*  default/unselected dropdown item like selected primary-blue buttons (to comply with the primary buttons style for the playlist items in the playlist page)
+-------------------------------------------------- */
+.dropdown-menu li > a {
+  background-color: #006dcc;
+  *background-color: #0044cc;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+  background-repeat: repeat-x;
+  color: #ffffff;
+
+  /*various beautifying styles to make the items look more like primary buttons than menu list items*/
+    margin-top: 5px;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+/*  selected dropdown item like selected primary-blue buttons (to comply with the primary buttons style for the playlist items in the playlist page)
+-------------------------------------------------- */
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a {
+    background-color: #0044CC;
+    background-position: 0 -15px;
+    background-image: linear-gradient(to bottom, #0088CC, #0044CC);
+ }
+
+/*  make focused text box more visible
+-------------------------------------------------- */
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+    border-color: #52A8EC;/*Make the color more strong by making it solid*/
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #52A8EC;/*Make the color more strong by making it solid*/
+    /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); Original*/
+    outline: 0 none;/*keep as is*/
+    background-color: rgba(82, 168, 236, 0.3); /*Make colored background to emphasize the focused stuff*/
+}

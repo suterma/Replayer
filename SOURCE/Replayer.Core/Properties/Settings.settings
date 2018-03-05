@@ -1,0 +1,17 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="Replayer.Core.v04.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PrePlayDuration_Seconds" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="KeyboardShortcutCharacterTimeout_sec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="DefaultCompilationLookupDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

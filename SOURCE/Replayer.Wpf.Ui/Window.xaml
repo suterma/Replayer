@@ -1,0 +1,156 @@
+﻿<Fluent:RibbonWindow x:Class="Replayer.Wpf.Ui.Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+        xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+        xmlns:Core="clr-namespace:Replayer.Core.v04;assembly=Replayer.Core.v04"
+        xmlns:Annotation="clr-namespace:Replayer.Core.v04.Annotation;assembly=Replayer.Core.v04"
+                 xmlns:my1="clr-namespace:Replayer.Wpf.Ui"
+                     
+    Title="Replayer" Height="396" Width="497"      >
+    <Window.CommandBindings>
+        <CommandBinding Command="MediaCommands.Play"
+                  Executed="PlayCmdExecuted"
+                  CanExecute="PlayCmdCanExecute"/>
+        <CommandBinding Command="MediaCommands.Pause"
+                  Executed="PauseCmdExecuted"
+                  CanExecute="PauseCmdCanExecute"/>
+        <CommandBinding Command="EditingCommands.Delete"
+                  Executed="EditingDeleteCmdExecuted"
+                  CanExecute="EditingDeleteCmdCanExecute"/>
+    </Window.CommandBindings>
+
+    <Window.Resources>
+        
+        <ObjectDataProvider x:Key="tracks" ObjectType="{x:Type Annotation:Track}"/>
+        <ObjectDataProvider x:Key="cues" ObjectType="{x:Type Annotation:Cue}"/>
+        
+        <!--A template for showing tracks as a summary.
+        This is currently used to present tracks as accordion items-->
+        <DataTemplate x:Key="tracksTemplate" DataType="Annotation:Track">
+            <StackPanel Margin="3 3 3 3" Orientation="Horizontal" Background="Red">
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete"
+                                  Command="EditingCommands.Delete"
+                                  CommandParameter="{Binding}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" FontWeight="bold"/>
+                <TextBlock Text=", "/>
+                <TextBlock Text="{Binding Path=Url}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!--A template for displaying a single cue. This is currently used inside
+        a list box.-->
+        <DataTemplate x:Key="cueItemTemplate" DataType="Annotation:Cue">
+            <StackPanel Margin="3 3 3 3" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="MediaCommands.Play" />
+                </StackPanel.InputBindings>
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete"
+                                  Command="EditingCommands.Delete"
+                                  CommandParameter="{Binding}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+                <TextBlock Text="{Binding Path=Shortcut}" FontWeight="bold" HorizontalAlignment="Stretch"                        />
+                <TextBlock Text=", " HorizontalAlignment="Stretch"/>
+                <TextBox Text="{Binding Path=Description, Mode=TwoWay}" IsReadOnly="False" HorizontalAlignment="Stretch"/>
+                <!--/TODO probably use the article here
+                http://www.codeproject.com/KB/WPF/editabletextblock.aspx
+                to have a neatly editable control. Editing could be switched on by an edit button on the stack panel.-->
+                <TextBlock Text="{Binding Path=Description}" HorizontalAlignment="Stretch"/>
+                <TextBlock Text=", " HorizontalAlignment="Stretch"/>
+                <TextBlock Text="{Binding Path=Time}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </DataTemplate>
+
+
+        <!--A template for showing cues in a list-->
+        <DataTemplate x:Key="cuesListTemplate" DataType="Annotation:Cue">
+            <!--Set the width to the parent's width. This makes for a style like docking:fill on winforms-->
+            <ListBox
+                Width="{Binding        RelativeSource={RelativeSource          Mode=FindAncestor,          AncestorType={x:Type my:Accordion}},        Path=ActualWidth}"
+                Height="{Binding        RelativeSource={RelativeSource          Mode=FindAncestor,          AncestorType={x:Type my:Accordion}},        Path=ActualHeigth}"                           
+                VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"                     
+    LostFocus="CuesListBox_LostFocus"
+                ItemsSource="{Binding Path=Cues}"                
+                SelectionChanged="CuesListBox_SelectionChanged"                            
+                ItemTemplate="{StaticResource cueItemTemplate}"/>            
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+            <Fluent:Ribbon Grid.Row="0" Grid.Column="0">
+                <!--Backstage-->
+                <Fluent:Ribbon.Menu>
+                    <Fluent:Backstage>
+                        <Fluent:BackstageTabControl>
+                            <Fluent:BackstageTabItem Header="Open"/>
+                            <Fluent:BackstageTabItem Header="New"/>
+                            <Fluent:BackstageTabItem Header="Print"/>
+                            <Fluent:Button Header="Blue" Icon="Images\Blue.png"/>
+                        </Fluent:BackstageTabControl>
+                    </Fluent:Backstage>
+                </Fluent:Ribbon.Menu>
+                <!--Tabs-->
+                <Fluent:RibbonTabItem Header="Transport">
+                    <Fluent:RibbonGroupBox Header="Transport">
+                        <Fluent:Button Name="ButtonStart" Header="Start" 
+                                       Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" 
+                                       Command="MediaCommands.Play"          />
+                        <Fluent:Button Name="ButtonPause" Header="Pause" 
+                                       Icon="Images\Gray.png" LargeIcon="Images\GrayLarge.png" 
+                                       Command="MediaCommands.Pause" />
+                    </Fluent:RibbonGroupBox>
+                </Fluent:RibbonTabItem>
+                <Fluent:RibbonTabItem Header="Edit">
+                    <Fluent:RibbonGroupBox Header="Compilation">
+                        <Fluent:Button Name="ButtonEditCompilation" Header="Edit Compilation" Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" />
+                    </Fluent:RibbonGroupBox>
+                    <Fluent:RibbonGroupBox Header="Tracks">
+                    <Fluent:Button Name="ButtonEditTrack" Header="Edit Track" Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" />
+                    <Fluent:Button Name="ButtonDeleteSelectedTrack" Header="Delete Selected Track" Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" Command="EditingCommands.Delete" CommandParameter="SelectedTrack"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Cues">
+                    <Fluent:Button Name="ButtonCreateCueHere" Header="Create cue here!" Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" Click="ButtonCreateCueHere_Click"/>
+                    <Fluent:Button Name="ButtonDeleteSelectedCue" Header="Delete Selected Cue" Icon="Images\Green.png" LargeIcon="Images\GreenLarge.png" Command="EditingCommands.Delete" CommandParameter="SelectedCue"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+                <!--Quick Access Toolbar Items-->
+                <Fluent:Ribbon.QuickAccessItems>
+                    <!--You Can Just Bind with Any Control-->
+                    <Fluent:QuickAccessMenuItem Target="{Binding ElementName=ButtonCreateCueHere}"/>
+                </Fluent:Ribbon.QuickAccessItems>
+            </Fluent:Ribbon>
+        
+        <!--
+                      ItemsSource="{Binding }" 
+        ItemsSource="{Binding Source={StaticResource tracks}, Path=this, Mode=TwoWay}" 
+        -->
+        <my:Accordion Grid.Row="1" MinHeight="50" Grid.Column="0" Name="accordion1" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                      ItemsSource="{Binding Source={StaticResource tracks}, Path=this, Mode=TwoWay}" 
+                      ItemTemplate="{StaticResource tracksTemplate}" 
+                      ContentTemplate="{StaticResource cuesListTemplate}" 
+                      SelectedItemsChanged="accordion1_SelectedItemsChanged" 
+                      SelectionMode="ZeroOrOne"
+                      SelectionSequence="CollapseBeforeExpand"
+                      />
+        <TextBlock                Grid.Row="4" Height="30" HorizontalAlignment="Stretch"
+            Name="textBlock1" VerticalAlignment="Center" FontStretch="Normal" TextAlignment="Center"/>
+        <!--  -->
+        <my1:MediaReplayer Grid.Row="2" HorizontalAlignment="Stretch" x:Name="mediaReplayer1" VerticalAlignment="Stretch"  />
+      
+    </Grid>
+</Fluent:RibbonWindow>

@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<!--
+    quirli, replay with ease.
+    Copyright (C) 2012 by marcel suter, marcel@codeministry.ch
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+    <title>quirli - replay and share media with cues.</title>
+    <meta name="Copyright" content="GPLv3 licensed by codeministry.ch" />
+    <meta name="dc.language" content="en" />
+    <meta name="geo.country" content="CH" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- To force IE9 to use the currently latest rendering engine -->
+    <meta name="description" content="Media player for replay and rehearsal with cues.">
+    <meta name="author" content="codeministry.ch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Le styles -->
+    <!-- Note: Twitter Bootstrap is not officially hosted on a CDN, so we host that ourselves for now-->
+    <!-- use a customized bootstrap version for quirli, prepending parts.-->
+    <link href="bootstrap/css/quirli-mods-pre.css" rel="stylesheet">
+    <!-- use prepending custom modifications for quirli. To make the body move-down for the top navbar working, this css must get loaded first.-->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- to allow usage of bootstrap responsive features-->
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- use a customized bootstrap version for quirli, postpending parts.-->
+    <link href="bootstrap/css/quirli-mods.css" rel="stylesheet">
+
+
+    <!-- Le fav and touch icons -->
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- 
+    Because there is no official apple support right now, we omit these apple specific things
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"> -->
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#">quirli
+                    <img src="img/quirli_app_icon_16x16.png" />
+                    <small><em>replay with ease.</em></small>&nbsp;<span class="label label-important">Beta release</span></a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!--Main content-->
+        quirli is a free media player for replay and rehearsal. It's main feature is fast navigation to predefined cue points in the media.<br />
+        <br />
+        <img src="img/HowItWorks.png" alt="A visual overview over how quirli works." />
+        <div class="pull-right">
+            <h1><a class="btn btn-primary btn-large" href="player.html">Get started!</a></h1>
+            <!--Facebook link-->
+            <iframe src="http://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fquirliplayer&amp;layout=standard&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=250" scrolling="no" frameborder="0" style="border: none; overflow: hidden; height: 35px; width: 250;" allowtransparency="true"></iframe>
+            <br />
+            <!-- Google+ link-->
+            <a href="http://plus.google.com/100181444156260536348?prsrc=3" rel="publisher" style="text-decoration: none;">
+                <img src="http://ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+" style="border: 0; width: 16px; height: 16px;" /></a>
+        </div>
+        <h3>Examples:</h3>
+        <div id="tracksdisplay">
+            <p style="line-height: 2.6em">
+                <span><a class="btn btn-primary" href="player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0VqTwnAuHws&title=What%20makes%20you%20beautiful&artist=The%20piano%20guys%20covering%20One%20Republic&album=Youtube&6.49=Intro&30.12=Knocking%20part&46.02=Real%20playing&51.5=Piano%20forte&93.32=Stringified&123.35=Vocals&139.38=Key%20cover%20jam&150.16=Good%20morning%20sky&173.96=Final%20chord"><i class="icon-play-circle icon-white" rel="tooltip" title="Loads the track into quirli."></i>&nbsp;&nbsp;<!-- spaces for nicer display -->From a Youtube video&nbsp;</a>&nbsp;                       
+                    <br />
+                </span>
+                <span><a class="btn btn-primary" href="player.html?media=media%2Flidija_roos-sweet_taste.mp3&title=Sweet%20taste&artist=Lidija%20Roos&album=Not%20for%20sale&0=Intro&15=Verse%201&45.5=Verse%202&75.94=Chorus&106.75=Verse%203&140.75=Chorus&172.07=Bridge&201.65=Chorus&232.65=Outro"><i class="icon-play-circle icon-white" rel="tooltip" title="Loads the track into quirli."></i>&nbsp;&nbsp;<!-- spaces for nicer display -->From an MP3 file&nbsp;</a>&nbsp;                       
+                    <br />
+                </span>
+                <span><a class="btn btn-primary" href="player.html?media=media%2FLidija%2520Roos%2520-%2520Your%2520Light.wav&title=Your%20Light&artist=Lidija%20Roos&album=Not%20for%20sale&0=Intro&17.47=Verse%201&50.89=Chorus&67.84=Verse%202&101.11=Chorus&118.15=Chorus&138.60=Instrumental&152.52=Chorus&169=Bridge&184=Chorus&202.50=Chorus%20Repeat&219.21=Chorus%20Outro"><i class="icon-play-circle icon-white" rel="tooltip" title="Loads the track into quirli."></i>&nbsp;&nbsp;<!-- spaces for nicer display -->From a WAV file&nbsp;</a>&nbsp;                       
+                    <br />
+                </span>
+                <span><a class="btn btn-primary" href="playlist.html">&nbsp;<!-- spaces for nicer display -->Demo playlist&nbsp;</a>&nbsp;                       
+                    <br />
+                </span>
+            </p>
+        </div>
+        <h3>How does it work?</h3>
+        <ol>
+            <li>You enter a link to a media file or YouTube video you want to use.</li>
+            <li>As the media plays, you press a button at the desired points in time to create cues. Name and edit the cues.</li>
+            <li>Generate a link to quirli with your cues contained, for keeping as bookmark or to share with your frieds.</li>
+            <li>Use the link to start playing from the cues.</li>
+        </ol>
+        <h3>Supported media types</h3>
+        Supported media types are <em>mp3</em>, <em>wav</em>, <em>mp4</em>, <em>webm</em>, <em>ogv</em>, <em>ogg</em> and <em>youtube</em>, given your browser can play it. The media is played using <a href="http://mediaelementjs.com/">MediaelementJS</a>.
+            <h3>Who can use it?</h3>
+        quirli is primarily aimed at musicians, singers and choir conductors who want to rehearse with playback music. You can however use it to provide access to specific parts of any media file regardless of it's content.
+            <h3>Troubleshooting</h3>
+        <dl>
+            <dt>Media is not played at all</dt>
+            <dd>For certain media file types on certain browsers (e.g. mp3 on Firefox), you need to have the Macromedia Flash plugin installed, enabled and configured. 
+                    This is expecially true, if you run quirli from the local filesystem. See <a href="localflashconfig.html">how to configure flash for local filesystem usage</a>.</dd>
+        </dl>
+        <h3>Replayer</h3>
+        quirli aims to support and extend the existing <a href="http://home.codeministry.ch/main/replayer/">Replayer desktop application</a> for the Microsoft Windows OS.
+            <h3>API</h3>
+        <h4>Track API</h4>
+        quirli supports loading of a track directly by sending a specially crafted URL in the HTTP request to quir.li, like below:
+            <pre>http://quir.li/player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0VqTwnAuHws&title=What%20makes%20you%20beautiful&artist=The%20piano%20guys%20covering%20One%20Republic&album=Youtube&6.49=Intro&30.12=Knocking%20part&46.02=Real%20playing&51.5=Piano%20forte&93.32=Stringified&123.35=Vocals&139.38=Key%20cover%20jam&150.16=Good%20morning%20sky&173.96=Final%20chord</pre>
+        <dl>
+            <dt>Location (<code>http://quir.li/player.html</code>)</dt>
+            <dd>Points to the location where the quirli player can be found. While this is usually the web address as in the example, you may also install a copy of quirli on your own server or even on a local disk.</dd>
+            <dt>Query delimiter (<code>?</code>)</dt>
+            <dd>Separates the location from the arguments, which also called the query part in the URL specification. The arguments are split by an ampersand <code>&</code> character and consist of a key, the equals operator <code>=</code> and the value. All arguments are optional, and their order is not relevant.</dd>
+            <dt>media argument (<code>media=</code>)</dt>
+            <dd>The URL to the media file to load for this track. The URL must be <a href="http://www.w3schools.com/tags/ref_urlencode.asp">encoded</a> to avoid interference with the other arguments. You may leave this out if you do not want to share the link to the media file or if the link points to a local file on your disk anyway.</dd>
+            <dt>title argument (<code>title=</code>)</dt>
+            <dd>The title for this track. You can set this to whatever you find suitable.</dd>
+            <dt>artist argument (<code>artist=</code>)</dt>
+            <dd>The artist performing this track. You can set this to whatever you find suitable.</dd>
+            <dt>album argument (<code>album=</code>)</dt>
+            <dd>The album or place where this track can be found. You can set this to whatever you find suitable.</dd>
+            <dt>cue argument(s) (<code>nn.nn=XXX</code>)</dt>
+            <dd>The cues to present, with their caption. The key is a floating point number indicating the position within the media file, in seconds from the start. You may use up to two digits after the decimal point. The value is a caption (free text, can also be empty) for the cue and can have any lenght. You can specify any number of cues. The order of the cue keys is reflected in the player view.</dd>
+        </dl>
+        To be working with most browsers, a total lenght of the resulting URL of 2000 characters should not get exceeded.
+            <h4>Playlist API</h4>
+        To pre-load quirli with more than one track, you can use the playlist API. To do so, a specially crafted JSONP file with the name <code>playlistcontent.jsonp</code> can get delivered along with the player.
+            Both the player (in the playlist view) and the fullsized playlist page then load the tracks from the JSONP file. <em>Currently, the playlist can not get loaded from another location, nor via an URL query argument. This API will change later.</em>
+        Example:
+            <pre class="pre-scrollable nobr">
+callback_json1({
+"title": "Demo playlist for various media formats",
+"tracks": [
+{"title":"Nice track from the Piano Guys (YouTube)","url":"player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0VqTwnAuHws&title=What%20makes%20you%20beautiful&artist=The%20piano%20guys%20covering%20One%20Republic&album=Youtube&6.49=Intro&30.12=Knocking%20part&46.02=Real%20playing&51.5=Piano%20forte&93.32=Stringified&123.35=Vocals&139.38=Key%20cover%20jam&150.16=Good%20morning%20sky&173.96=Final%20chord"},
+{"title":"Dreaming with the Piano Guys (YouTube)","url":"player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjzF_y039slk&title=Over%20the%20Rainbow&artist=The%20Piano%20Guys&album=Youtube&0=Intro&7.46=Strummin'%20the%20cello&43.51=Piano%20appearance&89.11=Dreamin'%20away&164.24=Greenfield%20openair"},
+{"title":"Space Shuttle Discovery Launch (YouTube)","url":"player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DxRVHylmxUk8&title=Discovery%20Launch%20Captured%20by%20Multiple%20Cameras&artist=NASATelevision&album=Youtube&0=Go%3F&30.89=Preparation&64.01=To%20the%20lauchpad&188.79=On%20the%20pad&257.75=Ignition&286.2=Lift-Off&346.73=The%20turn&447.20=Booster%20separation&510.92=Booster%20touchdown&535.14=Into%20space&629.79=Liquit%20tank%20separation&670.32=Orbiting&720.37=Farewell"},
+{"title":"Beautiful song by Lidija Roos (mp3)","url":"player.html?v=0.21&media=media%2Flidija_roos-sweet_taste.mp3&title=Sweet%20taste&artist=Lidija%20Roos&album=Not%20for%20sale&0=Intro&15=Verse%201&45.5=Verse%202&75.94=Chorus&106.75=Verse%203&140.75=Chorus&172.07=Bridge&201.65=Chorus&232.65=Outro"},
+{"title":"Echo trailer (mp4)","url":"player.html?media=media%2Fecho-hereweare.mp4&title=Here we are&artist=The echo conference&album=&0=We are here to&2.3=echo&31.02=Because&32.5=WE ARE&36.9=OF HIS HANDS"},
+{"title":"Echo trailer (ogv)","url":"player.html?media=media%2Fecho-hereweare.ogv&title=Here we are&artist=The echo conference&album=&0=We are here to&2.3=echo&31.02=Because&32.5=WE ARE&36.9=OF HIS HANDS"},
+{"title":"Echo trailer (webm)","url":"player.html?media=media%2Fecho-hereweare.webm&title=Here we are&artist=The echo conference&album=&0=We are here to&2.3=echo&31.02=Because&32.5=WE ARE&36.9=OF HIS HANDS"}
+]
+}
+);            </pre>
+        <h3>Roadmap</h3>
+        See the <a href="https://trello.com/board/quirli/4f99c2814ae135692dda8907">Trello board</a> for an updated roadmap.
+	        Your most wanted feature is missing? <a href="http://home.codeministry.ch/main/contact/">Get in contact with the author.</a>
+
+        <h3>Credits</h3>
+        Many thanks! quirli would not be possible without them!
+            <ul>
+                <li>The quirli icon is based on <a href="http://commons.wikimedia.org/wiki/Category:Crystal_icons">the crystal icon set by Everaldo Coelho</a> (<a href="http://en.wikipedia.org/wiki/LGPL">LGPL License</a>).</li>
+                <li>UI styles (CSS) are using <a href="http://twitter.github.com/bootstrap/index.html">Twitter Bootstrap.</a> (<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>).</li>
+                <li>The small action icons are from <a href="http://glyphicons.com/">Glyphicons.</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0 License</a>).</li>
+                <li>JavaScript DOM support is by <a href="http://jquery.com/">jQuery</a> (<a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a>).</li>
+                <li>JavaScript binding support is by <a href="http://angularjs.org/">AngularJs</a> (<a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a>).</li>
+                <li>The underlying media player is <a href="http://mediaelementjs.com/">MediaelementJS</a> by John Dyer (<a href="http://en.wikipedia.org/wiki/MIT_License">GPLv2 License</a>/<a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a>).</li>
+                <li>JSONP support is by <a href="http://www.nonobtrusive.com/2010/05/20/lightweight-jsonp-without-any-3rd-party-libraries/">Nonobtrusive Lightweight JSONP</a>.</li>
+                <li>Development environment is <a href="http://www.eclipse.org/platform/">Eclipse.</a></li>
+                <li>Development environment is also <a href="http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products">Visual Studio Express 2012 for Web.</a></li>
+            </ul>
+
+
+    </div>
+    <!-- /container -->
+
+    <!-- Footer
+        ================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>Created by <a href="http://www.codeministry.ch">codeministry.ch</a>. Hosted by <a href="http://www.cyon.ch">cyon.ch</a>.</p>
+            <p>Licensed under the open source <a href="gpl-3.0.txt">GPLv3 License</a>.</p>
+            <ul class="footer-links">
+                <li><a href="http://quirli.codeplex.com">Source</a></li>
+                <li class="muted">&middot;</li>
+                <li><a href="disclaimer.txt">Disclaimer</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Le javascript
+	    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster 
+	    <script src="js/bootstrap.min.js"></script>-->
+</body>
+</html>

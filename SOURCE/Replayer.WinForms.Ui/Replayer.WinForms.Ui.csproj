@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{715CCAF5-3456-4D27-8C77-398DB2F6E446}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Replayer.WinForms.Ui</RootNamespace>
+    <AssemblyName>Replayer.WinForms.Ui</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>http://replayer.codeplex.com/releases/clickonce/</UpdateUrl>
+    <SupportUrl>http://replayer.codeplex.com/</SupportUrl>
+    <ErrorReportUrl>http://replayer.codeplex.com/</ErrorReportUrl>
+    <ProductName>Replayer</ProductName>
+    <PublisherName>codeministry.ch</PublisherName>
+    <SuiteName>Replayer</SuiteName>
+    <WebPage>publish.htm</WebPage>
+    <AutorunEnabled>true</AutorunEnabled>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>47</ApplicationRevision>
+    <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Replayer.WinForms.Ui.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Replayer.WinForms.Ui.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>50E0D7E422AD79E768970C11F454FF5255085906</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Replayer.WinForms.Ui_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Replayer_App_Icon_256x256.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.2">
+      <HintPath>lib\DevExpress.Data.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+      <HintPath>lib\DevExpress.Utils.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>lib\DevExpress.XtraBars.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+      <HintPath>lib\DevExpress.XtraEditors.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>lib\DevExpress.XtraTreeList.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>lib\DevExpress.XtraVerticalGrid.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Microsoft.ExceptionMessageBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Design">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\CreateNewCompilationWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\CreateNewCompilationWizard.Designer.cs">
+      <DependentUpon>CreateNewCompilationWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DisplayableCoreSettings.cs" />
+    <Compile Include="Components\DisplayableUiSettings.cs" />
+    <Compile Include="Components\DisplayTypeWrapper.cs" />
+    <Compile Include="Components\OpenTrackFileDialog.cs" />
+    <Compile Include="Components\BusyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\BusyForm.Designer.cs">
+      <DependentUpon>BusyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Question.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Question.Designer.cs">
+      <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UiPathEditor.cs" />
+    <Compile Include="Components\WindowsMediaRePlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\WindowsMediaRePlayer.Designer.cs">
+      <DependentUpon>WindowsMediaRePlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReplayerApplicationEventHandler.cs" />
+    <Compile Include="ReplayerApplicationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReplayerApplicationForm.Designer.cs">
+      <DependentUpon>ReplayerApplicationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\OkPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\OkPanel.Designer.cs">
+      <DependentUpon>OkPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\OkCancelPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\OkCancelPanel.Designer.cs">
+      <DependentUpon>OkCancelPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PropertyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\PropertyDialog.Designer.cs">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SimpleIconButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SimpleIconButton.Designer.cs">
+      <DependentUpon>SimpleIconButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cues\CuesPresenter.cs" />
+    <Compile Include="Views\Cues\CuesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Cues\CuesView.Designer.cs">
+      <DependentUpon>CuesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cues\DisplayCue.cs" />
+    <Compile Include="Views\Cues\ICuesView.cs" />
+    <Compile Include="Views\KeyboardController\IKeyboardControllerView.cs" />
+    <Compile Include="Views\KeyboardController\KeyboardControllerPresenter.cs" />
+    <Compile Include="Views\KeyboardController\KeyboardControllerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\KeyboardController\KeyboardControllerView.Designer.cs">
+      <DependentUpon>KeyboardControllerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MediaPlayer\IMediaPlayerView.cs" />
+    <Compile Include="Views\MediaPlayer\MediaPlayerPresenter.cs" />
+    <Compile Include="Views\MediaPlayer\MediaPlayerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\MediaPlayer\MediaPlayerView.Designer.cs">
+      <DependentUpon>MediaPlayerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Presenter.cs" />
+    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\StandardMenu\DisplayCompilation.cs" />
+    <Compile Include="Views\StandardMenu\StandardMenuPresenter.cs" />
+    <Compile Include="Views\StandardMenu\StandardMenuView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StandardMenu\StandardMenuView.Designer.cs">
+      <DependentUpon>StandardMenuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StandardMenu\IStandardMenuView.cs" />
+    <Compile Include="Views\Tracks\DisplayTrack.cs" />
+    <Compile Include="Views\Tracks\ITracksView.cs" />
+    <Compile Include="Views\Tracks\TracksPresenter.cs" />
+    <Compile Include="Views\Tracks\TracksView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tracks\TracksView.Designer.cs">
+      <DependentUpon>TracksView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Components\CreateNewCompilationWizard.resx">
+      <DependentUpon>CreateNewCompilationWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\BusyForm.resx">
+      <DependentUpon>BusyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Question.resx">
+      <DependentUpon>Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SimpleIconButton.resx">
+      <DependentUpon>SimpleIconButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReplayerApplicationForm.resx">
+      <DependentUpon>ReplayerApplicationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\OkPanel.resx">
+      <DependentUpon>OkPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\OkCancelPanel.resx">
+      <DependentUpon>OkCancelPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\PropertyDialog.resx">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cues\CuesView.resx">
+      <DependentUpon>CuesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\KeyboardController\KeyboardControllerView.resx">
+      <DependentUpon>KeyboardControllerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MediaPlayer\MediaPlayerView.resx">
+      <DependentUpon>MediaPlayerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StandardMenu\StandardMenuView.resx">
+      <DependentUpon>StandardMenuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tracks\TracksView.resx">
+      <DependentUpon>TracksView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Replayer.WinForms.Ui_1_TemporaryKey.pfx" />
+    <None Include="Resources\configure_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Replayer.Core\Replayer.Core.csproj">
+      <Project>{F602672D-A488-440B-A535-F1AE1F39210A}</Project>
+      <Name>Replayer.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Replayer.Model\Replayer.Model.csproj">
+      <Project>{ef749824-12d8-4a12-a2e8-700ccb504af2}</Project>
+      <Name>Replayer.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WizardBase\WizardBase.csproj">
+      <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
+      <Name>WizardBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Application_Icon_256x256.png" />
+    <None Include="Resources\CueCreateHere_Icon_256x256.png" />
+    <None Include="Resources\CueAdd_Icon_256x256.png" />
+    <None Include="Resources\Cue_Icon_256x256.png" />
+    <None Include="Resources\CueDelete_Icon_256x256.png" />
+    <None Include="Resources\TrackAdd_Icon_256x256.png" />
+    <None Include="Resources\Track_Icon_256x256.png" />
+    <None Include="Resources\TrackRemove_Icon_256x256.png" />
+    <None Include="Resources\CompilationSave_Icon_256x256.png" />
+    <None Include="Resources\CompilationOpen_Icon_256x256.png" />
+    <None Include="Resources\CompilationNew_Icon_256x256.png" />
+    <None Include="Resources\Compilation_Icon_256x256.png" />
+    <None Include="Resources\CompilationSaveAs_Icon_256x256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CueEdit_Icon_256x256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Replayer_App_Icon_256x256.ico" />
+    <None Include="Resources\CompilationEdit_Icon_256x256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="DevExpress.Utils.v10.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraBars.v10.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraEditors.v10.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraTreeList.v10.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DevExpress.XtraVerticalGrid.v10.2">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".rex">
+      <Visible>False</Visible>
+      <Description>Replayer xml compilation</Description>
+      <Progid>ReplayerXmlCompilation</Progid>
+      <DefaultIcon>Replayer_App_Icon_256x256.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".rez">
+      <Visible>False</Visible>
+      <Description>Replayer zipped compilation</Description>
+      <Progid>ReplayerZippedCompilation</Progid>
+      <DefaultIcon>Replayer_App_Icon_256x256.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

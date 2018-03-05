@@ -1,0 +1,20 @@
+# Set the cache-control max-age for the various content types
+# 1 year for media files
+#<FilesMatch "\.(mp3|ogg|ogv|mp4|wav|webm)$">
+#Header set Cache-Control "max-age=31449600, public"
+#</FilesMatch>
+# 1 week for images and other static parts
+#<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg)$">
+#Header set Cache-Control "max-age=604800, public"
+#</FilesMatch>
+# 4 HOURS for content
+#<FilesMatch "\.(html|htm|xml|txt|jsonp)$">
+#Header set Cache-Control "max-age=14400, must-revalidate"
+#</FilesMatch>
+# Turn off the ETags
+#Header unset ETag
+#FileETag None
+# Turn off the Last Modified header except for html docs (content in this context)
+#<FilesMatch "\.(mp3|ogg|ogv|mp4|wav|webm|ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg)$">
+#Header unset Last-Modified
+#</FilesMatch>

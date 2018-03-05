@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="Replayer.WinForms.Ui.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UiFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Arial, 18pt</Value>
+    </Setting>
+    <Setting Name="LastLoadedCompilationPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

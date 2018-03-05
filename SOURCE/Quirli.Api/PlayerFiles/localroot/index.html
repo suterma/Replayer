@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<!--
+    quirli, replay with ease.
+    Copyright (C) 2012 by marcel suter, marcel@codeministry.ch
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html ng-app lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="content-language" content="en" />
+	<title>quirli - replay and share media with cues.</title>
+	<meta name="Copyright" content="GPLv3 licensed by codeministry.ch" />
+	<meta name="dc.language" content="en" />
+	<meta name="geo.country" content="CH" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- To force IE9 to use the currently latest rendering engine -->
+    <meta name="description" content="Media player for replay and rehearsal with cues.">
+    <meta name="author" content="codeministry.ch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Le styles -->
+    <!-- Note: Twitter Bootstrap is not officially hosted on a CDN, so we host that ourselves for now-->
+    <link href="css/quirli-mods-pre.css" rel="stylesheet"><!-- use prepending custom modifications for quirli. To make the body move-down for the top navbar working, this css must get loaded first.-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet"><!-- to allow usage of bootstrap responsive features-->
+    <link href="css/quirli-mods.css" rel="stylesheet"><!-- use custom modifications for quirli.-->
+    
+    <!-- Le fav and touch icons -->
+	<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- 
+    Because there is no official apple support right now, we omit these apple specific things
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"> -->
+    
+    <!-- Online loading from cdn to use client browser cache if already loaded from elsewhere by the client
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>-->
+
+    <!-- Loading from own server to avoid dependency on other resources. This also simplifies offline usage-->
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="angularjs/1.0.4/angular.min.js"></script>
+
+	<!-- Load the playlist angular controller.-->
+	 <script src="js/playlistcontroller.js"></script>
+    
+    <!-- Load the presenter code for this view -->
+    <script src="js/indexpresenter.js"></script>    
+
+    <!-- The JSONP loader library (by www.nonobtrusive.com)-->
+    <script src="lightweightjsonp/jsonp.js"></script>
+</head>	
+	<body">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+		      <div class="navbar-inner">
+		        <div class="container">
+		          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </a>
+		          <a class="brand" href="index.html">quirli <img src = "img/quirli_app_icon_16x16.png"/>&nbsp;<span class="label label-important">Beta</span></a>
+		          <div class="nav-collapse collapse">
+		            <ul class="nav">
+		            </ul>
+		          </div><!--/.nav-collapse -->
+		    	</div>
+			</div>
+		</div>
+		<div class="container" ng-controller="playlistcontroller">
+	        <!--Error notification-->
+		    <div id="errordisplay">
+			    <div class="alert alert-error">
+			    <h4 class="alert-heading">Please enable JavaScript to use quirli.</h4>
+			    </div>
+		    </div>
+		    <div id="progressdisplay">
+			    <div class="alert alert-info">
+			    <h4 class="alert-heading">Loading...</h4>
+			    </div>
+		    </div>
+            <h3>Available playlist</h3>
+            <a class="btn btn-primary" href="playlist.html">{{title}}</a>
+            <p/>
+            <p class="muted">
+                This is an offline, local quirli player for {{title}}.
+                <a href="http://quir.li">quirli</a> is a free media player for replay and rehearsal. It's main feature is fast navigation to predefined cue points in the media.
+            </p>
+			<div class="alert alert-error">
+				<a class="close" data-dismiss="alert" href="#">x</a>
+				Please give feedback to <a href="mailto:hello@quir.li">hello@quir.li</a>
+				<ul>
+				<li>Only working on latest browsers that support <a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a>.</li>
+				<li>The used mediaplayer, <a href="http://mediaelementjs.com/">mediaelement.js</a> supports the various media types as stated on it's website.</li>
+				</ul>
+			</div>
+			<div class="alert alert-info">
+				<a class="close" data-dismiss="alert" href="#">x</a>
+				Known issues (see <a href="https://trello.com/board/quirli/4f99c2814ae135692dda8907">the trello board</a> for a roadmap.
+				<ul>
+				<li>MP3 support is limited with the Firefox browser.</li>
+				<li>German umlauts do not work in Internet Explorer.</li>
+				</ul>
+			</div>
+            <h3>Troubleshooting</h3>
+                <dl>
+                <dt>Media is not played at all</dt>
+                <dd>For certain media file types on certain browsers (e.g. mp3 on Firefox), you need to have the Macromedia Flash plugin installed, enabled and configured. 
+                    This is expecially true, if you run quirli from the local filesystem. See <a href="localflashconfig.html">how to configure flash for local filesystem usage</a>.</dd>
+                </dl>       
+            <h3>Replayer</h3>
+            quirli aims to support and extend the existing <a href="http://home.codeministry.ch/main/replayer/">Replayer desktop application</a> for the Microsoft Windows OS.
+
+        </div> <!-- /container -->
+
+        <!-- Footer
+        ================================================== -->
+        <footer class="footer">
+            <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>Created by <a href="http://www.codeministry.ch">codeministry.ch</a>.</p>
+            <p>Licensed under the open source <a href ="gpl-3.0.txt" >GPLv3 License</a>.</p>
+            <ul class="footer-links">
+                <li><a href="http://quirli.codeplex.com">Source</a></li>
+                <li class="muted">&middot;</li>
+                <li><a href="disclaimer.txt">Disclaimer</a></li>
+            </ul>
+            </div>
+        </footer>
+		    
+		<!-- Le javascript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster 
+	    <script src="js/bootstrap.min.js"></script>-->
+	</body>	
+</html>

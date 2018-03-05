@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<!--
+    quirli, replay with ease.
+    Copyright (C) 2012 by marcel suter, marcel@codeministry.ch
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html ng-app="quirli" lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="content-language" content="en" />
+	<title>quirli - replay and share media with cues.</title>
+	<meta name="Copyright" content="GPLv3 licensed by codeministry.ch" />
+	<meta name="dc.language" content="en" />
+	<meta name="geo.country" content="CH" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- To force IE9 to use the currently latest rendering engine -->
+    <meta name="description" content="Media player for replay and rehearsal with cues.">
+    <meta name="author" content="codeministry.ch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Le styles -->
+    <!-- Note: Twitter Bootstrap is not officially hosted on a CDN, so we host that ourselves for now-->
+    <!-- use a customized bootstrap version for quirli, prepending parts.-->
+    <link href="bootstrap/css/quirli-mods-pre.css" rel="stylesheet">
+    <!-- use prepending custom modifications for quirli. To make the body move-down for the top navbar working, this css must get loaded first.-->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- to allow usage of bootstrap responsive features-->
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- use a customized bootstrap version for quirli, postpending parts.-->
+    <link href="bootstrap/css/quirli-mods.css" rel="stylesheet">
+
+   
+    <!-- Le fav and touch icons -->
+	<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- 
+    Because there is no official apple support right now, we omit these apple specific things
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"> -->
+    
+    <!-- Loading from own server to avoid dependency on other resources. This also simplifies offline usage-->
+    <script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="angularjs/1.0.5/angular.min.js"></script>
+
+    <!-- Mediaelement by John Dyer 	-->    
+    <!-- Already specified copy of JQuery is used instead of the mediaelement one.-->
+	<script src="mediaelement/mediaelement-and-player.min.js"></script>
+	<link rel="stylesheet" href="mediaelement/mediaelementplayer.min.css" />
+
+	<!-- Load the track angular controller.-->
+	 <script src="js/playercontroller.js"></script>
+
+    <!-- Load the playlist angular controller.-->
+	 <script src="js/playlistcontroller.js"></script>
+    
+    <!-- Load the keyboard angular controller.
+	 <script src="js/keyboardcontroller.js"></script>-->
+    
+    <!-- Load the presenter code for this view -->
+    <script src="js/playerpresenter.js"></script> 
+    
+    <!-- The JSONP loader library (by www.nonobtrusive.com)-->
+    <script src="lightweightjsonp/jsonp.js"></script>   
+</head>	
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+		      <div class="navbar-inner">
+		        <div class="container">
+		          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </a>
+		          <a class="brand" href="index.html">quirli <img src = "img/quirli_app_icon_16x16.png"/>&nbsp;<span class="label label-important">Beta</span></a>
+		          <div class="nav-collapse collapse">
+		            <ul class="nav">
+                      <li class="divider-vertical"></li>
+		              <li><a onclick="setViewStyle('edit')">Edit</a></li>
+		              <li><a onclick="setViewStyle('play')">Play</a></li>
+                      <li class="divider-vertical"></li>
+		              <li><a href="playlist.html">Playlist</a></li>
+                      <li class="dropdown">
+                          <a href="#" id="dropplaylist" role="button" class="dropdown-toggle" data-toggle="dropdown">Menu-Playlist<small>(Experimental)</small></a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropplaylist" ng-controller="playlistcontroller">
+                              <li ng-repeat="track in tracks"><a tabindex="-1" href="#" ng-click="loadTrack(track.url)"><i class="icon-play-circle icon-white" rel="tooltip" title="Loads the track into the player."></i>&nbsp;{{track.title}}</a></li>
+                         </ul>
+                      </li>
+		            </ul>
+		          </div><!--/.nav-collapse -->
+		    	</div>
+			</div>
+		</div>
+
+        <!-- experimental
+        <div class="container" ng-controller="keyboardController">
+                           Button to trigger modal 
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+     
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h1 id="myModalLabel">Modal header</h1>
+    </div>
+ <div class="modal-footer">
+</div>
+    </div>
+            </div>-->
+
+		<div  class="container" ng-controller="playerController">
+	        <!--Error notification-->
+		    <div id="errordisplay">
+			    <div class="alert alert-error">
+			    <h4 class="alert-heading" id="errortext">Please enable JavaScript to use quirli.</h4>
+			    </div>
+		    </div>
+		    <div id="progressdisplay">
+			    <div class="alert">
+			    <h4 class="alert-heading">Loading...</h4>
+			    </div>
+		    </div>
+            <strong>{{TrackTitle}}</strong><span ng-show="(ArtistName.length)"> by </span><!--Show only when there is an artist mentioned--><strong>{{ArtistName}}</strong><span ng-show="(AlbumName.length)"> on </span><!--Show only when there is an album mentioned--><strong>{{AlbumName}}</strong>
+ 		    <div> <!-- The core UI -->
+				<div id="mediainput">
+					<p ng-show="ViewStyle == 'edit'">	
+				    <input ng-model="MediaUrl" class="input-xxlarge" type="text" id="sourceurl" onblur="loadUrl('{{MediaUrl}}')" autocomplete="on" placeholder="Enter URL to media file or YouTube video" name="sourceurl"/> 
+	                <i class="icon-question-sign" rel="tooltip" title="Define the media file that quirli will work on."></i>
+					<strong><span id="sourceUrlDisplay">{{MediaUrl}}</span></strong>
+                    </p>
+                    <p ng-show="ViewStyle == 'edit' && (PlaybackType.length)">
+                    <input ng-model="TrackTitle" class="input-large" type="text" id="TrackTitle" autocomplete="on" placeholder="Track title" name="TrackTitle"/>
+                    <span ng-show="(ArtistName.length)"> by </span><!--Show only when there is an artist mentioned-->
+                    <input ng-model="ArtistName" class="input-medium" type="text" id="ArtistName" autocomplete="on" placeholder="Name of the artist" name="ArtistName"/>
+                    <span ng-show="(AlbumName.length)"> on </span><!--Show only when there is an album mentioned-->
+                    <input ng-model="AlbumName" class="input-medium" type="text" id="AlbumName" autocomplete="on" placeholder="Name of the album" name="AlbumName"/>
+					</p>
+		    	</div>
+
+		    	<!--experimental
+                 <p ng-show="(Debug.lenght)">
+                 <span class="badge-important">Debug info</span>
+                 Full url: {{location.absUrl()}}
+			     </p>-->
+
+                <!--experimental
+                <div id="keyboardecho">
+                <canvas id="example" width="200" height="200">
+                This text is displayed if your browser does not support HTML5 Canvas.
+                </canvas>
+				</div>-->
+                <!--experimental-->
+
+ 
+				<div id="mediaplayer"><!-- Media player -->		
+					<p><span ng-show="ViewStyle == 'edit' && (PlaybackType.length)" class="badge">playback method: {{PlaybackType}}</span></p>
+                    <div id="quirliplayer"></div>
+					<div id="playercontrols" ng-show="ViewStyle == 'edit' && (PlaybackType.length)">
+						<form ng-submit="addCueX()">
+                        <button class="btn btn-inverse" value="Play"        onclick="doPlay()" >
+                            <i class="icon-play icon-white" rel="tooltip" title="Starts playing from the current position."></i>
+                        </button> 
+                        <button class="btn btn-inverse" value="Pause"        onclick="doPause()" >
+                            <i class="icon-pause icon-white" rel="tooltip" title="Pauses playing at the current position."></i>
+                        </button> 
+                        <button class="btn btn-inverse" value="Take cue here!"        onclick="doAddCueHere()" >
+                            <i class="icon-star icon-white" rel="tooltip" title="Takes a cue at the current position."></i> Take cue here!
+                        </button>
+       					<i class="icon-question-sign" rel="tooltip" title="Review the media in the player. At the desired positions press [Take cue here!] to create a cue point"></i>
+ 
+                        <!--
+						 <input type="button" class="btn btn-inverse" value="Volume +"	onclick="doIncreaseVolume()" /> 
+						<input type="button" class="btn btn-inverse" value="Volume -" 	onclick="doDecreaseVolume()" />
+						<input type="button" class="btn btn-inverse" value="Load"		onclick="loadCues()" /> 
+						<input type="button" class="btn btn-inverse" value="Save" 		onclick="saveCues()" />
+						 -->
+						</form>
+					</div>
+				</div>
+				
+				<div><!-- Cues -->
+                    <p> <!--paragraph for better visual separation to player-->
+					<!-- although we like the form styling for the softcues, we use a div. A form would cause a postback and thus reload of the empty page (equals to unload the media and remove all cues) -->
+					<div ng-show="ViewStyle == 'edit'" id="cuedisplayedit"> <!-- cues edit view -->
+						<ul class="unstyled">
+							<li ng-repeat="cue in cues">
+                                <div class="form-horizontal">
+                                    <button class="btn btn-success" ng-click="playFromPosition(cue.position)">                      
+										<i class="icon-play icon-white" rel="tooltip" title="Skips the media position to this cue."></i>
+									</button> 
+									<input type="text" ng-model="cues[$index].text" class="input-xlarge" focus="{{cue.isNewest}}" /> 
+									<input type="text" ng-model="cues[$index].position" size="6" maxlength="6" class="input-mini" />
+                                    <!-- immediately recycle trashed cues. This has been recognised more intuitive than first ticking a checkbox and then archiving, by a user-->
+                                    <button class="btn btn-mini" ng-click="recycle(cue)">                      
+										<i class="icon-trash" rel="tooltip" title="Removes this cue."></i>
+									</button> 
+   
+                                    <!-- recycling with an archive, as alternative. Not used for now                           
+          							The label "for" identifier and the input "id" identifier must be unique among other items and equal to each other                                    
+                                    <span class="badge" id="trashcan"><i class="icon-trash" rel="tooltip" title="Removes this cue." ng-model="cue.recycle"></i></span>
+									<label for="checkbox{{cue.position}}"><i
+										class="icon-trash" rel="tooltip" title="Removes this cue."></i></label>
+									<input type="checkbox" id="checkbox1" name="checkbox{{cue.position}}" ng-model="cue.recycle" />-->  
+							    </div>
+							</li>
+						</ul>
+                        <!-- Not used, as we do not recycle at the moment, but immediately trash
+						<form ng-submit="addCue()">
+							<span>{{remaining()}} of {{cues.length}} used</span> [ <a href="" ng-click="archive()">recycle checked</a> ]
+						</form>-->
+					</div>
+					<div ng-show="ViewStyle == 'play'" id="cuedisplayplay"> <!-- cues view alternative, simple style -->
+						<!-- Not used right now, in favor of the simpler method below<ul class="unstyled">
+							<li ng-repeat="cue in cues"><span class="form-inline">									<button class="btn btn-success" ng-click="playFromPosition(cue.position)">										<i class="icon-play" rel="tooltip"											title="Skips the media position to this cue."></i>&nbsp;&nbsp;{{cue.text}}&nbsp;									 </button>							</span></li>
+						</ul>-->
+                        <p style="line-height:2.6em" >
+							<span ng-repeat="cue in cues"><button class="btn btn-success" ng-click="playFromPosition(cue.position)"><i class="icon-play icon-white" rel="tooltip" title="Skips the media position to this cue."></i>&nbsp;&nbsp;<!-- spaces for nicer display -->{{cue.text}}&nbsp;</button>&nbsp;</span>
+                            </p>
+					</div>
+                    </p>
+				</div>		
+				
+				<div ng-show="ViewStyle == 'edit' && PlaybackType.length" id="persistenceoptions"> <!-- Persistence -->
+                    <p>
+			    	<a class="btn btn-inverse" data-toggle="modal" href="#modalSaveAsLink" onclick="SaveAsLink();">Share as link...</a>
+					<i class="icon-question-sign" rel="tooltip" title="Provides the track, consisting of media url and cues, as a reusable link."></i>
+                    </p>
+		    	</div>		    	
+		    	
+		    	<div class="modal hide" id="modalSaveAsLink"><!-- Save as link, modal variant-->
+				    <div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">x</button>
+					    <h3>Share as link</h3>
+					</div>
+					<div class="modal-body">
+						<p>Copy the link below to keep this track for later use.</p>
+						<p>
+						<input class="input-xxlarge" type="text" id="savelinkInBox" />
+						</p>
+						<p>Or click on the link below to reload with this track (to bookmark it for example)</p>
+						<p>
+						<a href="" id="savelinkToLoad">This track with cues.</a>
+						</p>	
+                   		<div class="alert alert-error">
+                               Legal notice: By using or sharing the provided link you declare that you are entitled to do so. The author of quirli denies all responsibility in any eventual copyright infringement by you.
+                		</div>					
+					</div>
+					<div class="modal-footer">
+					    <a href="#" class="btn btn-inverse" data-dismiss="modal">Close</a>
+				    </div>
+			    </div>
+			</div>
+			<div class="alert alert-info">
+				Please give feedback to <a href="mailto:hello@quir.li">hello@quir.li</a>
+				<ul>
+				<li>Only working on latest browsers that support <a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a>.</li>
+				<li>The used mediaplayer, <a href="http://mediaelementjs.com/">mediaelement.js</a> supports the various media types as stated on it's website.</li>
+				</ul>
+			</div>
+ 	  </div> <!-- /container -->
+
+        <!-- Footer
+        ================================================== -->
+        <footer class="footer">
+            <div class="container">
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>Created by <a href="http://www.codeministry.ch">codeministry.ch</a>.</p>
+            <p>Licensed under the open source <a href ="gpl-3.0.txt" >GPLv3 License</a>.</p>
+            <ul class="footer-links">
+                <li><a href="http://quirli.codeplex.com">Source</a></li>
+                <li class="muted">&middot;</li>
+                <li><a href="disclaimer.txt">Disclaimer</a></li>
+            </ul>
+            </div>
+        </footer>
+		    
+		<!-- Le javascript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="bootstrap/js/bootstrap.min.js"></script>	
+	</body>	
+</html>
