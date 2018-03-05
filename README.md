@@ -12,4 +12,4 @@ Then, using Replayer and your laptop computer, you can rehearse any portion of y
 ## Fast
 Use the navigation features on the numeric keypad.
 
-_Replayer_ is created by [codeministry.ch](codeministry.ch)
+_Replayer_ is created by [https://codeministry.ch](codeministry.ch)
