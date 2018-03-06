@@ -17,6 +17,6 @@ Then, using Replayer and your laptop computer, you can rehearse any portion of y
 Use the navigation features on the numeric keypad. 
 
 ## Documentation
-See the [Leaflet](https://github.com/suterma/Replayer/raw/master/DOC/Leaflet%20v041.pdf) for an overview.
+See the [Leaflet](https://github.com/suterma/Replayer/raw/master/DOC/Leaflet%20v041.pdf) for an overview, or the [User Manual](https://github.com/suterma/Replayer/blob/master/DOC/User%20Manual%20v041.pdf) for detailed information.
 
 _Replayer_ is created by [codeministry.ch](https://codeministry.ch)
