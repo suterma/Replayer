@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers>
+  <!--<Costura IncludeAssemblies='AxInterop.WMPLib' />-->-->
+  <!--//TODO unfortunately, I have not found a way to include the AxInterop.WMPLib with costura-->
+  <Costura/>
+  <!--<Costura 
+    Unmanaged64Assemblies='AxInterop.WMPLib' />-->
+</Weavers>
