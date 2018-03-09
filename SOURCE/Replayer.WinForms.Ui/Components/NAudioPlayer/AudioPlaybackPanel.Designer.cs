@@ -32,8 +32,6 @@ namespace NAudioDemo.AudioPlaybackDemo
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.groupBoxDriverModel = new System.Windows.Forms.GroupBox();
-            this.panelOutputDeviceSettings = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonPlay = new System.Windows.Forms.ToolStripButton();
             this.buttonPause = new System.Windows.Forms.ToolStripButton();
@@ -48,31 +46,11 @@ namespace NAudioDemo.AudioPlaybackDemo
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
             this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
-            this.panSlider1 = new NAudio.Gui.PanSlider();
             this.pot1 = new NAudio.Gui.Pot();
-            this.fader1 = new NAudio.Gui.Fader();
-            this.progressLog1 = new NAudio.Utils.ProgressLog();
-            this.groupBoxDriverModel.SuspendLayout();
+            this.panelOutputDeviceSettings = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBoxDriverModel
-            // 
-            this.groupBoxDriverModel.Controls.Add(this.panelOutputDeviceSettings);
-            this.groupBoxDriverModel.Location = new System.Drawing.Point(14, 35);
-            this.groupBoxDriverModel.Name = "groupBoxDriverModel";
-            this.groupBoxDriverModel.Size = new System.Drawing.Size(307, 332);
-            this.groupBoxDriverModel.TabIndex = 13;
-            this.groupBoxDriverModel.TabStop = false;
-            this.groupBoxDriverModel.Text = "Output Driver";
-            // 
-            // panelOutputDeviceSettings
-            // 
-            this.panelOutputDeviceSettings.Location = new System.Drawing.Point(8, 60);
-            this.panelOutputDeviceSettings.Name = "panelOutputDeviceSettings";
-            this.panelOutputDeviceSettings.Size = new System.Drawing.Size(292, 272);
-            this.panelOutputDeviceSettings.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -135,7 +113,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(66, 22);
             this.toolStripLabel3.Text = "Total Time:";
             // 
             // labelTotalTime
@@ -146,15 +124,15 @@ namespace NAudioDemo.AudioPlaybackDemo
             // 
             // trackBarPosition
             // 
-            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPosition.LargeChange = 10;
-            this.trackBarPosition.Location = new System.Drawing.Point(21, 374);
+            this.trackBarPosition.LargeChange = 1;
+            this.trackBarPosition.Location = new System.Drawing.Point(0, 216);
             this.trackBarPosition.Maximum = 100;
             this.trackBarPosition.Name = "trackBarPosition";
-            this.trackBarPosition.Size = new System.Drawing.Size(664, 45);
+            this.trackBarPosition.Size = new System.Drawing.Size(689, 45);
             this.trackBarPosition.TabIndex = 16;
-            this.trackBarPosition.TickFrequency = 5;
+            this.trackBarPosition.Tag = "Position";
             this.trackBarPosition.Scroll += new System.EventHandler(this.trackBarPosition_Scroll);
             // 
             // timer1
@@ -167,9 +145,9 @@ namespace NAudioDemo.AudioPlaybackDemo
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(388, 66);
+            this.label3.Location = new System.Drawing.Point(367, 31);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 15);
+            this.label3.Size = new System.Drawing.Size(50, 15);
             this.label3.TabIndex = 17;
             this.label3.Text = "Volume:";
             // 
@@ -178,11 +156,11 @@ namespace NAudioDemo.AudioPlaybackDemo
             this.volumeMeter2.Amplitude = 0F;
             this.volumeMeter2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.volumeMeter2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.volumeMeter2.Location = new System.Drawing.Point(661, 35);
+            this.volumeMeter2.Location = new System.Drawing.Point(670, 28);
             this.volumeMeter2.MaxDb = 3F;
             this.volumeMeter2.MinDb = -60F;
             this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Size = new System.Drawing.Size(16, 118);
+            this.volumeMeter2.Size = new System.Drawing.Size(16, 32);
             this.volumeMeter2.TabIndex = 18;
             this.volumeMeter2.Text = "volumeMeter1";
             // 
@@ -191,82 +169,56 @@ namespace NAudioDemo.AudioPlaybackDemo
             this.volumeMeter1.Amplitude = 0F;
             this.volumeMeter1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.volumeMeter1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.volumeMeter1.Location = new System.Drawing.Point(640, 35);
+            this.volumeMeter1.Location = new System.Drawing.Point(648, 28);
             this.volumeMeter1.MaxDb = 3F;
             this.volumeMeter1.MinDb = -60F;
             this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Size = new System.Drawing.Size(16, 118);
+            this.volumeMeter1.Size = new System.Drawing.Size(16, 32);
             this.volumeMeter1.TabIndex = 18;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
             // volumeSlider1
             // 
             this.volumeSlider1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.volumeSlider1.Location = new System.Drawing.Point(516, 62);
+            this.volumeSlider1.Location = new System.Drawing.Point(434, 28);
             this.volumeSlider1.Name = "volumeSlider1";
             this.volumeSlider1.Size = new System.Drawing.Size(112, 18);
             this.volumeSlider1.TabIndex = 11;
             this.volumeSlider1.VolumeChanged += new System.EventHandler(this.OnVolumeSliderChanged);
             // 
-            // panSlider1
-            // 
-            this.panSlider1.Location = new System.Drawing.Point(373, 116);
-            this.panSlider1.Name = "panSlider1";
-            this.panSlider1.Pan = 0F;
-            this.panSlider1.Size = new System.Drawing.Size(232, 57);
-            this.panSlider1.TabIndex = 20;
-            // 
             // pot1
             // 
-            this.pot1.Location = new System.Drawing.Point(552, 229);
+            this.pot1.Location = new System.Drawing.Point(611, 28);
             this.pot1.Maximum = 1D;
             this.pot1.Minimum = 0D;
             this.pot1.Name = "pot1";
-            this.pot1.Size = new System.Drawing.Size(32, 32);
+            this.pot1.Size = new System.Drawing.Size(31, 32);
             this.pot1.TabIndex = 21;
             this.pot1.Value = 0.5D;
             // 
-            // fader1
+            // panelOutputDeviceSettings
             // 
-            this.fader1.Location = new System.Drawing.Point(373, 229);
-            this.fader1.Maximum = 0;
-            this.fader1.Minimum = 0;
-            this.fader1.Name = "fader1";
-            this.fader1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.fader1.Size = new System.Drawing.Size(173, 23);
-            this.fader1.TabIndex = 22;
-            this.fader1.Text = "fader1";
-            this.fader1.Value = -2147483648;
-            // 
-            // progressLog1
-            // 
-            this.progressLog1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.progressLog1.Location = new System.Drawing.Point(339, 279);
-            this.progressLog1.Name = "progressLog1";
-            this.progressLog1.Padding = new System.Windows.Forms.Padding(1);
-            this.progressLog1.Size = new System.Drawing.Size(289, 59);
-            this.progressLog1.TabIndex = 23;
+            this.panelOutputDeviceSettings.Location = new System.Drawing.Point(3, 28);
+            this.panelOutputDeviceSettings.Name = "panelOutputDeviceSettings";
+            this.panelOutputDeviceSettings.Size = new System.Drawing.Size(292, 30);
+            this.panelOutputDeviceSettings.TabIndex = 1;
             // 
             // AudioPlaybackPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.progressLog1);
-            this.Controls.Add(this.fader1);
+            this.Controls.Add(this.panelOutputDeviceSettings);
             this.Controls.Add(this.pot1);
-            this.Controls.Add(this.panSlider1);
             this.Controls.Add(this.volumeMeter2);
             this.Controls.Add(this.volumeMeter1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.trackBarPosition);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.groupBoxDriverModel);
             this.Controls.Add(this.volumeSlider1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AudioPlaybackPanel";
-            this.Size = new System.Drawing.Size(689, 428);
+            this.Size = new System.Drawing.Size(689, 261);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBoxDriverModel.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
@@ -281,7 +233,6 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         #endregion
         private NAudio.Gui.VolumeSlider volumeSlider1;
-        private System.Windows.Forms.GroupBox groupBoxDriverModel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton buttonPlay;
         private System.Windows.Forms.ToolStripButton buttonPause;
@@ -295,10 +246,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         private System.Windows.Forms.Label label3;
         private NAudio.Gui.VolumeMeter volumeMeter1;
         private NAudio.Gui.VolumeMeter volumeMeter2;
-        private System.Windows.Forms.Panel panelOutputDeviceSettings;
-        private NAudio.Gui.PanSlider panSlider1;
         private NAudio.Gui.Pot pot1;
-        private NAudio.Gui.Fader fader1;
-        private NAudio.Utils.ProgressLog progressLog1;
+        private System.Windows.Forms.Panel panelOutputDeviceSettings;
     }
 }

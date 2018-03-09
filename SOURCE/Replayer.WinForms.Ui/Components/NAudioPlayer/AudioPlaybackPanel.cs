@@ -5,13 +5,14 @@ using System.Linq;
 using System.Windows.Forms;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using NAudioDemo.Utils;
 using Replayer.Core.Player;
 
 namespace NAudioDemo.AudioPlaybackDemo
 {
     public partial class AudioPlaybackPanel : UserControl, IMediaPlayer
     {
+
+        //TODO add log4net logging
     
         private IWavePlayer waveOut;
         private string fileName;
@@ -35,10 +36,10 @@ namespace NAudioDemo.AudioPlaybackDemo
         {
 
             InitializeComponent();
-            LoadOuputPlugin();
+            LoadOutputPlugin();
         }
 
-        private void LoadOuputPlugin()
+        private void LoadOutputPlugin()
         {
             _outputDevicePlugin = new WaveOutPlugin();
 
@@ -54,87 +55,10 @@ namespace NAudioDemo.AudioPlaybackDemo
             panelOutputDeviceSettings.Controls.Add(settingsPanel);
         }
 
-
-      
-
-      
-
-        public TimeSpan Position
-        {
-            get {
-                if (waveOut == null)
-                {
-                    return TimeSpan.Zero;
-                }
-                if (audioFileReader == null)
-                {
-                    return TimeSpan.Zero;
-                }
-                return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime; }
-            set {
-                //TODO when Waveout Null, initialize it
-                //otherwise the first set of the position gets missed
-                if (waveOut != null)
-                {
-                    audioFileReader.CurrentTime = value;
-                }
-            }
-        }
-        public MediaPlayerState State {
-            get
-            {
-                if (waveOut != null)
-                {
-                    if (waveOut.PlaybackState == PlaybackState.Playing)
-                    {
-                        return MediaPlayerState.Playing;
-                    }
-                    else if (waveOut.PlaybackState == PlaybackState.Paused)
-                    {
-                        return MediaPlayerState.Paused;
-                    }
-                }
-                return MediaPlayerState.Paused;
-
-            }
-            set
-            {
-                if (value == MediaPlayerState.Playing)
-                {
-                    OnButtonPlayClick(this, new EventArgs());
-                }
-                else if (value == MediaPlayerState.Paused)
-                {
-                    OnButtonPauseClick(this, new EventArgs());
-                }
-                else
-                {
-                    throw new NotSupportedException($"State {value} is not supported for MediaPlayerState.");
-                }
-            }
-        }
-
-
-        public string Url
-        {
-
-            get
-            {
-                return fileName;
-            }
-            set
-            {
-                if (!string.IsNullOrEmpty(value) && value != fileName)
-                {
-                    //TODO irgendwie wird immer das gleiche File abgespielt, muss da noch was gesetzt werden??
-                    OnButtonStopClick(this, new EventArgs());
-                    fileName = value;
-                }
-            }
-        }
-        public double Volume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        private void OnButtonPlayClick(object sender, EventArgs e)
+        /// <summary>
+        /// Prepares to play by loading the file (if available) and getting the wave output ready.
+        /// </summary>
+        private void PrepareToPlay()
         {
             if (!_outputDevicePlugin.IsAvailable)
             {
@@ -144,28 +68,13 @@ namespace NAudioDemo.AudioPlaybackDemo
 
             if (waveOut != null)
             {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    return;
-                }
-                else if (waveOut.PlaybackState == PlaybackState.Paused)
-                {
-                    waveOut.Play();
-                    groupBoxDriverModel.Enabled = false;
-                    return;
-                }
+                return; //because there is nothing to prepare anymore.
             }
-            
-            // we are in a stopped state
-            // TODO: only re-initialise if necessary
+
 
             if (String.IsNullOrEmpty(fileName))
             {
-                OnOpenFileClick(sender, e);
-            }
-            if (String.IsNullOrEmpty(fileName))
-            {
-                return;
+                return; //because there is nothing to prepare when no file is available.
             }
 
             try
@@ -203,9 +112,165 @@ namespace NAudioDemo.AudioPlaybackDemo
                 return;
             }
 
-            setVolumeDelegate(volumeSlider1.Volume); 
-            groupBoxDriverModel.Enabled = false;
-            waveOut.Play();
+            setVolumeDelegate(volumeSlider1.Volume);
+            panelOutputDeviceSettings.Enabled = false;
+        }
+
+      
+
+      
+
+        public TimeSpan Position
+        {
+            get {
+                if (waveOut == null)
+                {
+                    return TimeSpan.Zero;
+                }
+                if (audioFileReader == null)
+                {
+                    return TimeSpan.Zero;
+                }
+                return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime; }
+            set {
+                PrepareToPlay();
+                if (waveOut != null)
+                {
+                    audioFileReader.CurrentTime = value;
+                }
+            }
+        }
+        public MediaPlayerState State {
+            get
+            {
+                if (waveOut != null)
+                {
+                    if (waveOut.PlaybackState == PlaybackState.Playing)
+                    {
+                        return MediaPlayerState.Playing;
+                    }
+                    else if (waveOut.PlaybackState == PlaybackState.Paused)
+                    {
+                        return MediaPlayerState.Paused;
+                    }
+                }
+                return MediaPlayerState.Paused;
+
+            }
+            set
+            {
+                if (value == MediaPlayerState.Playing)
+                {
+                    PrepareToPlay();
+                    if (waveOut != null)
+                    {
+                        waveOut.Play();
+                    }
+                }
+                else if (value == MediaPlayerState.Paused)
+                {
+                    OnButtonPauseClick(this, new EventArgs());
+                }
+                else
+                {
+                    throw new NotSupportedException($"State {value} is not supported for MediaPlayerState.");
+                }
+            }
+        }
+
+
+        public string Url
+        {
+
+            get
+            {
+                return fileName;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value) && value != fileName)
+                {
+                    CloseWaveOut();
+                    fileName = value;
+                    PrepareToPlay();
+                }
+            }
+        }
+        public double Volume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        private void OnButtonPlayClick(object sender, EventArgs e)
+        {
+            State = MediaPlayerState.Playing;
+            //if (!_outputDevicePlugin.IsAvailable)
+            //{
+            //    MessageBox.Show("The selected output driver is not available on this system");
+            //    return;
+            //}
+
+            //if (waveOut != null)
+            //{
+            //    if (waveOut.PlaybackState == PlaybackState.Playing)
+            //    {
+            //        return;
+            //    }
+            //    else if (waveOut.PlaybackState == PlaybackState.Paused)
+            //    {
+            //        waveOut.Play();
+            //        groupBoxDriverModel.Enabled = false;
+            //        return;
+            //    }
+            //}
+            
+            //// we are in a stopped state
+            //// TODO: only re-initialise if necessary
+
+            //if (String.IsNullOrEmpty(fileName))
+            //{
+            //    OnOpenFileClick(sender, e);
+            //}
+            //if (String.IsNullOrEmpty(fileName))
+            //{
+            //    return;
+            //}
+
+            //try
+            //{
+            //    CreateWaveOut();
+            //}
+            //catch (Exception driverCreateException)
+            //{
+            //    MessageBox.Show(String.Format("{0}", driverCreateException.Message));
+            //    return;
+            //}
+
+            //ISampleProvider sampleProvider;
+            //try
+            //{
+            //    sampleProvider = CreateInputStream(fileName);
+            //}
+            //catch (Exception createException)
+            //{
+            //    MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
+            //    return;
+            //}
+
+
+            //labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
+            //    audioFileReader.TotalTime.Seconds);
+
+            //try
+            //{
+            //    waveOut.Init(sampleProvider);
+            //}
+            //catch (Exception initException)
+            //{
+            //    MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
+            //    return;
+            //}
+
+            //setVolumeDelegate(volumeSlider1.Volume); 
+            //groupBoxDriverModel.Enabled = false;
+            //waveOut.Play();
         }
 
         private ISampleProvider CreateInputStream(string fileName)
@@ -237,7 +302,7 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         void OnPlaybackStopped(object sender, StoppedEventArgs e)
         {
-            groupBoxDriverModel.Enabled = true;
+            panelOutputDeviceSettings.Enabled = true;
             if (e.Exception != null)
             {
                 MessageBox.Show(e.Exception.Message, "Playback Device Error");
@@ -253,6 +318,8 @@ namespace NAudioDemo.AudioPlaybackDemo
             if (waveOut != null)
             {
                 waveOut.Stop();
+                waveOut.PlaybackStopped -= OnPlaybackStopped;
+
             }
             if (audioFileReader != null)
             {

@@ -179,37 +179,13 @@
     <Compile Include="Components\DisplayableCoreSettings.cs" />
     <Compile Include="Components\DisplayableUiSettings.cs" />
     <Compile Include="Components\DisplayTypeWrapper.cs" />
-    <Compile Include="Components\NAudioPlayer\AsioOutPlugin.cs" />
-    <Compile Include="Components\NAudioPlayer\AsioOutSettingsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\NAudioPlayer\AsioOutSettingsPanel.Designer.cs">
-      <DependentUpon>AsioOutSettingsPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\NAudioPlayer\AudioPlaybackPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\NAudioPlayer\AudioPlaybackPanel.Designer.cs">
       <DependentUpon>AudioPlaybackPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\NAudioPlayer\AudioPlaybackPanelPlugin.cs" />
-    <Compile Include="Components\NAudioPlayer\DirectSoundOutSettingsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\NAudioPlayer\DirectSoundOutSettingsPanel.Designer.cs">
-      <DependentUpon>DirectSoundOutSettingsPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\NAudioPlayer\DirectSoundOutPlugin.cs" />
-    <Compile Include="Components\NAudioPlayer\INAudioDemoPlugin.cs" />
     <Compile Include="Components\NAudioPlayer\IOutputDevicePlugin.cs" />
-    <Compile Include="Components\NAudioPlayer\ReflectionHelper.cs" />
-    <Compile Include="Components\NAudioPlayer\WasapiOutPlugin.cs" />
-    <Compile Include="Components\NAudioPlayer\WasapiOutSettingsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\NAudioPlayer\WasapiOutSettingsPanel.Designer.cs">
-      <DependentUpon>WasapiOutSettingsPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\NAudioPlayer\WaveOutPlugin.cs" />
     <Compile Include="Components\NAudioPlayer\WaveOutSettingsPanel.cs">
       <SubType>UserControl</SubType>
@@ -331,10 +307,7 @@
     <EmbeddedResource Include="Components\BusyForm.resx">
       <DependentUpon>BusyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\NAudioPlayer\AsioOutSettingsPanel.resx" />
     <EmbeddedResource Include="Components\NAudioPlayer\AudioPlaybackPanel.resx" />
-    <EmbeddedResource Include="Components\NAudioPlayer\DirectSoundOutSettingsPanel.resx" />
-    <EmbeddedResource Include="Components\NAudioPlayer\WasapiOutSettingsPanel.resx" />
     <EmbeddedResource Include="Components\NAudioPlayer\WaveOutSettingsPanel.resx" />
     <EmbeddedResource Include="Components\Question.resx">
       <DependentUpon>Question.cs</DependentUpon>
