@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Replayer.Core.Player;
-using Replayer.WinForms.Common;
+using NAudioDemo.AudioPlaybackDemo;
 
 namespace Replayer.WinForms.Ui.Views.MediaPlayer {
     /// <summary>
@@ -11,7 +11,7 @@ namespace Replayer.WinForms.Ui.Views.MediaPlayer {
         /// <summary>
         ///     The media player within this instance.
         /// </summary>
-        private readonly WindowsMediaRePlayer _mediaPlayer;
+        private readonly AudioPlaybackPanel _mediaPlayer;
 
         /// <summary>
         ///     Gets or sets the presenter.
@@ -34,7 +34,7 @@ namespace Replayer.WinForms.Ui.Views.MediaPlayer {
             InitializeComponent();
 
             //add media player
-            _mediaPlayer = new WindowsMediaRePlayer {Dock = DockStyle.Fill};
+            _mediaPlayer = new AudioPlaybackPanel { Dock = DockStyle.Fill};
             Controls.Add(_mediaPlayer);
 
             Presenter = new MediaPlayerPresenter(this);

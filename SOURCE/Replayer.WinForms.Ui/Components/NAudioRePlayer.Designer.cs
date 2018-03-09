@@ -1,7 +1,8 @@
-﻿using System.Globalization;
+﻿using NAudioDemo.AudioPlaybackDemo;
+using System.Globalization;
 namespace Replayer.WinForms.Common
 {
-    public partial class WindowsMediaRePlayer
+    public partial class NAudioRePlayer
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,36 +30,37 @@ namespace Replayer.WinForms.Common
         /// </summary>
         private void InitializeComponent()
         {
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WindowsMediaRePlayer));
-            this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
+            this.mediaPlayer = new AudioPlaybackPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).BeginInit();
             this.SuspendLayout();
+
             // 
-            // axWindowsMediaPlayer1
+            // mediaPlayer
             // 
-            this.axWindowsMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axWindowsMediaPlayer.Enabled = true;
-            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(0, 0);
-            this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer1";
-            //this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState", CultureInfo.InvariantCulture)));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(208, 63);
-            this.axWindowsMediaPlayer.TabIndex = 0;
+            this.mediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaPlayer.Enabled = true;
+            this.mediaPlayer.Location = new System.Drawing.Point(0, 0);
+            this.mediaPlayer.Name = "mediaPlayer";
+            this.mediaPlayer.Size = new System.Drawing.Size(208, 63);
+            this.mediaPlayer.TabIndex = 0;
             // 
-            // ControlledWindowsMediaPlayer
+            // NAudioRePlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.axWindowsMediaPlayer);
+            this.Controls.Add(this.mediaPlayer);
             this.MinimumSize = new System.Drawing.Size(208, 63);
-            this.Name = "ControlledWindowsMediaPlayer";
-            this.Size = new System.Drawing.Size(208, 63);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).EndInit();
+            this.Name = "NAudioRePlayer";
+            this.Size = new System.Drawing.Size(398, 148);
+            ((System.ComponentModel.ISupportInitialize)(this.mediaPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer;
+        private AudioPlaybackPanel mediaPlayer;
     }
 }

@@ -83,6 +83,106 @@ namespace Replayer.WinForms.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AudioBack_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioBack_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioForward_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioForward_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioLoop_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioLoop_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioMute_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioMute_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioPause_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioPause_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioPlay_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioPlay_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioRewind_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioRewind_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioShuffle_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioShuffle_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioStop_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioStop_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AudioUnmute_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AudioUnmute_Icon_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel_64x64 {
             get {
                 object obj = ResourceManager.GetObject("cancel_64x64", resourceCulture);
@@ -196,6 +296,16 @@ namespace Replayer.WinForms.Ui.Properties {
         internal static System.Drawing.Bitmap CueEdit_Icon_256x256 {
             get {
                 object obj = ResourceManager.GetObject("CueEdit_Icon_256x256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FileOpen_Icon_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("FileOpen_Icon_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

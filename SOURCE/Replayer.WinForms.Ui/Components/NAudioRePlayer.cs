@@ -5,11 +5,11 @@ using Replayer.Core.Player;
 
 namespace Replayer.WinForms.Common {
     /// <summary>
-    ///     A Windows Media Player instance which is
+    ///     A Media Player using anNAudio instance which is
     ///     usable as media player within the
     ///     RePlayer application
     /// </summary>
-    public partial class WindowsMediaRePlayer : UserControl, IMediaPlayer {
+    public partial class NAudioRePlayer : UserControl, IMediaPlayer {
         /// <summary>
         ///     A timer for updating the Position while playing is active.
         /// </summary>
@@ -106,9 +106,9 @@ namespace Replayer.WinForms.Common {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="WindowsMediaRePlayer" /> class.
+        ///     Initializes a new instance of the <see cref="NAudioRePlayer" /> class.
         /// </summary>
-        public WindowsMediaRePlayer() {
+        public NAudioRePlayer() {
             InitializeComponent();
 
             //do not autoplay
