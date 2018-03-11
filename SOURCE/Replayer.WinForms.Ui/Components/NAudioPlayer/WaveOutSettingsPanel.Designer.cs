@@ -33,14 +33,12 @@
             // 
             // comboBoxWaveOutDevice
             // 
-            this.comboBoxWaveOutDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxWaveOutDevice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxWaveOutDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxWaveOutDevice.FormattingEnabled = true;
             this.comboBoxWaveOutDevice.Location = new System.Drawing.Point(0, 0);
             this.comboBoxWaveOutDevice.Name = "comboBoxWaveOutDevice";
-            this.comboBoxWaveOutDevice.Size = new System.Drawing.Size(480, 21);
+            this.comboBoxWaveOutDevice.Size = new System.Drawing.Size(117, 21);
             this.comboBoxWaveOutDevice.TabIndex = 19;
             // 
             // WaveOutSettingsPanel
@@ -49,7 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBoxWaveOutDevice);
             this.Name = "WaveOutSettingsPanel";
-            this.Size = new System.Drawing.Size(480, 22);
+            this.Size = new System.Drawing.Size(117, 22);
             this.ResumeLayout(false);
 
         }

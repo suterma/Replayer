@@ -186,6 +186,9 @@
       <DependentUpon>AudioPlaybackPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\NAudioPlayer\IOutputDevicePlugin.cs" />
+    <Compile Include="Components\NAudioPlayer\VolumePot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Components\NAudioPlayer\WaveOutPlugin.cs" />
     <Compile Include="Components\NAudioPlayer\WaveOutSettingsPanel.cs">
       <SubType>UserControl</SubType>
@@ -308,6 +311,9 @@
       <DependentUpon>BusyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\NAudioPlayer\AudioPlaybackPanel.resx" />
+    <EmbeddedResource Include="Components\NAudioPlayer\VolumePot.resx">
+      <DependentUpon>VolumePot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\NAudioPlayer\WaveOutSettingsPanel.resx" />
     <EmbeddedResource Include="Components\Question.resx">
       <DependentUpon>Question.cs</DependentUpon>

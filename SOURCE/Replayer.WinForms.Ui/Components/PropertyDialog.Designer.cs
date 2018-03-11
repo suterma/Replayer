@@ -30,14 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PropertyDialog));
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.okCancelPanel1 = new Replayer.WinForms.Ui.Gui.OkCancelPanel();
             this.SuspendLayout();
             // 
             // propertyGrid1
             // 
-            this.propertyGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.propertyGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.propertyGrid1.Location = new System.Drawing.Point(3, 3);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.NoSort;
@@ -45,10 +46,16 @@
             this.propertyGrid1.TabIndex = 0;
             this.propertyGrid1.ToolbarVisible = false;
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(0, 0);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.TabIndex = 0;
+            // 
             // okCancelPanel1
             // 
-            this.okCancelPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.okCancelPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.okCancelPanel1.Location = new System.Drawing.Point(3, 234);
             this.okCancelPanel1.MinimumSize = new System.Drawing.Size(156, 78);
             this.okCancelPanel1.Name = "okCancelPanel1";
@@ -73,5 +80,6 @@
 
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private OkCancelPanel okCancelPanel1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

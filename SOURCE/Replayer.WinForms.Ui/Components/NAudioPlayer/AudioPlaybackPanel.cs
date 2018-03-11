@@ -13,11 +13,13 @@ namespace NAudioDemo.AudioPlaybackDemo
     {
 
         //TODO add log4net logging
-    
+
+        int trackbarMax = 100000; //reasonably larger than estimated width in pixels
+        int trackbarMin = 0;
+
         private IWavePlayer waveOut;
         private string fileName;
         private AudioFileReader audioFileReader;
-        private Action<float> setVolumeDelegate;
 
         /// <summary>
         /// The latency for playback.
@@ -32,10 +34,17 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AudioPlaybackPanel"/> class.
+        /// </summary>
         public AudioPlaybackPanel()
         {
 
             InitializeComponent();
+            trackBarPosition.Maximum = trackbarMax;
+            trackBarPosition.Minimum = trackbarMin;
+            volumePot.Maximum = 100; //0dBFS for the potentiometer, according to the Volume property used here.
+            volumePot.Value = 71; //approx. -3 dB
             LoadOutputPlugin();
         }
 
@@ -99,30 +108,40 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
 
 
-            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
+            label_TotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
                 audioFileReader.TotalTime.Seconds);
 
             try
             {
                 waveOut.Init(sampleProvider);
+                UpdateWaveoutVolume();
             }
             catch (Exception initException)
             {
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
                 return;
             }
-
-            setVolumeDelegate(volumeSlider1.Volume);
             panelOutputDeviceSettings.Enabled = false;
         }
 
-      
 
-      
 
+
+
+        /// <summary>
+        /// Gets or sets the position within the currently loaded media track.
+        /// </summary>
+        /// <value>
+        /// The position.
+        /// </value>
+        /// <remarks>
+        /// While playing, the position is expected to get updated
+        /// at about every half a second.
+        /// </remarks>
         public TimeSpan Position
         {
-            get {
+            get
+            {
                 if (waveOut == null)
                 {
                     return TimeSpan.Zero;
@@ -131,8 +150,10 @@ namespace NAudioDemo.AudioPlaybackDemo
                 {
                     return TimeSpan.Zero;
                 }
-                return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime; }
-            set {
+                return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
+            }
+            set
+            {
                 PrepareToPlay();
                 if (waveOut != null)
                 {
@@ -140,7 +161,8 @@ namespace NAudioDemo.AudioPlaybackDemo
                 }
             }
         }
-        public MediaPlayerState State {
+        public MediaPlayerState State
+        {
             get
             {
                 if (waveOut != null)
@@ -164,12 +186,13 @@ namespace NAudioDemo.AudioPlaybackDemo
                     PrepareToPlay();
                     if (waveOut != null)
                     {
+                        UpdateWaveoutVolume();
                         waveOut.Play();
                     }
                 }
                 else if (value == MediaPlayerState.Paused)
                 {
-                    OnButtonPauseClick(this, new EventArgs());
+                    btn_pause_Click(this, new EventArgs());
                 }
                 else
                 {
@@ -196,11 +219,209 @@ namespace NAudioDemo.AudioPlaybackDemo
                 }
             }
         }
-        public double Volume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        private void OnButtonPlayClick(object sender, EventArgs e)
+        /// <summary>
+        /// Gets or sets the volume. The value is expected to be in the range
+        /// of 0 to 100.
+        /// </summary>
+        /// <remarks>The value gets limited to the expected range.</remarks>
+        /// <value>
+        /// The volume.
+        /// </value>
+        public double Volume
         {
+            get
+            {
+                return volumePot.Value;
+            }
+            set
+            {
+                //limit
+                var limitedValue = Math.Max(0, Math.Min(100, value));
+
+                //Change the pot, but do not recursively fire the changed event
+                //volumePot.ValueChanged -= volumePot_ValueChanged;
+                if (volumePot.Value != limitedValue)
+                {
+                    TODO warum wird der Volume-change bei Tastatusdruck nicht übernommen??
+                    volumePot.Value = limitedValue;
+                    //volumePot.ValueChanged += volumePot_ValueChanged;
+
+                }
+                UpdateWaveoutVolume();
+            }
+        }
+
+        private void UpdateWaveoutVolume()
+        {
+            waveOut.Volume = (float)volumePot.Volume;
+        }
+
+        private ISampleProvider CreateInputStream(string fileName)
+        {
+            audioFileReader = new AudioFileReader(fileName);
+
+            var sampleChannel = new SampleChannel(audioFileReader, true);
+            //TODO is sampleChannel used still ? sampleChannel.PreVolumeMeter+= OnPreVolumeMeter;
+            var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
+
+            return postVolumeMeter;
+        }
+
+        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
+        {
+            UpdateAmplitudeDisplay(e.MaxSampleValues[0], e.MaxSampleValues[1]);
+        }
+
+        /// <summary>
+        /// Updates the amplitude display.
+        /// </summary>
+        /// <param name="leftAmplitude">The left amplitude.</param>
+        /// <param name="rightAmplitude">The right amplitude.</param>
+        private void UpdateAmplitudeDisplay(float leftAmplitude, float rightAmplitude)
+        {
+            volumeMeter1.Amplitude = leftAmplitude;
+            volumeMeter2.Amplitude = rightAmplitude;
+        }
+
+        private void CreateWaveOut()
+        {
+            CloseWaveOut();
+            waveOut = _outputDevicePlugin.CreateDevice(latency);
+            waveOut.PlaybackStopped += OnPlaybackStopped;
+
+        }
+
+        void OnPlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            UpdateAmplitudeDisplay(0, 0);
+            panelOutputDeviceSettings.Enabled = true;
+            if (e.Exception != null)
+            {
+                MessageBox.Show(e.Exception.Message, "Playback Device Error");
+            }
+            if (audioFileReader != null)
+            {
+                audioFileReader.Position = 0;
+            }
+        }
+
+        private void CloseWaveOut()
+        {
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+                waveOut.PlaybackStopped -= OnPlaybackStopped;
+
+            }
+            if (audioFileReader != null)
+            {
+                // this one really closes the file and ACM conversion
+                audioFileReader.Dispose();
+                audioFileReader = null;
+            }
+            if (waveOut != null)
+            {
+                waveOut.Dispose();
+                waveOut = null;
+            }
+        }
+
+
+
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (waveOut != null && audioFileReader != null)
+            {
+                UpdateTimerDisplays();
+            }
+            else
+            {
+                trackBarPosition.Value = 0;
+                //UpdateTimerDisplays();
+
+            }
+        }
+
+        private void UpdateTimerDisplays()
+        {
+            TimeSpan currentTime = Position;
+            trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(trackbarMax * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
+            label_CurrentTime.Text = String.Format("{0:00}:{1:00}.{2:0}", (int)currentTime.TotalMinutes,
+                currentTime.Seconds, currentTime.Milliseconds / 100 /*show only tenths of a second */);
+
+        }
+
+
+        /// <summary>
+        /// Handles the Scroll event of the trackBarPosition control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void trackBarPosition_Scroll(object sender, EventArgs e)
+        {
+            var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
+            Position = TimeSpan.FromSeconds(secondsPosition);
+        }
+
+        private void OnOpenFileClick(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            string allExtensions = "*.wav;*.aiff;*.mp3;*.aac";
+            openFileDialog.Filter = String.Format("All Supported Files|{0}|All Files (*.*)|*.*", allExtensions);
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = openFileDialog.FileName;
+            }
+        }
+
+        public void SeekBackward(double interval)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SeekForward(double interval)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Toggles the play/pause state.
+        /// </summary>
+        public void TogglePlayPause()
+        {
+            if (State == MediaPlayerState.Playing)
+            {
+                State = MediaPlayerState.Paused;
+            }
+            else
+            {
+                State = MediaPlayerState.Playing;
+            }
+        }
+
+        /// <summary>
+        /// Handles the ValueChanged event of the volumePot control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void volumePot_ValueChanged(object sender, EventArgs e)
+        {
+            Volume = volumePot.Value;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btn_play control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btn_play_Click(object sender, EventArgs e)
+        {
+
             State = MediaPlayerState.Playing;
+
             //if (!_outputDevicePlugin.IsAvailable)
             //{
             //    MessageBox.Show("The selected output driver is not available on this system");
@@ -220,7 +441,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             //        return;
             //    }
             //}
-            
+
             //// we are in a stopped state
             //// TODO: only re-initialise if necessary
 
@@ -271,71 +492,15 @@ namespace NAudioDemo.AudioPlaybackDemo
             //setVolumeDelegate(volumeSlider1.Volume); 
             //groupBoxDriverModel.Enabled = false;
             //waveOut.Play();
+
         }
 
-        private ISampleProvider CreateInputStream(string fileName)
-        {
-            audioFileReader = new AudioFileReader(fileName);
-            
-            var sampleChannel = new SampleChannel(audioFileReader, true);
-            //TODO is sampleChannel used still ? sampleChannel.PreVolumeMeter+= OnPreVolumeMeter;
-            setVolumeDelegate = vol => sampleChannel.Volume = vol;
-            var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
-            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
-
-            return postVolumeMeter;
-        }
-
-        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
-        {
-            // we know it is stereo
-            volumeMeter1.Amplitude = e.MaxSampleValues[0];
-            volumeMeter2.Amplitude = e.MaxSampleValues[1];
-        }
-
-        private void CreateWaveOut()
-        {
-            CloseWaveOut();
-            waveOut = _outputDevicePlugin.CreateDevice(latency);
-            waveOut.PlaybackStopped += OnPlaybackStopped;
-        }
-
-        void OnPlaybackStopped(object sender, StoppedEventArgs e)
-        {
-            panelOutputDeviceSettings.Enabled = true;
-            if (e.Exception != null)
-            {
-                MessageBox.Show(e.Exception.Message, "Playback Device Error");
-            }
-            if (audioFileReader != null)
-            {
-                audioFileReader.Position = 0;
-            }
-        }
-
-        private void CloseWaveOut()
-        {
-            if (waveOut != null)
-            {
-                waveOut.Stop();
-                waveOut.PlaybackStopped -= OnPlaybackStopped;
-
-            }
-            if (audioFileReader != null)
-            {
-                // this one really closes the file and ACM conversion
-                audioFileReader.Dispose();
-                setVolumeDelegate = null;
-                audioFileReader = null;
-            }
-            if (waveOut != null)
-            {
-                waveOut.Dispose();
-                waveOut = null;
-            }
-        }
-
-        private void OnButtonPauseClick(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the Click event of the btn_pause control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btn_pause_Click(object sender, EventArgs e)
         {
             if (waveOut != null)
             {
@@ -344,76 +509,21 @@ namespace NAudioDemo.AudioPlaybackDemo
                     waveOut.Pause();
                 }
             }
+            UpdateAmplitudeDisplay(0, 0);
         }
 
-        private void OnVolumeSliderChanged(object sender, EventArgs e)
-        {
-            if (setVolumeDelegate != null)
-            {
-                setVolumeDelegate(volumeSlider1.Volume);
-            }
-        }
-
-        private void OnButtonStopClick(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the Click event of the btn_stop control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void btn_stop_Click(object sender, EventArgs e)
         {
             if (waveOut != null)
             {
                 waveOut.Stop();
             }
-        }
-
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            if (waveOut != null && audioFileReader != null)
-            {
-                TimeSpan currentTime = Position;
-                trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
-                labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes,
-                    currentTime.Seconds);
-            }
-            else
-            {
-                trackBarPosition.Value = 0;
-            }
-        }
-
-        private void trackBarPosition_Scroll(object sender, EventArgs e)
-        {
-            Position = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);           
-        }
-
-        private void OnOpenFileClick(object sender, EventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog();
-            string allExtensions = "*.wav;*.aiff;*.mp3;*.aac";
-            openFileDialog.Filter = String.Format("All Supported Files|{0}|All Files (*.*)|*.*", allExtensions);
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                fileName = openFileDialog.FileName;
-            }
-        }
-
-        public void SeekBackward(double interval)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SeekForward(double interval)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TogglePlayPause()
-        {
-            if (State == MediaPlayerState.Playing)
-            {
-                State = MediaPlayerState.Paused;
-            }
-            else
-            {
-                State = MediaPlayerState.Playing;
-            }
+            UpdateAmplitudeDisplay(0, 0);
         }
 
 

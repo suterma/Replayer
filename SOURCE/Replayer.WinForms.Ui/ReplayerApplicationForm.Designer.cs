@@ -51,6 +51,7 @@
             this.standardMenuView1.AutoSize = true;
             this.standardMenuView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.standardMenuView1.Location = new System.Drawing.Point(0, 0);
+            this.standardMenuView1.LookAndFeel.SkinName = "Black";
             this.standardMenuView1.Margin = new System.Windows.Forms.Padding(0);
             this.standardMenuView1.Name = "standardMenuView1";
             this.standardMenuView1.Size = new System.Drawing.Size(641, 40);
@@ -83,7 +84,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this._cuesView);
-            this.splitContainer1.Size = new System.Drawing.Size(641, 135);
+            this.splitContainer1.Size = new System.Drawing.Size(641, 372);
             this.splitContainer1.SplitterDistance = 210;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -93,7 +94,7 @@
             this._tracksView.Location = new System.Drawing.Point(0, 0);
             this._tracksView.Margin = new System.Windows.Forms.Padding(0);
             this._tracksView.Name = "_tracksView";
-            this._tracksView.Size = new System.Drawing.Size(210, 135);
+            this._tracksView.Size = new System.Drawing.Size(210, 372);
             this._tracksView.TabIndex = 4;
             // 
             // _cuesView
@@ -102,7 +103,7 @@
             this._cuesView.Location = new System.Drawing.Point(0, 0);
             this._cuesView.Margin = new System.Windows.Forms.Padding(0);
             this._cuesView.Name = "_cuesView";
-            this._cuesView.Size = new System.Drawing.Size(427, 135);
+            this._cuesView.Size = new System.Drawing.Size(427, 372);
             this._cuesView.TabIndex = 0;
             // 
             // mediaPlayerView1
@@ -117,16 +118,17 @@
             // 
             // defaultLookAndFeel1
             // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Blue";
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Black";
+            this.defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Office2003;
             // 
             // mediaPlayerView2
             // 
             this.mediaPlayerView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mediaPlayerView2.Location = new System.Drawing.Point(0, 178);
-            this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 63);
+            this.mediaPlayerView2.Location = new System.Drawing.Point(0, 415);
+            this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 32);
             this.mediaPlayerView2.Name = "mediaPlayerView2";
-            this.mediaPlayerView2.Size = new System.Drawing.Size(641, 285);
+            this.mediaPlayerView2.Size = new System.Drawing.Size(641, 48);
             this.mediaPlayerView2.TabIndex = 8;
             // 
             // ReplayerApplicationForm
