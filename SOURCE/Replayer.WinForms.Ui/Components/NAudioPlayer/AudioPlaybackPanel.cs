@@ -62,7 +62,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             trackBarPosition.Minimum = trackbarMin;
             volumePot.Maximum = 100; //0dBFS for the potentiometer, according to the Volume property used here.
             volumePot.Value = 71; //approx. -3 dB
-            volumePot.ValueChanged += volumePot_ValueChanged;
+            //volumePot.ValueChanged += volumePot_ValueChanged;
 
             LoadOutputPlugin();
         }
@@ -114,7 +114,7 @@ namespace NAudioDemo.AudioPlaybackDemo
 
             if (String.IsNullOrEmpty(fileName))
             {
-                Log.Info("Nothing to prepare, no file available.");
+                Log.Warn("Nothing to prepare, no file available.");
                 return; //because there is nothing to prepare when no file is available.
             }
 
@@ -162,10 +162,6 @@ namespace NAudioDemo.AudioPlaybackDemo
             panelOutputDeviceSettings.Enabled = false;
             Log.Info("Ready to play!");
         }
-
-
-
-
 
         /// <summary>
         /// Gets or sets the position within the currently loaded media track.
@@ -463,7 +459,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         private void volumePot_ValueChanged(object sender, EventArgs e)
         {
             Volume = volumePot.Value;
-            UpdateWaveoutVolume();
+            //UpdateWaveoutVolume();
         }
 
         /// <summary>
