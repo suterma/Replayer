@@ -36,7 +36,6 @@ namespace Replayer.Model {
                     break;
                 default:
                     throw new NotSupportedException();
-                    break;
             }
             converted.Url = source.Url;
             converted.MediaPath = source.MediaPath;

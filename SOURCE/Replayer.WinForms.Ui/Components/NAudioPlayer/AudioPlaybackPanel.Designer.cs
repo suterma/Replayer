@@ -3,6 +3,11 @@ using System;
 
 namespace NAudioDemo.AudioPlaybackDemo
 {
+    /// <summary>
+    /// A panel for audio playback using NAudio
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.UserControl" />
+    /// <seealso cref="Replayer.Core.Player.IMediaPlayer" />
     partial class AudioPlaybackPanel
     {
         /// <summary>

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using Replayer.Core.Player;
@@ -34,22 +36,43 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="AudioPlaybackPanel"/> class.
+        /// </summary>
+        ~AudioPlaybackPanel()
+        {
+            Log.Info("AudioPlaybackPanel finalized.");
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioPlaybackPanel"/> class.
         /// </summary>
         public AudioPlaybackPanel()
         {
+            Log.Info("AudioPlaybackPanel construction.");
+
 
             InitializeComponent();
             trackBarPosition.Maximum = trackbarMax;
             trackBarPosition.Minimum = trackbarMin;
             volumePot.Maximum = 100; //0dBFS for the potentiometer, according to the Volume property used here.
             volumePot.Value = 71; //approx. -3 dB
+            volumePot.ValueChanged += volumePot_ValueChanged;
+
             LoadOutputPlugin();
         }
 
+        /// <summary>
+        /// Loads the output plugin.
+        /// </summary>
         private void LoadOutputPlugin()
         {
+            Log.Info("WaveOutPlugin loading...");
             _outputDevicePlugin = new WaveOutPlugin();
 
             Control settingsPanel;
@@ -62,6 +85,8 @@ namespace NAudioDemo.AudioPlaybackDemo
                 settingsPanel = new Label() { Text = "This output device is unavailable on your system", Dock = DockStyle.Fill };
             }
             panelOutputDeviceSettings.Controls.Add(settingsPanel);
+            Log.Info("WaveOutPlugin loaded.");
+
         }
 
         /// <summary>
@@ -69,20 +94,27 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         private void PrepareToPlay()
         {
+            Log.Info("Preparing to play...");
+
             if (!_outputDevicePlugin.IsAvailable)
             {
+                //TODO logging all these
                 MessageBox.Show("The selected output driver is not available on this system");
+                Log.Error("Preparing to play failed.");
                 return;
             }
 
             if (waveOut != null)
             {
+                Log.Info("Nothing to prepare - Ready to play!");
+
                 return; //because there is nothing to prepare anymore.
             }
 
 
             if (String.IsNullOrEmpty(fileName))
             {
+                Log.Info("Nothing to prepare, no file available.");
                 return; //because there is nothing to prepare when no file is available.
             }
 
@@ -92,7 +124,9 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             catch (Exception driverCreateException)
             {
+                //TODO logging all these
                 MessageBox.Show(String.Format("{0}", driverCreateException.Message));
+                Log.Error("Preparing to play failed.");
                 return;
             }
 
@@ -103,7 +137,9 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             catch (Exception createException)
             {
+                //TODO logging all these
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
+                Log.Error("Preparing to play failed.");
                 return;
             }
 
@@ -118,10 +154,13 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             catch (Exception initException)
             {
+                //TODO logging all these
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
+                Log.Error("Preparing to play failed.");
                 return;
             }
             panelOutputDeviceSettings.Enabled = false;
+            Log.Info("Ready to play!");
         }
 
 
@@ -150,14 +189,17 @@ namespace NAudioDemo.AudioPlaybackDemo
                 {
                     return TimeSpan.Zero;
                 }
-                return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
+                //return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
+                return audioFileReader.CurrentTime;
             }
             set
             {
                 PrepareToPlay();
-                if (waveOut != null)
+                if (audioFileReader != null)
                 {
                     audioFileReader.CurrentTime = value;
+                    UpdateTimerDisplays();
+                    Log.Info($"Position skipped to {value}.");
                 }
             }
         }
@@ -198,6 +240,7 @@ namespace NAudioDemo.AudioPlaybackDemo
                 {
                     throw new NotSupportedException($"State {value} is not supported for MediaPlayerState.");
                 }
+                Log.Info($"State set to {value.ToString()}.");
             }
         }
 
@@ -215,6 +258,7 @@ namespace NAudioDemo.AudioPlaybackDemo
                 {
                     CloseWaveOut();
                     fileName = value;
+                    Log.Info($"URL set to {value.ToString()}");
                     PrepareToPlay();
                 }
             }
@@ -235,14 +279,16 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             set
             {
+                Log.Info($"Setting pot value to {value.ToString()}");
+
                 //limit
                 var limitedValue = Math.Max(0, Math.Min(100, value));
 
                 //Change the pot, but do not recursively fire the changed event
                 //volumePot.ValueChanged -= volumePot_ValueChanged;
-                if (volumePot.Value != limitedValue)
+                //if (volumePot.Value != limitedValue)
                 {
-                    TODO warum wird der Volume-change bei Tastatusdruck nicht übernommen??
+                    //TODO warum wird der Volume-change bei Tastatusdruck nicht übernommen??
                     volumePot.Value = limitedValue;
                     //volumePot.ValueChanged += volumePot_ValueChanged;
 
@@ -253,7 +299,10 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         private void UpdateWaveoutVolume()
         {
-            waveOut.Volume = (float)volumePot.Volume;
+            var volume = (float)volumePot.Volume;
+            waveOut.Volume = volume;
+            Log.Info($"Volume set to {volume}");
+
         }
 
         private ISampleProvider CreateInputStream(string fileName)
@@ -286,10 +335,11 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         private void CreateWaveOut()
         {
+            Log.Info($"Creating WaveOut...");
             CloseWaveOut();
             waveOut = _outputDevicePlugin.CreateDevice(latency);
             waveOut.PlaybackStopped += OnPlaybackStopped;
-
+            Log.Info($"WaveOut created.");
         }
 
         void OnPlaybackStopped(object sender, StoppedEventArgs e)
@@ -304,6 +354,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             {
                 audioFileReader.Position = 0;
             }
+            Log.Info($"Playback stopped.");
         }
 
         private void CloseWaveOut()
@@ -362,20 +413,22 @@ namespace NAudioDemo.AudioPlaybackDemo
         private void trackBarPosition_Scroll(object sender, EventArgs e)
         {
             var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
-            Position = TimeSpan.FromSeconds(secondsPosition);
+            var position = TimeSpan.FromSeconds(secondsPosition);
+            if (Position != position)
+                Position = position;
         }
 
-        private void OnOpenFileClick(object sender, EventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog();
-            string allExtensions = "*.wav;*.aiff;*.mp3;*.aac";
-            openFileDialog.Filter = String.Format("All Supported Files|{0}|All Files (*.*)|*.*", allExtensions);
-            openFileDialog.FilterIndex = 1;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                fileName = openFileDialog.FileName;
-            }
-        }
+        //private void UpdateTrackBarPosition()
+        //{
+        //    trackBarPosition.Value = 
+        //    //if (audioFileReader != null)
+        //    //{
+        //    //    var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
+        //    //    var position = TimeSpan.FromSeconds(secondsPosition);
+        //    //    if (Position != position)
+        //    //    Position = position;
+        //    //}
+        //}
 
         public void SeekBackward(double interval)
         {
@@ -410,6 +463,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         private void volumePot_ValueChanged(object sender, EventArgs e)
         {
             Volume = volumePot.Value;
+            UpdateWaveoutVolume();
         }
 
         /// <summary>
@@ -421,78 +475,6 @@ namespace NAudioDemo.AudioPlaybackDemo
         {
 
             State = MediaPlayerState.Playing;
-
-            //if (!_outputDevicePlugin.IsAvailable)
-            //{
-            //    MessageBox.Show("The selected output driver is not available on this system");
-            //    return;
-            //}
-
-            //if (waveOut != null)
-            //{
-            //    if (waveOut.PlaybackState == PlaybackState.Playing)
-            //    {
-            //        return;
-            //    }
-            //    else if (waveOut.PlaybackState == PlaybackState.Paused)
-            //    {
-            //        waveOut.Play();
-            //        groupBoxDriverModel.Enabled = false;
-            //        return;
-            //    }
-            //}
-
-            //// we are in a stopped state
-            //// TODO: only re-initialise if necessary
-
-            //if (String.IsNullOrEmpty(fileName))
-            //{
-            //    OnOpenFileClick(sender, e);
-            //}
-            //if (String.IsNullOrEmpty(fileName))
-            //{
-            //    return;
-            //}
-
-            //try
-            //{
-            //    CreateWaveOut();
-            //}
-            //catch (Exception driverCreateException)
-            //{
-            //    MessageBox.Show(String.Format("{0}", driverCreateException.Message));
-            //    return;
-            //}
-
-            //ISampleProvider sampleProvider;
-            //try
-            //{
-            //    sampleProvider = CreateInputStream(fileName);
-            //}
-            //catch (Exception createException)
-            //{
-            //    MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
-            //    return;
-            //}
-
-
-            //labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
-            //    audioFileReader.TotalTime.Seconds);
-
-            //try
-            //{
-            //    waveOut.Init(sampleProvider);
-            //}
-            //catch (Exception initException)
-            //{
-            //    MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
-            //    return;
-            //}
-
-            //setVolumeDelegate(volumeSlider1.Volume); 
-            //groupBoxDriverModel.Enabled = false;
-            //waveOut.Play();
-
         }
 
         /// <summary>

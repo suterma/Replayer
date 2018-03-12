@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
+using log4net;
 using Replayer.Core;
 using Replayer.Core.Input;
 using Replayer.WinForms.Ui.Components;
@@ -15,10 +17,16 @@ namespace Replayer.WinForms.Ui {
     ///     The main form for the RePlayer Application.
     /// </summary>
     public partial class ReplayerApplicationForm : XtraForm {
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ReplayerApplicationForm" /> class.
         /// </summary>
         public ReplayerApplicationForm() {
+            Log.Info("### Replayer startup ###");
+
             ApplyAppearance();
             //Before creating any visual components. Do not call before creating this form, because this will mess the spacing between the controls
 
@@ -50,6 +58,8 @@ namespace Replayer.WinForms.Ui {
             Core.Model.Instance.BusyIndicator = new BusyForm(this);
 
             Shown += ReplayerLiveApplicationForm_Shown;
+            Log.Info("Replayer ready!");
+
         }
 
         private void ReplayerLiveApplicationForm_Shown(object sender, EventArgs e) {
@@ -122,6 +132,8 @@ namespace Replayer.WinForms.Ui {
                 Settings.Default.LastLoadedCompilationPath = String.Empty;
             }
             Settings.Default.Save();
+            Log.Info("### Replayer shutdown ###");
+
         }
 
         /// <summary>

@@ -1,9 +1,11 @@
 ﻿using DevExpress.XtraEditors;
+using log4net;
 using NAudio.Gui;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +17,24 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
     /// <remarks>Features a volume property with float type, instead of double and allows to have a logarithmic response.</remarks>
     public class VolumePot : Pot
     {
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// The current value of the pot
+        /// </summary>
+        public new double Value {
+            get
+            {
+                return base.Value;
+            }
+            set
+            {
+                base.Value = value;
+                Transform(value);
+            }
+        }
+
         private LabelControl _valueLabel;
 
         /// <summary>
@@ -43,12 +63,10 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
             _valueLabel.Height = 10;
             _valueLabel.Left = boxSize.Width/2 - 10;
             _valueLabel.Font = new Font(FontFamily.GenericSansSerif,  6.0F, FontStyle.Regular);
-            this.Controls.Add(_valueLabel);
-
-            ValueChanged += VolumePot_ValueChanged;
+            Controls.Add(_valueLabel);
 
             //Initialize the display
-            Volume = Transform(Value);
+            Transform(Value);
         }
 
         /// <summary>
@@ -60,7 +78,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// <exception cref="NotImplementedException"></exception>
         private void VolumePot_ValueChanged(object sender, EventArgs e)
         {
-            Volume = Transform(Value);
+            Transform(Value);
         }
 
         /// <summary>
@@ -83,7 +101,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// <remarks>This uses a logarithmic formula. A value of 0 to 100 gets transformed from 0 to 1 in a logarithimic fashion.</remarks>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        private double Transform(double value)
+        private void Transform(double value)
         {
             //limit to 0-100
             var input = Math.Min(Math.Max(value, lowerInputBound), upperInputBound);
@@ -96,9 +114,14 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
 
             //Show the dB level
             var dbLevel = 10*Math.Log10(limited/1);
-            _valueLabel.Text = $"{dbLevel:#.#}dB";
+            if (_valueLabel != null)
+            {
+                _valueLabel.Text = $"{dbLevel:#.#}dB";
+            }
 
-            return limited;
+            Log.Debug($"VolumePot: Transformed value {value} to {limited}");
+
+            Volume = limited;
         }
 
         private void InitializeComponent()
