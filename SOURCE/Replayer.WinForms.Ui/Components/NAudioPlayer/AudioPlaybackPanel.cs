@@ -8,6 +8,7 @@ using log4net;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using Replayer.Core.Player;
+using Replayer.WinForms.Ui.Gui;
 
 namespace NAudioDemo.AudioPlaybackDemo
 {
@@ -98,9 +99,9 @@ namespace NAudioDemo.AudioPlaybackDemo
 
             if (!_outputDevicePlugin.IsAvailable)
             {
-                //TODO logging all these
-                MessageBox.Show("The selected output driver is not available on this system");
-                Log.Error("Preparing to play failed.");
+                string message = "Preparing to play failed. The selected output driver is not available on this system.";
+                Log.Error(message);
+                ErrorBox.Show(message);
                 return;
             }
 
@@ -124,9 +125,9 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             catch (Exception driverCreateException)
             {
-                //TODO logging all these
-                MessageBox.Show(String.Format("{0}", driverCreateException.Message));
-                Log.Error("Preparing to play failed.");
+                string message = $"Preparing to play failed. Message: {driverCreateException.Message}";
+                Log.Error(message, driverCreateException);
+                ErrorBox.Show(message);
                 return;
             }
 
@@ -137,9 +138,18 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
             catch (Exception createException)
             {
-                //TODO logging all these
-                MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
-                Log.Error("Preparing to play failed.");
+                string message = null;
+                if (createException.Message.Contains("NoDriver"))
+                {
+                    //there was probably a codec missing
+                    message = $"The file {fileName} could not be loaded. Probably there is no matching codec available for the content. You may try to use different content or install a suitable codec from an online resource.";
+                }
+                else
+                {
+                    message = $"The file {fileName} could not be loaded. Message: {createException.Message}";
+                }
+                Log.Error(message, createException);
+                ErrorBox.Show(message);
                 return;
             }
 
@@ -155,8 +165,9 @@ namespace NAudioDemo.AudioPlaybackDemo
             catch (Exception initException)
             {
                 //TODO logging all these
-                MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
-                Log.Error("Preparing to play failed.");
+                string message = $"Preparing to play failed. The output could not be initialized. Message: {initException.Message}";
+                Log.Error(message,initException);
+                ErrorBox.Show(message);
                 return;
             }
             panelOutputDeviceSettings.Enabled = false;
@@ -225,12 +236,37 @@ namespace NAudioDemo.AudioPlaybackDemo
                     if (waveOut != null)
                     {
                         UpdateWaveoutVolume();
-                        waveOut.Play();
+                        try
+                        {
+                            waveOut.Play();
+                        }
+                        catch (NullReferenceException nrex)
+                        {
+                            string message = "Playing does not work. Message: " + nrex.Message;
+                            Log.Error(message,nrex);
+                            ErrorBox.Show(message);
+                        }
                     }
                 }
                 else if (value == MediaPlayerState.Paused)
                 {
-                    btn_pause_Click(this, new EventArgs());
+                    try
+                    {
+                        if (waveOut != null)
+                        {
+                            if (waveOut.PlaybackState == PlaybackState.Playing)
+                            {
+                                waveOut.Pause();
+                            }
+                        }
+                        UpdateAmplitudeDisplay(0, 0);
+                    }
+                    catch (NAudio.MmException mex)
+                    {
+                        string message = "Pausing does not work. Message: " + mex.Message;
+                        Log.Error(message, mex);
+                        ErrorBox.Show(message);
+                    }
                 }
                 else
                 {
@@ -280,15 +316,7 @@ namespace NAudioDemo.AudioPlaybackDemo
                 //limit
                 var limitedValue = Math.Max(0, Math.Min(100, value));
 
-                //Change the pot, but do not recursively fire the changed event
-                //volumePot.ValueChanged -= volumePot_ValueChanged;
-                //if (volumePot.Value != limitedValue)
-                {
-                    //TODO warum wird der Volume-change bei Tastatusdruck nicht übernommen??
-                    volumePot.Value = limitedValue;
-                    //volumePot.ValueChanged += volumePot_ValueChanged;
-
-                }
+                    volumePot.Value = limitedValue;       
                 UpdateWaveoutVolume();
             }
         }
@@ -344,7 +372,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             panelOutputDeviceSettings.Enabled = true;
             if (e.Exception != null)
             {
-                MessageBox.Show(e.Exception.Message, "Playback Device Error");
+                ErrorBox.Show(e.Exception.Message, "Playback Device Error");
             }
             if (audioFileReader != null)
             {
@@ -480,14 +508,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btn_pause_Click(object sender, EventArgs e)
         {
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOut.Pause();
-                }
-            }
-            UpdateAmplitudeDisplay(0, 0);
+            State = MediaPlayerState.Paused;
         }
 
         /// <summary>
