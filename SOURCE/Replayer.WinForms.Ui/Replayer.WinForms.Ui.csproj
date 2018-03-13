@@ -206,6 +206,12 @@
     <Compile Include="Components\BusyForm.Designer.cs">
       <DependentUpon>BusyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ErrorBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\ErrorBox.Designer.cs">
+      <DependentUpon>ErrorBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Question.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +324,9 @@
       <DependentUpon>VolumePot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\NAudioPlayer\WaveOutSettingsPanel.resx" />
+    <EmbeddedResource Include="Components\ErrorBox.resx">
+      <DependentUpon>ErrorBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Question.resx">
       <DependentUpon>Question.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,6 +443,7 @@
     <None Include="Resources\CueEdit_Icon_256x256.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Action-button-stop-icon_16x16.png" />
     <Content Include="Resources\AudioBack_Icon_16x16.png" />
     <Content Include="Resources\AudioForward_Icon_16x16.png" />
     <Content Include="Resources\AudioLoop_Icon_16x16.png" />
