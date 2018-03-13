@@ -12,11 +12,13 @@ using Replayer.WinForms.Ui.Components;
 using Replayer.WinForms.Ui.Gui;
 using Replayer.WinForms.Ui.Properties;
 
-namespace Replayer.WinForms.Ui {
+namespace Replayer.WinForms.Ui
+{
     /// <summary>
     ///     The main form for the RePlayer Application.
     /// </summary>
-    public partial class ReplayerApplicationForm : XtraForm {
+    public partial class ReplayerApplicationForm : XtraForm
+    {
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -24,7 +26,8 @@ namespace Replayer.WinForms.Ui {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ReplayerApplicationForm" /> class.
         /// </summary>
-        public ReplayerApplicationForm() {
+        public ReplayerApplicationForm()
+        {
             Log.Info("### Replayer startup ###");
 
             ApplyAppearance();
@@ -35,7 +38,8 @@ namespace Replayer.WinForms.Ui {
             InitializeComponent();
 
             //Handle application title
-            Core.Model.Instance.PropertyChanged += (sender, e) => {
+            Core.Model.Instance.PropertyChanged += (sender, e) =>
+            {
                 if (
                     (e.PropertyName.Equals("Compilation"))
                     ) //changed?
@@ -62,14 +66,16 @@ namespace Replayer.WinForms.Ui {
 
         }
 
-        private void ReplayerLiveApplicationForm_Shown(object sender, EventArgs e) {
+        private void ReplayerLiveApplicationForm_Shown(object sender, EventArgs e)
+        {
             HandleCommandlineArguments();
         }
 
         /// <summary>
         ///     Handles the command line arguments.
         /// </summary>
-        private void HandleCommandlineArguments() {
+        private void HandleCommandlineArguments()
+        {
             //handle command line arguments
             string compilationFilenameArgument = string.Empty;
             if (
@@ -78,7 +84,8 @@ namespace Replayer.WinForms.Ui {
                 (AppDomain.CurrentDomain.SetupInformation.ActivationArguments != null) &&
                 (AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null)
                 //activation data available?
-                ) {
+                )
+            {
                 string[] activationData = AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData;
                 compilationFilenameArgument = (from arg in activationData
                                                where
@@ -87,23 +94,42 @@ namespace Replayer.WinForms.Ui {
                                                select arg).FirstOrDefault();
                 //get the argument with a valid compilation extension, if any
             }
-
-            //execute the command line if necessary
-            if (!String.IsNullOrEmpty(compilationFilenameArgument)) //is available?
+            try
             {
-                try {
+                //execute the command line if necessary
+                if (!String.IsNullOrEmpty(compilationFilenameArgument)) //is available?
+                {
+
                     //if we got a command line argument then try to load that as a compilation
                     Core.Model.Instance.Retrieve(compilationFilenameArgument);
-                } catch (Exception) {
-                    //silently catch the failed retrieval, and leave the compilation empty. The user may later manually open a collection.
+
                 }
-            } else //no command line args
-            {
-                //load the compilation from last time, if possible
-                if (File.Exists(Settings.Default.LastLoadedCompilationPath)) //there is a file at that place?
+                else //no command line args
                 {
-                    Core.Model.Instance.Retrieve(Settings.Default.LastLoadedCompilationPath);
+                    string lastLoaded = Settings.Default.LastLoadedCompilationPath;
+                    if (!string.IsNullOrEmpty(lastLoaded))
+                    {
+                        //load the compilation from last time, if possible
+                        if (File.Exists(lastLoaded)) //there is a file at that place?
+                        {
+                            Core.Model.Instance.Retrieve(Settings.Default.LastLoadedCompilationPath);
+                        }
+                    }
+                    else
+                    {
+                        //first use, try to load a local (in the same directory) compilation
+                        var firstLocalCompilation = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rez", SearchOption.TopDirectoryOnly)
+                            .Concat(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rex", SearchOption.TopDirectoryOnly)).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(firstLocalCompilation))
+                        {
+                            Core.Model.Instance.Retrieve(firstLocalCompilation);
+                        }
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                //silently catch the failed retrieval, and leave the compilation empty. The user may later manually open a collection.
             }
         }
 
@@ -112,13 +138,15 @@ namespace Replayer.WinForms.Ui {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ReplayerLiveApplicationForm_FormClosing(object sender, FormClosingEventArgs e) {
+        private void ReplayerLiveApplicationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
             if (
                 (Core.Model.Instance.Compilation != null) &&
                 (Core.Model.Instance.Compilation.IsDirty)
                 ) //do we have unsaved changes?
             {
-                if (new Question("Save changes to compilation before exit?").Ask().Equals(DialogResult.OK)) {
+                if (new Question("Save changes to compilation before exit?").Ask().Equals(DialogResult.OK))
+                {
                     //yes, then save
                     EventBroker.Instance.IssueEvent("Menu:SaveFile");
                 }
@@ -128,7 +156,9 @@ namespace Replayer.WinForms.Ui {
             if (Core.Model.Instance.Compilation != null) //there is any?
             {
                 Settings.Default.LastLoadedCompilationPath = Core.Model.Instance.Compilation.Url;
-            } else {
+            }
+            else
+            {
                 Settings.Default.LastLoadedCompilationPath = String.Empty;
             }
             Settings.Default.Save();
@@ -146,11 +176,15 @@ namespace Replayer.WinForms.Ui {
         /// <summary>
         ///     Sets the title of this form.
         /// </summary>
-        private void SetTitle() {
-            if (InvokeRequired) {
+        private void SetTitle()
+        {
+            if (InvokeRequired)
+            {
                 // Reinvoke the same method if necessary        
                 BeginInvoke(new MethodInvoker(delegate { SetTitle(); }));
-            } else {
+            }
+            else
+            {
                 if (Core.Model.Instance.Compilation != null) //thre is any?
                 {
                     Text = String.Format("Replayer - {0} - {1}",
@@ -164,7 +198,8 @@ namespace Replayer.WinForms.Ui {
         /// <summary>
         ///     Applies the appearance as defined in the model.
         /// </summary>
-        private static void ApplyAppearance() {
+        private static void ApplyAppearance()
+        {
             // Access the Default LookAndFeel. 
             //UserLookAndFeel defaultLF = UserLookAndFeel.Default;
             //defaultLF.UseWindowsXPTheme = false;
@@ -187,8 +222,10 @@ namespace Replayer.WinForms.Ui {
         /// <param name="e">
         ///     The <see cref="System.Windows.Forms.KeyPressEventArgs" /> instance containing the event data.
         /// </param>
-        private void Form_KeyPressed(object sender, KeyPressEventArgs e) {
-            Core.Model.Instance.KeyboardInputHandler.HandleKeyPress(new SimpleKeyPressEventArgs {
+        private void Form_KeyPressed(object sender, KeyPressEventArgs e)
+        {
+            Core.Model.Instance.KeyboardInputHandler.HandleKeyPress(new SimpleKeyPressEventArgs
+            {
                 Handled = e.Handled,
                 KeyChar = e.KeyChar
             }); //push the key to the handler
@@ -202,7 +239,8 @@ namespace Replayer.WinForms.Ui {
         /// <param name="e">
         ///     The <see cref="System.Windows.Forms.KeyEventArgs" /> instance containing the event data.
         /// </param>
-        private void Form_KeyUp(object sender, KeyEventArgs e) {
+        private void Form_KeyUp(object sender, KeyEventArgs e)
+        {
             if (e.Alt) //is modified?
             {
                 return; //do not handle here, let pass further
@@ -211,10 +249,11 @@ namespace Replayer.WinForms.Ui {
             {
                 return; //do not handle here, let pass further
             }
-            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up) {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
                 return; //do not handle here, let pass further
             }
-            Core.Model.Instance.KeyboardInputHandler.HandleKeyUp(new SimpleKeyEventArgs {Handled = e.Handled});
+            Core.Model.Instance.KeyboardInputHandler.HandleKeyUp(new SimpleKeyEventArgs { Handled = e.Handled });
             e.Handled = true; //do not allow handling elsewhere
         }
 
@@ -225,7 +264,8 @@ namespace Replayer.WinForms.Ui {
         /// <param name="e">
         ///     The <see cref="System.Windows.Forms.KeyEventArgs" /> instance containing the event data.
         /// </param>
-        private void Form_KeyDown(object sender, KeyEventArgs e) {
+        private void Form_KeyDown(object sender, KeyEventArgs e)
+        {
             if (e.Alt) //is modified?
             {
                 return; //do not handle here, let pass further
@@ -234,14 +274,16 @@ namespace Replayer.WinForms.Ui {
             {
                 return; //do not handle here, let pass further
             }
-            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up) {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
                 return; //do not handle here, let pass further
             }
 
 
             //do let the input handler handle this key
             Core.Model.Instance.KeyboardInputHandler.HandleKeyDown
-                (new SimpleKeyEventArgs {
+                (new SimpleKeyEventArgs
+                {
                     Handled = e.Handled
                 }
                 );
