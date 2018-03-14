@@ -1,1 +1,0 @@
-These releases are executables for use on a Windows system.
