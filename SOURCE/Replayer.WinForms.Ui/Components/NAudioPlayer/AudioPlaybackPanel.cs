@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using log4net;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
@@ -11,7 +12,7 @@ using Replayer.Core.Player;
 using Replayer.WinForms.Ui.Gui;
 
 namespace NAudioDemo.AudioPlaybackDemo {
-    public partial class AudioPlaybackPanel : UserControl, IMediaPlayer {
+    public partial class AudioPlaybackPanel : XtraUserControl, IMediaPlayer {
 
         //TODO add log4net logging
 

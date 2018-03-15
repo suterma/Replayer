@@ -1,8 +1,9 @@
 ﻿using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using NAudio.Wave;
 
 namespace NAudioDemo.AudioPlaybackDemo {
-    public partial class WaveOutSettingsPanel : UserControl {
+    public partial class WaveOutSettingsPanel : XtraUserControl {
         public WaveOutSettingsPanel() {
             InitializeComponent();
             InitialiseDeviceCombo();

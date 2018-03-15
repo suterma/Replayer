@@ -65,9 +65,6 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 40);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer1.Name = "splitContainer1";
@@ -118,8 +115,6 @@
             // 
             // mediaPlayerView2
             // 
-            this.mediaPlayerView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.mediaPlayerView2.Location = new System.Drawing.Point(0, 415);
             this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 32);
             this.mediaPlayerView2.Name = "mediaPlayerView2";
