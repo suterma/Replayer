@@ -173,14 +173,16 @@ namespace Replayer.Core {
                         FollowSelectedTrackFor(value); //keep track up to date
                         _selectedCue = value;
                         LoadSelectedCue();
-                    } else {
+                    }
+                    else {
                         //unselection is requested
                         //dont use the setter accessor for this property, as we are already in there
                         _selectedCue = null; //simply unselect the current selected cue                         
                     }
                     OnPropertyChanged("SelectedCue"); //report the change
-                } else //selected the same cue again
-                {
+                }
+                else //selected the same cue again
+              {
                     LoadSelectedCue(); //just reload, but there is no actual change for this property
                 }
             }
@@ -212,15 +214,16 @@ namespace Replayer.Core {
                     {
                         //provide absolute url to the player
                         Player.Url = _Compilation.Find(_selectedTrack);
-                    } else //no track selected
-                    {
+                    }
+                    else //no track selected
+                  {
                         Player.Url = null; //do not use a media
                     }
                 }
             }
         }
 
-        static Model() {}
+        static Model() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Model" /> class.
@@ -270,9 +273,10 @@ namespace Replayer.Core {
                 //go to cue point
                 Player.State = MediaPlayerState.Paused;
                 Player.Url = trackUrl;
-                Player.Position = new TimeSpan((long) (SelectedCue.Time - Settings.PrePlayDuration_Seconds)*10000000);
+                Player.Position = new TimeSpan((long)(SelectedCue.Time - Settings.PrePlayDuration_Seconds) * 10000000);
                 //set position in ticks.                    
-            } else {
+            }
+            else {
                 throw new FileNotFoundException("Media for this cue point was not found!");
             }
         }
@@ -344,7 +348,8 @@ namespace Replayer.Core {
             if (previousCue == null) //no previous?
             {
                 SelectedTrack.Cues.Insert(0, cueToInsert); //put into first position
-            } else {
+            }
+            else {
                 int previousIndex = SelectedTrack.Cues.IndexOf(previousCue);
                 SelectedTrack.Cues.Insert(previousIndex + 1, cueToInsert); //insert after previous
             }

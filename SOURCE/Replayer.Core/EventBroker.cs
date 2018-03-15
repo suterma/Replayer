@@ -23,7 +23,7 @@ namespace Replayer.Core {
             get { return instance; }
         }
 
-        static EventBroker() {}
+        static EventBroker() { }
 
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Replayer.Core {
         private void OnEventOccured(String occuredEvent) {
             if (EventOccured != null) //anyone listening?
             {
-                EventOccured(this, new EventArgs<String> {Data = occuredEvent});
+                EventOccured(this, new EventArgs<String> { Data = occuredEvent });
             }
         }
 

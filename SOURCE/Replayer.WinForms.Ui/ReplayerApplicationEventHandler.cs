@@ -31,118 +31,118 @@ namespace Replayer.WinForms.Ui {
         private void EventBroker_EventOccured(object sender, EventArgs<string> e) {
             switch (e.Data) {
                 case "Menu:OpenCompilationClicked": {
-                    HandleOpenCompilationClickedEvent();
-                    break;
-                }
+                        HandleOpenCompilationClickedEvent();
+                        break;
+                    }
                 case "Menu:EditCompilationClicked": {
-                    HandleEditCompilationClickedEvent();
-                    break;
-                }
+                        HandleEditCompilationClickedEvent();
+                        break;
+                    }
                 case "Menu:AboutClicked": {
-                    HandleAboutClickedEvent();
-                    break;
-                }
+                        HandleAboutClickedEvent();
+                        break;
+                    }
                 case "Menu:OnlineHelpClicked": {
-                    HandleOnlineHelpClickedEvent();
-                    break;
-                }
+                        HandleOnlineHelpClickedEvent();
+                        break;
+                    }
                 case "Menu:ExitClicked": {
-                    HandleExitClickedEvent();
-                    break;
-                }
+                        HandleExitClickedEvent();
+                        break;
+                    }
                 case "Menu:SettingsClicked": {
-                    HandleSettingsClickedEvent();
-                    break;
-                }
+                        HandleSettingsClickedEvent();
+                        break;
+                    }
                 case "Menu:UiSettingsClicked": {
-                    HandleUiSettingsClickedEvent();
-                    break;
-                }
+                        HandleUiSettingsClickedEvent();
+                        break;
+                    }
                 case "Menu:CreateNewCompilationClicked": {
-                    HandleCreateNewCompilationClickedEvent();
-                    break;
-                }
+                        HandleCreateNewCompilationClickedEvent();
+                        break;
+                    }
                 case "Menu:AddCueClicked": {
-                    HandleAddCueClickedEvent();
-                    break;
-                }
+                        HandleAddCueClickedEvent();
+                        break;
+                    }
 
                 case "Menu:CreateCueHereClicked": {
-                    Core.Model.Instance.CreateCueHere();
-                    break;
-                }
+                        Core.Model.Instance.CreateCueHere();
+                        break;
+                    }
                 case "Menu:DeleteSelectedCue": {
-                    Core.Model.Instance.RemoveSelectedCue();
-                    break;
-                }
+                        Core.Model.Instance.RemoveSelectedCue();
+                        break;
+                    }
                 case "Menu:MoveUpSelectedCue": {
-                    Core.Model.Instance.MoveSelectedCue(-1);
-                    break;
-                }
+                        Core.Model.Instance.MoveSelectedCue(-1);
+                        break;
+                    }
                 case "Menu:MoveDownSelectedCue": {
-                    Core.Model.Instance.MoveSelectedCue(+1);
-                    break;
-                }
+                        Core.Model.Instance.MoveSelectedCue(+1);
+                        break;
+                    }
                 case "Menu:MoveUpSelectedTrack": {
-                    Core.Model.Instance.MoveSelectedTrack(-1);
-                    break;
-                }
+                        Core.Model.Instance.MoveSelectedTrack(-1);
+                        break;
+                    }
                 case "Menu:MoveDownSelectedTrack": {
-                    Core.Model.Instance.MoveSelectedTrack(+1);
-                    break;
-                }
+                        Core.Model.Instance.MoveSelectedTrack(+1);
+                        break;
+                    }
                 case "Menu:DeleteSelectedTrack": {
-                    Core.Model.Instance.RemoveSelectedTrack();
-                    break;
-                }
+                        Core.Model.Instance.RemoveSelectedTrack();
+                        break;
+                    }
                 case "Menu:EditSelectedCue": {
-                    if (Core.Model.Instance.SelectedCue != null) //there is any selected?
-                    {
-                        Cue cloneCue = Core.Model.Instance.SelectedCue.Clone(); //clone for private manipulation
-                        using (var propertyDialog = new PropertyDialog(cloneCue, "Edit cue")) {
-                            if (propertyDialog.ShowDialog() == DialogResult.OK) {
-                                Core.Model.Instance.SelectedTrack.Cues.Replace(Core.Model.Instance.SelectedCue, cloneCue);
-                                //assign back, causing an update of the model
-                                Core.Model.Instance.SelectedCue = cloneCue; //use the new as selected
+                        if (Core.Model.Instance.SelectedCue != null) //there is any selected?
+                        {
+                            Cue cloneCue = Core.Model.Instance.SelectedCue.Clone(); //clone for private manipulation
+                            using (var propertyDialog = new PropertyDialog(cloneCue, "Edit cue")) {
+                                if (propertyDialog.ShowDialog() == DialogResult.OK) {
+                                    Core.Model.Instance.SelectedTrack.Cues.Replace(Core.Model.Instance.SelectedCue, cloneCue);
+                                    //assign back, causing an update of the model
+                                    Core.Model.Instance.SelectedCue = cloneCue; //use the new as selected
+                                }
                             }
                         }
+                        break;
                     }
-                    break;
-                }
 
                 case "Menu:AddTrackClicked": {
-                    HandleAddTrackClickedEvent();
-                    break;
-                }
+                        HandleAddTrackClickedEvent();
+                        break;
+                    }
                 case "Menu:EditSelectedTrack": {
-                    if (Core.Model.Instance.SelectedTrack != null) //there is any selected?
-                    {
-                        var displayTrack = new DisplayTrack(Core.Model.Instance.SelectedTrack.Clone());
-                        //clone for private manipulation
-                        using (var propertyDialog = new PropertyDialog(displayTrack, "Edit track")) {
-                            if (propertyDialog.ShowDialog() == DialogResult.OK) {
-                                Core.Model.Instance.Compilation.Tracks.Replace(Core.Model.Instance.SelectedTrack,
-                                                                               displayTrack.Model);
-                                //assign back, causing an update of the model
-                                Core.Model.Instance.SelectedTrack = displayTrack.Model; //use the new as selected
+                        if (Core.Model.Instance.SelectedTrack != null) //there is any selected?
+                        {
+                            var displayTrack = new DisplayTrack(Core.Model.Instance.SelectedTrack.Clone());
+                            //clone for private manipulation
+                            using (var propertyDialog = new PropertyDialog(displayTrack, "Edit track")) {
+                                if (propertyDialog.ShowDialog() == DialogResult.OK) {
+                                    Core.Model.Instance.Compilation.Tracks.Replace(Core.Model.Instance.SelectedTrack,
+                                                                                   displayTrack.Model);
+                                    //assign back, causing an update of the model
+                                    Core.Model.Instance.SelectedTrack = displayTrack.Model; //use the new as selected
+                                }
                             }
                         }
+                        break;
                     }
-                    break;
-                }
 
                 case "Menu:SaveFile": {
-                    HandleSaveFileEvent();
-                    break;
-                }
+                        HandleSaveFileEvent();
+                        break;
+                    }
                 case "Menu:SaveFileAs": {
-                    HandleSaveFileAsEvent();
-                    break;
-                }
+                        HandleSaveFileAsEvent();
+                        break;
+                    }
                 case "Menu:ExportFile": {
-                    HandleExportFileEvent();
-                    break;
-                }
+                        HandleExportFileEvent();
+                        break;
+                    }
 
                 default:
                     break;
@@ -279,8 +279,9 @@ namespace Replayer.WinForms.Ui {
                 {
                     Core.Model.Instance.Compilation.Store();
                 }
-            } catch (ArgumentException) //if the file path is invalid
-            {
+            }
+            catch (ArgumentException) //if the file path is invalid
+          {
                 //try to save as...
                 EventBroker.Instance.IssueEvent("Menu:SaveFileAs");
             }
@@ -432,8 +433,9 @@ namespace Replayer.WinForms.Ui {
                 if (result.Equals(DialogResult.OK)) //confirmed?
                 {
                     Core.Model.Instance.Settings.Save(); //save what was changed
-                } else //not confirmed
-                {
+                }
+                else //not confirmed
+              {
                     Core.Model.Instance.Settings.Reload(); //revert to saved
                 }
             }
@@ -449,8 +451,9 @@ namespace Replayer.WinForms.Ui {
                 if (result.Equals(DialogResult.OK)) //confirmed?
                 {
                     Settings.Default.Save(); //save what was changed
-                } else //not confirmed
-                {
+                }
+                else //not confirmed
+              {
                     Settings.Default.Reload(); //restore back
                 }
             }

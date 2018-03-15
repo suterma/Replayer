@@ -10,10 +10,8 @@ using NAudio.Wave.SampleProviders;
 using Replayer.Core.Player;
 using Replayer.WinForms.Ui.Gui;
 
-namespace NAudioDemo.AudioPlaybackDemo
-{
-    public partial class AudioPlaybackPanel : UserControl, IMediaPlayer
-    {
+namespace NAudioDemo.AudioPlaybackDemo {
+    public partial class AudioPlaybackPanel : UserControl, IMediaPlayer {
 
         //TODO add log4net logging
 
@@ -44,8 +42,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <summary>
         /// Finalizes an instance of the <see cref="AudioPlaybackPanel"/> class.
         /// </summary>
-        ~AudioPlaybackPanel()
-        {
+        ~AudioPlaybackPanel() {
             Log.Info("AudioPlaybackPanel finalized.");
 
         }
@@ -53,8 +50,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioPlaybackPanel"/> class.
         /// </summary>
-        public AudioPlaybackPanel()
-        {
+        public AudioPlaybackPanel() {
             Log.Info("AudioPlaybackPanel construction.");
 
 
@@ -71,18 +67,15 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <summary>
         /// Loads the output plugin.
         /// </summary>
-        private void LoadOutputPlugin()
-        {
+        private void LoadOutputPlugin() {
             Log.Info("WaveOutPlugin loading...");
             _outputDevicePlugin = new WaveOutPlugin();
 
             Control settingsPanel;
-            if (_outputDevicePlugin.IsAvailable)
-            {
+            if (_outputDevicePlugin.IsAvailable) {
                 settingsPanel = _outputDevicePlugin.CreateSettingsPanel();
             }
-            else
-            {
+            else {
                 settingsPanel = new Label() { Text = "This output device is unavailable on your system", Dock = DockStyle.Fill };
             }
             panelOutputDeviceSettings.Controls.Add(settingsPanel);
@@ -93,38 +86,32 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <summary>
         /// Prepares to play by loading the file (if available) and getting the wave output ready.
         /// </summary>
-        private void PrepareToPlay()
-        {
+        private void PrepareToPlay() {
             Log.Info("Preparing to play...");
 
-            if (!_outputDevicePlugin.IsAvailable)
-            {
+            if (!_outputDevicePlugin.IsAvailable) {
                 string message = "Preparing to play failed. The selected output driver is not available on this system.";
                 Log.Error(message);
                 ErrorBox.Show(message);
                 return;
             }
 
-            if (waveOut != null)
-            {
+            if (waveOut != null) {
                 Log.Info("Nothing to prepare - Ready to play!");
 
                 return; //because there is nothing to prepare anymore.
             }
 
 
-            if (String.IsNullOrEmpty(fileName))
-            {
+            if (String.IsNullOrEmpty(fileName)) {
                 Log.Warn("Nothing to prepare, no file available.");
                 return; //because there is nothing to prepare when no file is available.
             }
 
-            try
-            {
+            try {
                 CreateWaveOut();
             }
-            catch (Exception driverCreateException)
-            {
+            catch (Exception driverCreateException) {
                 string message = $"Preparing to play failed. Message: {driverCreateException.Message}";
                 Log.Error(message, driverCreateException);
                 ErrorBox.Show(message);
@@ -132,20 +119,16 @@ namespace NAudioDemo.AudioPlaybackDemo
             }
 
             ISampleProvider sampleProvider;
-            try
-            {
+            try {
                 sampleProvider = CreateInputStream(fileName);
             }
-            catch (Exception createException)
-            {
+            catch (Exception createException) {
                 string message = null;
-                if (createException.Message.Contains("NoDriver"))
-                {
+                if (createException.Message.Contains("NoDriver")) {
                     //there was probably a codec missing
                     message = $"The file {fileName} could not be loaded. Probably there is no matching codec available for the content. You may try to use different content or install a suitable codec from an online resource.";
                 }
-                else
-                {
+                else {
                     message = $"The file {fileName} could not be loaded. Message: {createException.Message}";
                 }
                 Log.Error(message, createException);
@@ -157,16 +140,14 @@ namespace NAudioDemo.AudioPlaybackDemo
             label_TotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
                 audioFileReader.TotalTime.Seconds);
 
-            try
-            {
+            try {
                 waveOut.Init(sampleProvider);
                 UpdateWaveoutVolume();
             }
-            catch (Exception initException)
-            {
+            catch (Exception initException) {
                 //TODO logging all these
                 string message = $"Preparing to play failed. The output could not be initialized. Message: {initException.Message}";
-                Log.Error(message,initException);
+                Log.Error(message, initException);
                 ErrorBox.Show(message);
                 return;
             }
@@ -184,92 +165,70 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// While playing, the position is expected to get updated
         /// at about every half a second.
         /// </remarks>
-        public TimeSpan Position
-        {
-            get
-            {
-                if (waveOut == null)
-                {
+        public TimeSpan Position {
+            get {
+                if (waveOut == null) {
                     return TimeSpan.Zero;
                 }
-                if (audioFileReader == null)
-                {
+                if (audioFileReader == null) {
                     return TimeSpan.Zero;
                 }
                 //return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
                 return audioFileReader.CurrentTime;
             }
-            set
-            {
+            set {
                 PrepareToPlay();
-                if (audioFileReader != null)
-                {
+                if (audioFileReader != null) {
                     audioFileReader.CurrentTime = value;
                     UpdateTimerDisplays();
                     Log.Info($"Position skipped to {value}.");
                 }
             }
         }
-        public MediaPlayerState State
-        {
-            get
-            {
-                if (waveOut != null)
-                {
-                    if (waveOut.PlaybackState == PlaybackState.Playing)
-                    {
+        public MediaPlayerState State {
+            get {
+                if (waveOut != null) {
+                    if (waveOut.PlaybackState == PlaybackState.Playing) {
                         return MediaPlayerState.Playing;
                     }
-                    else if (waveOut.PlaybackState == PlaybackState.Paused)
-                    {
+                    else if (waveOut.PlaybackState == PlaybackState.Paused) {
                         return MediaPlayerState.Paused;
                     }
                 }
                 return MediaPlayerState.Paused;
 
             }
-            set
-            {
-                if (value == MediaPlayerState.Playing)
-                {
+            set {
+                if (value == MediaPlayerState.Playing) {
                     PrepareToPlay();
-                    if (waveOut != null)
-                    {
+                    if (waveOut != null) {
                         UpdateWaveoutVolume();
-                        try
-                        {
+                        try {
                             waveOut.Play();
                         }
-                        catch (NullReferenceException nrex)
-                        {
+                        catch (NullReferenceException nrex) {
                             string message = "Playing does not work. Message: " + nrex.Message;
-                            Log.Error(message,nrex);
+                            Log.Error(message, nrex);
                             ErrorBox.Show(message);
                         }
                     }
                 }
-                else if (value == MediaPlayerState.Paused)
-                {
-                    try
-                    {
-                        if (waveOut != null)
-                        {
-                            if (waveOut.PlaybackState == PlaybackState.Playing)
-                            {
+                else if (value == MediaPlayerState.Paused) {
+                    try {
+                        if (waveOut != null) {
+                            if (waveOut.PlaybackState == PlaybackState.Playing) {
                                 waveOut.Pause();
                             }
                         }
                         UpdateAmplitudeDisplay(0, 0);
                     }
-                    catch (NAudio.MmException mex)
-                    {
+                    catch (NAudio.MmException mex) {
                         string message = "Pausing does not work. Message: " + mex.Message;
                         Log.Error(message, mex);
                         ErrorBox.Show(message);
                     }
                 }
-                else
-                {
+                else {
                     throw new NotSupportedException($"State {value} is not supported for MediaPlayerState.");
                 }
                 Log.Info($"State set to {value.ToString()}.");
@@ -277,17 +236,13 @@ namespace NAudioDemo.AudioPlaybackDemo
         }
 
 
-        public string Url
-        {
+        public string Url {
 
-            get
-            {
+            get {
                 return fileName;
             }
-            set
-            {
-                if (!string.IsNullOrEmpty(value) && value != fileName)
-                {
+            set {
+                if (!string.IsNullOrEmpty(value) && value != fileName) {
                     CloseWaveOut();
                     fileName = value;
                     Log.Info($"URL set to {value.ToString()}");
@@ -303,34 +258,29 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// <value>
         /// The volume.
         /// </value>
-        public double Volume
-        {
-            get
-            {
+        public double Volume {
+            get {
                 return volumePot.Value;
             }
-            set
-            {
+            set {
                 Log.Info($"Setting pot value to {value.ToString()}");
 
                 //limit
                 var limitedValue = Math.Max(0, Math.Min(100, value));
 
-                    volumePot.Value = limitedValue;       
+                volumePot.Value = limitedValue;
                 UpdateWaveoutVolume();
             }
         }
 
-        private void UpdateWaveoutVolume()
-        {
+        private void UpdateWaveoutVolume() {
             var volume = (float)volumePot.Volume;
             waveOut.Volume = volume;
             Log.Info($"Volume set to {volume}");
 
         }
 
-        private ISampleProvider CreateInputStream(string fileName)
-        {
+        private ISampleProvider CreateInputStream(string fileName) {
             audioFileReader = new AudioFileReader(fileName);
 
             var sampleChannel = new SampleChannel(audioFileReader, true);
@@ -341,8 +291,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             return postVolumeMeter;
         }
 
-        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
-        {
+        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e) {
             UpdateAmplitudeDisplay(e.MaxSampleValues[0], e.MaxSampleValues[1]);
         }
 
@@ -351,14 +300,12 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="leftAmplitude">The left amplitude.</param>
         /// <param name="rightAmplitude">The right amplitude.</param>
-        private void UpdateAmplitudeDisplay(float leftAmplitude, float rightAmplitude)
-        {
+        private void UpdateAmplitudeDisplay(float leftAmplitude, float rightAmplitude) {
             volumeMeter1.Amplitude = leftAmplitude;
             volumeMeter2.Amplitude = rightAmplitude;
         }
 
-        private void CreateWaveOut()
-        {
+        private void CreateWaveOut() {
             Log.Info($"Creating WaveOut...");
             CloseWaveOut();
             waveOut = _outputDevicePlugin.CreateDevice(latency);
@@ -366,37 +313,30 @@ namespace NAudioDemo.AudioPlaybackDemo
             Log.Info($"WaveOut created.");
         }
 
-        void OnPlaybackStopped(object sender, StoppedEventArgs e)
-        {
+        void OnPlaybackStopped(object sender, StoppedEventArgs e) {
             UpdateAmplitudeDisplay(0, 0);
             panelOutputDeviceSettings.Enabled = true;
-            if (e.Exception != null)
-            {
+            if (e.Exception != null) {
                 ErrorBox.Show(e.Exception.Message, "Playback Device Error");
             }
-            if (audioFileReader != null)
-            {
+            if (audioFileReader != null) {
                 audioFileReader.Position = 0;
             }
             Log.Info($"Playback stopped.");
         }
 
-        private void CloseWaveOut()
-        {
-            if (waveOut != null)
-            {
+        private void CloseWaveOut() {
+            if (waveOut != null) {
                 waveOut.Stop();
                 waveOut.PlaybackStopped -= OnPlaybackStopped;
 
             }
-            if (audioFileReader != null)
-            {
+            if (audioFileReader != null) {
                 // this one really closes the file and ACM conversion
                 audioFileReader.Dispose();
                 audioFileReader = null;
             }
-            if (waveOut != null)
-            {
+            if (waveOut != null) {
                 waveOut.Dispose();
                 waveOut = null;
             }
@@ -405,22 +345,18 @@ namespace NAudioDemo.AudioPlaybackDemo
 
 
 
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            if (waveOut != null && audioFileReader != null)
-            {
+        private void OnTimerTick(object sender, EventArgs e) {
+            if (waveOut != null && audioFileReader != null) {
                 UpdateTimerDisplays();
             }
-            else
-            {
+            else {
                 trackBarPosition.Value = 0;
                 //UpdateTimerDisplays();
 
             }
         }
 
-        private void UpdateTimerDisplays()
-        {
+        private void UpdateTimerDisplays() {
             TimeSpan currentTime = Position;
             trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(trackbarMax * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
             label_CurrentTime.Text = String.Format("{0:00}:{1:00}.{2:0}", (int)currentTime.TotalMinutes,
@@ -434,8 +370,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void trackBarPosition_Scroll(object sender, EventArgs e)
-        {
+        private void trackBarPosition_Scroll(object sender, EventArgs e) {
             var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
             var position = TimeSpan.FromSeconds(secondsPosition);
             if (Position != position)
@@ -454,27 +389,22 @@ namespace NAudioDemo.AudioPlaybackDemo
         //    //}
         //}
 
-        public void SeekBackward(double interval)
-        {
+        public void SeekBackward(double interval) {
             throw new NotImplementedException();
         }
 
-        public void SeekForward(double interval)
-        {
+        public void SeekForward(double interval) {
             throw new NotImplementedException();
         }
 
         /// <summary>
         /// Toggles the play/pause state.
         /// </summary>
-        public void TogglePlayPause()
-        {
-            if (State == MediaPlayerState.Playing)
-            {
+        public void TogglePlayPause() {
+            if (State == MediaPlayerState.Playing) {
                 State = MediaPlayerState.Paused;
             }
-            else
-            {
+            else {
                 State = MediaPlayerState.Playing;
             }
         }
@@ -484,8 +414,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void volumePot_ValueChanged(object sender, EventArgs e)
-        {
+        private void volumePot_ValueChanged(object sender, EventArgs e) {
             Volume = volumePot.Value;
             //UpdateWaveoutVolume();
         }
@@ -495,8 +424,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_play_Click(object sender, EventArgs e)
-        {
+        private void btn_play_Click(object sender, EventArgs e) {
 
             State = MediaPlayerState.Playing;
         }
@@ -506,8 +434,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_pause_Click(object sender, EventArgs e)
-        {
+        private void btn_pause_Click(object sender, EventArgs e) {
             State = MediaPlayerState.Paused;
         }
 
@@ -516,10 +443,8 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_stop_Click(object sender, EventArgs e)
-        {
-            if (waveOut != null)
-            {
+        private void btn_stop_Click(object sender, EventArgs e) {
+            if (waveOut != null) {
                 waveOut.Stop();
             }
             UpdateAmplitudeDisplay(0, 0);

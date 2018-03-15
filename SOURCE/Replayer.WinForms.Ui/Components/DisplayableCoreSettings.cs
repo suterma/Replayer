@@ -46,7 +46,7 @@ namespace Replayer.WinForms.Ui.Components {
         [Description("Default directory for browsing for collections.")]
         [Category("Behaviour")]
         [DisplayName("Default compilation directory")]
-        [Editor(typeof (FolderNameEditor), typeof (UITypeEditor))]
+        [Editor(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string DefaultCompilationLookupDirectory {
             get { return Wrapped.DefaultCompilationLookupDirectory; }
             set { Wrapped.DefaultCompilationLookupDirectory = value; }
@@ -57,6 +57,6 @@ namespace Replayer.WinForms.Ui.Components {
         /// </summary>
         /// <param name="wrapped">The wrapped object.</param>
         public DisplayableCoreSettings(Settings wrapped)
-            : base(wrapped) {}
+            : base(wrapped) { }
     }
 }

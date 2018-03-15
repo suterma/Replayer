@@ -10,11 +10,11 @@
         ///     The implementor should now indicate this ongoing task to the user.
         /// </summary>
         /// <param name="activityDescription"></param>
-        public void IsBusyWith(string activityDescription) {}
+        public void IsBusyWith(string activityDescription) { }
 
         /// <summary>
         ///     Indicates that this is no more busy.
         /// </summary>
-        public void IsNoMoreBusy() {}
+        public void IsNoMoreBusy() { }
     }
 }

@@ -34,7 +34,7 @@ namespace Replayer.WinForms.Ui.Views.MediaPlayer {
             InitializeComponent();
 
             //add media player
-            _mediaPlayer = new AudioPlaybackPanel { Dock = DockStyle.Fill};
+            _mediaPlayer = new AudioPlaybackPanel { Dock = DockStyle.Fill };
             Controls.Add(_mediaPlayer);
 
             Presenter = new MediaPlayerPresenter(this);

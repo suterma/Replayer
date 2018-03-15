@@ -1,15 +1,13 @@
 ﻿using Replayer.WinForms.Ui.Components.NAudioPlayer;
 using System;
 
-namespace NAudioDemo.AudioPlaybackDemo
-{
+namespace NAudioDemo.AudioPlaybackDemo {
     /// <summary>
     /// A panel for audio playback using NAudio
     /// </summary>
     /// <seealso cref="System.Windows.Forms.UserControl" />
     /// <seealso cref="Replayer.Core.Player.IMediaPlayer" />
-    partial class AudioPlaybackPanel
-    {
+    partial class AudioPlaybackPanel {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -19,11 +17,9 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
+        protected override void Dispose(bool disposing) {
             CloseWaveOut();
-            if (disposing && (components != null))
-            {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -35,8 +31,7 @@ namespace NAudioDemo.AudioPlaybackDemo
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -54,7 +49,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             // 
             // trackBarPosition
             // 
-            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarPosition.LargeChange = 1;
             this.trackBarPosition.Location = new System.Drawing.Point(126, 0);
@@ -100,7 +95,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             // 
             // panelOutputDeviceSettings
             // 
-            this.panelOutputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelOutputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelOutputDeviceSettings.Location = new System.Drawing.Point(175, 23);
             this.panelOutputDeviceSettings.Name = "panelOutputDeviceSettings";
@@ -152,7 +147,7 @@ namespace NAudioDemo.AudioPlaybackDemo
             // 
             // label_CurrentTime
             // 
-            this.label_CurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.label_CurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_CurrentTime.AutoSize = true;
             this.label_CurrentTime.Location = new System.Drawing.Point(126, 23);
@@ -197,8 +192,7 @@ namespace NAudioDemo.AudioPlaybackDemo
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_Load(object sender, EventArgs e) {
         }
 
         #endregion

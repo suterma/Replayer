@@ -51,10 +51,12 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         private void Model_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName.Equals("SelectedCue")) {
                 SetVisualSelectedCue();
-            } else if (e.PropertyName.Equals("SelectedTrack")) {
+            }
+            else if (e.PropertyName.Equals("SelectedTrack")) {
                 ExhibitCues();
                 MonitorCuesCollection();
-            } else if (e.PropertyName.Equals("Compilation")) {
+            }
+            else if (e.PropertyName.Equals("Compilation")) {
                 ExhibitCues();
             }
         }
@@ -202,7 +204,8 @@ namespace Replayer.WinForms.Ui.Views.Cues {
                 {
                     View.Cues.SelectedItem = visualToSelect;
                 }
-            } else {
+            }
+            else {
                 //none is matching? Probably the selection points to another track, so refresh everyting
                 ExhibitCues();
             }
@@ -215,14 +218,16 @@ namespace Replayer.WinForms.Ui.Views.Cues {
             if (View.InvokeRequired) {
                 // Reinvoke the same method if necessary        
                 View.BeginInvoke(new MethodInvoker(delegate { ExhibitCues(); }));
-            } else {
+            }
+            else {
                 if (
                     (Core.Model.Instance.Compilation == null) || //no compilation available?
                     (Core.Model.Instance.SelectedTrack == null) || //no track selected?
                     (Core.Model.Instance.SelectedTrack.Cues == null) //none available?
                     ) {
                     View.Cues.Items.Clear();
-                } else {
+                }
+                else {
                     View.Cues.SelectedIndexChanged -= Cues_SelectedIndexChanged;
                     //unwire to keep from selecting an item while the data is manipulated
                     View.Cues.Items.Clear();

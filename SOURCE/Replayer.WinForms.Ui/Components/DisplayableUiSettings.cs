@@ -28,6 +28,6 @@ namespace Replayer.WinForms.Ui.Components {
         /// </summary>
         /// <param name="settings">The settings.</param>
         public DisplayableUiSettings(Settings settings)
-            : base(settings) {}
+            : base(settings) { }
     }
 }

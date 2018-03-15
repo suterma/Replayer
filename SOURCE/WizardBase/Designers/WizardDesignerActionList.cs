@@ -4,56 +4,43 @@ using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
-namespace WizardBase
-{
-    internal class WizardDesignerActionList : DesignerActionList
-    {
-        public WizardDesignerActionList(IComponent component) : base(component)
-        {
+namespace WizardBase {
+    internal class WizardDesignerActionList : DesignerActionList {
+        public WizardDesignerActionList(IComponent component) : base(component) {
         }
 
-        protected virtual WizardControl WizardControl
-        {
-            get { return (WizardControl) Component; }
+        protected virtual WizardControl WizardControl {
+            get { return (WizardControl)Component; }
         }
 
-        [TypeConverter(typeof (GenericCollectionConverter<GenericCollection<WizardStep>>)),
-         Editor(typeof (WizardStepCollectionEditor), typeof (UITypeEditor))]
-        public GenericCollection<WizardStep> WizardSteps
-        {
-            get
-            {
-                if (WizardControl == null)
-                {
+        [TypeConverter(typeof(GenericCollectionConverter<GenericCollection<WizardStep>>)),
+         Editor(typeof(WizardStepCollectionEditor), typeof(UITypeEditor))]
+        public GenericCollection<WizardStep> WizardSteps {
+            get {
+                if (WizardControl == null) {
                     return null;
                 }
                 return WizardControl.WizardSteps;
             }
         }
 
-        public virtual DockStyle DockStyle
-        {
+        public virtual DockStyle DockStyle {
             get { return WizardControl.Dock; }
-            set
-            {
-                if (WizardControl.Dock != value)
-                {
+            set {
+                if (WizardControl.Dock != value) {
                     WizardControl.Dock = value;
                     WizardControl.Invalidate();
                 }
             }
         }
 
-        protected internal virtual void AddFinishStep()
-        {
-            var service = (IDesignerHost) GetService(typeof (IDesignerHost));
-            if (WizardControl == null || service == null)
-            {
+        protected internal virtual void AddFinishStep() {
+            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (FinishStep) service.CreateComponent(typeof (FinishStep));
-            if (WizardControl.WizardSteps.Count != 0)
-            {
+            var step = (FinishStep)service.CreateComponent(typeof(FinishStep));
+            if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
                 SelectWizard();
@@ -64,45 +51,37 @@ namespace WizardBase
             SelectWizard();
         }
 
-        protected internal virtual void AddCustomStep()
-        {
-            var service = (IDesignerHost) GetService(typeof (IDesignerHost));
-            if (WizardControl == null || service == null)
-            {
+        protected internal virtual void AddCustomStep() {
+            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (IntermediateStep) service.CreateComponent(typeof (IntermediateStep));
-            if (WizardControl.WizardSteps.Count != 0)
-            {
+            var step = (IntermediateStep)service.CreateComponent(typeof(IntermediateStep));
+            if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
                 SelectWizard();
             }
-            else
-            {
+            else {
                 WizardControl.WizardSteps.Add(step);
                 RemoveWizardFromSelection();
                 SelectWizard();
             }
         }
 
-        protected internal virtual void AddStartStep()
-        {
-            var service = (IDesignerHost) GetService(typeof (IDesignerHost));
-            if (WizardControl == null || service == null)
-            {
+        protected internal virtual void AddStartStep() {
+            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (StartStep) service.CreateComponent(typeof (StartStep));
-            if (WizardControl.WizardSteps.Count != 0)
-            {
+            var step = (StartStep)service.CreateComponent(typeof(StartStep));
+            if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
                 SelectWizard();
                 return;
             }
-            else
-            {
+            else {
                 WizardControl.WizardSteps.Add(step);
                 RemoveWizardFromSelection();
                 SelectWizard();
@@ -110,37 +89,30 @@ namespace WizardBase
             }
         }
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            if (WizardControl == null)
-            {
+        public override DesignerActionItemCollection GetSortedActionItems() {
+            if (WizardControl == null) {
                 return new DesignerActionItemCollection();
             }
-            if (WizardControl.CurrentStepIndex != -1)
-            {
+            if (WizardControl.CurrentStepIndex != -1) {
                 var items = new DesignerActionItemCollection();
                 items.Add(new DesignerActionHeaderItem("Add Steps"));
                 items.Add(new DesignerActionPropertyItem("WizardSteps", "New Wizard Step", "Add Steps"));
                 items.Add(new DesignerActionMethodItem(this, "AddStartStep", "Add Start Step", "Add Steps", true));
                 items.Add(new DesignerActionMethodItem(this, "AddCustomStep", "Add Custom Step", "Add Steps", true));
                 items.Add(new DesignerActionMethodItem(this, "AddFinishStep", "Add Finish Step", "Add Steps", true));
-                if (WizardControl.CurrentStepIndex == -1)
-                {
+                if (WizardControl.CurrentStepIndex == -1) {
                     return items;
                 }
                 items.Add(new DesignerActionHeaderItem("Remove Step"));
                 items.Add(new DesignerActionMethodItem(this, "RemoveStep", "Remove Step", "Remove Step", true));
                 items.Add(new DesignerActionMethodItem(this, "RemoveAllSteps", "Remove All Steps", "Remove Step", true));
-                if (WizardControl.WizardSteps.Count >= 1)
-                {
+                if (WizardControl.WizardSteps.Count >= 1) {
                     items.Add(new DesignerActionHeaderItem("Step navigation"));
-                    if (WizardControl.CurrentStepIndex > 0)
-                    {
+                    if (WizardControl.CurrentStepIndex > 0) {
                         items.Add(new DesignerActionMethodItem(this, "PreviousStep", "Previous Step", "Step navigation",
                                                                true));
                     }
-                    if (WizardControl.CurrentStepIndex != (WizardControl.WizardSteps.Count - 1))
-                    {
+                    if (WizardControl.CurrentStepIndex != (WizardControl.WizardSteps.Count - 1)) {
                         items.Add(new DesignerActionMethodItem(this, "NextStep", "Next Step", "Step navigation", true));
                     }
                 }
@@ -151,10 +123,8 @@ namespace WizardBase
             return new DesignerActionItemCollection();
         }
 
-        protected internal virtual void NextStep()
-        {
-            if (WizardControl == null)
-            {
+        protected internal virtual void NextStep() {
+            if (WizardControl == null) {
                 return;
             }
             WizardControl.CurrentStepIndex++;
@@ -162,11 +132,9 @@ namespace WizardBase
             SelectWizard();
         }
 
-        protected internal virtual void PreviousStep()
-        {
+        protected internal virtual void PreviousStep() {
             WizardControl wizardControl = WizardControl;
-            if (wizardControl == null)
-            {
+            if (wizardControl == null) {
                 return;
             }
             wizardControl.CurrentStepIndex--;
@@ -174,26 +142,22 @@ namespace WizardBase
             SelectWizard();
         }
 
-        protected internal virtual void RemoveAllSteps()
-        {
-            var service = (IDesignerHost) GetService(typeof (IDesignerHost));
-            if (WizardControl == null || service == null)
-            {
+        protected internal virtual void RemoveAllSteps() {
+            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            if (WizardControl == null || service == null) {
                 return;
             }
             if (
                 MessageBox.Show(WizardControl.FindForm(), "Are you sure you want to remove all the steps?",
                                 "Remove Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=
-                DialogResult.Yes)
-            {
+                DialogResult.Yes) {
                 return;
             }
             var array = new WizardStep[WizardControl.WizardSteps.Count];
-            ((ICollection) WizardControl.WizardSteps).CopyTo(array, 0);
+            ((ICollection)WizardControl.WizardSteps).CopyTo(array, 0);
             WizardControl.WizardSteps.Clear();
             WizardStep[] stepArray2 = array;
-            for (int index = 0; index < stepArray2.Length; index++)
-            {
+            for (int index = 0; index < stepArray2.Length; index++) {
                 WizardStep component = stepArray2[index];
                 service.DestroyComponent(component);
                 index++;
@@ -201,18 +165,15 @@ namespace WizardBase
             SelectWizard();
         }
 
-        protected internal virtual void RemoveStep()
-        {
-            var service = (IDesignerHost) GetService(typeof (IDesignerHost));
-            if (WizardControl == null || service == null)
-            {
+        protected internal virtual void RemoveStep() {
+            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            if (WizardControl == null || service == null) {
                 return;
             }
             if (
                 MessageBox.Show(WizardControl.FindForm(), "Are you sure you want to remove the step?",
                                 "Remove Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-                DialogResult.Yes)
-            {
+                DialogResult.Yes) {
                 WizardStep step = WizardControl.WizardSteps[WizardControl.CurrentStepIndex];
                 WizardControl.WizardSteps.Remove(step);
                 service.DestroyComponent(step);
@@ -221,26 +182,22 @@ namespace WizardBase
             SelectWizard();
         }
 
-        protected void RemoveWizardFromSelection()
-        {
-            var service = (ISelectionService) GetService(typeof (ISelectionService));
-            if (WizardControl == null || service == null)
-            {
+        protected void RemoveWizardFromSelection() {
+            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            if (WizardControl == null || service == null) {
                 return;
             }
-            var components = new object[] {WizardControl};
+            var components = new object[] { WizardControl };
             service.SetSelectedComponents(components, SelectionTypes.Remove);
             return;
         }
 
-        protected void SelectWizard()
-        {
-            var service = (ISelectionService) GetService(typeof (ISelectionService));
-            if (WizardControl == null || service == null)
-            {
+        protected void SelectWizard() {
+            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            if (WizardControl == null || service == null) {
                 return;
             }
-            var components = new object[] {WizardControl};
+            var components = new object[] { WizardControl };
             service.SetSelectedComponents(components, SelectionTypes.Replace);
             return;
         }

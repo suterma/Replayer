@@ -36,7 +36,8 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
         private void Model_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName.Equals("Compilation")) {
                 ExhibitNewCompilation();
-            } else if (e.PropertyName.Equals("SelectedTrack")) {
+            }
+            else if (e.PropertyName.Equals("SelectedTrack")) {
                 var items = View.Tracks.DataSource as List<DisplayTrack>;
                 View.Tracks.SelectedItem =
                     (from item in items where item.Model.Equals(Core.Model.Instance.SelectedTrack) select item)
@@ -59,7 +60,8 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
             {
                 Core.Model.Instance.SelectedCue = firstCue;
                 Core.Model.Instance.Player.State = MediaPlayerState.Playing; //start playing the selected track
-            } else {
+            }
+            else {
                 //just start at the beginning of the track
                 Core.Model.Instance.Player.Position = new TimeSpan(0);
                 Core.Model.Instance.Player.State = MediaPlayerState.Playing;
@@ -113,14 +115,16 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
             if (View.InvokeRequired) {
                 // Reinvoke the same method if necessary        
                 View.BeginInvoke(new MethodInvoker(delegate { ExhibitTracks(); }));
-            } else {
+            }
+            else {
                 if (
                     (Core.Model.Instance.Compilation == null) || //no compilation available?
                     (Core.Model.Instance.Compilation.Tracks == null) || //none available?
                     (Core.Model.Instance.Compilation.Tracks.Count == 0) //none available?
                     ) {
                     View.Tracks.DataSource = null;
-                } else {
+                }
+                else {
                     View.Tracks.DataSource = (from track in Core.Model.Instance.Compilation.Tracks
                                               select new DisplayTrack(track)).ToList();
                     View.Tracks.DisplayMember = "Name";

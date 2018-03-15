@@ -20,7 +20,8 @@ namespace Replayer.Model.Persistence {
             quirliTrack.Title = track.Name;
             if (uri == null) {
                 quirliTrack.MediaUrl = new Uri(track.Url);
-            } else {
+            }
+            else {
                 quirliTrack.MediaUrl = uri;
             }
             foreach (Cue cue in track.Cues) {

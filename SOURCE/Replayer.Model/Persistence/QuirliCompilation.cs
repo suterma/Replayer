@@ -118,7 +118,7 @@ namespace Replayer.Model.Persistence {
             Uri relativePlayerUrl = urlRoot.MakeRelativeUri(new Uri(targetDirectory + "player.html"));
             Player.Url = relativePlayerUrl;
             string templateContent = GetPlaylistTemplate();
-            Template.RegisterSafeType(typeof (Quirli.Api.Track), new[] {"Title", "Album", "Artist", "TrackUrl"});
+            Template.RegisterSafeType(typeof(Quirli.Api.Track), new[] { "Title", "Album", "Artist", "TrackUrl" });
             Template.NamingConvention = new CSharpNamingConvention();
             Template template = Template.Parse(templateContent); // Parses and compiles the template
             string htmlPlaylist = template.Render(Hash.FromAnonymousObject(new {

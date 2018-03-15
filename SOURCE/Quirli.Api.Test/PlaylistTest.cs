@@ -1,17 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Quirli.Api.Test
-{
+namespace Quirli.Api.Test {
     [TestClass]
-    public class PlaylistTest
-    {
+    public class PlaylistTest {
         /// <summary>
         /// Tests whether a Playlist is parsed correctly.
         /// </summary>
         [TestMethod]
-        public void ParseWithDemoPlaylistTest()
-        {
+        public void ParseWithDemoPlaylistTest() {
             ///not yet implemented
         }
     }

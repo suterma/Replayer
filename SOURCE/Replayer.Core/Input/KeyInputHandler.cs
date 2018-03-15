@@ -125,8 +125,8 @@ namespace Replayer.Core.Input {
             // Create the delegate that invokes methods for the timer.
             TimerCallback timerDelegate =
                 _sequenceClearingTimer_Elapsed;
-            _sequenceClearingTimer = new Timer(timerDelegate, null, (int) (SequenceClearingTimeout*1000),
-                                               (int) (SequenceClearingTimeout*1000));
+            _sequenceClearingTimer = new Timer(timerDelegate, null, (int)(SequenceClearingTimeout * 1000),
+                                               (int)(SequenceClearingTimeout * 1000));
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Replayer.Core.Input {
         /// </summary>
         /// <param name="timer">The timer.</param>
         private void StartTimer(Timer timer) {
-            timer.Change((int) (SequenceClearingTimeout*1000), (int) (SequenceClearingTimeout*1000));
+            timer.Change((int)(SequenceClearingTimeout * 1000), (int)(SequenceClearingTimeout * 1000));
         }
 
         /// <summary>
@@ -217,7 +217,8 @@ namespace Replayer.Core.Input {
                     {
                         KeyWasUp = false;
                         KeyWasPressedRepeatedly = false; //however, not yet pressed repeatedly
-                    } else {
+                    }
+                    else {
                         //key was pressed repeatedly
                         KeyWasPressedRepeatedly = true;
                         PressedCharacter = e.KeyChar;
@@ -230,7 +231,8 @@ namespace Replayer.Core.Input {
                     {
                         KeyWasUp = false;
                         KeyWasPressedRepeatedly = false; //however, not yet pressed repeatedly
-                    } else {
+                    }
+                    else {
                         //key was pressed repeatedly
                         KeyWasPressedRepeatedly = true;
                         PressedCharacter = e.KeyChar;
@@ -246,12 +248,13 @@ namespace Replayer.Core.Input {
                     if (CurrentDetectedKeySequence.Length > 0) //there is a typed key sequence available?
                     {
                         OnKeySequenceDetected();
-                    } else {
+                    }
+                    else {
                         OnCommandIssued(InputCommand.PlayPauseToggled);
                     }
                     e.Handled = true;
                     break;
-                    ///handle sequence character
+                ///handle sequence character
                 default:
                     CurrentDetectedKeySequence += e.KeyChar;
                     StartTimer(_sequenceClearingTimer); //start waiting a short time before clearing the sequence
@@ -299,12 +302,12 @@ namespace Replayer.Core.Input {
             {
                 switch (PressedCharacter) {
                     case '/': {
-                        OnCommandIssued(InputCommand.SkipBackward);
-                    }
+                            OnCommandIssued(InputCommand.SkipBackward);
+                        }
                         break;
                     case '*': {
-                        OnCommandIssued(InputCommand.SkipForward);
-                    }
+                            OnCommandIssued(InputCommand.SkipForward);
+                        }
                         break;
                 }
             }
@@ -321,6 +324,6 @@ namespace Replayer.Core.Input {
         /// <param name="e">
         ///     The <see cref="Replayer.Core.v04.Input.SimpleKeyEventArgs" /> instance containing the event data.
         /// </param>
-        public void HandleKeyDown(SimpleKeyEventArgs e) {}
+        public void HandleKeyDown(SimpleKeyEventArgs e) { }
     }
 }

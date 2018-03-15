@@ -25,13 +25,11 @@ namespace Replayer.WinForms.Ui.Gui {
             return ShowDialog();
         }
 
-        public static DialogResult Show(string message)
-        {
+        public static DialogResult Show(string message) {
             return new ErrorBox(message).Show();
         }
 
-        internal static DialogResult Show(string message, string title)
-        {
+        internal static DialogResult Show(string message, string title) {
             return new ErrorBox(message, title).Show();
         }
     }

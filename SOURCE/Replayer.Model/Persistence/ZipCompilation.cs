@@ -136,7 +136,7 @@ namespace Replayer.Model.Persistence {
         /// <returns></returns>
         [Browsable(false)]
         public override String Find(Track track) {
-            var places = new List<string> {MediaPath};
+            var places = new List<string> { MediaPath };
             string path = TrackFinder.Find(track.Url, places);
 
             //before returning the path, check if found, otherwise request user input, if not found successfully
@@ -283,7 +283,7 @@ namespace Replayer.Model.Persistence {
             Url = url; //use this from now on.
 
             //store Compilation back to file
-            var CompilationSerializer = new XmlSerializer(typeof (XmlCompilation));
+            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
             using (TextWriter writeFileStream = new StreamWriter(ExtractionPath + EmbeddedXmlCompilationFilename)) {
                 CompilationSerializer.Serialize(writeFileStream, InnerCompilation);
             }
@@ -314,11 +314,11 @@ namespace Replayer.Model.Persistence {
                                                   select unzipfileName).First();
 
 
-            var CompilationSerializer = new XmlSerializer(typeof (XmlCompilation));
+            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
             using (
                 var readFileStream = new FileStream(CompilationUnzippedFileName, FileMode.Open, FileAccess.Read,
                                                     FileShare.Read)) {
-                var xmlCompilation = (XmlCompilation) CompilationSerializer.Deserialize(readFileStream);
+                var xmlCompilation = (XmlCompilation)CompilationSerializer.Deserialize(readFileStream);
 
                 //now with the retrived XML Compilation, fill the properties of the retrieved instance
                 retrieved.Tracks = xmlCompilation.Tracks;

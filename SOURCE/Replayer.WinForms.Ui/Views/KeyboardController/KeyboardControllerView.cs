@@ -20,7 +20,8 @@ namespace Replayer.WinForms.Ui.Views.KeyboardController {
                 if (InvokeRequired) {
                     // Reinvoke the same method if necessary        
                     BeginInvoke(new MethodInvoker(delegate { KeySequence = value; }));
-                } else {
+                }
+                else {
                     _tbKeys.Text = value;
                 }
             }
@@ -30,9 +31,11 @@ namespace Replayer.WinForms.Ui.Views.KeyboardController {
         ///     Gets or sets the presenter.
         /// </summary>
         /// <value>The presenter.</value>
-        public KeyboardControllerPresenter Presenter { get
-            ; set
-                ; }
+        public KeyboardControllerPresenter Presenter {
+            get
+; set
+;
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="KeyboardControllerView" /> class.

@@ -22,9 +22,11 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         ///     Gets or sets the presenter.
         /// </summary>
         /// <value>The presenter.</value>
-        public CuesPresenter Presenter { get
-            ; set
-                ; }
+        public CuesPresenter Presenter {
+            get
+; set
+;
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CuesView" /> class.

@@ -7,16 +7,14 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace WizardBase
-{
+namespace WizardBase {
     /// <summary>
     ///     Represents two color pair with gradient angle.
     /// </summary>
-    [Editor(typeof (ColorPairEditor), typeof (UITypeEditor))]
-    [TypeConverter(typeof (ExpandableObjectConverter))]
+    [Editor(typeof(ColorPairEditor), typeof(UITypeEditor))]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     [Serializable]
-    public class ColorPair : ICloneable
-    {
+    public class ColorPair : ICloneable {
         #region Fields
 
         private readonly int currentDefaultGradient = 90;
@@ -31,8 +29,7 @@ namespace WizardBase
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColorPair" /> class.
         /// </summary>
-        public ColorPair()
-        {
+        public ColorPair() {
             backColor1 = Color.Empty;
             backColor2 = Color.Empty;
             gradient = 90;
@@ -44,8 +41,7 @@ namespace WizardBase
         /// <param name="backColor1">Start color.</param>
         /// <param name="backColor2">End color</param>
         /// <param name="gradient">Gradient of the brush.</param>
-        public ColorPair(Color backColor1, Color backColor2, int gradient)
-        {
+        public ColorPair(Color backColor1, Color backColor2, int gradient) {
             this.backColor1 = backColor1;
             this.backColor2 = backColor2;
             this.gradient = gradient;
@@ -63,8 +59,7 @@ namespace WizardBase
         ///     A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public override string ToString()
-        {
+        public override string ToString() {
             return "BackColor1 : " + backColor1 + ";" + "BackColor2 : " + backColor2 + ";" + "Gradient : " + gradient;
         }
 
@@ -75,8 +70,7 @@ namespace WizardBase
         ///     A hash code for the current <see cref="T:System.Object"></see>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return ToString().GetHashCode();
         }
 
@@ -95,11 +89,9 @@ namespace WizardBase
         ///     The <see cref="T:System.Object"></see> to compare with the current <see cref="T:System.Object"></see>.
         /// </param>
         /// <filterpriority>2</filterpriority>
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             var pair = obj as ColorPair;
-            if (pair != null)
-            {
+            if (pair != null) {
                 return pair.BackColor1.Equals(backColor1) && pair.BackColor2.Equals(backColor2) &&
                        pair.Gradient.Equals(gradient);
             }
@@ -113,13 +105,10 @@ namespace WizardBase
         /// <summary>
         ///     Gets or sets Start color.
         /// </summary>
-        public Color BackColor1
-        {
+        public Color BackColor1 {
             get { return backColor1; }
-            set
-            {
-                if (!backColor1.Equals(value))
-                {
+            set {
+                if (!backColor1.Equals(value)) {
                     backColor1 = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
@@ -129,13 +118,10 @@ namespace WizardBase
         /// <summary>
         ///     Gets or sets End color.
         /// </summary>
-        public Color BackColor2
-        {
+        public Color BackColor2 {
             get { return backColor2; }
-            set
-            {
-                if (!backColor2.Equals(value))
-                {
+            set {
+                if (!backColor2.Equals(value)) {
                     backColor2 = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
@@ -145,14 +131,11 @@ namespace WizardBase
         /// <summary>
         ///     Gets or sets Gradient.
         /// </summary>
-        [Editor(typeof (GradientAngleEditor), typeof (UITypeEditor))]
-        public int Gradient
-        {
+        [Editor(typeof(GradientAngleEditor), typeof(UITypeEditor))]
+        public int Gradient {
             get { return gradient; }
-            set
-            {
-                if (!gradient.Equals(value))
-                {
+            set {
+                if (!gradient.Equals(value)) {
                     gradient = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
@@ -161,26 +144,21 @@ namespace WizardBase
 
         #endregion
 
-        public static bool operator ==(ColorPair p1, ColorPair p2)
-        {
-            if (ReferenceEquals(p1, null))
-            {
+        public static bool operator ==(ColorPair p1, ColorPair p2) {
+            if (ReferenceEquals(p1, null)) {
                 return ReferenceEquals(p2, null);
             }
             return p1.Equals(p2);
         }
 
-        public static bool operator !=(ColorPair p1, ColorPair p2)
-        {
+        public static bool operator !=(ColorPair p1, ColorPair p2) {
             return !(p1 == p2);
         }
 
         public event GenericEventHandler<bool> AppearenceChanged;
 
-        protected virtual void OnAppearenceChanged(GenericEventArgs<bool> e)
-        {
-            if (AppearenceChanged != null)
-            {
+        protected virtual void OnAppearenceChanged(GenericEventArgs<bool> e) {
+            if (AppearenceChanged != null) {
                 AppearenceChanged(this, e);
             }
         }
@@ -194,8 +172,7 @@ namespace WizardBase
         ///     A new object that is a copy of this instance.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public object Clone()
-        {
+        public object Clone() {
             var pair = new ColorPair();
             pair.backColor1 = backColor1;
             pair.backColor2 = backColor2;
@@ -207,18 +184,15 @@ namespace WizardBase
 
         #region Reset methods used by IDE
 
-        public void ResetBackColor1()
-        {
+        public void ResetBackColor1() {
             backColor1 = Color.Empty;
         }
 
-        public void ResetBackColor2()
-        {
+        public void ResetBackColor2() {
             backColor2 = Color.Empty;
         }
 
-        public void ResetGradient()
-        {
+        public void ResetGradient() {
             gradient = 90;
         }
 
@@ -226,18 +200,15 @@ namespace WizardBase
 
         #region Should Serialize methods used by IDE
 
-        public bool ShouldSerializeBackColor1()
-        {
+        public bool ShouldSerializeBackColor1() {
             return !backColor1.IsEmpty;
         }
 
-        public bool ShouldSerializeBackColor2()
-        {
+        public bool ShouldSerializeBackColor2() {
             return !backColor2.IsEmpty;
         }
 
-        public bool ShouldSerializeGradient()
-        {
+        public bool ShouldSerializeGradient() {
             return gradient != currentDefaultGradient;
         }
 
@@ -250,8 +221,7 @@ namespace WizardBase
         /// <summary>
         ///     UITypeEditor for <see cref="ColorPair" /> type.
         /// </summary>
-        public class ColorPairEditor : UITypeEditor
-        {
+        public class ColorPairEditor : UITypeEditor {
             #region Fields
 
             private DisplayStyleUI display;
@@ -277,17 +247,13 @@ namespace WizardBase
             /// <param name="provider">
             ///     An <see cref="T:System.IServiceProvider"></see> that this editor can use to obtain services.
             /// </param>
-            public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
-            {
-                if (provider != null)
-                {
-                    var edSvc = (IWindowsFormsEditorService) provider.GetService(typeof (IWindowsFormsEditorService));
-                    if (edSvc == null)
-                    {
+            public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
+                if (provider != null) {
+                    var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+                    if (edSvc == null) {
                         return value;
                     }
-                    if (display == null)
-                    {
+                    if (display == null) {
                         display = new DisplayStyleUI();
                     }
                     display.Start(edSvc, value);
@@ -327,8 +293,7 @@ namespace WizardBase
             /// <param name="context">
             ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that can be used to gain additional context information.
             /// </param>
-            public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-            {
+            public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
                 return UITypeEditorEditStyle.DropDown;
             }
 
@@ -345,8 +310,7 @@ namespace WizardBase
             /// <param name="context">
             ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that can be used to gain additional context information.
             /// </param>
-            public override bool GetPaintValueSupported(ITypeDescriptorContext context)
-            {
+            public override bool GetPaintValueSupported(ITypeDescriptorContext context) {
                 return true;
             }
 
@@ -360,12 +324,10 @@ namespace WizardBase
             /// <param name="e">
             ///     A <see cref="T:System.Drawing.Design.PaintValueEventArgs"></see> that indicates what to paint and where to paint it.
             /// </param>
-            public override void PaintValue(PaintValueEventArgs e)
-            {
+            public override void PaintValue(PaintValueEventArgs e) {
                 base.PaintValue(e);
                 var pair = e.Value as ColorPair;
-                if (pair != null)
-                {
+                if (pair != null) {
                     var br = new LinearGradientBrush(e.Bounds, pair.BackColor1, pair.BackColor2, pair.Gradient);
                     e.Graphics.FillRectangle(br, e.Bounds);
                 }
@@ -379,8 +341,7 @@ namespace WizardBase
         #region Nested type: DisplayStyleUI
 
         [ToolboxItem(false)]
-        private class DisplayStyleUI : UserControl
-        {
+        private class DisplayStyleUI : UserControl {
             #region Fields
 
             private IWindowsFormsEditorService edSvc;
@@ -403,8 +364,7 @@ namespace WizardBase
 
             #region Constructor
 
-            internal DisplayStyleUI()
-            {
+            internal DisplayStyleUI() {
                 InitializeComponent();
             }
 
@@ -416,8 +376,7 @@ namespace WizardBase
             /// <param name="e">
             ///     An <see cref="T:System.EventArgs"></see> that contains the event data.
             /// </param>
-            protected override void OnValidated(EventArgs e)
-            {
+            protected override void OnValidated(EventArgs e) {
                 value.BackColor1 = pnlNewBack1.BackColor;
                 value.BackColor2 = pnlNewBack2.BackColor;
                 value.Gradient = gradUI.Value;
@@ -425,8 +384,7 @@ namespace WizardBase
 
             #region Private Methods
 
-            private void PaintPanel(PaintEventArgs e)
-            {
+            private void PaintPanel(PaintEventArgs e) {
                 var brush1 = new LinearGradientBrush(pnlPreview.ClientRectangle, value.BackColor1, value.BackColor2,
                                                      value.Gradient);
                 e.Graphics.FillRectangle(brush1, pnlPreview.ClientRectangle);
@@ -436,8 +394,7 @@ namespace WizardBase
 
             #region Public property
 
-            public ColorPair Value
-            {
+            public ColorPair Value {
                 get { return value; }
             }
 
@@ -445,8 +402,7 @@ namespace WizardBase
 
             #region Designer generated code
 
-            private void InitializeComponent()
-            {
+            private void InitializeComponent() {
                 this.pnlPreview = new System.Windows.Forms.Panel();
                 this.lblPreview = new System.Windows.Forms.Label();
                 this.lblBack1 = new System.Windows.Forms.Label();
@@ -600,12 +556,10 @@ namespace WizardBase
 
             #region Public Method
 
-            public void Start(IWindowsFormsEditorService service, object val)
-            {
+            public void Start(IWindowsFormsEditorService service, object val) {
                 edSvc = service;
                 value = val as ColorPair;
-                if (val != null)
-                {
+                if (val != null) {
                     pnlOldBack1.BackColor = value.BackColor1;
                     pnlOldBack2.BackColor = value.BackColor2;
                     pnlNewBack1.BackColor = value.BackColor1;
@@ -616,8 +570,7 @@ namespace WizardBase
                 }
             }
 
-            public void End()
-            {
+            public void End() {
                 edSvc = null;
                 value = null;
             }
@@ -626,43 +579,37 @@ namespace WizardBase
 
             #region Event handler
 
-            private void panel1_Paint(object sender, PaintEventArgs e)
-            {
+            private void panel1_Paint(object sender, PaintEventArgs e) {
                 PaintPanel(e);
             }
 
-            private void pnlNewBack2_Click(object sender, EventArgs e)
-            {
+            private void pnlNewBack2_Click(object sender, EventArgs e) {
                 var dlg = new ColorDialog();
                 dlg.AllowFullOpen = true;
                 dlg.AnyColor = true;
                 dlg.Color = value.BackColor2;
                 dlg.FullOpen = true;
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
+                if (dlg.ShowDialog() == DialogResult.OK) {
                     value.BackColor2 = dlg.Color;
                     pnlNewBack2.BackColor = dlg.Color;
                 }
                 pnlPreview.Refresh();
             }
 
-            private void pnlNewBack1_Click(object sender, EventArgs e)
-            {
+            private void pnlNewBack1_Click(object sender, EventArgs e) {
                 var dlg = new ColorDialog();
                 dlg.AllowFullOpen = true;
                 dlg.AnyColor = true;
                 dlg.Color = value.BackColor1;
                 dlg.FullOpen = true;
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
+                if (dlg.ShowDialog() == DialogResult.OK) {
                     value.BackColor1 = dlg.Color;
                     pnlNewBack1.BackColor = dlg.Color;
                 }
                 pnlPreview.Refresh();
             }
 
-            private void label1_ValueChanged(object sender, EventArgs e)
-            {
+            private void label1_ValueChanged(object sender, EventArgs e) {
                 value.Gradient = gradUI.GetValue();
                 pnlPreview.Refresh();
             }
@@ -672,8 +619,7 @@ namespace WizardBase
 
         #endregion
 
-        private class GradientAngleEditor : UITypeEditor
-        {
+        private class GradientAngleEditor : UITypeEditor {
             /// <summary>
             ///     Gets the editor style used by the
             ///     <see
@@ -703,10 +649,8 @@ namespace WizardBase
             /// <param name="context">
             ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that can be used to gain additional context information.
             /// </param>
-            public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-            {
-                if (context != null && context.Instance != null)
-                {
+            public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+                if (context != null && context.Instance != null) {
                     return UITypeEditorEditStyle.DropDown;
                 }
                 return base.GetEditStyle(context);
@@ -729,22 +673,18 @@ namespace WizardBase
             /// <param name="provider">
             ///     An <see cref="T:System.IServiceProvider"></see> that this editor can use to obtain services.
             /// </param>
-            public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
-            {
+            public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
                 IWindowsFormsEditorService editorService;
                 GradientEditorUI editor;
 
-                if (context != null && context.Instance != null && provider != null)
-                {
+                if (context != null && context.Instance != null && provider != null) {
                     editorService =
-                        (IWindowsFormsEditorService) provider.GetService(typeof (IWindowsFormsEditorService));
-                    if (!(value is int && (int) value < 360 && (int) value >= 0))
-                    {
+                        (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+                    if (!(value is int && (int)value < 360 && (int)value >= 0)) {
                         value = 0;
                     }
-                    if (editorService != null)
-                    {
-                        var currentValue = (int) value;
+                    if (editorService != null) {
+                        var currentValue = (int)value;
                         editor = new GradientEditorUI(currentValue);
                         editor.Dock = DockStyle.Fill;
                         editorService.DropDownControl(editor);
@@ -768,16 +708,14 @@ namespace WizardBase
             /// <param name="context">
             ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that can be used to gain additional context information.
             /// </param>
-            public override bool GetPaintValueSupported(ITypeDescriptorContext context)
-            {
+            public override bool GetPaintValueSupported(ITypeDescriptorContext context) {
                 return false;
             }
 
             #region Nested type: GradientEditorUI
 
             [ToolboxItem(false)]
-            internal class GradientEditorUI : UserControl
-            {
+            internal class GradientEditorUI : UserControl {
                 /// <summary>
                 ///     Required designer variable.
                 /// </summary>
@@ -789,25 +727,20 @@ namespace WizardBase
                 private int midy;
                 private int value;
 
-                internal GradientEditorUI()
-                {
+                internal GradientEditorUI() {
                     value = 0;
                     InitializeComponent();
                 }
 
-                internal GradientEditorUI(int value)
-                {
+                internal GradientEditorUI(int value) {
                     this.value = value;
                     InitializeComponent();
                 }
 
-                public int Value
-                {
+                public int Value {
                     get { return value; }
-                    set
-                    {
-                        if (value != this.value)
-                        {
+                    set {
+                        if (value != this.value) {
                             this.value = value;
                             OnValueChanged();
                         }
@@ -816,10 +749,8 @@ namespace WizardBase
 
                 internal event EventHandler ValueChanged;
 
-                internal virtual void OnValueChanged()
-                {
-                    if (ValueChanged != null)
-                    {
+                internal virtual void OnValueChanged() {
+                    if (ValueChanged != null) {
                         ValueChanged(this, EventArgs.Empty);
                     }
                 }
@@ -830,8 +761,7 @@ namespace WizardBase
                 /// <param name="e">
                 ///     A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.
                 /// </param>
-                protected override void OnPaint(PaintEventArgs e)
-                {
+                protected override void OnPaint(PaintEventArgs e) {
                     PaintValue(e);
                 }
 
@@ -841,14 +771,11 @@ namespace WizardBase
                 /// <param name="e">
                 ///     A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
                 /// </param>
-                protected override void OnMouseDown(MouseEventArgs e)
-                {
+                protected override void OnMouseDown(MouseEventArgs e) {
                     base.OnMouseDown(e);
-                    if (HitTest(e.Location))
-                    {
+                    if (HitTest(e.Location)) {
                         int angle = GetAngle(e.Location);
-                        if (angle != -1)
-                        {
+                        if (angle != -1) {
                             value = angle;
                             OnValueChanged();
                         }
@@ -862,94 +789,77 @@ namespace WizardBase
                 /// <param name="e">
                 ///     A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
                 /// </param>
-                protected override void OnMouseMove(MouseEventArgs e)
-                {
+                protected override void OnMouseMove(MouseEventArgs e) {
                     base.OnMouseMove(e);
-                    if (HitTest(e.Location))
-                    {
+                    if (HitTest(e.Location)) {
                         int angle = GetAngle(e.Location);
-                        if (angle != -1)
-                        {
+                        if (angle != -1) {
                             hoverValue = angle;
                         }
-                        Invalidate(new Rectangle((int) (Width - diameter*0.25), 1, (int) (0.25*diameter),
-                                                 (int) (2*Font.SizeInPoints)));
+                        Invalidate(new Rectangle((int)(Width - diameter * 0.25), 1, (int)(0.25 * diameter),
+                                                 (int)(2 * Font.SizeInPoints)));
                     }
                 }
 
-                private bool HitTest(Point point)
-                {
+                private bool HitTest(Point point) {
                     var distance =
-                        (int) Math.Sqrt((point.X - midx)*(point.X - midx) + (point.Y - midy)*(point.Y - midy));
-                    return distance <= (diameter*0.7)/2;
+                        (int)Math.Sqrt((point.X - midx) * (point.X - midx) + (point.Y - midy) * (point.Y - midy));
+                    return distance <= (diameter * 0.7) / 2;
                 }
 
-                private int GetAngle(Point p)
-                {
-                    if ((p.X - midx) != 0)
-                    {
-                        var ret = (int) ((Math.Atan((p.Y - midy)/(float) (p.X - midx)))*(180)/Math.PI);
-                        if ((p.Y - midy) >= 0 && (p.X - midx) <= 0)
-                        {
+                private int GetAngle(Point p) {
+                    if ((p.X - midx) != 0) {
+                        var ret = (int)((Math.Atan((p.Y - midy) / (float)(p.X - midx))) * (180) / Math.PI);
+                        if ((p.Y - midy) >= 0 && (p.X - midx) <= 0) {
                             ret = 180 + ret;
                         }
-                        else if ((p.Y - midy) <= 0 && (p.X - midx) <= 0)
-                        {
+                        else if ((p.Y - midy) <= 0 && (p.X - midx) <= 0) {
                             ret = 180 + ret;
                         }
-                        else if ((p.Y - midy) <= 0 && (p.X - midx) >= 0)
-                        {
+                        else if ((p.Y - midy) <= 0 && (p.X - midx) >= 0) {
                             ret = 360 + ret;
                         }
                         return ret;
                     }
-                    else
-                    {
-                        if ((p.Y - midy) > 0)
-                        {
+                    else {
+                        if ((p.Y - midy) > 0) {
                             return 90;
                         }
-                        else if ((p.Y - midy) < 0)
-                        {
+                        else if ((p.Y - midy) < 0) {
                             return 270;
                         }
-                        else
-                        {
+                        else {
                             return -1;
                         }
                     }
                 }
 
-                private void PaintValue(PaintEventArgs e)
-                {
+                private void PaintValue(PaintEventArgs e) {
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
                     e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     diameter = Math.Min(Height, Width);
-                    midx = ClientSize.Width/2;
-                    midy = ClientSize.Height/2;
+                    midx = ClientSize.Width / 2;
+                    midy = ClientSize.Height / 2;
                     DrawFrame(e);
                     e.Graphics.DrawString(value.ToString(), Font, Brushes.Red, 1, 1);
-                    e.Graphics.DrawString(hoverValue.ToString(), Font, Brushes.Green, (float) (Width - diameter*0.25), 1);
+                    e.Graphics.DrawString(hoverValue.ToString(), Font, Brushes.Green, (float)(Width - diameter * 0.25), 1);
                     DrawLine(e, value, Color.Red);
-                    if (HitTest(MousePosition))
-                    {
+                    if (HitTest(MousePosition)) {
                         DrawLine(e, hoverValue, Color.Green);
                     }
                 }
 
-                private void DrawLine(PaintEventArgs e, int val, Color color)
-                {
+                private void DrawLine(PaintEventArgs e, int val, Color color) {
                     var p = new Pen(color, 2);
                     Point current = GetCurrentPoint(val);
                     e.Graphics.DrawLine(p, midx, midy, current.X, current.Y);
                 }
 
-                private Point GetCurrentPoint(int val)
-                {
-                    return new Point((int) (midx + Math.Cos(val*Math.PI/180)*diameter*0.8/2),
-                                     (int) (midy + Math.Sin(val*Math.PI/180)*diameter*0.8/2));
+                private Point GetCurrentPoint(int val) {
+                    return new Point((int)(midx + Math.Cos(val * Math.PI / 180) * diameter * 0.8 / 2),
+                                     (int)(midy + Math.Sin(val * Math.PI / 180) * diameter * 0.8 / 2));
                 }
 
                 /// <summary>
@@ -964,69 +874,59 @@ namespace WizardBase
                 /// <param name="msg">
                 ///     A <see cref="T:System.Windows.Forms.Message"></see>, passed by reference, that represents the window message to process.
                 /// </param>
-                protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-                {
-                    if ((Enabled) && ((msg.Msg == 256) || (msg.Msg == 260)))
-                    {
-                        switch (keyData)
-                        {
+                protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+                    if ((Enabled) && ((msg.Msg == 256) || (msg.Msg == 260))) {
+                        switch (keyData) {
                             case Keys.Left:
-                                if (value > 0)
-                                {
+                                if (value > 0) {
                                     value--;
                                 }
                                 break;
 
                             case Keys.Up:
-                                if (value < 360)
-                                {
+                                if (value < 360) {
                                     value++;
                                 }
                                 break;
 
                             case Keys.Right:
-                                if (value < 360)
-                                {
+                                if (value < 360) {
                                     value++;
                                 }
                                 break;
 
                             case Keys.Down:
-                                if (value > 0)
-                                {
+                                if (value > 0) {
                                     value--;
                                 }
                                 break;
                         }
                         OnValueChanged();
                     }
-                    if (value == 360)
-                    {
+                    if (value == 360) {
                         value = 0;
                     }
                     Invalidate();
                     return base.ProcessCmdKey(ref msg, keyData);
                 }
 
-                private void DrawFrame(PaintEventArgs e)
-                {
+                private void DrawFrame(PaintEventArgs e) {
                     var p = new Pen(Color.Black, 2);
-                    var drawRect = new Rectangle((int) (midx - 0.7*diameter/2), (int) (midy - 0.7*diameter/2),
-                                                 (int) (0.7*diameter), (int) (0.7*diameter));
+                    var drawRect = new Rectangle((int)(midx - 0.7 * diameter / 2), (int)(midy - 0.7 * diameter / 2),
+                                                 (int)(0.7 * diameter), (int)(0.7 * diameter));
                     e.Graphics.DrawEllipse(p, drawRect);
                     drawRect.Inflate(1, 1);
                     e.Graphics.TranslateClip(1, 1);
                     e.Graphics.DrawEllipse(Pens.Gray, drawRect);
-                    e.Graphics.DrawLine(Pens.Black, midx, midy - diameter/2, midx, midy + diameter/2);
-                    e.Graphics.DrawLine(Pens.Black, midx - diameter/2, midy, midx + diameter/2, midy);
-                    e.Graphics.DrawString("0", Font, Brushes.LimeGreen, (float) (midx + 0.8*diameter/2), midy);
-                    e.Graphics.DrawString("180", Font, Brushes.LimeGreen, (midx - diameter/2), midy);
-                    e.Graphics.DrawString("90", Font, Brushes.LimeGreen, midx, (float) (midy + 0.8*diameter/2));
-                    e.Graphics.DrawString("270", Font, Brushes.LimeGreen, midx, (midy - diameter/2));
+                    e.Graphics.DrawLine(Pens.Black, midx, midy - diameter / 2, midx, midy + diameter / 2);
+                    e.Graphics.DrawLine(Pens.Black, midx - diameter / 2, midy, midx + diameter / 2, midy);
+                    e.Graphics.DrawString("0", Font, Brushes.LimeGreen, (float)(midx + 0.8 * diameter / 2), midy);
+                    e.Graphics.DrawString("180", Font, Brushes.LimeGreen, (midx - diameter / 2), midy);
+                    e.Graphics.DrawString("90", Font, Brushes.LimeGreen, midx, (float)(midy + 0.8 * diameter / 2));
+                    e.Graphics.DrawString("270", Font, Brushes.LimeGreen, midx, (midy - diameter / 2));
                 }
 
-                internal int GetValue()
-                {
+                internal int GetValue() {
                     return value;
                 }
 
@@ -1034,10 +934,8 @@ namespace WizardBase
                 ///     Clean up any resources being used.
                 /// </summary>
                 /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-                protected override void Dispose(bool disposing)
-                {
-                    if (disposing && (components != null))
-                    {
+                protected override void Dispose(bool disposing) {
+                    if (disposing && (components != null)) {
                         components.Dispose();
                     }
                     base.Dispose(disposing);
@@ -1049,8 +947,7 @@ namespace WizardBase
                 ///     Required method for Designer support - do not modify
                 ///     the contents of this method with the code editor.
                 /// </summary>
-                private void InitializeComponent()
-                {
+                private void InitializeComponent() {
                     this.SuspendLayout();
                     // 
                     // GradientEditorUI

@@ -4,15 +4,12 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using WizardBase.Properties;
 
-namespace WizardBase
-{
-    [ToolboxItem(false), Designer(typeof (WizardStepDesigner)), DefaultEvent("Click")]
-    public class FinishStep : WizardStep
-    {
+namespace WizardBase {
+    [ToolboxItem(false), Designer(typeof(WizardStepDesigner)), DefaultEvent("Click")]
+    public class FinishStep : WizardStep {
         private ColorPair pair = new ColorPair();
 
-        public FinishStep()
-        {
+        public FinishStep() {
 #pragma warning disable DoNotCallOverridableMethodsInConstructor
             Reset();
 #pragma warning restore DoNotCallOverridableMethodsInConstructor
@@ -20,28 +17,23 @@ namespace WizardBase
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override Image BackgroundImage
-        {
+        public override Image BackgroundImage {
             get { return base.BackgroundImage; }
             set { base.BackgroundImage = value; }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override Color BackColor
-        {
+        public override Color BackColor {
             get { return base.BackColor; }
             set { base.BackColor = value; }
         }
 
         [Description("Backgroung of the finish step."), Category("Appearance")]
-        public Image BindingImage
-        {
+        public Image BindingImage {
             get { return base.BackgroundImage; }
-            set
-            {
-                if (value != base.BackgroundImage)
-                {
+            set {
+                if (value != base.BackgroundImage) {
                     base.BackgroundImage = value;
                     Invalidate();
                     OnBindingImageChanged();
@@ -50,13 +42,10 @@ namespace WizardBase
         }
 
         [Description("Appearence of body."), Category("Appearance")]
-        public ColorPair Pair
-        {
+        public ColorPair Pair {
             get { return pair; }
-            set
-            {
-                if (pair != value)
-                {
+            set {
+                if (pair != value) {
                     pair = value;
                     Invalidate();
                 }
@@ -64,14 +53,12 @@ namespace WizardBase
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        public override Color ForeColor
-        {
+        public override Color ForeColor {
             get { return base.ForeColor; }
             set { base.ForeColor = value; }
         }
 
-        internal override void Reset()
-        {
+        internal override void Reset() {
             BackColor = SystemColors.ControlLightLight;
             BindingImage = Resources.back;
             BackgroundImageLayout = ImageLayout.Tile;
@@ -83,34 +70,28 @@ namespace WizardBase
         /// <param name="e">
         ///     A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.
         /// </param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             using (
-                Brush brush = new LinearGradientBrush(ClientRectangle, pair.BackColor1, pair.BackColor2, pair.Gradient))
-            {
+                Brush brush = new LinearGradientBrush(ClientRectangle, pair.BackColor1, pair.BackColor2, pair.Gradient)) {
                 e.Graphics.FillRectangle(brush, ClientRectangle);
             }
         }
 
-        public bool ShouldSerializeBindingImage()
-        {
+        public bool ShouldSerializeBindingImage() {
             return BindingImage != Resources.back;
         }
 
-        public void ResetBindingImage()
-        {
+        public void ResetBindingImage() {
             BindingImage = Resources.back;
             ;
         }
 
-        public bool ShouldSerializePair()
-        {
+        public bool ShouldSerializePair() {
             return pair != new ColorPair();
         }
 
-        public void ResetPair()
-        {
+        public void ResetPair() {
             pair = new ColorPair();
         }
     }

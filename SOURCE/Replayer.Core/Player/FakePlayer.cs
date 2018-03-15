@@ -54,17 +54,17 @@ namespace Replayer.Core.Player {
         ///     Seeks backward within the currently loaded media track.
         /// </summary>
         /// <param name="interval">The interval.</param>
-        public void SeekBackward(double interval) {}
+        public void SeekBackward(double interval) { }
 
         /// <summary>
         ///     Seeks forward within the currently loaded media track.
         /// </summary>
         /// <param name="interval">The interval.</param>
-        public void SeekForward(double interval) {}
+        public void SeekForward(double interval) { }
 
         /// <summary>
         ///     Toggles the play/pause state.
         /// </summary>
-        public void TogglePlayPause() {}
+        public void TogglePlayPause() { }
     }
 }

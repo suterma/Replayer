@@ -52,11 +52,13 @@ namespace Replayer.Model {
             if (Path.GetExtension(url).Equals(XmlCompilation.DefaultExtension)) //is xml Compilation?
             {
                 return new XmlCompilation().Retrieve(url);
-            } else if (Path.GetExtension(url).Equals(ZipCompilation.DefaultExtension)) //is zipped Compilation?
-            {
+            }
+            else if (Path.GetExtension(url).Equals(ZipCompilation.DefaultExtension)) //is zipped Compilation?
+          {
                 return new ZipCompilation().Retrieve(url);
-            } else if (Path.GetExtension(url).Equals(QuirliCompilation.DefaultExtension)) //is Quirli Compilation?
-            {
+            }
+            else if (Path.GetExtension(url).Equals(QuirliCompilation.DefaultExtension)) //is Quirli Compilation?
+          {
                 return new QuirliCompilation().Retrieve(url);
             }
             throw new NotSupportedException("The specified URL does not appear to point to a valid compilation.");

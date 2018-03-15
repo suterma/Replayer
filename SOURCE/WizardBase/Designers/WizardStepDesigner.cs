@@ -6,14 +6,11 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace WizardBase
-{
-    internal class WizardStepDesigner : ParentControlDesigner
-    {
+namespace WizardBase {
+    internal class WizardStepDesigner : ParentControlDesigner {
         private WizardStep wizardStep;
 
-        public WizardStepDesigner()
-        {
+        public WizardStepDesigner() {
             AutoResizeHandles = true;
         }
 
@@ -23,10 +20,8 @@ namespace WizardBase
         /// <returns>
         ///     The design-time action lists supported by the component associated with the designer.
         /// </returns>
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
+        public override DesignerActionListCollection ActionLists {
+            get {
                 var actionListCollection = new DesignerActionListCollection();
                 var designerActionList = new WizardStepDesignerActionList(wizardStep);
                 actionListCollection.Add(designerActionList);
@@ -34,14 +29,12 @@ namespace WizardBase
             }
         }
 
-        public override SelectionRules SelectionRules
-        {
+        public override SelectionRules SelectionRules {
             get { return (base.SelectionRules & ~(SelectionRules.Moveable | SelectionRules.AllSizeable)); }
         }
 
-        public override void Initialize(IComponent component)
-        {
-            wizardStep = (WizardStep) component;
+        public override void Initialize(IComponent component) {
+            wizardStep = (WizardStep)component;
             base.Initialize(component);
         }
 
@@ -54,55 +47,44 @@ namespace WizardBase
         /// <param name="parentDesigner">
         ///     The <see cref="T:System.ComponentModel.Design.IDesigner"></see> that manages the control to check.
         /// </param>
-        public override bool CanBeParentedTo(IDesigner parentDesigner)
-        {
-            if (parentDesigner == null)
-            {
+        public override bool CanBeParentedTo(IDesigner parentDesigner) {
+            if (parentDesigner == null) {
                 return false;
             }
             return (parentDesigner.Component is WizardControl);
         }
 
-        internal void OnDragCompleteInternal(DragEventArgs de)
-        {
+        internal void OnDragCompleteInternal(DragEventArgs de) {
             OnDragComplete(de);
         }
 
-        internal void OnDragDropInternal(DragEventArgs de)
-        {
+        internal void OnDragDropInternal(DragEventArgs de) {
             OnDragDrop(de);
         }
 
-        internal void OnDragEnterInternal(DragEventArgs de)
-        {
+        internal void OnDragEnterInternal(DragEventArgs de) {
             OnDragEnter(de);
         }
 
-        internal void OnDragLeaveInternal(EventArgs e)
-        {
+        internal void OnDragLeaveInternal(EventArgs e) {
             OnDragLeave(e);
         }
 
-        internal void OnDragOverInternal(DragEventArgs e)
-        {
+        internal void OnDragOverInternal(DragEventArgs e) {
             OnDragOver(e);
         }
 
-        internal void OnGiveFeedbackInternal(GiveFeedbackEventArgs e)
-        {
+        internal void OnGiveFeedbackInternal(GiveFeedbackEventArgs e) {
             OnGiveFeedback(e);
         }
 
 
-        internal class WizardStepDesignerActionList : DesignerActionList
-        {
-            public WizardStepDesignerActionList(IComponent component) : base(component)
-            {
+        internal class WizardStepDesignerActionList : DesignerActionList {
+            public WizardStepDesignerActionList(IComponent component) : base(component) {
             }
 
-            protected virtual WizardStep WizardStep
-            {
-                get { return (WizardStep) Component; }
+            protected virtual WizardStep WizardStep {
+                get { return (WizardStep)Component; }
             }
 
             /// <summary>
@@ -111,8 +93,7 @@ namespace WizardBase
             /// <returns>
             ///     true if the panel should be shown when the owning component is created; otherwise, false. The default is false.
             /// </returns>
-            public override bool AutoShow
-            {
+            public override bool AutoShow {
                 get { return true; }
                 set { base.AutoShow = value; }
             }
@@ -123,13 +104,11 @@ namespace WizardBase
             /// <returns>
             ///     A <see cref="T:System.ComponentModel.Design.DesignerActionItem"></see> array that contains the items in this list.
             /// </returns>
-            public override DesignerActionItemCollection GetSortedActionItems()
-            {
+            public override DesignerActionItemCollection GetSortedActionItems() {
                 var items = new DesignerActionItemCollection();
                 items.Add(new DesignerActionHeaderItem("Appearence", "Appearence"));
                 items.Add(new DesignerActionMethodItem(this, "ResetAppearence", "Reset Appearence", "Appearence", true));
-                if (WizardStep is StartStep)
-                {
+                if (WizardStep is StartStep) {
                     items.Add(new DesignerActionPropertyItem("StartTitle", "Title", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("StartSubTitle", "SubTitle", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("StartBindingImage", "BindingImage", "Appearence"));
@@ -137,8 +116,7 @@ namespace WizardBase
                     items.Add(new DesignerActionPropertyItem("StartLeftPair", "Left pane appearence", "Appearence"));
                 }
 
-                if (WizardStep is LicenceStep)
-                {
+                if (WizardStep is LicenceStep) {
                     items.Add(new DesignerActionPropertyItem("LicenceTitle", "Title", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("LicenceSubTitle", "SubTitle", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("LicenceBindingImage", "BindingImage", "Appearence"));
@@ -150,92 +128,74 @@ namespace WizardBase
                     items.Add(new DesignerActionPropertyItem("LicenceLicenseFile", "License File", "Licence"));
                 }
 
-                if (WizardStep is IntermediateStep)
-                {
+                if (WizardStep is IntermediateStep) {
                     items.Add(new DesignerActionPropertyItem("IntermediateTitle", "Title", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("IntermediateSubTitle", "SubTitle", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("IntermediateBindingImage", "BindingImage", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("IntermediateHeaderPair", "HeaderPair", "Appearence"));
                 }
 
-                if (WizardStep is FinishStep)
-                {
+                if (WizardStep is FinishStep) {
                     items.Add(new DesignerActionPropertyItem("FinishBindingImage", "BindingImage", "Appearence"));
                     items.Add(new DesignerActionPropertyItem("FinishPair", "Pair", "Appearence"));
                 }
                 return items;
             }
 
-            protected virtual void ResetAppearence()
-            {
+            protected virtual void ResetAppearence() {
                 WizardStep.Reset();
                 WizardStep.Invalidate();
             }
 
             #region Start page actions
 
-            public virtual Image StartBindingImage
-            {
-                get { return ((StartStep) WizardStep).BindingImage; }
-                set
-                {
-                    if (((StartStep) WizardStep).BindingImage != value)
-                    {
-                        ((StartStep) WizardStep).BindingImage = value;
+            public virtual Image StartBindingImage {
+                get { return ((StartStep)WizardStep).BindingImage; }
+                set {
+                    if (((StartStep)WizardStep).BindingImage != value) {
+                        ((StartStep)WizardStep).BindingImage = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string StartTitle
-            {
-                get { return ((StartStep) WizardStep).Title; }
-                set
-                {
-                    if (((StartStep) WizardStep).Title != value)
-                    {
-                        ((StartStep) WizardStep).Title = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string StartTitle {
+                get { return ((StartStep)WizardStep).Title; }
+                set {
+                    if (((StartStep)WizardStep).Title != value) {
+                        ((StartStep)WizardStep).Title = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string StartSubTitle
-            {
-                get { return ((StartStep) WizardStep).Subtitle; }
-                set
-                {
-                    if (((StartStep) WizardStep).Subtitle != value)
-                    {
-                        ((StartStep) WizardStep).Subtitle = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string StartSubTitle {
+                get { return ((StartStep)WizardStep).Subtitle; }
+                set {
+                    if (((StartStep)WizardStep).Subtitle != value) {
+                        ((StartStep)WizardStep).Subtitle = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual Image StartIcon
-            {
-                get { return ((StartStep) WizardStep).Icon; }
-                set
-                {
-                    if (((StartStep) WizardStep).Icon != value)
-                    {
-                        ((StartStep) WizardStep).Icon = value;
+            public virtual Image StartIcon {
+                get { return ((StartStep)WizardStep).Icon; }
+                set {
+                    if (((StartStep)WizardStep).Icon != value) {
+                        ((StartStep)WizardStep).Icon = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual ColorPair StartLeftPair
-            {
-                get { return ((StartStep) WizardStep).LeftPair; }
-                set
-                {
-                    if (((StartStep) WizardStep).LeftPair != value)
-                    {
-                        ((StartStep) WizardStep).LeftPair = value;
+            public virtual ColorPair StartLeftPair {
+                get { return ((StartStep)WizardStep).LeftPair; }
+                set {
+                    if (((StartStep)WizardStep).LeftPair != value) {
+                        ((StartStep)WizardStep).LeftPair = value;
                         WizardStep.Invalidate();
                     }
                 }
@@ -245,106 +205,83 @@ namespace WizardBase
 
             #region Licence page actions
 
-            public virtual Image LicenceBindingImage
-            {
-                get { return ((LicenceStep) WizardStep).BindingImage; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).BindingImage != value)
-                    {
-                        ((LicenceStep) WizardStep).BindingImage = value;
+            public virtual Image LicenceBindingImage {
+                get { return ((LicenceStep)WizardStep).BindingImage; }
+                set {
+                    if (((LicenceStep)WizardStep).BindingImage != value) {
+                        ((LicenceStep)WizardStep).BindingImage = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string LicenceTitle
-            {
-                get { return ((LicenceStep) WizardStep).Title; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).Title != value)
-                    {
-                        ((LicenceStep) WizardStep).Title = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string LicenceTitle {
+                get { return ((LicenceStep)WizardStep).Title; }
+                set {
+                    if (((LicenceStep)WizardStep).Title != value) {
+                        ((LicenceStep)WizardStep).Title = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string LicenceSubTitle
-            {
-                get { return ((LicenceStep) WizardStep).Subtitle; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).Subtitle != value)
-                    {
-                        ((LicenceStep) WizardStep).Subtitle = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string LicenceSubTitle {
+                get { return ((LicenceStep)WizardStep).Subtitle; }
+                set {
+                    if (((LicenceStep)WizardStep).Subtitle != value) {
+                        ((LicenceStep)WizardStep).Subtitle = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual bool? LicenceAccepted
-            {
-                get { return ((LicenceStep) WizardStep).Accepted; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).Accepted != value)
-                    {
-                        ((LicenceStep) WizardStep).Accepted = value;
+            public virtual bool? LicenceAccepted {
+                get { return ((LicenceStep)WizardStep).Accepted; }
+                set {
+                    if (((LicenceStep)WizardStep).Accepted != value) {
+                        ((LicenceStep)WizardStep).Accepted = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (CustomFileNameEditor), typeof (UITypeEditor))]
-            public virtual string LicenceLicenseFile
-            {
-                get { return ((LicenceStep) WizardStep).LicenseFile; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).LicenseFile != value)
-                    {
-                        ((LicenceStep) WizardStep).LicenseFile = value;
+            [Editor(typeof(CustomFileNameEditor), typeof(UITypeEditor))]
+            public virtual string LicenceLicenseFile {
+                get { return ((LicenceStep)WizardStep).LicenseFile; }
+                set {
+                    if (((LicenceStep)WizardStep).LicenseFile != value) {
+                        ((LicenceStep)WizardStep).LicenseFile = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual string LicenceAcceptText
-            {
-                get { return ((LicenceStep) WizardStep).AcceptText; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).AcceptText != value)
-                    {
-                        ((LicenceStep) WizardStep).AcceptText = value;
+            public virtual string LicenceAcceptText {
+                get { return ((LicenceStep)WizardStep).AcceptText; }
+                set {
+                    if (((LicenceStep)WizardStep).AcceptText != value) {
+                        ((LicenceStep)WizardStep).AcceptText = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual string LicenceDeclineText
-            {
-                get { return ((LicenceStep) WizardStep).DeclineText; }
-                set
-                {
-                    if (((LicenceStep) WizardStep).DeclineText != value)
-                    {
-                        ((LicenceStep) WizardStep).DeclineText = value;
+            public virtual string LicenceDeclineText {
+                get { return ((LicenceStep)WizardStep).DeclineText; }
+                set {
+                    if (((LicenceStep)WizardStep).DeclineText != value) {
+                        ((LicenceStep)WizardStep).DeclineText = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual ColorPair LicenceHeaderPair
-            {
-                get { return ((LicenceStep) WizardStep).HeaderPair; }
-                set
-                {
-                    ((LicenceStep) WizardStep).HeaderPair = value;
+            public virtual ColorPair LicenceHeaderPair {
+                get { return ((LicenceStep)WizardStep).HeaderPair; }
+                set {
+                    ((LicenceStep)WizardStep).HeaderPair = value;
                     WizardStep.Invalidate();
                 }
             }
@@ -353,55 +290,43 @@ namespace WizardBase
 
             #region Licence page actions
 
-            public virtual Image IntermediateBindingImage
-            {
-                get { return ((IntermediateStep) WizardStep).BindingImage; }
-                set
-                {
-                    if (((IntermediateStep) WizardStep).BindingImage != value)
-                    {
-                        ((IntermediateStep) WizardStep).BindingImage = value;
+            public virtual Image IntermediateBindingImage {
+                get { return ((IntermediateStep)WizardStep).BindingImage; }
+                set {
+                    if (((IntermediateStep)WizardStep).BindingImage != value) {
+                        ((IntermediateStep)WizardStep).BindingImage = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string IntermediateTitle
-            {
-                get { return ((IntermediateStep) WizardStep).Title; }
-                set
-                {
-                    if (((IntermediateStep) WizardStep).Title != value)
-                    {
-                        ((IntermediateStep) WizardStep).Title = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string IntermediateTitle {
+                get { return ((IntermediateStep)WizardStep).Title; }
+                set {
+                    if (((IntermediateStep)WizardStep).Title != value) {
+                        ((IntermediateStep)WizardStep).Title = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            [Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-            public virtual string IntermediateSubTitle
-            {
-                get { return ((IntermediateStep) WizardStep).Subtitle; }
-                set
-                {
-                    if (((IntermediateStep) WizardStep).Subtitle != value)
-                    {
-                        ((IntermediateStep) WizardStep).Subtitle = value;
+            [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+            public virtual string IntermediateSubTitle {
+                get { return ((IntermediateStep)WizardStep).Subtitle; }
+                set {
+                    if (((IntermediateStep)WizardStep).Subtitle != value) {
+                        ((IntermediateStep)WizardStep).Subtitle = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual ColorPair IntermediateHeaderPair
-            {
-                get { return ((IntermediateStep) WizardStep).HeaderPair; }
-                set
-                {
-                    if (((IntermediateStep) WizardStep).HeaderPair != value)
-                    {
-                        ((IntermediateStep) WizardStep).HeaderPair = value;
+            public virtual ColorPair IntermediateHeaderPair {
+                get { return ((IntermediateStep)WizardStep).HeaderPair; }
+                set {
+                    if (((IntermediateStep)WizardStep).HeaderPair != value) {
+                        ((IntermediateStep)WizardStep).HeaderPair = value;
                         WizardStep.Invalidate();
                     }
                 }
@@ -411,27 +336,21 @@ namespace WizardBase
 
             #region Finish Step actions
 
-            public virtual ColorPair FinishPair
-            {
-                get { return ((FinishStep) WizardStep).Pair; }
-                set
-                {
-                    if (((FinishStep) WizardStep).Pair != value)
-                    {
-                        ((FinishStep) WizardStep).Pair = value;
+            public virtual ColorPair FinishPair {
+                get { return ((FinishStep)WizardStep).Pair; }
+                set {
+                    if (((FinishStep)WizardStep).Pair != value) {
+                        ((FinishStep)WizardStep).Pair = value;
                         WizardStep.Invalidate();
                     }
                 }
             }
 
-            public virtual Image FinishBindingImage
-            {
-                get { return ((FinishStep) WizardStep).BindingImage; }
-                set
-                {
-                    if (((FinishStep) WizardStep).BindingImage != value)
-                    {
-                        ((FinishStep) WizardStep).BindingImage = value;
+            public virtual Image FinishBindingImage {
+                get { return ((FinishStep)WizardStep).BindingImage; }
+                set {
+                    if (((FinishStep)WizardStep).BindingImage != value) {
+                        ((FinishStep)WizardStep).BindingImage = value;
                         WizardStep.Invalidate();
                     }
                 }

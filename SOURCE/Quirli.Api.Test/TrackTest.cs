@@ -5,17 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quirli.Api.Test
-{
+namespace Quirli.Api.Test {
     [TestClass]
-    public class TrackTest
-    {
+    public class TrackTest {
         /// <summary>
         /// Tests, wheter parsing a track with an YouTube URL works.
         /// </summary>
         [TestMethod]
-        public void ParseYoutubeUrlTest()
-        {
+        public void ParseYoutubeUrlTest() {
             //Prepare
             var testTrackUrl = @"http://quir.li/player.html?media=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D0VqTwnAuHws&title=What%20makes%20you%20beautiful&artist=The%20piano%20guys%20covering%20One%20Republic&album=Youtube&6.49=Intro&30.12=Knocking%20part&46.02=Real%20playing&51.5=Piano%20forte&93.32=Stringified&123.35=Vocals&139.38=Key%20cover%20jam&150.16=Good%20morning%20sky&173.96=Final%20chord";
             //Act
@@ -36,8 +33,7 @@ namespace Quirli.Api.Test
         /// Tests, wheter creating a track with an MP3 URL works.
         /// </summary>
         [TestMethod]
-        public void CreateForMp3Test()
-        {
+        public void CreateForMp3Test() {
             //Prepare
             var cue1 = new Cue(0, "Intro");
             var cue2 = new Cue(15, "Verse 1");
@@ -59,7 +55,7 @@ namespace Quirli.Api.Test
             track.Cues.Add(cue7);
             track.Cues.Add(cue8);
             track.Cues.Add(cue9);
-            
+
             track.Album = "Not for sale";
             track.Artist = "Lidija Roos";
             track.Title = "Sweet taste";

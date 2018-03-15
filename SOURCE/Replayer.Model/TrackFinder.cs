@@ -21,7 +21,8 @@ namespace Replayer.Model {
                 File.Exists(Path.GetFullPath(path))) //existing?
             {
                 return Path.GetFullPath(path);
-            } else {
+            }
+            else {
                 //search the places for an exact match
                 foreach (string place in places) {
                     try {
@@ -30,9 +31,11 @@ namespace Replayer.Model {
                         if (File.Exists(fileName)) {
                             return fileName;
                         }
-                    } catch (ArgumentException) {
+                    }
+                    catch (ArgumentException) {
                         continue; //simply with the next place
-                    } catch (PathTooLongException) {
+                    }
+                    catch (PathTooLongException) {
                         continue; //simply with the next place
                     }
                 }

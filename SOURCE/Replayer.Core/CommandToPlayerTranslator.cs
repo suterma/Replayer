@@ -99,50 +99,50 @@ namespace Replayer.Core {
                     Model.Instance.Player.TogglePlayPause();
                     break;
                 case InputCommand.SkipForward: {
-                    //from the currently used cue point in the track, search the next cue point
-                    List<Cue> cuePoints = Model.Instance.Compilation.Tracks.SelectMany(a => a.Cues).ToList();
-                    for (int i = 0; i < cuePoints.Count; i++) {
-                        if (cuePoints[i].Equals(Model.Instance.SelectedCue))
+                        //from the currently used cue point in the track, search the next cue point
+                        List<Cue> cuePoints = Model.Instance.Compilation.Tracks.SelectMany(a => a.Cues).ToList();
+                        for (int i = 0; i < cuePoints.Count; i++) {
+                            if (cuePoints[i].Equals(Model.Instance.SelectedCue))
                             //we are at the currently used cue point?
-                        {
-                            Model.Instance.SelectedCue = cuePoints[Math.Min(cuePoints.Count - 1, i + 1)];
+                            {
+                                Model.Instance.SelectedCue = cuePoints[Math.Min(cuePoints.Count - 1, i + 1)];
 
-                            break;
+                                break;
+                            }
                         }
-                    }
 
-                    break;
-                }
+                        break;
+                    }
                 case InputCommand.SkipBackward: {
-                    //from the currently used cue point in the track, search the previous cue point
-                    List<Cue> cuePoints = Model.Instance.Compilation.Tracks.SelectMany(a => a.Cues).ToList();
-                    for (int i = 0; i < cuePoints.Count(); i++) {
-                        if (cuePoints[i].Equals(Model.Instance.SelectedCue))
+                        //from the currently used cue point in the track, search the previous cue point
+                        List<Cue> cuePoints = Model.Instance.Compilation.Tracks.SelectMany(a => a.Cues).ToList();
+                        for (int i = 0; i < cuePoints.Count(); i++) {
+                            if (cuePoints[i].Equals(Model.Instance.SelectedCue))
                             //we are at the currently used cue point?
-                        {
-                            Model.Instance.SelectedCue = cuePoints[Math.Max(0, i - 1)];
-                            break;
+                            {
+                                Model.Instance.SelectedCue = cuePoints[Math.Max(0, i - 1)];
+                                break;
+                            }
                         }
-                    }
 
-                    break;
-                }
+                        break;
+                    }
                 case InputCommand.SeekBackward: {
-                    //explicitly use setter property to have changed event
-                    Model.Instance.Player.SeekBackward(0.5);
-                    break;
-                }
+                        //explicitly use setter property to have changed event
+                        Model.Instance.Player.SeekBackward(0.5);
+                        break;
+                    }
                 case InputCommand.SeekForward: {
-                    //explicitly use setter property to have changed event
-                    Model.Instance.Player.SeekForward(0.5);
-                    break;
-                }
+                        //explicitly use setter property to have changed event
+                        Model.Instance.Player.SeekForward(0.5);
+                        break;
+                    }
                 case InputCommand.Stop: {
-                    //go back to last selected queue.
-                    Model.Instance.Player.State = MediaPlayerState.Paused;
-                    Model.Instance.Player.Position = new TimeSpan((long) (Model.Instance.SelectedCue.Time*10000000));
-                    break;
-                }
+                        //go back to last selected queue.
+                        Model.Instance.Player.State = MediaPlayerState.Paused;
+                        Model.Instance.Player.Position = new TimeSpan((long)(Model.Instance.SelectedCue.Time * 10000000));
+                        break;
+                    }
                 default:
                     break;
             }

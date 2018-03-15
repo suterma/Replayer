@@ -61,7 +61,8 @@ namespace Replayer.WinForms.Ui.Components {
             process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             try {
                 process.Start();
-            } catch {}
+            }
+            catch { }
         }
     }
 }

@@ -6,11 +6,9 @@ using System.ComponentModel.Design.Serialization;
 using System.Drawing.Design;
 using System.Globalization;
 
-namespace WizardBase
-{
-    [Editor(typeof (CollectionEditor), typeof (UITypeEditor))]
-    internal class GenericCollectionConverter<T> : TypeConverter
-    {
+namespace WizardBase {
+    [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+    internal class GenericCollectionConverter<T> : TypeConverter {
         /// <summary>
         ///     Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.
         /// </summary>
@@ -23,9 +21,8 @@ namespace WizardBase
         /// <param name="sourceType">
         ///     A <see cref="T:System.Type"></see> that represents the type you want to convert from.
         /// </param>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-        {
-            return ((sourceType == typeof (string)) || base.CanConvertFrom(context, sourceType));
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
+            return ((sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType));
         }
 
         /// <summary>
@@ -40,9 +37,8 @@ namespace WizardBase
         /// <param name="destinationType">
         ///     A <see cref="T:System.Type"></see> that represents the type you want to convert to.
         /// </param>
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            return ((destinationType == typeof (InstanceDescriptor)) || base.CanConvertTo(context, destinationType));
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
+            return ((destinationType == typeof(InstanceDescriptor)) || base.CanConvertTo(context, destinationType));
         }
 
         /// <summary>
@@ -66,18 +62,14 @@ namespace WizardBase
         /// <exception cref="T:System.NotSupportedException">The conversion cannot be performed. </exception>
         /// <exception cref="T:System.ArgumentNullException">The destinationType parameter is null. </exception>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value,
-                                         Type destinationType)
-        {
-            if (destinationType == null)
-            {
+                                         Type destinationType) {
+            if (destinationType == null) {
                 throw new ArgumentNullException("destinationType");
             }
-            if (value is GenericCollection<T>)
-            {
+            if (value is GenericCollection<T>) {
                 return "(Items)";
             }
-            if (value is CollectionBase)
-            {
+            if (value is CollectionBase) {
                 return "(Items)";
             }
             return base.ConvertTo(context, culture, value, destinationType);
@@ -92,8 +84,7 @@ namespace WizardBase
         /// <param name="context">
         ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that provides a format context.
         /// </param>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
-        {
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
             return true;
         }
 
@@ -114,8 +105,7 @@ namespace WizardBase
         /// <param name="context">
         ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that provides a format context.
         /// </param>
-        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
-        {
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
             return false;
         }
 
@@ -135,16 +125,12 @@ namespace WizardBase
         ///     An <see cref="T:System.Object"></see> that specifies the type of array for which to get properties.
         /// </param>
         public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value,
-                                                                   Attribute[] attributes)
-        {
+                                                                   Attribute[] attributes) {
             var collection = value as GenericCollection<T>;
-            if (collection != null)
-            {
+            if (collection != null) {
                 var properties = new PropertyDescriptor[collection.Count];
-                for (int i = 0; i < collection.Count; i++)
-                {
-                    try
-                    {
+                for (int i = 0; i < collection.Count; i++) {
+                    try {
                         properties[i] = (new PDesc<T>(collection[i]));
                     }
 #pragma warning disable EmptyGeneralCatchClause

@@ -6,11 +6,9 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using WizardBase.Properties;
 
-namespace WizardBase
-{
-    [ToolboxItem(false), Designer(typeof (WizardStepDesigner)), DefaultEvent("Click")]
-    public class IntermediateStep : WizardStep
-    {
+namespace WizardBase {
+    [ToolboxItem(false), Designer(typeof(WizardStepDesigner)), DefaultEvent("Click")]
+    public class IntermediateStep : WizardStep {
         #region Private Fields
 
         private Image bindingImage = Resources.Top;
@@ -24,8 +22,7 @@ namespace WizardBase
 
         #region Constructor
 
-        public IntermediateStep()
-        {
+        public IntermediateStep() {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -39,8 +36,7 @@ namespace WizardBase
 
         #region Virtual Methods
 
-        protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect, Graphics graphics)
-        {
+        protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect, Graphics graphics) {
             var format = new StringFormat(StringFormatFlags.FitBlackBox);
             format.Trimming = StringTrimming.EllipsisCharacter;
             format.Alignment = StringAlignment.Center;
@@ -50,7 +46,7 @@ namespace WizardBase
             titleRect = new RectangleF(subtitleAppearence.Font.SizeInPoints, subtitleAppearence.Font.SizeInPoints,
                                        sz.Width, sz.Height);
             SizeF sz1 = graphics.MeasureString(Subtitle, subtitleAppearence.Font, Width, format);
-            subtitleRect = new RectangleF(2*subtitleAppearence.Font.SizeInPoints,
+            subtitleRect = new RectangleF(2 * subtitleAppearence.Font.SizeInPoints,
                                           titleRect.Height + subtitleAppearence.Font.SizeInPoints, sz1.Width, sz1.Height);
         }
 
@@ -58,49 +54,38 @@ namespace WizardBase
 
         #region Private Methods
 
-        protected void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect)
-        {
+        protected void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect) {
             Graphics graphics = CreateGraphics();
-            try
-            {
+            try {
                 GetTextBounds(out titleRect, out subtitleRect, graphics);
             }
-            finally
-            {
-                if (graphics != null)
-                {
+            finally {
+                if (graphics != null) {
                     graphics.Dispose();
                 }
             }
         }
 
-        protected Region GetTextBounds()
-        {
+        protected Region GetTextBounds() {
             RectangleF titleRect;
             RectangleF subtitleRect;
             GetTextBounds(out titleRect, out subtitleRect);
             return GetTextBounds(titleRect, subtitleRect);
         }
 
-        protected Region GetTextBounds(RectangleF titleRect, RectangleF subtitleRectangle)
-        {
-            if (!titleRect.IsEmpty)
-            {
-                if (!subtitleRectangle.IsEmpty)
-                {
+        protected Region GetTextBounds(RectangleF titleRect, RectangleF subtitleRectangle) {
+            if (!titleRect.IsEmpty) {
+                if (!subtitleRectangle.IsEmpty) {
                     return
                         new Region(new RectangleF(6f, Width - 12, (Width - 66),
                                                   (6f + titleRect.Height) + subtitleRectangle.Height));
                 }
-                else
-                {
+                else {
                     return new Region(titleRect);
                 }
             }
-            else
-            {
-                if (!subtitleRectangle.IsEmpty)
-                {
+            else {
+                if (!subtitleRectangle.IsEmpty) {
                     return new Region(subtitleRectangle);
                 }
                 return new Region(RectangleF.Empty);
@@ -117,8 +102,7 @@ namespace WizardBase
         /// <param name="e">
         ///     A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.
         /// </param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             Graphics graphics = e.Graphics;
             Rectangle rect = HeaderRectangle;
@@ -126,18 +110,15 @@ namespace WizardBase
             RectangleF titleRect;
             RectangleF subtitleRect;
             GetTextBounds(out titleRect, out subtitleRect);
-            if (bindingImage != null)
-            {
+            if (bindingImage != null) {
                 graphics.DrawImage(bindingImage, rect);
                 rectangle = new Rectangle(rect.Left, rect.Bottom, rect.Width, 2);
                 ControlPaint.DrawBorder3D(graphics, rectangle);
             }
-            else
-            {
+            else {
                 using (
                     Brush brush = new LinearGradientBrush(rect, headerPair.BackColor1, headerPair.BackColor2,
-                                                          headerPair.Gradient))
-                {
+                                                          headerPair.Gradient)) {
                     graphics.FillRectangle(brush, rect);
                     rectangle = new Rectangle(rect.Left, rect.Bottom, rect.Width, 2);
                     ControlPaint.DrawBorder3D(graphics, rectangle);
@@ -147,8 +128,7 @@ namespace WizardBase
             DrawText(graphics, subtitleRect, subtitle, subtitleAppearence);
         }
 
-        internal override void Reset()
-        {
+        internal override void Reset() {
             ResetHeaderPair();
             ResetBindingImage();
             ResetBackColor();
@@ -166,13 +146,10 @@ namespace WizardBase
         #region Public Property
 
         [Description("The title text appearence of step."), Category("Appearance")]
-        public TextAppearence TitleAppearence
-        {
+        public TextAppearence TitleAppearence {
             get { return titleAppearence; }
-            set
-            {
-                if (titleAppearence != value)
-                {
+            set {
+                if (titleAppearence != value) {
                     titleAppearence = value;
                     Invalidate();
                 }
@@ -180,13 +157,10 @@ namespace WizardBase
         }
 
         [Description("The sub title appearence of step."), Category("Appearance")]
-        public TextAppearence SubtitleAppearence
-        {
+        public TextAppearence SubtitleAppearence {
             get { return subtitleAppearence; }
-            set
-            {
-                if (subtitleAppearence != value)
-                {
+            set {
+                if (subtitleAppearence != value) {
                     subtitleAppearence = value;
                     Invalidate();
                 }
@@ -194,13 +168,10 @@ namespace WizardBase
         }
 
         [Description("The background image of the panel."), Category("Appearance")]
-        public Image BindingImage
-        {
+        public Image BindingImage {
             get { return bindingImage; }
-            set
-            {
-                if (value != bindingImage)
-                {
+            set {
+                if (value != bindingImage) {
                     bindingImage = value;
                     Invalidate();
                     OnBindingImageChanged();
@@ -208,20 +179,16 @@ namespace WizardBase
             }
         }
 
-        protected virtual Rectangle HeaderRectangle
-        {
+        protected virtual Rectangle HeaderRectangle {
             get { return new Rectangle(0, 0, Width, 60); }
         }
 
         [Category("Appearance"), DefaultValue("Description for the new step."), Description("The subtitle of the step.")
-        , Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-        public string Subtitle
-        {
+        , Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+        public string Subtitle {
             get { return subtitle; }
-            set
-            {
-                if (!string.IsNullOrEmpty(subtitle) && value != subtitle)
-                {
+            set {
+                if (!string.IsNullOrEmpty(subtitle) && value != subtitle) {
                     Region refreshRegion = GetTextBounds();
                     subtitle = value;
                     refreshRegion.Union(GetTextBounds());
@@ -231,14 +198,11 @@ namespace WizardBase
         }
 
         [Description("The title of the step."), DefaultValue("New Wizard step."),
-         Editor(typeof (MultilineStringEditor), typeof (UITypeEditor)), Category("Appearance")]
-        public string Title
-        {
+         Editor(typeof(MultilineStringEditor), typeof(UITypeEditor)), Category("Appearance")]
+        public string Title {
             get { return title; }
-            set
-            {
-                if (!string.IsNullOrEmpty(title) && value != title)
-                {
+            set {
+                if (!string.IsNullOrEmpty(title) && value != title) {
                     Region refreshRegion = GetTextBounds();
                     title = value;
                     refreshRegion.Union(GetTextBounds());
@@ -248,13 +212,10 @@ namespace WizardBase
         }
 
         [Description("Appearence of header."), Category("Appearance")]
-        public ColorPair HeaderPair
-        {
+        public ColorPair HeaderPair {
             get { return headerPair; }
-            set
-            {
-                if (value != headerPair)
-                {
+            set {
+                if (value != headerPair) {
                     headerPair = value;
                     Invalidate(HeaderRectangle);
                 }
@@ -265,48 +226,40 @@ namespace WizardBase
 
         #region Should Serialize implementation
 
-        protected virtual bool ShouldSerializeSubtitleAppearence()
-        {
+        protected virtual bool ShouldSerializeSubtitleAppearence() {
             var sa = new TextAppearence();
             sa.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
             return SubtitleAppearence != sa;
         }
 
-        protected virtual bool ShouldSerializeTitleAppearence()
-        {
+        protected virtual bool ShouldSerializeTitleAppearence() {
             return TitleAppearence.DefaultChanged();
         }
 
-        protected virtual bool ShouldSerializeBindingImage()
-        {
+        protected virtual bool ShouldSerializeBindingImage() {
             return bindingImage != Resources.Top;
         }
 
-        protected virtual bool ShouldSerializeHeaderPair()
-        {
+        protected virtual bool ShouldSerializeHeaderPair() {
             return headerPair != new ColorPair();
         }
 
         #endregion
 
-        protected virtual void ResetTitleAppearence()
-        {
+        protected virtual void ResetTitleAppearence() {
             titleAppearence = new TextAppearence();
         }
 
-        protected virtual void ResetHeaderPair()
-        {
+        protected virtual void ResetHeaderPair() {
             headerPair = new ColorPair();
         }
 
-        protected virtual void ResetSubtitleAppearence()
-        {
+        protected virtual void ResetSubtitleAppearence() {
             subtitleAppearence = new TextAppearence();
             subtitleAppearence.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
         }
 
-        protected virtual void ResetBindingImage()
-        {
+        protected virtual void ResetBindingImage() {
             bindingImage = Resources.Top;
         }
     }

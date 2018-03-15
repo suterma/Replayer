@@ -4,79 +4,62 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Text;
 
-namespace WizardBase
-{
-    [Editor(typeof (TextAppearenceEditor), typeof (UITypeEditor))]
-    [TypeConverter(typeof (ExpandableObjectConverter))]
+namespace WizardBase {
+    [Editor(typeof(TextAppearenceEditor), typeof(UITypeEditor))]
+    [TypeConverter(typeof(ExpandableObjectConverter))]
     [Serializable]
-    public class TextAppearence : ICloneable
-    {
+    public class TextAppearence : ICloneable {
         private Font font = new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
         private Color textColor = Color.Black;
         private Color textShadowColor = Color.LightGray;
         private float xshift = 1.5f;
         private float yshift = 1.5f;
 
-        public Color TextColor
-        {
+        public Color TextColor {
             get { return textColor; }
-            set
-            {
-                if (textColor != value)
-                {
+            set {
+                if (textColor != value) {
                     textColor = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
             }
         }
 
-        public Color TextShadowColor
-        {
+        public Color TextShadowColor {
             get { return textShadowColor; }
-            set
-            {
-                if (textShadowColor != value)
-                {
+            set {
+                if (textShadowColor != value) {
                     textShadowColor = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
             }
         }
 
-        public float Xshift
-        {
+        public float Xshift {
             get { return xshift; }
-            set
-            {
-                if (xshift != value)
-                {
+            set {
+                if (xshift != value) {
                     xshift = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
             }
         }
 
-        public float Yshift
-        {
+        public float Yshift {
             get { return yshift; }
-            set
-            {
-                if (yshift != value)
-                {
+            set {
+                if (yshift != value) {
                     yshift = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
             }
         }
 
-        [Editor(typeof (FontEditor), typeof (UITypeEditor))]
-        public Font Font
-        {
+        [Editor(typeof(FontEditor), typeof(UITypeEditor))]
+        public Font Font {
             get { return font; }
-            set
-            {
-                if (!font.Equals(value))
-                {
+            set {
+                if (!font.Equals(value)) {
                     font = value;
                     OnAppearenceChanged(new GenericEventArgs<bool>(true));
                 }
@@ -92,23 +75,20 @@ namespace WizardBase
         ///     A new object that is a copy of this instance.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public object Clone()
-        {
+        public object Clone() {
             var appearence = new TextAppearence();
             appearence.TextColor = TextColor;
             appearence.TextShadowColor = TextShadowColor;
             appearence.Xshift = Xshift;
-            appearence.font = (Font) font.Clone();
+            appearence.font = (Font)font.Clone();
             appearence.Yshift = Yshift;
             return appearence;
         }
 
         #endregion
 
-        public static bool operator ==(TextAppearence p1, TextAppearence p2)
-        {
-            if (ReferenceEquals(p1, null))
-            {
+        public static bool operator ==(TextAppearence p1, TextAppearence p2) {
+            if (ReferenceEquals(p1, null)) {
                 return ReferenceEquals(p2, null);
             }
             return p1.Equals(p2);
@@ -121,8 +101,7 @@ namespace WizardBase
         ///     A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public override string ToString()
-        {
+        public override string ToString() {
             return "TextAppearence";
         }
 
@@ -140,11 +119,9 @@ namespace WizardBase
         ///     The <see cref="T:System.Object"></see> to compare with the current <see cref="T:System.Object"></see>.
         /// </param>
         /// <filterpriority>2</filterpriority>
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             var app = obj as TextAppearence;
-            if (app != null)
-            {
+            if (app != null) {
                 return app.textColor.Equals(TextColor) && app.TextShadowColor.Equals(TextShadowColor) &&
                        app.xshift == xshift && app.yshift == yshift;
             }
@@ -158,28 +135,23 @@ namespace WizardBase
         ///     A hash code for the current <see cref="T:System.Object"></see>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return ToString().GetHashCode();
         }
 
-        public static bool operator !=(TextAppearence p1, TextAppearence p2)
-        {
+        public static bool operator !=(TextAppearence p1, TextAppearence p2) {
             return !(p1 == p2);
         }
 
         public event GenericEventHandler<bool> AppearenceChanged;
 
-        protected virtual void OnAppearenceChanged(GenericEventArgs<bool> e)
-        {
-            if (AppearenceChanged != null)
-            {
+        protected virtual void OnAppearenceChanged(GenericEventArgs<bool> e) {
+            if (AppearenceChanged != null) {
                 AppearenceChanged(this, e);
             }
         }
 
-        internal void Reset()
-        {
+        internal void Reset() {
             ResetFont();
             ResetTextColor();
             ResetTextShadowColor();
@@ -187,67 +159,55 @@ namespace WizardBase
             ResetYshift();
         }
 
-        public virtual bool DefaultChanged()
-        {
+        public virtual bool DefaultChanged() {
             return ShouldSerializeTextColor() ||
                    ShouldSerializeTextShadowColor() && ShouldSerializeXshift() && ShouldSerializeYshift() &&
                    ShouldSerializeFont();
         }
 
-        private bool ShouldSerializeFont()
-        {
+        private bool ShouldSerializeFont() {
             return font != new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
         }
 
-        private bool ShouldSerializeTextColor()
-        {
+        private bool ShouldSerializeTextColor() {
             return textColor != Color.Black;
         }
 
-        private bool ShouldSerializeXshift()
-        {
+        private bool ShouldSerializeXshift() {
             return Xshift != 1.5f;
         }
 
-        private bool ShouldSerializeYshift()
-        {
+        private bool ShouldSerializeYshift() {
             return Yshift != 1.5f;
         }
 
-        private bool ShouldSerializeTextShadowColor()
-        {
+        private bool ShouldSerializeTextShadowColor() {
             return textShadowColor != Color.LightGray;
         }
 
-        private void ResetTextColor()
-        {
+        private void ResetTextColor() {
             textColor = Color.Black;
         }
 
-        private void ResetTextShadowColor()
-        {
+        private void ResetTextShadowColor() {
             textShadowColor = Color.LightGray;
         }
 
-        private void ResetXshift()
-        {
+        private void ResetXshift() {
             Xshift = 1.5f;
         }
 
-        private void ResetYshift()
-        {
+        private void ResetYshift() {
             Yshift = 1.5f;
         }
 
-        private void ResetFont()
-        {
+        private void ResetFont() {
             Font = new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
         }
 
         #region Nested type: TextAppearenceEditor
 
-        internal class TextAppearenceEditor : UITypeEditor
-        {
+        internal class TextAppearenceEditor : UITypeEditor {
             /// <summary>
             ///     Indicates whether the specified context supports painting a representation of an object's value within the specified context.
             /// </summary>
@@ -261,17 +221,14 @@ namespace WizardBase
             /// <param name="context">
             ///     An <see cref="T:System.ComponentModel.ITypeDescriptorContext"></see> that can be used to gain additional context information.
             /// </param>
-            public override bool GetPaintValueSupported(ITypeDescriptorContext context)
-            {
+            public override bool GetPaintValueSupported(ITypeDescriptorContext context) {
                 return true;
             }
 
-            public override void PaintValue(PaintValueEventArgs e)
-            {
+            public override void PaintValue(PaintValueEventArgs e) {
                 base.PaintValue(e);
                 var app = e.Value as TextAppearence;
-                if (app != null)
-                {
+                if (app != null) {
                     e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
                     var format = new StringFormat();
                     format.Trimming = StringTrimming.EllipsisCharacter;

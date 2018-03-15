@@ -1,15 +1,12 @@
 using System;
 using System.ComponentModel;
 
-namespace WizardBase
-{
-    internal class PDesc<T> : PropertyDescriptor
-    {
+namespace WizardBase {
+    internal class PDesc<T> : PropertyDescriptor {
         private readonly T t;
 
         public PDesc(T t)
-            : base(t.ToString(), null)
-        {
+            : base(t.ToString(), null) {
             this.t = t;
         }
 
@@ -27,9 +24,8 @@ namespace WizardBase
         ///     </see>
         ///     methods are invoked, the object specified might be an instance of this type.
         /// </returns>
-        public override Type ComponentType
-        {
-            get { return typeof (T); }
+        public override Type ComponentType {
+            get { return typeof(T); }
         }
 
         /// <summary>
@@ -38,8 +34,7 @@ namespace WizardBase
         /// <returns>
         ///     true if the property is read-only; otherwise, false.
         /// </returns>
-        public override bool IsReadOnly
-        {
+        public override bool IsReadOnly {
             get { return false; }
         }
 
@@ -49,9 +44,8 @@ namespace WizardBase
         /// <returns>
         ///     A <see cref="T:System.Type"></see> that represents the type of the property.
         /// </returns>
-        public override Type PropertyType
-        {
-            get { return typeof (T); }
+        public override Type PropertyType {
+            get { return typeof(T); }
         }
 
         /// <summary>
@@ -61,8 +55,7 @@ namespace WizardBase
         ///     true if resetting the component changes its value; otherwise, false.
         /// </returns>
         /// <param name="component">The component to test for reset capability. </param>
-        public override bool CanResetValue(object component)
-        {
+        public override bool CanResetValue(object component) {
             return false;
         }
 
@@ -73,8 +66,7 @@ namespace WizardBase
         ///     The value of a property for a given component.
         /// </returns>
         /// <param name="component">The component with the property for which to retrieve the value. </param>
-        public override object GetValue(object component)
-        {
+        public override object GetValue(object component) {
             return t;
         }
 
@@ -82,8 +74,7 @@ namespace WizardBase
         ///     When overridden in a derived class, resets the value for this property of the component to the default value.
         /// </summary>
         /// <param name="component">The component with the property value that is to be reset to the default value. </param>
-        public override void ResetValue(object component)
-        {
+        public override void ResetValue(object component) {
         }
 
         /// <summary>
@@ -91,8 +82,7 @@ namespace WizardBase
         /// </summary>
         /// <param name="component">The component with the property value that is to be set. </param>
         /// <param name="value">The new value. </param>
-        public override void SetValue(object component, object value)
-        {
+        public override void SetValue(object component, object value) {
         }
 
         /// <summary>
@@ -102,8 +92,7 @@ namespace WizardBase
         ///     true if the property should be persisted; otherwise, false.
         /// </returns>
         /// <param name="component">The component with the property to be examined for persistence. </param>
-        public override bool ShouldSerializeValue(object component)
-        {
+        public override bool ShouldSerializeValue(object component) {
             return true;
         }
     }

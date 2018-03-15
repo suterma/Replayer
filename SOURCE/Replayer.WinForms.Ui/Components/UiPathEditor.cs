@@ -32,7 +32,7 @@ namespace Replayer.WinForms.Ui.Gui {
             }
 
             //Retrieve our settings attribute (if one is specified)
-            var sa = (OfdParamsAttribute) context.PropertyDescriptor.Attributes[typeof (OfdParamsAttribute)];
+            var sa = (OfdParamsAttribute)context.PropertyDescriptor.Attributes[typeof(OfdParamsAttribute)];
             if (sa != null) {
                 m_Settings = sa; //Store it in the editor
             }
@@ -53,7 +53,7 @@ namespace Replayer.WinForms.Ui.Gui {
             dlg.InitialDirectory = Environment.GetFolderPath(m_Settings.DefaultDirectory);
 
             //Find if the current value is legitimate
-            var filename = (string) value;
+            var filename = (string)value;
             if (!File.Exists(filename)) {
                 filename = null;
             }

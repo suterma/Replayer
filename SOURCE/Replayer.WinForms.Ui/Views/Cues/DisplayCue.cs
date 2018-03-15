@@ -37,7 +37,7 @@ namespace Replayer.WinForms.Ui.Views.Cues {
 
         public override bool Equals(object obj) {
             if (obj is DisplayCue) {
-                return Equals((DisplayCue) obj);
+                return Equals((DisplayCue)obj);
             }
             return false;
         }

@@ -8,6 +8,6 @@
         /// </summary>
         /// <param name="view">The view.</param>
         public StandardMenuPresenter(IStandardMenuView view)
-            : base(view) {}
+            : base(view) { }
     }
 }

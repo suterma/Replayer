@@ -7,10 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using WizardBase.Properties;
 
-namespace WizardBase
-{
-    public class LicenceStep : WizardStep
-    {
+namespace WizardBase {
+    public class LicenceStep : WizardStep {
         #region Private Fields
 
         private readonly RadioButton rbtnAccept = new RadioButton();
@@ -34,115 +32,94 @@ namespace WizardBase
 
         public event GenericEventHandler<bool> AgreementChanged;
 
-        protected virtual void ResetTitleAppearence()
-        {
+        protected virtual void ResetTitleAppearence() {
             titleAppearence = new TextAppearence();
             titleAppearence.Font = new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
         }
 
-        protected virtual void ResetSubtitleAppearence()
-        {
+        protected virtual void ResetSubtitleAppearence() {
             subtitleAppearence = new TextAppearence();
             subtitleAppearence.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
         }
 
-        protected virtual void ResetBindingImage()
-        {
+        protected virtual void ResetBindingImage() {
             bindingImage = Resources.Top;
         }
 
-        protected virtual void ResetWarningFont()
-        {
+        protected virtual void ResetWarningFont() {
             warningFont = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
         }
 
-        protected virtual void ResetAccepted()
-        {
+        protected virtual void ResetAccepted() {
             accepted = null;
         }
 
-        protected virtual void ResetAcceptText()
-        {
+        protected virtual void ResetAcceptText() {
             AcceptText = "I &accept the agreement";
         }
 
-        protected virtual void ResetDeclineText()
-        {
+        protected virtual void ResetDeclineText() {
             DeclineText = "I do &not accept the agreement";
         }
 
-        protected virtual void ResetHeaderPair()
-        {
+        protected virtual void ResetHeaderPair() {
             headerPair = new ColorPair();
         }
 
-        protected virtual bool ShouldSerializeTitleAppearence()
-        {
+        protected virtual bool ShouldSerializeTitleAppearence() {
             var ta = new TextAppearence();
             ta.Font = new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
             return ta != titleAppearence;
         }
 
-        protected virtual bool ShouldSerializeSubtitleAppearence()
-        {
+        protected virtual bool ShouldSerializeSubtitleAppearence() {
             var sa = new TextAppearence();
             sa.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
             return sa != subtitleAppearence;
         }
 
-        protected virtual bool ShouldSerializeWarningFont()
-        {
+        protected virtual bool ShouldSerializeWarningFont() {
             return warningFont != new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
         }
 
-        protected virtual bool ShouldSerializeBindingImage()
-        {
+        protected virtual bool ShouldSerializeBindingImage() {
             return bindingImage != Resources.Top;
         }
 
-        protected virtual bool ShouldSerializeAccepted()
-        {
+        protected virtual bool ShouldSerializeAccepted() {
             return accepted != null;
         }
 
-        protected virtual bool ShouldSerializeAcceptText()
-        {
+        protected virtual bool ShouldSerializeAcceptText() {
             return AcceptText != "I &accept the agreement";
         }
 
-        protected virtual bool ShouldSerializeDeclineText()
-        {
+        protected virtual bool ShouldSerializeDeclineText() {
             return DeclineText != "I do &not accept the agreement";
         }
 
-        protected virtual bool ShouldSerializeHeaderPair()
-        {
+        protected virtual bool ShouldSerializeHeaderPair() {
             return headerPair != new ColorPair();
         }
 
 
-        private void rbtnDecline_CheckedChanged(object sender, EventArgs e)
-        {
+        private void rbtnDecline_CheckedChanged(object sender, EventArgs e) {
             OnAgreementChanged();
         }
 
-        private void rbtnAccept_CheckedChanged(object sender, EventArgs e)
-        {
+        private void rbtnAccept_CheckedChanged(object sender, EventArgs e) {
             OnAgreementChanged();
         }
 
-        protected virtual void OnAgreementChanged()
-        {
-            if (AgreementChanged != null)
-            {
+        protected virtual void OnAgreementChanged() {
+            if (AgreementChanged != null) {
                 AgreementChanged(this, new GenericEventArgs<bool>(rbtnAccept.Checked));
             }
         }
 
         #region Constructor
 
-        public LicenceStep()
-        {
+        public LicenceStep() {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -156,8 +133,7 @@ namespace WizardBase
 #pragma warning restore DoNotCallOverridableMethodsInConstructor
         }
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             SuspendLayout();
             RectangleF titleRect;
             RectangleF subtitleRect;
@@ -188,7 +164,7 @@ namespace WizardBase
             rbtnDecline.Text = "I do &not accept the agreement";
             rbtnDecline.UseVisualStyleBackColor = true;
             rbtnDecline.CheckedChanged += rbtnDecline_CheckedChanged;
-            Controls.AddRange(new Control[] {rtbLicense, rbtnAccept, rbtnDecline});
+            Controls.AddRange(new Control[] { rtbLicense, rbtnAccept, rbtnDecline });
             ResumeLayout();
         }
 
@@ -197,8 +173,7 @@ namespace WizardBase
         #region Virtual Methods
 
         protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect,
-                                             out RectangleF descriptionRect, Graphics graphics)
-        {
+                                             out RectangleF descriptionRect, Graphics graphics) {
             var format = new StringFormat(StringFormatFlags.NoClip);
             format.Trimming = StringTrimming.EllipsisCharacter;
             format.Alignment = StringAlignment.Center;
@@ -208,11 +183,11 @@ namespace WizardBase
             titleRect = new RectangleF(subtitleAppearence.Font.SizeInPoints, subtitleAppearence.Font.SizeInPoints,
                                        sz.Width, sz.Height);
             SizeF sz1 = graphics.MeasureString(Subtitle, subtitleAppearence.Font, Width, format);
-            subtitleRect = new RectangleF(2*subtitleAppearence.Font.SizeInPoints,
+            subtitleRect = new RectangleF(2 * subtitleAppearence.Font.SizeInPoints,
                                           titleRect.Height + subtitleAppearence.Font.SizeInPoints, sz1.Width, sz1.Height);
-            SizeF sz2 = graphics.MeasureString(warning, warningFont, (int) (Width - (4*warningFont.SizeInPoints)),
+            SizeF sz2 = graphics.MeasureString(warning, warningFont, (int)(Width - (4 * warningFont.SizeInPoints)),
                                                format);
-            descriptionRect = new RectangleF(2*warningFont.SizeInPoints, HeaderRect.Height + warningFont.SizeInPoints,
+            descriptionRect = new RectangleF(2 * warningFont.SizeInPoints, HeaderRect.Height + warningFont.SizeInPoints,
                                              sz2.Width, sz2.Height);
         }
 
@@ -221,32 +196,27 @@ namespace WizardBase
         #region Private Methods
 
         protected void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect,
-                                     out RectangleF descriptionRect)
-        {
+                                     out RectangleF descriptionRect) {
             Graphics graphics = CreateGraphics();
-            try
-            {
+            try {
                 GetTextBounds(out titleRect, out subtitleRect, out descriptionRect, graphics);
-                rtbLicense.Location = new Point((int) (2*warningFont.SizeInPoints),
-                                                (int) (descriptionRect.Bottom + warningFont.SizeInPoints));
-                rtbLicense.Size = new Size((int) (Width - 4*warningFont.SizeInPoints),
+                rtbLicense.Location = new Point((int)(2 * warningFont.SizeInPoints),
+                                                (int)(descriptionRect.Bottom + warningFont.SizeInPoints));
+                rtbLicense.Size = new Size((int)(Width - 4 * warningFont.SizeInPoints),
                                            (int)
                                            (Height - descriptionRect.Height - rbtnAccept.Height - HeaderRect.Height - 38));
-                rbtnAccept.Location = new Point((int) (2*warningFont.SizeInPoints), rtbLicense.Bottom + 10);
-                rbtnDecline.Location = new Point((int) (2*warningFont.SizeInPoints) + rtbLicense.Width/2,
+                rbtnAccept.Location = new Point((int)(2 * warningFont.SizeInPoints), rtbLicense.Bottom + 10);
+                rbtnDecline.Location = new Point((int)(2 * warningFont.SizeInPoints) + rtbLicense.Width / 2,
                                                  rtbLicense.Bottom + 10);
             }
-            finally
-            {
-                if (graphics != null)
-                {
+            finally {
+                if (graphics != null) {
                     graphics.Dispose();
                 }
             }
         }
 
-        protected Region GetTextBounds()
-        {
+        protected Region GetTextBounds() {
             RectangleF titleRect;
             RectangleF subtitleRect;
             RectangleF descriptionRect;
@@ -254,43 +224,33 @@ namespace WizardBase
             return GetTextBounds(titleRect, subtitleRect);
         }
 
-        protected Region GetTextBounds(RectangleF titleRect, RectangleF subtitleRect)
-        {
-            if (!titleRect.IsEmpty)
-            {
-                if (!subtitleRect.IsEmpty)
-                {
+        protected Region GetTextBounds(RectangleF titleRect, RectangleF subtitleRect) {
+            if (!titleRect.IsEmpty) {
+                if (!subtitleRect.IsEmpty) {
                     return
                         new Region(new RectangleF(6f, Width - 12, (Width - 66),
                                                   (6f + titleRect.Height) + subtitleRect.Height));
                 }
-                else
-                {
+                else {
                     return new Region(titleRect);
                 }
             }
-            else
-            {
-                if (!subtitleRect.IsEmpty)
-                {
+            else {
+                if (!subtitleRect.IsEmpty) {
                     return new Region(subtitleRect);
                 }
                 return new Region(RectangleF.Empty);
             }
         }
 
-        private void DrawText(RectangleF empty, Graphics graphics, RectangleF titleRect, RectangleF warningRect)
-        {
-            if (!titleRect.IsEmpty)
-            {
+        private void DrawText(RectangleF empty, Graphics graphics, RectangleF titleRect, RectangleF warningRect) {
+            if (!titleRect.IsEmpty) {
                 DrawText(graphics, titleRect, title, titleAppearence);
             }
-            if (!empty.IsEmpty)
-            {
+            if (!empty.IsEmpty) {
                 DrawText(graphics, empty, subtitle, subtitleAppearence);
             }
-            if (!warningRect.IsEmpty)
-            {
+            if (!warningRect.IsEmpty) {
                 graphics.DrawString(warning, warningFont, new SolidBrush(ForeColor), warningRect);
             }
         }
@@ -299,8 +259,7 @@ namespace WizardBase
 
         #region Override
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             Graphics graphics = e.Graphics;
             Rectangle rect = HeaderRect;
@@ -309,18 +268,15 @@ namespace WizardBase
             RectangleF subtitleRect;
             RectangleF warningRect;
             GetTextBounds(out titleRect, out subtitleRect, out warningRect);
-            if (bindingImage != null)
-            {
+            if (bindingImage != null) {
                 graphics.DrawImage(bindingImage, rect);
                 rectangle = new Rectangle(rect.Left, rect.Bottom, rect.Width, 2);
                 ControlPaint.DrawBorder3D(graphics, rectangle);
             }
-            else
-            {
+            else {
                 using (
                     Brush brush = new LinearGradientBrush(rect, headerPair.BackColor1, headerPair.BackColor2,
-                                                          headerPair.Gradient))
-                {
+                                                          headerPair.Gradient)) {
                     graphics.FillRectangle(brush, rect);
                     rectangle = new Rectangle(rect.Left, rect.Bottom, rect.Width, 2);
                     ControlPaint.DrawBorder3D(graphics, rectangle);
@@ -329,8 +285,7 @@ namespace WizardBase
             DrawText(subtitleRect, graphics, titleRect, warningRect);
         }
 
-        internal override void Reset()
-        {
+        internal override void Reset() {
             ResetBindingImage();
             ResetSubtitleAppearence();
             ResetAccepted();
@@ -346,13 +301,10 @@ namespace WizardBase
         #region Public Property
 
         [Description("Appearence of header."), Category("Appearance")]
-        public ColorPair HeaderPair
-        {
+        public ColorPair HeaderPair {
             get { return headerPair; }
-            set
-            {
-                if (value != headerPair)
-                {
+            set {
+                if (value != headerPair) {
                     headerPair = value;
                     Invalidate(HeaderRect);
                 }
@@ -360,13 +312,10 @@ namespace WizardBase
         }
 
         [Description("The background image of the panel."), Category("Appearance")]
-        public Image BindingImage
-        {
+        public Image BindingImage {
             get { return bindingImage; }
-            set
-            {
-                if (value != bindingImage)
-                {
+            set {
+                if (value != bindingImage) {
                     bindingImage = value;
                     Invalidate(HeaderRect);
                     OnBindingImageChanged();
@@ -374,19 +323,15 @@ namespace WizardBase
             }
         }
 
-        protected virtual Rectangle HeaderRect
-        {
+        protected virtual Rectangle HeaderRect {
             get { return new Rectangle(0, 0, Width, 60); }
         }
 
         [Description("The sub title appearence of step."), Category("Appearance")]
-        public TextAppearence SubtitleAppearence
-        {
+        public TextAppearence SubtitleAppearence {
             get { return subtitleAppearence; }
-            set
-            {
-                if (subtitleAppearence != value)
-                {
+            set {
+                if (subtitleAppearence != value) {
                     subtitleAppearence = value;
                     Invalidate();
                 }
@@ -394,13 +339,10 @@ namespace WizardBase
         }
 
         [Description("The title text appearence of step."), Category("Appearance")]
-        public TextAppearence TitleAppearence
-        {
+        public TextAppearence TitleAppearence {
             get { return titleAppearence; }
-            set
-            {
-                if (titleAppearence != value)
-                {
+            set {
+                if (titleAppearence != value) {
                     titleAppearence = value;
                     Invalidate();
                 }
@@ -408,13 +350,10 @@ namespace WizardBase
         }
 
         [Description("The warning text appearence of step."), Category("Appearance")]
-        public Font WarningFont
-        {
+        public Font WarningFont {
             get { return warningFont; }
-            set
-            {
-                if (warningFont != value)
-                {
+            set {
+                if (warningFont != value) {
                     warningFont = value;
                     Invalidate();
                 }
@@ -422,14 +361,11 @@ namespace WizardBase
         }
 
         [Category("Appearance"), DefaultValue("Please read the following important information before continuing."),
-         Description("The subtitle of the step."), Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-        public string Subtitle
-        {
+         Description("The subtitle of the step."), Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+        public string Subtitle {
             get { return subtitle; }
-            set
-            {
-                if (value != subtitle)
-                {
+            set {
+                if (value != subtitle) {
                     Region refreshRegion = GetTextBounds();
                     subtitle = value;
                     refreshRegion.Union(GetTextBounds());
@@ -439,29 +375,23 @@ namespace WizardBase
         }
 
         [Category("Appearance"), Description("Warning text."),
-         Editor(typeof (MultilineStringEditor), typeof (UITypeEditor))]
-        public string Warning
-        {
+         Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+        public string Warning {
             get { return warning; }
-            set
-            {
-                if (value != warning)
-                {
+            set {
+                if (value != warning) {
                     warning = value;
                     Invalidate();
                 }
             }
         }
 
-        [Description("License Agreement."), Editor(typeof (MultilineStringEditor), typeof (UITypeEditor)),
+        [Description("License Agreement."), Editor(typeof(MultilineStringEditor), typeof(UITypeEditor)),
          Category("Appearance")]
-        public string Title
-        {
+        public string Title {
             get { return title; }
-            set
-            {
-                if (value != title)
-                {
+            set {
+                if (value != title) {
                     Region refreshRegion = GetTextBounds();
                     title = value;
                     refreshRegion.Union(GetTextBounds());
@@ -471,13 +401,10 @@ namespace WizardBase
         }
 
         [Description("Accept text."), Category("Appearance")]
-        public string AcceptText
-        {
+        public string AcceptText {
             get { return rbtnAccept.Text; }
-            set
-            {
-                if (rbtnAccept.Text != value)
-                {
+            set {
+                if (rbtnAccept.Text != value) {
                     rbtnAccept.Text = value;
                     Invalidate();
                 }
@@ -485,13 +412,10 @@ namespace WizardBase
         }
 
         [Description("Decline text."), Category("Appearance")]
-        public string DeclineText
-        {
+        public string DeclineText {
             get { return rbtnDecline.Text; }
-            set
-            {
-                if (rbtnDecline.Text != value)
-                {
+            set {
+                if (rbtnDecline.Text != value) {
                     rbtnDecline.Text = value;
                     Invalidate();
                 }
@@ -499,26 +423,20 @@ namespace WizardBase
         }
 
         [Description("Status of license agreement."), Category("Behavior")]
-        public bool? Accepted
-        {
+        public bool? Accepted {
             get { return accepted; }
-            set
-            {
-                if (accepted != value)
-                {
+            set {
+                if (accepted != value) {
                     accepted = value;
-                    if (!accepted.HasValue)
-                    {
+                    if (!accepted.HasValue) {
                         rbtnAccept.Checked = false;
                         rbtnDecline.Checked = false;
                     }
-                    else if (accepted.HasValue && accepted.Value)
-                    {
+                    else if (accepted.HasValue && accepted.Value) {
                         rbtnAccept.Checked = true;
                         rbtnDecline.Checked = false;
                     }
-                    else
-                    {
+                    else {
                         rbtnAccept.Checked = false;
                         rbtnDecline.Checked = true;
                     }
@@ -527,30 +445,23 @@ namespace WizardBase
             }
         }
 
-        [Editor(typeof (CustomFileNameEditor), typeof (UITypeEditor))]
+        [Editor(typeof(CustomFileNameEditor), typeof(UITypeEditor))]
         [Description("License file to display."), Category("Behavior")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string LicenseFile
-        {
+        public string LicenseFile {
             get { return licenseFile; }
-            set
-            {
-                if (licenseFile != value)
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
+            set {
+                if (licenseFile != value) {
+                    if (string.IsNullOrEmpty(value)) {
                         rtbLicense.Text = "Please select the licence file.";
                         licenseFile = value;
                     }
-                    else
-                    {
-                        try
-                        {
+                    else {
+                        try {
                             rtbLicense.LoadFile(value);
                             licenseFile = value;
                         }
-                        catch
-                        {
+                        catch {
                             licenseFile = null;
                         }
                     }

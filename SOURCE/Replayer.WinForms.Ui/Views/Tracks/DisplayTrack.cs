@@ -29,7 +29,7 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
         [Description("The path to the media file of the track.")]
         [UiPathEditor.OfdParamsAttribute("MP3 Files (*.mp3)|*.mp3", "Select the media file for this track",
             Environment.SpecialFolder.MyMusic)]
-        [Editor(typeof (UiPathEditor), typeof (UITypeEditor))]
+        [Editor(typeof(UiPathEditor), typeof(UITypeEditor))]
         public String Path {
             get { return Model.Url; }
             set {

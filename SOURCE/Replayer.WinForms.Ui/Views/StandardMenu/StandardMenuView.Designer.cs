@@ -1,9 +1,7 @@
 ﻿using Replayer.WinForms.Ui.Gui;
 using DevExpress.XtraEditors;
-namespace Replayer.WinForms.Ui.Views.StandardMenu
-{
-    partial class StandardMenuView
-    {
+namespace Replayer.WinForms.Ui.Views.StandardMenu {
+    partial class StandardMenuView {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -13,10 +11,8 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -28,8 +24,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StandardMenuView));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.compilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

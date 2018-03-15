@@ -9,14 +9,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Replayer.WinForms.Ui.Components.NAudioPlayer
-{
+namespace Replayer.WinForms.Ui.Components.NAudioPlayer {
     /// <summary>
     /// A variant of a Pot, specifically to control volume.
     /// </summary>
     /// <remarks>Features a volume property with float type, instead of double and allows to have a logarithmic response.</remarks>
-    public class VolumePot : Pot
-    {
+    public class VolumePot : Pot {
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -24,12 +22,10 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// The current value of the pot
         /// </summary>
         public new double Value {
-            get
-            {
+            get {
                 return base.Value;
             }
-            set
-            {
+            set {
                 base.Value = value;
                 Transform(value);
             }
@@ -41,8 +37,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// Provides a volume number, using the transform function.
         /// </summary>
         /// <remarks>Uses input values in the range 0-100 and transfers them into the range 0-1, using a function.</remarks>
-        public double Volume
-        {
+        public double Volume {
             get; private set;
         }
 
@@ -50,8 +45,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// Raises the <see cref="E:System.Windows.Forms.UserControl.Load" /> event.
         /// </summary>
         /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
-        protected override void OnLoad(EventArgs e)
-        {
+        protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
 
             //Add a label
@@ -61,8 +55,8 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
             _valueLabel.Text = "- dB";
             _valueLabel.Top = boxSize.Height - 10;
             _valueLabel.Height = 10;
-            _valueLabel.Left = boxSize.Width/2 - 10;
-            _valueLabel.Font = new Font(FontFamily.GenericSansSerif,  6.0F, FontStyle.Regular);
+            _valueLabel.Left = boxSize.Width / 2 - 10;
+            _valueLabel.Font = new Font(FontFamily.GenericSansSerif, 6.0F, FontStyle.Regular);
             Controls.Add(_valueLabel);
 
             //Initialize the display
@@ -76,8 +70,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         /// <exception cref="NotImplementedException"></exception>
-        private void VolumePot_ValueChanged(object sender, EventArgs e)
-        {
+        private void VolumePot_ValueChanged(object sender, EventArgs e) {
             Transform(Value);
         }
 
@@ -101,21 +94,19 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
         /// <remarks>This uses a logarithmic formula. A value of 0 to 100 gets transformed from 0 to 1 in a logarithimic fashion.</remarks>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        private void Transform(double value)
-        {
+        private void Transform(double value) {
             //limit to 0-100
             var input = Math.Min(Math.Max(value, lowerInputBound), upperInputBound);
 
             //Log with base 2
-            var volume =  Math.Pow(input / upperInputBound, 2);
+            var volume = Math.Pow(input / upperInputBound, 2);
 
             //limit the output to 0-1
-            var limited = Math.Min(Math.Max(volume, 0),1);
+            var limited = Math.Min(Math.Max(volume, 0), 1);
 
             //Show the dB level
-            var dbLevel = 10*Math.Log10(limited/1);
-            if (_valueLabel != null)
-            {
+            var dbLevel = 10 * Math.Log10(limited / 1);
+            if (_valueLabel != null) {
                 _valueLabel.Text = $"{dbLevel:#.#}dB";
             }
 
@@ -124,8 +115,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer
             Volume = limited;
         }
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.SuspendLayout();
             // 
             // VolumePot

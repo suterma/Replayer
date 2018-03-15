@@ -5,11 +5,9 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
-namespace WizardBase
-{
-    [DefaultEvent("Click"), Designer(typeof (WizardDesigner))]
-    public class WizardControl : Control
-    {
+namespace WizardBase {
+    [DefaultEvent("Click"), Designer(typeof(WizardDesigner))]
+    public class WizardControl : Control {
         #region Private Fields
 
         private readonly LinkLabel EulaLabel = new LinkLabel();
@@ -58,8 +56,7 @@ namespace WizardBase
 
         #region Constructor
 
-        public WizardControl()
-        {
+        public WizardControl() {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -73,32 +70,25 @@ namespace WizardBase
             wizardStepCollection.Removed += wizardStepCollection_Removed;
         }
 
-        private void wizardStepCollection_Removed(int index, WizardStep value)
-        {
+        private void wizardStepCollection_Removed(int index, WizardStep value) {
             value.Dispose();
-            if (wizardStepCollection.Count != 1)
-            {
+            if (wizardStepCollection.Count != 1) {
                 UpdateButtons();
             }
-            else
-            {
+            else {
                 OnSetFirstStep();
             }
         }
 
-        private void wizardStepCollection_Cleared()
-        {
+        private void wizardStepCollection_Cleared() {
             OnResetWizardSteps();
         }
 
-        private void wizardStepCollection_Inserted(int index, WizardStep value)
-        {
-            if (wizardStepCollection.Count != 1)
-            {
+        private void wizardStepCollection_Inserted(int index, WizardStep value) {
+            if (wizardStepCollection.Count != 1) {
                 UpdateButtons();
             }
-            else
-            {
+            else {
                 OnSetFirstStep();
             }
         }
@@ -107,8 +97,7 @@ namespace WizardBase
 
         #region Private Methods
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             SuspendLayout();
             BackButton.Location = new Point(213, 7);
             BackButton.Size = new Size(75, 23);
@@ -122,54 +111,45 @@ namespace WizardBase
             EulaLabel.Text = "eula";
             EulaLabel.AutoSize = true;
             EulaLabel.Name = "EulaLabel";
-            EulaLabel.Click += delegate(object sender, EventArgs e)
-                                   {
-                                       if (EulaButtonClick != null)
-                                       {
-                                           EulaButtonClick(sender, e);
-                                       }
-                                   };
+            EulaLabel.Click += delegate (object sender, EventArgs e) {
+                if (EulaButtonClick != null) {
+                    EulaButtonClick(sender, e);
+                }
+            };
             NextButton.Location = new Point(288, 7);
             NextButton.Size = new Size(75, 23);
             NextButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             NextButton.Text = "Next >";
             NextButton.Name = "NextButton";
-            NextButton.Click += delegate(object sender, EventArgs e)
-                                    {
-                                        if (CurrentStepIndex == (WizardSteps.Count - 1))
-                                        {
-                                            if (FinishButtonClick != null)
-                                            {
-                                                FinishButtonClick(sender, e);
-                                            }
-                                            return;
-                                        }
-                                        OnNextButtonClick(sender, e);
-                                    };
+            NextButton.Click += delegate (object sender, EventArgs e) {
+                if (CurrentStepIndex == (WizardSteps.Count - 1)) {
+                    if (FinishButtonClick != null) {
+                        FinishButtonClick(sender, e);
+                    }
+                    return;
+                }
+                OnNextButtonClick(sender, e);
+            };
             CancelButton.Location = new Point(370, 7);
             CancelButton.Size = new Size(75, 23);
             CancelButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             CancelButton.Text = "Cancel";
             CancelButton.Name = "CancelButton";
-            CancelButton.Click += delegate(object sender, EventArgs e)
-                                      {
-                                          if (CancelButtonClick != null)
-                                          {
-                                              CancelButtonClick(sender, e);
-                                          }
-                                      };
+            CancelButton.Click += delegate (object sender, EventArgs e) {
+                if (CancelButtonClick != null) {
+                    CancelButtonClick(sender, e);
+                }
+            };
             HelpButton.Location = new Point(453, 7);
             HelpButton.Size = new Size(75, 23);
             HelpButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             HelpButton.Text = "Help";
             HelpButton.Name = "HelpButton";
-            HelpButton.Click += delegate(object sender, EventArgs e)
-                                    {
-                                        if (HelpButtonClick != null)
-                                        {
-                                            HelpButtonClick(sender, e);
-                                        }
-                                    };
+            HelpButton.Click += delegate (object sender, EventArgs e) {
+                if (HelpButtonClick != null) {
+                    HelpButtonClick(sender, e);
+                }
+            };
             controlHost.Size = new Size(534, 363);
             controlHost.Location = Point.Empty;
             controlHost.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
@@ -191,101 +171,79 @@ namespace WizardBase
             ResumeLayout();
         }
 
-        private void DoReLayout(int newIndex)
-        {
+        private void DoReLayout(int newIndex) {
             SuspendLayout();
-            if (controlHost.Controls.Count > 0)
-            {
+            if (controlHost.Controls.Count > 0) {
                 controlHost.Controls.RemoveAt(0);
             }
             controlHost.Controls.Add(WizardSteps[newIndex]);
             currentStepIndex = newIndex;
-            if (CurrentStepIndex != 0)
-            {
+            if (CurrentStepIndex != 0) {
                 BackButton.Enabled = true;
             }
-            else
-            {
+            else {
                 BackButton.Enabled = false;
             }
-            if (CurrentStepIndex != (wizardStepCollection.Count - 1))
-            {
+            if (CurrentStepIndex != (wizardStepCollection.Count - 1)) {
                 NextButton.Text = nextButtonText;
             }
-            else
-            {
+            else {
                 NextButton.Text = finishButtonText;
             }
             ResumeLayout();
         }
 
-        private void ResetBackButtonEnabled()
-        {
-            if (currentStepIndex <= 0)
-            {
+        private void ResetBackButtonEnabled() {
+            if (currentStepIndex <= 0) {
                 BackButton.Enabled = false;
             }
-            else
-            {
-                if (currentStepIndex > 0)
-                {
+            else {
+                if (currentStepIndex > 0) {
                     BackButton.Enabled = true;
                 }
             }
         }
 
-        private void ResetBackButtonVisible()
-        {
+        private void ResetBackButtonVisible() {
             BackButtonVisible = true;
         }
 
-        private void ResetCancelButtonEnabled()
-        {
+        private void ResetCancelButtonEnabled() {
             CancelButtonEnabled = true;
         }
 
-        private void ResetCancelButtonVisible()
-        {
+        private void ResetCancelButtonVisible() {
             CancelButtonVisible = true;
         }
 
-        private void ResetHelpButtonEnabled()
-        {
+        private void ResetHelpButtonEnabled() {
             HelpButtonEnabled = true;
         }
 
-        private void ResetHelpButtonVisible()
-        {
+        private void ResetHelpButtonVisible() {
             HelpButtonVisible = true;
         }
 
-        private void ResetNextButtonEnabled()
-        {
+        private void ResetNextButtonEnabled() {
             NextButtonEnabled = true;
         }
 
-        private void ResetNextButtonVisible()
-        {
+        private void ResetNextButtonVisible() {
             NextButtonVisible = true;
         }
 
-        internal void UpdateButtons()
-        {
+        internal void UpdateButtons() {
             SuspendLayout();
-            if (CurrentStepIndex != 0)
-            {
+            if (CurrentStepIndex != 0) {
                 BackButton.Enabled = true;
             }
-            else
-            {
+            else {
                 BackButton.Enabled = false;
             }
-            if (CurrentStepIndex != (wizardStepCollection.Count - 1))
-            {
+            if (CurrentStepIndex != (wizardStepCollection.Count - 1)) {
                 NextButton.Text = nextButtonText;
             }
-            else
-            {
+            else {
                 NextButton.Text = finishButtonText;
             }
             ResumeLayout();
@@ -295,39 +253,31 @@ namespace WizardBase
 
         #region Virtual Methods
 
-        protected virtual void OnBackButtonClick(object sender, EventArgs e)
-        {
-            if (CurrentStepIndex == 0)
-            {
+        protected virtual void OnBackButtonClick(object sender, EventArgs e) {
+            if (CurrentStepIndex == 0) {
                 return;
             }
-            if (DesignMode)
-            {
+            if (DesignMode) {
                 CurrentStepIndex--;
                 return;
             }
-            if (BackButtonClick == null)
-            {
+            if (BackButtonClick == null) {
                 int backStepIndex = WizardSteps[CurrentStepIndex].BackStepIndex;
-                if (backStepIndex != -1)
-                {
+                if (backStepIndex != -1) {
                     CurrentStepIndex = backStepIndex;
                     return;
                 }
                 CurrentStepIndex--;
                 return;
             }
-            else
-            {
+            else {
                 var args = new CancelEventArgs();
                 BackButtonClick(this, args);
-                if (args.Cancel)
-                {
+                if (args.Cancel) {
                     return;
                 }
                 int num = WizardSteps[CurrentStepIndex].BackStepIndex;
-                if (num != -1)
-                {
+                if (num != -1) {
                     CurrentStepIndex = num;
                     return;
                 }
@@ -336,95 +286,73 @@ namespace WizardBase
             }
         }
 
-        protected internal virtual void OnChangeCurrentStepIndex(int newIndex, bool force)
-        {
-            if (newIndex < 0 || newIndex >= WizardSteps.Count)
-            {
+        protected internal virtual void OnChangeCurrentStepIndex(int newIndex, bool force) {
+            if (newIndex < 0 || newIndex >= WizardSteps.Count) {
                 throw new ArgumentOutOfRangeException("newIndex",
                                                       "The new index must be a valid index of the WizardSteps collection property.");
             }
-            if (CurrentStepIndex != newIndex)
-            {
+            if (CurrentStepIndex != newIndex) {
                 DoReLayout(newIndex);
-                if (CurrentStepIndexChanged != null)
-                {
+                if (CurrentStepIndexChanged != null) {
                     CurrentStepIndexChanged(this, EventArgs.Empty);
                 }
             }
-            else if (force)
-            {
+            else if (force) {
                 DoReLayout(newIndex);
             }
         }
 
-        protected virtual void OnNextButtonClick(object sender, EventArgs e)
-        {
+        protected virtual void OnNextButtonClick(object sender, EventArgs e) {
             int num;
-            if (DesignMode)
-            {
+            if (DesignMode) {
                 CurrentStepIndex++;
                 return;
             }
-            else
-            {
+            else {
                 num = 0;
-                if (!(WizardSteps[CurrentStepIndex] is StartStep))
-                {
-                    if ((WizardSteps[CurrentStepIndex] is FinishStep))
-                    {
+                if (!(WizardSteps[CurrentStepIndex] is StartStep)) {
+                    if ((WizardSteps[CurrentStepIndex] is FinishStep)) {
                         num = -1;
                     }
                 }
-                else
-                {
+                else {
                     num = 1;
                 }
             }
-            if (NextButtonClick == null)
-            {
+            if (NextButtonClick == null) {
                 bool noFinish = false;
                 int num2 = 0;
-                if (!(WizardSteps[CurrentStepIndex + 1] is StartStep))
-                {
-                    if (!(WizardSteps[CurrentStepIndex + 1] is FinishStep))
-                    {
+                if (!(WizardSteps[CurrentStepIndex + 1] is StartStep)) {
+                    if (!(WizardSteps[CurrentStepIndex + 1] is FinishStep)) {
                         noFinish = true;
                     }
-                    else
-                    {
+                    else {
                         num2 = -1;
                     }
                 }
-                else
-                {
+                else {
                     num2 = 1;
                 }
-                if (((indexer + num) + num2) >= 0)
-                {
-                    if ((((indexer + num) + num2) != 0) || !noFinish)
-                    {
+                if (((indexer + num) + num2) >= 0) {
+                    if ((((indexer + num) + num2) != 0) || !noFinish) {
                         WizardSteps[CurrentStepIndex + 1].BackStepIndex = CurrentStepIndex;
                         CurrentStepIndex++;
                         indexer += num;
                     }
                 }
-                else
-                {
+                else {
                     throw new InvalidOperationException(
                         "The steps must be well formed, so there cannot be an IntermediateStep without enclosing.");
                 }
             }
-            else
-            {
+            else {
                 var args = new GenericCancelEventArgs<WizardControl>(this);
                 NextButtonClick(this, args);
-                if (args.Cancel)
-                {
+                if (args.Cancel) {
                     return;
                 }
                 int nextStep = GetNextStep();
-                if (nextStep != -1)
-                {
+                if (nextStep != -1) {
                     WizardSteps[nextStep].BackStepIndex = CurrentStepIndex;
                     CurrentStepIndex = nextStep;
                     indexer += num;
@@ -437,54 +365,42 @@ namespace WizardBase
             }
         }
 
-        private int GetNextStep()
-        {
+        private int GetNextStep() {
             int num;
             num = 0;
-            if (!(WizardSteps[CurrentStepIndex] is StartStep))
-            {
-                if ((WizardSteps[CurrentStepIndex] is FinishStep))
-                {
+            if (!(WizardSteps[CurrentStepIndex] is StartStep)) {
+                if ((WizardSteps[CurrentStepIndex] is FinishStep)) {
                     num = -1;
                 }
             }
-            else
-            {
+            else {
                 num = 1;
             }
             bool noFinish = false;
             int num2 = 0;
-            if (!(WizardSteps[CurrentStepIndex + 1] is StartStep))
-            {
-                if (!(WizardSteps[CurrentStepIndex + 1] is FinishStep))
-                {
+            if (!(WizardSteps[CurrentStepIndex + 1] is StartStep)) {
+                if (!(WizardSteps[CurrentStepIndex + 1] is FinishStep)) {
                     noFinish = true;
                 }
-                else
-                {
+                else {
                     num2 = -1;
                 }
             }
-            else
-            {
+            else {
                 num2 = 1;
             }
-            if (((indexer + num) + num2) >= 0 && ((indexer + num) + num2) != 0 || !noFinish)
-            {
+            if (((indexer + num) + num2) >= 0 && ((indexer + num) + num2) != 0 || !noFinish) {
                 return CurrentStepIndex + 1;
             }
-            else
-            {
+            else {
                 throw new InvalidOperationException(
                     "The step must be well formed, so there cannot be a Finishstep without a Startstep.");
             }
         }
 
-        protected internal virtual void OnResetWizardSteps()
-        {
+        protected internal virtual void OnResetWizardSteps() {
             SuspendLayout();
-            if (controlHost.Controls.Count > 0)
-            {
+            if (controlHost.Controls.Count > 0) {
                 controlHost.Controls.RemoveAt(0);
             }
             buttonHost.Visible = false;
@@ -494,14 +410,12 @@ namespace WizardBase
             var rectangle = new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2);
             Invalidate(rectangle, false);
             ResumeLayout();
-            if (CurrentStepIndexChanged != null)
-            {
+            if (CurrentStepIndexChanged != null) {
                 CurrentStepIndexChanged(this, EventArgs.Empty);
             }
         }
 
-        protected internal virtual void OnSetFirstStep()
-        {
+        protected internal virtual void OnSetFirstStep() {
             CurrentStepIndex = 0;
             SuspendLayout();
             controlHost.Visible = true;
@@ -541,8 +455,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false)]
-        public override Font Font
-        {
+        public override Font Font {
             get { return base.Font; }
             set { base.Font = value; }
         }
@@ -564,8 +477,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false)]
-        public override Color ForeColor
-        {
+        public override Color ForeColor {
             get { return base.ForeColor; }
             set { base.ForeColor = value; }
         }
@@ -592,8 +504,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override bool AllowDrop
-        {
+        public override bool AllowDrop {
             get { return base.AllowDrop; }
 #pragma warning disable ValueParameterNotUsed
             set { base.AllowDrop = true; }
@@ -617,8 +528,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false)]
-        public override Color BackColor
-        {
+        public override Color BackColor {
             get { return base.BackColor; }
 #pragma warning disable ValueParameterNotUsed
             set { base.BackColor = SystemColors.Control; }
@@ -638,8 +548,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false)]
-        public override Image BackgroundImage
-        {
+        public override Image BackgroundImage {
             get { return base.BackgroundImage; }
 #pragma warning disable ValueParameterNotUsed
             set { base.BackgroundImage = null; }
@@ -680,8 +589,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        public override ImageLayout BackgroundImageLayout
-        {
+        public override ImageLayout BackgroundImageLayout {
             get { return base.BackgroundImageLayout; }
 #pragma warning disable ValueParameterNotUsed
             set { base.BackgroundImageLayout = ImageLayout.None; }
@@ -694,8 +602,7 @@ namespace WizardBase
         /// <returns>
         ///     The default <see cref="T:System.Drawing.Size"></see> of the control.
         /// </returns>
-        protected override Size DefaultSize
-        {
+        protected override Size DefaultSize {
             get { return new Size(534, 403); }
         }
 
@@ -707,8 +614,7 @@ namespace WizardBase
         /// </returns>
         /// <filterpriority>1</filterpriority>
         [Browsable(false)]
-        public override string Text
-        {
+        public override string Text {
             get { return base.Text; }
             set { base.Text = value; }
         }
@@ -742,8 +648,7 @@ namespace WizardBase
         ///         version="1" Unrestricted="true" />
         /// </PermissionSet>
         [Browsable(false)]
-        public override RightToLeft RightToLeft
-        {
+        public override RightToLeft RightToLeft {
             get { return base.RightToLeft; }
             set { base.RightToLeft = value; }
         }
@@ -754,10 +659,8 @@ namespace WizardBase
         /// <param name="e">
         ///     A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.
         /// </param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if (WizardSteps.Count != 0)
-            {
+        protected override void OnPaint(PaintEventArgs e) {
+            if (WizardSteps.Count != 0) {
                 ControlPaint.DrawBorder3D(e.Graphics,
                                           new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2),
                                           Border3DStyle.Etched, Border3DSide.Top);
@@ -771,8 +674,7 @@ namespace WizardBase
         /// <param name="e">
         ///     An <see cref="T:System.EventArgs"></see> that contains the event data.
         /// </param>
-        protected override void OnTabIndexChanged(EventArgs e)
-        {
+        protected override void OnTabIndexChanged(EventArgs e) {
             base.TabIndex = 0;
         }
 
@@ -782,17 +684,13 @@ namespace WizardBase
         /// <param name="e">
         ///     An <see cref="T:System.EventArgs"></see> that contains the event data.
         /// </param>
-        protected override void OnTabStopChanged(EventArgs e)
-        {
+        protected override void OnTabStopChanged(EventArgs e) {
             base.TabStop = false;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                for (int i = 0; i < WizardSteps.Count; i++)
-                {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
+                for (int i = 0; i < WizardSteps.Count; i++) {
                     WizardSteps[i].Dispose();
                     WizardSteps[i] = null;
                 }
@@ -805,46 +703,40 @@ namespace WizardBase
         #region Public Property
 
         [Category("WizardControl Buttons Behavior"), Description("Defines if the back button is enabled or disabled.")]
-        public bool BackButtonEnabled
-        {
+        public bool BackButtonEnabled {
             get { return BackButton.Enabled; }
             set { BackButton.Enabled = value; }
         }
 
         [Description("Gets or sets the back button text."), Category("WizardControl Buttons Appearance"),
          DefaultValue("< Back")]
-        public string BackButtonText
-        {
+        public string BackButtonText {
             get { return BackButton.Text; }
             set { BackButton.Text = value; }
         }
 
         [Description("Defines the visibility of the back button."), Category("WizardControl Buttons Behavior")]
-        public bool BackButtonVisible
-        {
+        public bool BackButtonVisible {
             get { return BackButton.Visible; }
             set { BackButton.Visible = value; }
         }
 
         [Description("Defines if the cancel button is enabled or disabled."), Category("WizardControl Buttons Behavior")
         ]
-        public bool CancelButtonEnabled
-        {
+        public bool CancelButtonEnabled {
             get { return CancelButton.Enabled; }
             set { CancelButton.Enabled = value; }
         }
 
         [Description("Gets or sets the cancel button text."), DefaultValue("Cancel"),
          Category("WizardControl Buttons Appearance")]
-        public string CancelButtonText
-        {
+        public string CancelButtonText {
             get { return CancelButton.Text; }
             set { CancelButton.Text = value; }
         }
 
         [Description("Defines the visibility of the cancel button."), Category("WizardControl Buttons Behavior")]
-        public bool CancelButtonVisible
-        {
+        public bool CancelButtonVisible {
             get { return CancelButton.Visible; }
             set { CancelButton.Visible = value; }
         }
@@ -853,8 +745,7 @@ namespace WizardBase
          Description(
              "Gets or sets the value of the current wizard step index based on the WizardSteps collection property."),
          DefaultValue(0), Category("Behavior")]
-        public int CurrentStepIndex
-        {
+        public int CurrentStepIndex {
             get { return currentStepIndex; }
             set { OnChangeCurrentStepIndex(value, false); }
         }
@@ -862,18 +753,14 @@ namespace WizardBase
 
         [Description("Gets or sets the finish button text."), DefaultValue("Finish"),
          Category("WizardControl Buttons Appearance")]
-        public string FinishButtonText
-        {
+        public string FinishButtonText {
             get { return finishButtonText; }
-            set
-            {
+            set {
                 finishButtonText = value;
-                if (CurrentStepIndex == (wizardStepCollection.Count - 1))
-                {
+                if (CurrentStepIndex == (wizardStepCollection.Count - 1)) {
                     NextButton.Text = finishButtonText;
                 }
-                else
-                {
+                else {
                     NextButton.Text = nextButtonText;
                 }
             }
@@ -883,8 +770,7 @@ namespace WizardBase
         /// </summary>
         [Description("Defines the visibility of the eula label.")]
         [Category("WizardControl Buttons Behavior")]
-        public bool EulaButtonVisible
-        {
+        public bool EulaButtonVisible {
             get { return EulaLabel.Visible; }
             set { EulaLabel.Visible = value; }
         }
@@ -893,52 +779,44 @@ namespace WizardBase
         /// </summary>
         [Description("Defines if the eula label is enabled or disabled.")]
         [Category("WizardControl Buttons Behavior")]
-        public bool EulaButtonEnabled
-        {
+        public bool EulaButtonEnabled {
             get { return EulaLabel.Enabled; }
             set { EulaLabel.Enabled = value; }
         }
 
 
         [Description("Defines if the help button is enabled or disabled."), Category("WizardControl Buttons Behavior")]
-        public bool HelpButtonEnabled
-        {
+        public bool HelpButtonEnabled {
             get { return HelpButton.Enabled; }
             set { HelpButton.Enabled = value; }
         }
 
         [Category("WizardControl Buttons Appearance"), Description("Gets or sets the help button text."),
          DefaultValue("Help")]
-        public string HelpButtonText
-        {
+        public string HelpButtonText {
             get { return HelpButton.Text; }
             set { HelpButton.Text = value; }
         }
 
         [Category("WizardControl Buttons Behavior"), Description("Defines the visibility of the help button.")]
-        public bool HelpButtonVisible
-        {
+        public bool HelpButtonVisible {
             get { return HelpButton.Visible; }
             set { HelpButton.Visible = value; }
         }
 
         [Description("Defines if the next button is enabled or disabled."), Category("WizardControl Buttons Behavior")]
-        public bool NextButtonEnabled
-        {
+        public bool NextButtonEnabled {
             get { return NextButton.Enabled; }
             set { NextButton.Enabled = value; }
         }
 
         [DefaultValue("Next >"), Category("WizardControl Buttons Appearance"),
          Description("Gets or sets the next button text.")]
-        public string NextButtonText
-        {
+        public string NextButtonText {
             get { return nextButtonText; }
-            set
-            {
+            set {
                 nextButtonText = value;
-                if (CurrentStepIndex != (wizardStepCollection.Count - 1))
-                {
+                if (CurrentStepIndex != (wizardStepCollection.Count - 1)) {
                     NextButton.Text = nextButtonText;
                     return;
                 }
@@ -952,23 +830,20 @@ namespace WizardBase
         [Category("WizardControl Buttons Appearance")]
         [Description("Gets or sets the eula button text.")]
         [DefaultValue("Help")]
-        public string EulaButtonText
-        {
+        public string EulaButtonText {
             get { return EulaLabel.Text; }
             set { EulaLabel.Text = value; }
         }
 
         [Category("WizardControl Buttons Behavior"), Description("Defines the visibility of the next button.")]
-        public bool NextButtonVisible
-        {
+        public bool NextButtonVisible {
             get { return NextButton.Visible; }
             set { NextButton.Visible = value; }
         }
 
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        public new int TabIndex
-        {
+        public new int TabIndex {
             get { return base.TabIndex; }
 #pragma warning disable ValueParameterNotUsed
             private set { base.TabIndex = 0; }
@@ -976,21 +851,19 @@ namespace WizardBase
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        public new bool TabStop
-        {
+        public new bool TabStop {
             get { return base.TabStop; }
 #pragma warning disable ValueParameterNotUsed
             private set { base.TabStop = false; }
 #pragma warning restore ValueParameterNotUsed
         }
 
-        [Editor(typeof (WizardStepCollectionEditor), typeof (UITypeEditor)),
+        [Editor(typeof(WizardStepCollectionEditor), typeof(UITypeEditor)),
          Description(
              "Gets a collection containing the step. This property returns the same collection than the Controls property."
-             ), TypeConverter(typeof (GenericCollectionConverter<WizardStep>)), Category("Behavior"),
+             ), TypeConverter(typeof(GenericCollectionConverter<WizardStep>)), Category("Behavior"),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public virtual GenericCollection<WizardStep> WizardSteps
-        {
+        public virtual GenericCollection<WizardStep> WizardSteps {
             get { return wizardStepCollection; }
         }
 

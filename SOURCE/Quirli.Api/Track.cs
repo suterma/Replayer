@@ -99,7 +99,7 @@ namespace Quirli.Api {
         /// <summary>
         ///     Creates an empty new Track instance.
         /// </summary>
-        public Track() {}
+        public Track() { }
 
         /// <summary>
         ///     Parses the given track URL and initializes this instance with it's data.
@@ -120,13 +120,17 @@ namespace Quirli.Api {
 
                 if (decodedKey == "media") {
                     MediaUrl = new Uri(decodedValue);
-                } else if (decodedKey == "title") {
+                }
+                else if (decodedKey == "title") {
                     Title = decodedValue;
-                } else if (decodedKey == "artist") {
+                }
+                else if (decodedKey == "artist") {
                     Artist = decodedValue;
-                } else if (decodedKey == "album") {
+                }
+                else if (decodedKey == "album") {
                     Album = decodedValue;
-                } else {
+                }
+                else {
                     double position;
                     if (Double.TryParse(decodedKey, out position)) {
                         Cues.Add(new Cue(position, decodedValue));

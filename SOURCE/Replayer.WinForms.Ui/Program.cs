@@ -36,11 +36,13 @@ namespace Replayer.WinForms.Ui {
                 result =
                     new ExceptionMessageBox(t.Exception, ExceptionMessageBoxButtons.AbortRetryIgnore,
                                             ExceptionMessageBoxSymbol.Error).Show(null);
-            } catch {
+            }
+            catch {
                 try {
                     MessageBox.Show("Fatal Windows Forms Error",
                                     "Fatal Windows Forms Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop);
-                } finally {
+                }
+                finally {
                     Application.Exit();
                 }
             }
@@ -57,7 +59,7 @@ namespace Replayer.WinForms.Ui {
         // log the event, and inform the user about it. 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
             try {
-                var ex = (Exception) e.ExceptionObject;
+                var ex = (Exception)e.ExceptionObject;
                 string errorMsg = "An application error occurred. Please contact the adminstrator " +
                                   "with the following information:\n\n";
 
@@ -73,12 +75,14 @@ namespace Replayer.WinForms.Ui {
                 var myLog = new EventLog();
                 myLog.Source = "ThreadException";
                 myLog.WriteEntry(errorMsg + ex.Message + "\n\nStack Trace:\n" + ex.StackTrace);
-            } catch (Exception exc) {
+            }
+            catch (Exception exc) {
                 try {
                     MessageBox.Show("Fatal Non-UI Error",
                                     "Fatal Non-UI Error. Could not write the error to the event log. Reason: "
                                     + exc.Message, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                } finally {
+                }
+                finally {
                     Application.Exit();
                 }
             }

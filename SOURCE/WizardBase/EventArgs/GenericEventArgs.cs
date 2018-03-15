@@ -1,18 +1,14 @@
 using System;
 
-namespace WizardBase
-{
+namespace WizardBase {
     public delegate void GenericEventHandler<T>(object sender, GenericEventArgs<T> tArgs);
 
-    public class GenericEventArgs<T> : EventArgs
-    {
-        public GenericEventArgs()
-        {
+    public class GenericEventArgs<T> : EventArgs {
+        public GenericEventArgs() {
             Value = default(T);
         }
 
-        public GenericEventArgs(T value)
-        {
+        public GenericEventArgs(T value) {
             this.Value = value;
         }
 

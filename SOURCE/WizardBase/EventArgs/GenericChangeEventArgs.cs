@@ -1,25 +1,20 @@
 using System.ComponentModel;
 
-namespace WizardBase
-{
-    public class GenericChangeEventArgs<T> : CancelEventArgs
-    {
+namespace WizardBase {
+    public class GenericChangeEventArgs<T> : CancelEventArgs {
         private readonly T oldValue;
 
-        public GenericChangeEventArgs(T oldValue, T newValue) : base(false)
-        {
+        public GenericChangeEventArgs(T oldValue, T newValue) : base(false) {
             this.oldValue = oldValue;
             this.NewValue = newValue;
         }
 
-        public GenericChangeEventArgs(T oldValue, T newValue, bool cancel) : base(cancel)
-        {
+        public GenericChangeEventArgs(T oldValue, T newValue, bool cancel) : base(cancel) {
             this.oldValue = oldValue;
             this.NewValue = newValue;
         }
 
-        public T OldValue
-        {
+        public T OldValue {
             get { return oldValue; }
         }
 
