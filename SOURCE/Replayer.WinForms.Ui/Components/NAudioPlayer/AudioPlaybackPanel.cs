@@ -78,6 +78,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             else {
                 settingsPanel = new Label() { Text = "This output device is unavailable on your system", Dock = DockStyle.Fill };
             }
+            settingsPanel.Dock = DockStyle.Fill;
             panelOutputDeviceSettings.Controls.Add(settingsPanel);
             Log.Info("WaveOutPlugin loaded.");
 
