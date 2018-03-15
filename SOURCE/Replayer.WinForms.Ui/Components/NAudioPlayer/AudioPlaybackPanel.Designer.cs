@@ -49,8 +49,9 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // trackBarPosition
             // 
-            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarPosition.Enabled = false;
             this.trackBarPosition.LargeChange = 1;
             this.trackBarPosition.Location = new System.Drawing.Point(126, 0);
             this.trackBarPosition.Maximum = 100;
@@ -95,7 +96,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // panelOutputDeviceSettings
             // 
-            this.panelOutputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.panelOutputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelOutputDeviceSettings.Location = new System.Drawing.Point(175, 23);
             this.panelOutputDeviceSettings.Name = "panelOutputDeviceSettings";
@@ -147,7 +148,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // label_CurrentTime
             // 
-            this.label_CurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.label_CurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_CurrentTime.AutoSize = true;
             this.label_CurrentTime.Location = new System.Drawing.Point(126, 23);

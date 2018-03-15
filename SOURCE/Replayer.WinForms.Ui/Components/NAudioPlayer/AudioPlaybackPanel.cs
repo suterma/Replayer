@@ -273,11 +273,15 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
         }
 
+        /// <summary>
+        /// Updates the waveout volume.
+        /// </summary>
         private void UpdateWaveoutVolume() {
-            var volume = (float)volumePot.Volume;
-            waveOut.Volume = volume;
-            Log.Info($"Volume set to {volume}");
-
+            if (waveOut != null) {
+                var volume = (float)volumePot.Volume;
+                waveOut.Volume = volume;
+                Log.Info($"Volume set to {volume}");
+            }
         }
 
         private ISampleProvider CreateInputStream(string fileName) {
@@ -310,6 +314,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             CloseWaveOut();
             waveOut = _outputDevicePlugin.CreateDevice(latency);
             waveOut.PlaybackStopped += OnPlaybackStopped;
+            trackBarPosition.Enabled = true;//Allow scrolling only with a ready-to play situation
             Log.Info($"WaveOut created.");
         }
 
@@ -340,6 +345,8 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 waveOut.Dispose();
                 waveOut = null;
             }
+            trackBarPosition.Enabled = false;//Not allow scrolling when not able to play
+            trackBarPosition.Value = 0;
         }
 
 
@@ -375,6 +382,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             var position = TimeSpan.FromSeconds(secondsPosition);
             if (Position != position)
                 Position = position;
+
         }
 
         //private void UpdateTrackBarPosition()
