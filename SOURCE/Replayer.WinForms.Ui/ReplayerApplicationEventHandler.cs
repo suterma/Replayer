@@ -439,11 +439,12 @@ namespace Replayer.WinForms.Ui {
         private void HandleOpenCompilationClickedEvent() {
             PreventDiscadingUnsavedCompilation();
 
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Core.Model.Instance.Settings.DefaultCompilationLookupDirectory;
-            openFileDialog.Filter =
-                "Compilation files (*.rez (zipped), *.rex(xml), *.zip(deprecated))|*.rez;*.rex;*.zip";
-            openFileDialog.FilterIndex = 1;
+            var openFileDialog = new OpenFileDialog {
+                InitialDirectory = Core.Model.Instance.Settings.DefaultCompilationLookupDirectory,
+                Filter =
+                "Compilation files (*.rez (zipped), *.rex(xml), *.zip(deprecated))|*.rez;*.rex;*.zip",
+                FilterIndex = 1
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 Core.Model.Instance.Retrieve(openFileDialog.FileName);
                 //use directory as default

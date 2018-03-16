@@ -67,11 +67,12 @@ namespace Replayer.WinForms.Ui.Gui {
             }
 
             //Initialize the file dialog with our settings
-            var dlg = new OpenFileDialog();
-            dlg.Filter = m_Settings.Filter;
-            dlg.CheckFileExists = true;
-            dlg.Title = m_Settings.Title;
-            dlg.InitialDirectory = Environment.GetFolderPath(m_Settings.DefaultDirectory);
+            var dlg = new OpenFileDialog {
+                Filter = m_Settings.Filter,
+                CheckFileExists = true,
+                Title = m_Settings.Title,
+                InitialDirectory = Environment.GetFolderPath(m_Settings.DefaultDirectory)
+            };
 
             //Find if the current value is legitimate
             var filename = (string)value;

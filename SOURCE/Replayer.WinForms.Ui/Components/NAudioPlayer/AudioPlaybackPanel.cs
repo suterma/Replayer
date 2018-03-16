@@ -393,7 +393,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void trackBarPosition_Scroll(object sender, EventArgs e) {
+        private void TrackBarPosition_Scroll(object sender, EventArgs e) {
             var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
             var position = TimeSpan.FromSeconds(secondsPosition);
             if (Position != position)
@@ -436,7 +436,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void volumePot_ValueChanged(object sender, EventArgs e) {
+        private void VolumePot_ValueChanged(object sender, EventArgs e) {
             Volume = volumePot.Value;
         }
 
@@ -445,7 +445,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_play_Click(object sender, EventArgs e) {
+        private void Btn_play_Click(object sender, EventArgs e) {
 
             State = MediaPlayerState.Playing;
         }
@@ -455,7 +455,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_pause_Click(object sender, EventArgs e) {
+        private void Btn_pause_Click(object sender, EventArgs e) {
             State = MediaPlayerState.Paused;
         }
 
@@ -464,7 +464,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btn_stop_Click(object sender, EventArgs e) {
+        private void Btn_stop_Click(object sender, EventArgs e) {
             if (waveOut != null) {
                 waveOut.Stop();
             }

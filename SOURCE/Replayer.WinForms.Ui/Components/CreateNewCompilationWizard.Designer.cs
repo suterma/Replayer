@@ -67,7 +67,7 @@
             this.intermediateStep1,
             this.intermediateStep2,
             this.finishStep1});
-            this.wizardControl1.CancelButtonClick += new System.EventHandler(this.wizardControl1_CancelButtonClick);
+            this.wizardControl1.CancelButtonClick += new System.EventHandler(this.WizardControl1_CancelButtonClick);
             // 
             // startStep1
             // 

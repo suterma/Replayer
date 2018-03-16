@@ -135,7 +135,8 @@ namespace Replayer.Model.Persistence {
         /// <summary>
         ///     Retrieves the Compilation at the specified url.
         /// </summary>
-        public ICompilation Retrieve(string url) {
+        /// <remarks>This is not currently supported. An empty compilation will be returned.</remarks>
+        public override ICompilation Retrieve(string url) {
             return new QuirliCompilation();
         }
     }

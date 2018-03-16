@@ -15,7 +15,7 @@ namespace Replayer.WinForms.Ui.Gui {
         /// </summary>
         public CreateNewCompilationWizard() {
             InitializeComponent();
-            wizardControl1.FinishButtonClick += wizardControl1_FinishButtonClick;
+            wizardControl1.FinishButtonClick += WizardControl1_FinishButtonClick;
         }
 
         /// <summary>
@@ -23,18 +23,19 @@ namespace Replayer.WinForms.Ui.Gui {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void wizardControl1_FinishButtonClick(object sender, EventArgs e) {
+        private void WizardControl1_FinishButtonClick(object sender, EventArgs e) {
             //generate the compilation with the tracks.
             ICompilation compilation = CompilationFactory.CreateNew();
             compilation.Title = _tbCollectionName.Text;
 
             //create tracks
             foreach (string trackMediaFile in _tbTrackMediaFiles.Lines) {
-                var newTrack = new Track();
-                newTrack.Album = _tbCommonAlbum.Text;
-                newTrack.Artist = _tbCommonArtist.Text;
-                newTrack.Name = Path.GetFileNameWithoutExtension(trackMediaFile);
-                newTrack.Url = trackMediaFile;
+                var newTrack = new Track {
+                    Album = _tbCommonAlbum.Text,
+                    Artist = _tbCommonArtist.Text,
+                    Name = Path.GetFileNameWithoutExtension(trackMediaFile),
+                    Url = trackMediaFile
+                };
                 //create initial cue
                 newTrack.Cues.Add(
                     new Cue {
@@ -68,7 +69,7 @@ namespace Replayer.WinForms.Ui.Gui {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void wizardControl1_CancelButtonClick(object sender, EventArgs e) {
+        private void WizardControl1_CancelButtonClick(object sender, EventArgs e) {
             DialogResult = DialogResult.Cancel;
             Close();
         }

@@ -60,7 +60,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.trackBarPosition.TabIndex = 16;
             this.trackBarPosition.Tag = "Position";
             this.trackBarPosition.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarPosition.Scroll += new System.EventHandler(this.trackBarPosition_Scroll);
+            this.trackBarPosition.Scroll += new System.EventHandler(this.TrackBarPosition_Scroll);
             // 
             // timer1
             // 
@@ -112,7 +112,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.btn_play.Size = new System.Drawing.Size(36, 48);
             this.btn_play.TabIndex = 22;
             this.btn_play.UseVisualStyleBackColor = true;
-            this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
+            this.btn_play.Click += new System.EventHandler(this.Btn_play_Click);
             // 
             // btn_pause
             // 
@@ -123,7 +123,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.btn_pause.Size = new System.Drawing.Size(36, 48);
             this.btn_pause.TabIndex = 23;
             this.btn_pause.UseVisualStyleBackColor = true;
-            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            this.btn_pause.Click += new System.EventHandler(this.Btn_pause_Click);
             // 
             // btn_stop
             // 
@@ -134,7 +134,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.btn_stop.Size = new System.Drawing.Size(36, 48);
             this.btn_stop.TabIndex = 24;
             this.btn_stop.UseVisualStyleBackColor = true;
-            this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
+            this.btn_stop.Click += new System.EventHandler(this.Btn_stop_Click);
             // 
             // label_TotalTime
             // 
@@ -167,7 +167,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.volumePot.Size = new System.Drawing.Size(63, 48);
             this.volumePot.TabIndex = 21;
             this.volumePot.Value = 50D;
-            this.volumePot.ValueChanged += new System.EventHandler(this.volumePot_ValueChanged);
+            this.volumePot.ValueChanged += new System.EventHandler(this.VolumePot_ValueChanged);
             // 
             // AudioPlaybackPanel
             // 
