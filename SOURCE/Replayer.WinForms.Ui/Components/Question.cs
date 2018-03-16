@@ -3,9 +3,9 @@ using DevExpress.XtraEditors;
 
 namespace Replayer.WinForms.Ui.Gui {
     /// <summary>
-    ///     Asks the user a question.
+    /// Asks the user a question.
     /// </summary>
-    /// <param name="question"></param>
+    /// <seealso cref="DevExpress.XtraEditors.XtraForm" />
     public partial class Question : XtraForm {
         /// <summary>
         ///     Prepares the question.

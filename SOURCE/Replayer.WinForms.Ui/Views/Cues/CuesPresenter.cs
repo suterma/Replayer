@@ -48,6 +48,11 @@ namespace Replayer.WinForms.Ui.Views.Cues {
             View.Cues.DrawItem += Cues_DrawItem;
         }
 
+        /// <summary>
+        /// Handles the PropertyChanged event of the Model control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         private void Model_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName.Equals("SelectedCue")) {
                 SetVisualSelectedCue();
@@ -153,12 +158,17 @@ namespace Replayer.WinForms.Ui.Views.Cues {
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the Cues control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Cues_SelectedIndexChanged(object sender, EventArgs e) {
             if (View.Cues.SelectedIndices.Count > 1) //more than one selected
             {
-                ///force selection of a single item
-                ///forcing is necessary because we have a multiselect list. This is needed to also allow "no selection". See
-                ///http://devexpress.com/Support/Center/p/Q102277.aspx
+                //force selection of a single item
+                //forcing is necessary because we have a multiselect list. This is needed to also allow "no selection". See
+                //http://devexpress.com/Support/Center/p/Q102277.aspx
                 int index = View.Cues.SelectedIndex;
                 View.Cues.UnSelectAll();
                 View.Cues.SetSelected(index, true);
@@ -243,12 +253,12 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         }
 
         /// <summary>
-        ///     Formats the given amount of secons into a formatted time string.
+        /// Formats the given amount of secons into a formatted time string.
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="seconds">The seconds.</param>
         /// <returns></returns>
-        private string ToTimeString(double secs) {
-            TimeSpan t = TimeSpan.FromSeconds(secs);
+        private string ToTimeString(double seconds) {
+            TimeSpan t = TimeSpan.FromSeconds(seconds);
             return string.Format("{0:D2}:{1:D2}.{2:D1}",
                                  t.Minutes,
                                  t.Seconds,

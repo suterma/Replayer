@@ -152,13 +152,6 @@ namespace Replayer.WinForms.Ui {
         }
 
         /// <summary>
-        ///     Handles the PropertyChanged event of the Model.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">
-        ///     The <see cref="System.ComponentModel.PropertyChangedEventArgs" /> instance containing the event data.
-        /// </param>
-        /// <summary>
         ///     Sets the title of this form.
         /// </summary>
         private void SetTitle() {

@@ -8,9 +8,10 @@ namespace Replayer.WinForms.Ui.Gui {
     /// </summary>
     public partial class ErrorBox : XtraForm {
         /// <summary>
-        ///     Prepares the message.
+        /// Prepares the message.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message.</param>
+        /// <param name="title">The title.</param>
         public ErrorBox(string message, string title = "") {
             InitializeComponent();
             labelControl1.Text = message;
@@ -18,17 +19,28 @@ namespace Replayer.WinForms.Ui.Gui {
         }
 
         /// <summary>
-        ///     Shows the message and returns a DialogResult.
+        /// Shows the message and returns a DialogResult.
         /// </summary>
         /// <returns></returns>
-        public DialogResult Show() {
+        public new DialogResult Show() {
             return ShowDialog();
         }
 
+        /// <summary>
+        /// Shows the specified message and returns a DialogResult.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         public static DialogResult Show(string message) {
             return new ErrorBox(message).Show();
         }
 
+        /// <summary>
+        /// Shows the specified message and title and returns a DialogResult.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="title">The title.</param>
+        /// <returns></returns>
         internal static DialogResult Show(string message, string title) {
             return new ErrorBox(message, title).Show();
         }

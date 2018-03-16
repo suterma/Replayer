@@ -5,12 +5,24 @@ using DevExpress.XtraEditors;
 using Replayer.Model;
 
 namespace Replayer.WinForms.Ui.Gui {
+    /// <summary>
+    /// Wizard to create a new compilation.
+    /// </summary>
+    /// <seealso cref="DevExpress.XtraEditors.XtraForm" />
     public partial class CreateNewCompilationWizard : XtraForm {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateNewCompilationWizard"/> class.
+        /// </summary>
         public CreateNewCompilationWizard() {
             InitializeComponent();
             wizardControl1.FinishButtonClick += wizardControl1_FinishButtonClick;
         }
 
+        /// <summary>
+        /// Handles the FinishButtonClick event of the wizardControl1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void wizardControl1_FinishButtonClick(object sender, EventArgs e) {
             //generate the compilation with the tracks.
             ICompilation compilation = CompilationFactory.CreateNew();
@@ -38,6 +50,11 @@ namespace Replayer.WinForms.Ui.Gui {
             Close();
         }
 
+        /// <summary>
+        /// Handles the Click event of the _btnBrowserForTracks control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void _btnBrowserForTracks_Click(object sender, EventArgs e) {
             var otfd = new OpenTrackFileDialog();
             if (otfd.ShowDialog(true) == DialogResult.OK) //pressed ok by the user?
@@ -46,6 +63,11 @@ namespace Replayer.WinForms.Ui.Gui {
             }
         }
 
+        /// <summary>
+        /// Handles the CancelButtonClick event of the wizardControl1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void wizardControl1_CancelButtonClick(object sender, EventArgs e) {
             DialogResult = DialogResult.Cancel;
             Close();

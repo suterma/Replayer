@@ -1,23 +1,23 @@
-﻿using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using NAudio.Wave;
 
 namespace NAudioDemo.AudioPlaybackDemo {
+    /// <summary>
+    /// The Settings panel fo rthe WaveOut Device.
+    /// </summary>
+    /// <seealso cref="DevExpress.XtraEditors.XtraUserControl" />
     public partial class WaveOutSettingsPanel : XtraUserControl {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WaveOutSettingsPanel"/> class.
+        /// </summary>
         public WaveOutSettingsPanel() {
             InitializeComponent();
             InitialiseDeviceCombo();
         }
 
-        internal class CallbackComboItem {
-            public CallbackComboItem(string text, WaveCallbackStrategy strategy) {
-                Text = text;
-                Strategy = strategy;
-            }
-            public string Text { get; private set; }
-            public WaveCallbackStrategy Strategy { get; }
-        }
-
+        /// <summary>
+        /// Initialises the device combo.
+        /// </summary>
         private void InitialiseDeviceCombo() {
             if (WaveOut.DeviceCount <= 0)
                 return;
@@ -30,6 +30,12 @@ namespace NAudioDemo.AudioPlaybackDemo {
 
 
 
+        /// <summary>
+        /// Gets the selected device number.
+        /// </summary>
+        /// <value>
+        /// The selected device number.
+        /// </value>
         public int SelectedDeviceNumber => comboBoxWaveOutDevice.SelectedIndex;
 
     }

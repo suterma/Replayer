@@ -22,6 +22,12 @@ namespace Replayer.WinForms.Ui.Components {
 
         #region Assembly Attribute Accessors
 
+        /// <summary>
+        /// Gets the assembly title.
+        /// </summary>
+        /// <value>
+        /// The assembly title.
+        /// </value>
         public string AssemblyTitle {
             get {
                 object[] attributes =
@@ -36,10 +42,22 @@ namespace Replayer.WinForms.Ui.Components {
             }
         }
 
+        /// <summary>
+        /// Gets the assembly version.
+        /// </summary>
+        /// <value>
+        /// The assembly version.
+        /// </value>
         public string AssemblyVersion {
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
+        /// <summary>
+        /// Gets the assembly description.
+        /// </summary>
+        /// <value>
+        /// The assembly description.
+        /// </value>
         public string AssemblyDescription {
             get {
                 object[] attributes =
@@ -51,6 +69,12 @@ namespace Replayer.WinForms.Ui.Components {
             }
         }
 
+        /// <summary>
+        /// Gets the assembly product.
+        /// </summary>
+        /// <value>
+        /// The assembly product.
+        /// </value>
         public string AssemblyProduct {
             get {
                 object[] attributes =
@@ -62,6 +86,12 @@ namespace Replayer.WinForms.Ui.Components {
             }
         }
 
+        /// <summary>
+        /// Gets the assembly copyright.
+        /// </summary>
+        /// <value>
+        /// The assembly copyright.
+        /// </value>
         public string AssemblyCopyright {
             get {
                 object[] attributes =
@@ -73,6 +103,12 @@ namespace Replayer.WinForms.Ui.Components {
             }
         }
 
+        /// <summary>
+        /// Gets the assembly company.
+        /// </summary>
+        /// <value>
+        /// The assembly company.
+        /// </value>
         public string AssemblyCompany {
             get {
                 object[] attributes =

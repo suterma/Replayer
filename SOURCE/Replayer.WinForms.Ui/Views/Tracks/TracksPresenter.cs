@@ -54,7 +54,7 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
         /// </param>
         private void Tracks_DoubleClick(object sender, EventArgs e) {
             //start the player with the first cue of the track if possible
-            ///it is assumed that the expected track was already selected by the changed selection index
+            //it is assumed that the expected track was already selected by the changed selection index
             Cue firstCue = Core.Model.Instance.SelectedTrack.Cues.FirstOrDefault();
             if (firstCue != null) // there is one?
             {

@@ -58,11 +58,6 @@ namespace Replayer.Core.Player {
         double Volume { get; set; }
 
         /// <summary>
-        ///     Occurs when a property has changed it's value.
-        /// </summary>
-        event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
         ///     Seeks backward within the currently loaded media track.
         /// </summary>
         /// <param name="interval">The interval, in [seconds].</param>

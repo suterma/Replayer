@@ -34,9 +34,10 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         private WaveOutPlugin _outputDevicePlugin;
 
+        /// <summary>
+        /// Occurs when a property has changed it's value.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //public event PropertyChangedEventHandler PropertyChanged;
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -187,6 +188,13 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 }
             }
         }
+        /// <summary>
+        /// Gets or sets the state.
+        /// </summary>
+        /// <value>
+        /// The state.
+        /// </value>
+        /// <exception cref="NotSupportedException"></exception>
         public MediaPlayerState State {
             get {
                 if (waveOut != null) {
@@ -238,6 +246,12 @@ namespace NAudioDemo.AudioPlaybackDemo {
         }
 
 
+        /// <summary>
+        /// Gets or sets the URL, which represents the current media to use.
+        /// </summary>
+        /// <value>
+        /// The URL, or null if no media should get used now.
+        /// </value>
         public string Url {
 
             get {
@@ -387,22 +401,20 @@ namespace NAudioDemo.AudioPlaybackDemo {
 
         }
 
-        //private void UpdateTrackBarPosition()
-        //{
-        //    trackBarPosition.Value = 
-        //    //if (audioFileReader != null)
-        //    //{
-        //    //    var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
-        //    //    var position = TimeSpan.FromSeconds(secondsPosition);
-        //    //    if (Position != position)
-        //    //    Position = position;
-        //    //}
-        //}
-
+        /// <summary>
+        /// Seeks backward within the currently loaded media track.
+        /// </summary>
+        /// <param name="interval">The interval, in [seconds].</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void SeekBackward(double interval) {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Seeks forward within the currently loaded media track.
+        /// </summary>
+        /// <param name="interval">The interval, in [seconds].</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void SeekForward(double interval) {
             throw new NotImplementedException();
         }
@@ -426,7 +438,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void volumePot_ValueChanged(object sender, EventArgs e) {
             Volume = volumePot.Value;
-            //UpdateWaveoutVolume();
         }
 
         /// <summary>
