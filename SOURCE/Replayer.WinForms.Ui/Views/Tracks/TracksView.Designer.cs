@@ -36,7 +36,6 @@
             // 
             // _lbcTracks
             // 
-            this._lbcTracks.Appearance.BackColor = System.Drawing.Color.White;
             this._lbcTracks.Appearance.Options.UseBackColor = true;
             this._lbcTracks.Dock = System.Windows.Forms.DockStyle.Fill;
             this._lbcTracks.Location = new System.Drawing.Point(0, 0);
@@ -54,13 +53,13 @@
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
             this._cmsTracks.Name = "_cmsTracks";
-            this._cmsTracks.Size = new System.Drawing.Size(157, 156);
+            this._cmsTracks.Size = new System.Drawing.Size(154, 156);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.TrackEdit_Icon_256x256;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(156, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(153, 38);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
@@ -68,21 +67,21 @@
             // 
             this.deleteToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.TrackRemove_Icon_256x256;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(156, 38);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(153, 38);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // moveUpToolStripMenuItem
             // 
             this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
-            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(156, 38);
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(153, 38);
             this.moveUpToolStripMenuItem.Text = "Move up";
             this.moveUpToolStripMenuItem.Click += new System.EventHandler(this.moveUpToolStripMenuItem_Click);
             // 
             // moveDownToolStripMenuItem
             // 
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
-            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(156, 38);
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(153, 38);
             this.moveDownToolStripMenuItem.Text = "Move down";
             this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 

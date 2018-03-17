@@ -23,12 +23,10 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 return;
             for (var deviceId = -1; deviceId < WaveOut.DeviceCount; deviceId++) {
                 var capabilities = WaveOut.GetCapabilities(deviceId);
-                comboBoxWaveOutDevice.Items.Add($"Device {deviceId} ({capabilities.ProductName})");
+                comboBoxWaveOutDevice.Properties.Items.Add($"Device {deviceId} ({capabilities.ProductName})");
             }
             comboBoxWaveOutDevice.SelectedIndex = 0;
         }
-
-
 
         /// <summary>
         /// Gets the selected device number.

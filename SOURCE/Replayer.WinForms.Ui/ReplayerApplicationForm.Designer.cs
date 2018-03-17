@@ -25,43 +25,19 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReplayerApplicationForm));
-            this.standardMenuView1 = new Replayer.WinForms.Ui.Views.StandardMenu.StandardMenuView();
-            this._keyboardControllerView = new Replayer.WinForms.Ui.Views.KeyboardController.KeyboardControllerView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._tracksView = new Replayer.WinForms.Ui.Views.Tracks.TracksView();
             this._cuesView = new Replayer.WinForms.Ui.Views.Cues.CuesView();
-            this.mediaPlayerView1 = new Replayer.WinForms.Ui.Views.MediaPlayer.MediaPlayerView();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.mediaPlayerView2 = new Replayer.WinForms.Ui.Views.MediaPlayer.MediaPlayerView();
+            this.standardMenuView1 = new Replayer.WinForms.Ui.Views.StandardMenu.StandardMenuView();
+            this._keyboardControllerView = new Replayer.WinForms.Ui.Views.KeyboardController.KeyboardControllerView();
+            this.mediaPlayerView1 = new Replayer.WinForms.Ui.Views.MediaPlayer.MediaPlayerView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // standardMenuView1
-            // 
-            this.standardMenuView1.Appearance.Font = new System.Drawing.Font("Arial", 14F);
-            this.standardMenuView1.Appearance.Options.UseFont = true;
-            this.standardMenuView1.AutoSize = true;
-            this.standardMenuView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.standardMenuView1.Location = new System.Drawing.Point(0, 0);
-            this.standardMenuView1.LookAndFeel.SkinName = "Black";
-            this.standardMenuView1.Margin = new System.Windows.Forms.Padding(0);
-            this.standardMenuView1.Name = "standardMenuView1";
-            this.standardMenuView1.Size = new System.Drawing.Size(641, 40);
-            this.standardMenuView1.TabIndex = 6;
-            // 
-            // _keyboardControllerView
-            // 
-            this._keyboardControllerView.AutoSize = true;
-            this._keyboardControllerView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._keyboardControllerView.Location = new System.Drawing.Point(0, 466);
-            this._keyboardControllerView.Margin = new System.Windows.Forms.Padding(0);
-            this._keyboardControllerView.MinimumSize = new System.Drawing.Size(0, 29);
-            this._keyboardControllerView.Name = "_keyboardControllerView";
-            this._keyboardControllerView.Size = new System.Drawing.Size(641, 29);
-            this._keyboardControllerView.TabIndex = 2;
             // 
             // splitContainer1
             // 
@@ -98,6 +74,43 @@
             this._cuesView.Size = new System.Drawing.Size(427, 372);
             this._cuesView.TabIndex = 0;
             // 
+            // defaultLookAndFeel1
+            // 
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Dark Style";
+            // 
+            // mediaPlayerView2
+            // 
+            this.mediaPlayerView2.Location = new System.Drawing.Point(0, 415);
+            this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 32);
+            this.mediaPlayerView2.Name = "mediaPlayerView2";
+            this.mediaPlayerView2.Size = new System.Drawing.Size(641, 48);
+            this.mediaPlayerView2.TabIndex = 8;
+            // 
+            // standardMenuView1
+            // 
+            this.standardMenuView1.Appearance.Font = new System.Drawing.Font("Arial", 14F);
+            this.standardMenuView1.Appearance.Options.UseFont = true;
+            this.standardMenuView1.AutoSize = true;
+            this.standardMenuView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.standardMenuView1.Location = new System.Drawing.Point(0, 0);
+            this.standardMenuView1.LookAndFeel.SkinName = "Black";
+            this.standardMenuView1.Margin = new System.Windows.Forms.Padding(0);
+            this.standardMenuView1.Name = "standardMenuView1";
+            this.standardMenuView1.Size = new System.Drawing.Size(641, 40);
+            this.standardMenuView1.TabIndex = 6;
+            // 
+            // _keyboardControllerView
+            // 
+            this._keyboardControllerView.AutoSize = true;
+            this._keyboardControllerView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._keyboardControllerView.Location = new System.Drawing.Point(0, 466);
+            this._keyboardControllerView.LookAndFeel.SkinName = "Caramel";
+            this._keyboardControllerView.Margin = new System.Windows.Forms.Padding(0);
+            this._keyboardControllerView.MinimumSize = new System.Drawing.Size(0, 29);
+            this._keyboardControllerView.Name = "_keyboardControllerView";
+            this._keyboardControllerView.Size = new System.Drawing.Size(641, 29);
+            this._keyboardControllerView.TabIndex = 2;
+            // 
             // mediaPlayerView1
             // 
             this.mediaPlayerView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -107,19 +120,6 @@
             this.mediaPlayerView1.Name = "mediaPlayerView1";
             this.mediaPlayerView1.Size = new System.Drawing.Size(702, 64);
             this.mediaPlayerView1.TabIndex = 8;
-            // 
-            // defaultLookAndFeel1
-            // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Black";
-            this.defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Office2003;
-            // 
-            // mediaPlayerView2
-            // 
-            this.mediaPlayerView2.Location = new System.Drawing.Point(0, 415);
-            this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 32);
-            this.mediaPlayerView2.Name = "mediaPlayerView2";
-            this.mediaPlayerView2.Size = new System.Drawing.Size(641, 48);
-            this.mediaPlayerView2.TabIndex = 8;
             // 
             // ReplayerApplicationForm
             // 

@@ -33,6 +33,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.editCompilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCompilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCompilationAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addTrackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedTrackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,6 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uISettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,6 +123,14 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.saveCompilationAsToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
             this.saveCompilationAsToolStripMenuItem.Text = "Save As...";
             this.saveCompilationAsToolStripMenuItem.Click += new System.EventHandler(this.saveCompilationAsToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationSaveAs_Icon_256x256;
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.exportToolStripMenuItem.Text = "Export...";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // trackToolStripMenuItem
             // 
@@ -246,14 +254,6 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(219, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationSaveAs_Icon_256x256;
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
-            this.exportToolStripMenuItem.Text = "Export...";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // StandardMenuView
             // 

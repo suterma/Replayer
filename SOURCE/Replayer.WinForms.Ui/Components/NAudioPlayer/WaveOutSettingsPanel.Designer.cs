@@ -23,14 +23,12 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.comboBoxWaveOutDevice = new System.Windows.Forms.ComboBox();
+            this.comboBoxWaveOutDevice = new DevExpress.XtraEditors.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxWaveOutDevice
             // 
             this.comboBoxWaveOutDevice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxWaveOutDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxWaveOutDevice.FormattingEnabled = true;
             this.comboBoxWaveOutDevice.Location = new System.Drawing.Point(0, 0);
             this.comboBoxWaveOutDevice.Name = "comboBoxWaveOutDevice";
             this.comboBoxWaveOutDevice.Size = new System.Drawing.Size(117, 21);
@@ -49,6 +47,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxWaveOutDevice;
+        private DevExpress.XtraEditors.ComboBox comboBoxWaveOutDevice;
     }
 }
