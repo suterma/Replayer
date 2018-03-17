@@ -29,7 +29,6 @@
             this._tracksView = new Replayer.WinForms.Ui.Views.Tracks.TracksView();
             this._cuesView = new Replayer.WinForms.Ui.Views.Cues.CuesView();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.mediaPlayerView2 = new Replayer.WinForms.Ui.Views.MediaPlayer.MediaPlayerView();
             this.standardMenuView1 = new Replayer.WinForms.Ui.Views.StandardMenu.StandardMenuView();
             this._keyboardControllerView = new Replayer.WinForms.Ui.Views.KeyboardController.KeyboardControllerView();
             this.mediaPlayerView1 = new Replayer.WinForms.Ui.Views.MediaPlayer.MediaPlayerView();
@@ -41,6 +40,9 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 40);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer1.Name = "splitContainer1";
@@ -52,8 +54,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this._cuesView);
-            this.splitContainer1.Size = new System.Drawing.Size(641, 372);
-            this.splitContainer1.SplitterDistance = 210;
+            this.splitContainer1.Size = new System.Drawing.Size(616, 162);
+            this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 7;
             // 
             // _tracksView
@@ -62,7 +64,7 @@
             this._tracksView.Location = new System.Drawing.Point(0, 0);
             this._tracksView.Margin = new System.Windows.Forms.Padding(0);
             this._tracksView.Name = "_tracksView";
-            this._tracksView.Size = new System.Drawing.Size(210, 372);
+            this._tracksView.Size = new System.Drawing.Size(201, 162);
             this._tracksView.TabIndex = 4;
             // 
             // _cuesView
@@ -71,20 +73,12 @@
             this._cuesView.Location = new System.Drawing.Point(0, 0);
             this._cuesView.Margin = new System.Windows.Forms.Padding(0);
             this._cuesView.Name = "_cuesView";
-            this._cuesView.Size = new System.Drawing.Size(427, 372);
+            this._cuesView.Size = new System.Drawing.Size(411, 162);
             this._cuesView.TabIndex = 0;
             // 
             // defaultLookAndFeel1
             // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Dark Style";
-            // 
-            // mediaPlayerView2
-            // 
-            this.mediaPlayerView2.Location = new System.Drawing.Point(0, 415);
-            this.mediaPlayerView2.MinimumSize = new System.Drawing.Size(208, 32);
-            this.mediaPlayerView2.Name = "mediaPlayerView2";
-            this.mediaPlayerView2.Size = new System.Drawing.Size(641, 48);
-            this.mediaPlayerView2.TabIndex = 8;
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Caramel";
             // 
             // standardMenuView1
             // 
@@ -96,39 +90,39 @@
             this.standardMenuView1.LookAndFeel.SkinName = "Black";
             this.standardMenuView1.Margin = new System.Windows.Forms.Padding(0);
             this.standardMenuView1.Name = "standardMenuView1";
-            this.standardMenuView1.Size = new System.Drawing.Size(641, 40);
+            this.standardMenuView1.Size = new System.Drawing.Size(616, 40);
             this.standardMenuView1.TabIndex = 6;
             // 
             // _keyboardControllerView
             // 
             this._keyboardControllerView.AutoSize = true;
             this._keyboardControllerView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._keyboardControllerView.Location = new System.Drawing.Point(0, 466);
+            this._keyboardControllerView.Location = new System.Drawing.Point(0, 251);
             this._keyboardControllerView.LookAndFeel.SkinName = "Caramel";
             this._keyboardControllerView.Margin = new System.Windows.Forms.Padding(0);
             this._keyboardControllerView.MinimumSize = new System.Drawing.Size(0, 29);
             this._keyboardControllerView.Name = "_keyboardControllerView";
-            this._keyboardControllerView.Size = new System.Drawing.Size(641, 29);
+            this._keyboardControllerView.Size = new System.Drawing.Size(616, 29);
             this._keyboardControllerView.TabIndex = 2;
             // 
             // mediaPlayerView1
             // 
-            this.mediaPlayerView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaPlayerView1.Location = new System.Drawing.Point(0, 335);
+            this.mediaPlayerView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mediaPlayerView1.Location = new System.Drawing.Point(0, 202);
             this.mediaPlayerView1.Margin = new System.Windows.Forms.Padding(0);
-            this.mediaPlayerView1.MinimumSize = new System.Drawing.Size(208, 63);
             this.mediaPlayerView1.Name = "mediaPlayerView1";
-            this.mediaPlayerView1.Size = new System.Drawing.Size(702, 64);
+            this.mediaPlayerView1.Size = new System.Drawing.Size(616, 49);
             this.mediaPlayerView1.TabIndex = 8;
             // 
             // ReplayerApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 495);
-            this.Controls.Add(this.mediaPlayerView2);
+            this.ClientSize = new System.Drawing.Size(616, 280);
             this.Controls.Add(this.standardMenuView1);
             this.Controls.Add(this._keyboardControllerView);
+            this.Controls.Add(this.mediaPlayerView1);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinName = "Black";
@@ -151,7 +145,6 @@
         private Views.Cues.CuesView _cuesView;
         private Views.MediaPlayer.MediaPlayerView mediaPlayerView1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
-        private Views.MediaPlayer.MediaPlayerView mediaPlayerView2;
     }
 }
 

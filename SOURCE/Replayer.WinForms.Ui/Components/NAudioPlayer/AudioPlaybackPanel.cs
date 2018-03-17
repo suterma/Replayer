@@ -61,7 +61,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             trackBarPosition.Minimum = trackbarMin;
             volumePot.Maximum = 100; //0dBFS for the potentiometer, according to the Volume property used here.
             volumePot.Value = 71; //approx. -3 dB
-            //volumePot.ValueChanged += volumePot_ValueChanged;
+            volumePot.ValueChanged += VolumePot_ValueChanged;
 
             LoadOutputPlugin();
         }
@@ -446,7 +446,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_play_Click(object sender, EventArgs e) {
-
             State = MediaPlayerState.Playing;
         }
 
