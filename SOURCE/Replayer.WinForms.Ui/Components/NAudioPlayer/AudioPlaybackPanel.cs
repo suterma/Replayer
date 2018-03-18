@@ -14,8 +14,6 @@ using Replayer.WinForms.Ui.Gui;
 namespace NAudioDemo.AudioPlaybackDemo {
     public partial class AudioPlaybackPanel : XtraUserControl, IMediaPlayer {
 
-        //TODO add log4net logging
-
         int trackbarMax = 100000; //reasonably larger than estimated width in pixels
         int trackbarMin = 0;
 
@@ -81,7 +79,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 settingsPanel = new Label() { Text = "This output device is unavailable on your system", Dock = DockStyle.Fill };
             }
             settingsPanel.Dock = DockStyle.Fill;
-            panelOutputDeviceSettings.Controls.Add(settingsPanel);
             Log.Info("WaveOutPlugin loaded.");
 
         }
@@ -154,7 +151,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 ErrorBox.Show(message);
                 return;
             }
-            panelOutputDeviceSettings.Enabled = false;
             Log.Info("Ready to play!");
         }
 
@@ -331,12 +327,12 @@ namespace NAudioDemo.AudioPlaybackDemo {
             waveOut = _outputDevicePlugin.CreateDevice(latency);
             waveOut.PlaybackStopped += OnPlaybackStopped;
             trackBarPosition.Enabled = true;//Allow scrolling only with a ready-to play situation
+            //panelOutputDeviceSettings.Enabled = false; //Do not allow to change device while the output is existing
             Log.Info($"WaveOut created.");
         }
 
         void OnPlaybackStopped(object sender, StoppedEventArgs e) {
             UpdateAmplitudeDisplay(0, 0);
-            panelOutputDeviceSettings.Enabled = true;
             if (e.Exception != null) {
                 ErrorBox.Show(e.Exception.Message, "Playback Device Error");
             }
@@ -363,6 +359,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
             trackBarPosition.Enabled = false;//Not allow scrolling when not able to play
             trackBarPosition.Value = 0;
+            //panelOutputDeviceSettings.Enabled = true; //Allow changing the device while the output is not existing.
         }
 
 
@@ -470,7 +467,14 @@ namespace NAudioDemo.AudioPlaybackDemo {
             UpdateAmplitudeDisplay(0, 0);
         }
 
+        private void panelOutputDeviceSettings_Click(object sender, EventArgs e) {
+            AllowDeviceOutputReselect();
+        }
 
+        private void AllowDeviceOutputReselect() {
+            CloseWaveOut();
+            //panelOutputDeviceSettings.Enabled = true; //Allow reselect now
+        }
     }
 }
 

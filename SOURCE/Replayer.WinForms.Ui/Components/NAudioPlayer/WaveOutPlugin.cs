@@ -22,21 +22,12 @@ namespace NAudioDemo.AudioPlaybackDemo {
             //Existing Window is the default, probably most suitable for Replayer.
             //TODO: later cleanup this code with only leaving this default.
             var strategy = WaveCallbackStrategy.ExistingWindow;
-            if (strategy == WaveCallbackStrategy.Event) {
-                var waveOut = new WaveOutEvent {
-                    DeviceNumber = waveOutSettingsPanel.SelectedDeviceNumber,
-                    DesiredLatency = latency
-                };
-                device = waveOut;
-            }
-            else {
                 WaveCallbackInfo callbackInfo = strategy == WaveCallbackStrategy.NewWindow ? WaveCallbackInfo.NewWindow() : WaveCallbackInfo.FunctionCallback();
                 WaveOut outputDevice = new WaveOut(callbackInfo) {
                     DeviceNumber = waveOutSettingsPanel.SelectedDeviceNumber,
                     DesiredLatency = latency
                 };
-                device = outputDevice;
-            }
+                device = outputDevice;       
             return device;
         }
 

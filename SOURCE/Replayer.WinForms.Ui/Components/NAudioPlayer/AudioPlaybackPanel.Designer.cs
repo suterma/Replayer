@@ -37,7 +37,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
-            this.panelOutputDeviceSettings = new System.Windows.Forms.Panel();
             this.btn_play = new DevExpress.XtraEditors.SimpleButton();
             this.btn_pause = new DevExpress.XtraEditors.SimpleButton();
             this.btn_stop = new DevExpress.XtraEditors.SimpleButton();
@@ -93,15 +92,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.volumeMeter1.Size = new System.Drawing.Size(16, 48);
             this.volumeMeter1.TabIndex = 18;
             this.volumeMeter1.Text = "volumeMeter1";
-            // 
-            // panelOutputDeviceSettings
-            // 
-            this.panelOutputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelOutputDeviceSettings.Location = new System.Drawing.Point(175, 23);
-            this.panelOutputDeviceSettings.Name = "panelOutputDeviceSettings";
-            this.panelOutputDeviceSettings.Size = new System.Drawing.Size(262, 25);
-            this.panelOutputDeviceSettings.TabIndex = 1;
             // 
             // btn_play
             // 
@@ -181,7 +171,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.btn_pause);
             this.Controls.Add(this.btn_play);
-            this.Controls.Add(this.panelOutputDeviceSettings);
             this.Controls.Add(this.volumeMeter2);
             this.Controls.Add(this.volumeMeter1);
             this.Controls.Add(this.trackBarPosition);
@@ -204,7 +193,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
         private NAudio.Gui.VolumeMeter volumeMeter1;
         private NAudio.Gui.VolumeMeter volumeMeter2;
         private VolumePot volumePot;
-        private System.Windows.Forms.Panel panelOutputDeviceSettings;
         private DevExpress.XtraEditors.SimpleButton btn_play;
         private DevExpress.XtraEditors.SimpleButton btn_pause;
         private DevExpress.XtraEditors.SimpleButton btn_stop;
