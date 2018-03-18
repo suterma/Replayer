@@ -300,7 +300,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             audioFileReader = new AudioFileReader(fileName);
 
             var sampleChannel = new SampleChannel(audioFileReader, true);
-            //TODO is sampleChannel used still ? sampleChannel.PreVolumeMeter+= OnPreVolumeMeter;
             var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
             postVolumeMeter.StreamVolume += OnPostVolumeMeter;
 
@@ -327,7 +326,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             waveOut = _outputDevicePlugin.CreateDevice(latency);
             waveOut.PlaybackStopped += OnPlaybackStopped;
             trackBarPosition.Enabled = true;//Allow scrolling only with a ready-to play situation
-            //panelOutputDeviceSettings.Enabled = false; //Do not allow to change device while the output is existing
             Log.Info($"WaveOut created.");
         }
 
@@ -359,7 +357,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
             trackBarPosition.Enabled = false;//Not allow scrolling when not able to play
             trackBarPosition.Value = 0;
-            //panelOutputDeviceSettings.Enabled = true; //Allow changing the device while the output is not existing.
         }
 
 
@@ -465,15 +462,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 waveOut.Stop();
             }
             UpdateAmplitudeDisplay(0, 0);
-        }
-
-        private void panelOutputDeviceSettings_Click(object sender, EventArgs e) {
-            AllowDeviceOutputReselect();
-        }
-
-        private void AllowDeviceOutputReselect() {
-            CloseWaveOut();
-            //panelOutputDeviceSettings.Enabled = true; //Allow reselect now
         }
     }
 }
