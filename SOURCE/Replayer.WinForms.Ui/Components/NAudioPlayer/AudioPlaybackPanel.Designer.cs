@@ -51,7 +51,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.trackBarPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarPosition.Enabled = false;
-            this.trackBarPosition.LargeChange = 1;
+            this.trackBarPosition.LargeChange = 10;
             this.trackBarPosition.Location = new System.Drawing.Point(126, 0);
             this.trackBarPosition.Maximum = 100;
             this.trackBarPosition.Name = "trackBarPosition";

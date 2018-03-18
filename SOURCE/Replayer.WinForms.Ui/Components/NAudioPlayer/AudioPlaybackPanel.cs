@@ -57,6 +57,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             InitializeComponent();
             trackBarPosition.Maximum = trackbarMax;
             trackBarPosition.Minimum = trackbarMin;
+            trackBarPosition.LargeChange = trackbarMax / 20;
             volumePot.Maximum = 100; //0dBFS for the potentiometer, according to the Volume property used here.
             volumePot.Value = 71; //approx. -3 dB
             volumePot.ValueChanged += VolumePot_ValueChanged;
@@ -84,11 +85,10 @@ namespace NAudioDemo.AudioPlaybackDemo {
         }
 
         /// <summary>
-        /// Prepares to play by loading the file (if available) and getting the wave output ready.
+        /// Prepares to play, if required, by creating the output device and
+        /// loading the file (if available) and getting the wave output ready.
         /// </summary>
         private void PrepareToPlay() {
-            Log.Info("Preparing to play...");
-
             if (!_outputDevicePlugin.IsAvailable) {
                 string message = "Preparing to play failed. The selected output driver is not available on this system.";
                 Log.Error(message);
@@ -97,11 +97,11 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
 
             if (waveOut != null) {
-                Log.Info("Nothing to prepare - Ready to play!");
-
+                //Log.Info("Nothing to prepare - Ready to play!");
                 return; //because there is nothing to prepare anymore.
             }
 
+            Log.Info("Preparing to play...");
 
             if (String.IsNullOrEmpty(fileName)) {
                 Log.Warn("Nothing to prepare, no file available.");
@@ -177,11 +177,15 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
             set {
                 PrepareToPlay();
-                if (audioFileReader != null) {
-                    audioFileReader.CurrentTime = value;
-                    UpdateTimerDisplays();
-                    Log.Info($"Position skipped to {value}.");
+
+                if (waveOut.PlaybackState == PlaybackState.Paused) {
+                    waveOut.Stop(); //This will flush any outstanding buffers. See https://stackoverflow.com/a/32115661/79485
                 }
+
+                audioFileReader.CurrentTime = value;
+                UpdateTimerDisplays();
+                Log.Info($"Position skipped to {value}.");
+
             }
         }
         /// <summary>
@@ -275,13 +279,16 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 return volumePot.Value;
             }
             set {
-                Log.Info($"Setting pot value to {value.ToString()}");
-
                 //limit
                 var limitedValue = Math.Max(0, Math.Min(100, value));
 
-                volumePot.Value = limitedValue;
-                UpdateWaveoutVolume();
+                //apply change if necessary
+                //if (volumePot?.Value != limitedValue)
+                {
+                    Log.Info($"Setting pot value to {value.ToString()}");
+                    volumePot.Value = limitedValue;
+                    UpdateWaveoutVolume();
+                }
             }
         }
 
@@ -291,8 +298,10 @@ namespace NAudioDemo.AudioPlaybackDemo {
         private void UpdateWaveoutVolume() {
             if (waveOut != null) {
                 var volume = (float)volumePot.Volume;
-                waveOut.Volume = volume;
-                Log.Info($"Volume set to {volume}");
+                if (waveOut.Volume != volume) {
+                    waveOut.Volume = volume;
+                    Log.Info($"Volume set to {volume}");
+                }
             }
         }
 
@@ -333,9 +342,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
             UpdateAmplitudeDisplay(0, 0);
             if (e.Exception != null) {
                 ErrorBox.Show(e.Exception.Message, "Playback Device Error");
-            }
-            if (audioFileReader != null) {
-                audioFileReader.Position = 0;
             }
             Log.Info($"Playback stopped.");
         }
@@ -399,18 +405,16 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// Seeks backward within the currently loaded media track.
         /// </summary>
         /// <param name="interval">The interval, in [seconds].</param>
-        /// <exception cref="NotImplementedException"></exception>
         public void SeekBackward(double interval) {
-            throw new NotImplementedException();
+            Position -= TimeSpan.FromSeconds(interval);
         }
 
         /// <summary>
         /// Seeks forward within the currently loaded media track.
         /// </summary>
         /// <param name="interval">The interval, in [seconds].</param>
-        /// <exception cref="NotImplementedException"></exception>
         public void SeekForward(double interval) {
-            throw new NotImplementedException();
+            Position += TimeSpan.FromSeconds(interval);
         }
 
         /// <summary>
