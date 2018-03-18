@@ -1,7 +1,13 @@
 # Release notes for Replayer 
 See also https://github.com/suterma/Replayer
-
-## Release 0.6.0 (Next, beta)
+## Release 0.6.1 (beta RC2 with NAudio)
+ - Updated UI with nicer colors
+ - Removed Device selection
+ - minor Time display fixes in the UI
+ - Fixes for Transport features
+ - Various cleanups in Code
+ - Fixed various crashes with missing device output
+## Release 0.6.0 (beta with NAudio)
  - No dependency on Windows Media Player
  - Singe file executable (no installation)
  - Auto-load of the first compilation in the same directory (when no last loaded available)
