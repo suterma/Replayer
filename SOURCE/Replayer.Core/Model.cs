@@ -273,8 +273,7 @@ namespace Replayer.Core {
                 //go to cue point
                 Player.State = MediaPlayerState.Paused;
                 Player.Url = trackUrl;
-                Player.Position = new TimeSpan((long)(SelectedCue.Time - Settings.PrePlayDuration_Seconds) * 10000000);
-                //set position in ticks.                    
+                Player.Position = TimeSpan.FromSeconds((SelectedCue.Time - Settings.PrePlayDuration_Seconds));
             }
             else {
                 throw new FileNotFoundException("Media for this cue point was not found!");

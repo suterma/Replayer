@@ -23,9 +23,7 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         /// </summary>
         /// <value>The presenter.</value>
         public CuesPresenter Presenter {
-            get
-; set
-;
+            get; set;
         }
 
         /// <summary>

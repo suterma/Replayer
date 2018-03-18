@@ -34,7 +34,6 @@ namespace Replayer.WinForms.Ui.Views.Cues {
 
             MonitorCuesCollection();
 
-
             View.Cues.SelectedIndexChanged += Cues_SelectedIndexChanged;
 
             View.Cues.DoubleClick += CuesList_DoubleClick;
@@ -259,10 +258,7 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         /// <returns></returns>
         private string ToTimeString(double seconds) {
             TimeSpan t = TimeSpan.FromSeconds(seconds);
-            return string.Format("{0:D2}:{1:D2}.{2:D1}",
-                                 t.Minutes,
-                                 t.Seconds,
-                                 t.Milliseconds);
+            return $"{t.Minutes:D2}:{t.Seconds:D2}.{t.Milliseconds/100:D1}";
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Replayer.Model {
         public String Shortcut { get; set; }
 
         /// <summary>
-        ///     Gets or sets the time.
+        ///     Gets or sets the time in whole and fractional seconds from the beginning of the track..
         /// </summary>
         /// <value>The time.</value>
         public Double Time { get; set; }

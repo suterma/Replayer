@@ -172,7 +172,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 if (audioFileReader == null) {
                     return TimeSpan.Zero;
                 }
-                //return (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
                 return audioFileReader.CurrentTime;
             }
             set {
