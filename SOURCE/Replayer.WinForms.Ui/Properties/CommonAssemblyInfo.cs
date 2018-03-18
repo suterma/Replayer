@@ -6,9 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Replayer WinForms Application Ui")]
-[assembly: AssemblyDescription("A simple Ui with editing capabilities for the Replayer application.")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("codeministry.ch")]
+[assembly: AssemblyProduct("Replayer")]
+[assembly: AssemblyCopyright("GPL-v3")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
-
-
+[assembly: XmlConfigurator(Watch = true)]
