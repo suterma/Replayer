@@ -185,6 +185,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             this.Controls.Add(this.volumeMeter2);
             this.Controls.Add(this.volumeMeter1);
             this.Controls.Add(this.trackBarPosition);
+            this.Controls.Add(this.volumePot);
             this.Name = "AudioPlaybackPanel";
             this.Size = new System.Drawing.Size(600, 48);
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -23,7 +23,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
                 return;
             for (var deviceId = -1; deviceId < WaveOut.DeviceCount; deviceId++) {
                 var capabilities = WaveOut.GetCapabilities(deviceId);
-                comboBoxWaveOutDevice.Properties.Items.Add($"Device {deviceId} ({capabilities.ProductName})");
+                comboBoxWaveOutDevice.Items.Add($"Device {deviceId} ({capabilities.ProductName})");
             }
             comboBoxWaveOutDevice.SelectedIndex = 0;
         }
