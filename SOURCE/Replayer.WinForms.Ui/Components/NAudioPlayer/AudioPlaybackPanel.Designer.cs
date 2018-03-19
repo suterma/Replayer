@@ -95,6 +95,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // btn_play
             // 
+            this.btn_play.AllowFocus = false;
             this.btn_play.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_play.Image = global::Replayer.WinForms.Ui.Properties.Resources.AudioPlay_Icon_16x16;
             this.btn_play.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
@@ -106,6 +107,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // btn_pause
             // 
+            this.btn_pause.AllowFocus = false;
             this.btn_pause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_pause.Image = global::Replayer.WinForms.Ui.Properties.Resources.AudioPause_Icon_16x16;
             this.btn_pause.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
@@ -117,6 +119,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             // 
             // btn_stop
             // 
+            this.btn_stop.AllowFocus = false;
             this.btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_stop.Image = global::Replayer.WinForms.Ui.Properties.Resources.AudioStop_Icon_16x16;
             this.btn_stop.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
