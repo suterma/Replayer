@@ -65,14 +65,6 @@ namespace Replayer.Core {
                 {
                     Model.Instance.Player.State = MediaPlayerState.Paused; //TODO go back to last selected queue.
                     Model.Instance.SelectedCue = matchingCue;
-                    //TODO delete below
-                    ////select track of this item
-                    //Model.Instance.SelectedTrack = (from track in Model.Instance.Compilation.Tracks
-                    //                                where track.Cues.Contains(matchingCue)
-                    //                                select track).Single();
-
-                    //Model.Instance.UpdateSelectedCueTo(matchingCue);
-                    //Model.Instance.Player.Position = new TimeSpan((long)(Model.Instance.SelectedCue.Time * 10000000));
                 } //else leave the existing selected cue as is
 
                 #endregion
@@ -139,10 +131,7 @@ namespace Replayer.Core {
                     }
                 case InputCommand.Stop: {
                         //go back to last selected queue.
-                        if (Model.Instance.SelectedCue != null) {
-                            Model.Instance.Player.State = MediaPlayerState.Paused;
-                            Model.Instance.Player.Position = new TimeSpan((long)(Model.Instance.SelectedCue.Time * 10000000));
-                        }
+                        Model.Instance.LoadSelectedCue();
                         break;
                     }
                 default:

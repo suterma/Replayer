@@ -293,10 +293,7 @@ namespace Replayer.Core {
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         private void OnPropertyChanged(String propertyName) {
-            if (PropertyChanged != null) //anyone listening?
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
