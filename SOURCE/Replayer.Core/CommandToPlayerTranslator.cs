@@ -139,8 +139,10 @@ namespace Replayer.Core {
                     }
                 case InputCommand.Stop: {
                         //go back to last selected queue.
-                        Model.Instance.Player.State = MediaPlayerState.Paused;
-                        Model.Instance.Player.Position = new TimeSpan((long)(Model.Instance.SelectedCue.Time * 10000000));
+                        if (Model.Instance.SelectedCue != null) {
+                            Model.Instance.Player.State = MediaPlayerState.Paused;
+                            Model.Instance.Player.Position = new TimeSpan((long)(Model.Instance.SelectedCue.Time * 10000000));
+                        }
                         break;
                     }
                 default:
