@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PropertyDialog));
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.okCancelPanel1 = new Replayer.WinForms.Ui.Gui.OkCancelPanel();
             this.SuspendLayout();
             // 
@@ -40,12 +39,6 @@
             this.propertyGrid1.Size = new System.Drawing.Size(599, 270);
             this.propertyGrid1.TabIndex = 0;
             this.propertyGrid1.ToolbarVisible = false;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(0, 0);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.TabIndex = 0;
             // 
             // okCancelPanel1
             // 
@@ -65,8 +58,10 @@
             this.Controls.Add(this.okCancelPanel1);
             this.Controls.Add(this.propertyGrid1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "PropertyDialog";
             this.Text = "Properties";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PropertyDialog_KeyDown);
             this.ResumeLayout(false);
 
         }
@@ -75,6 +70,5 @@
 
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private OkCancelPanel okCancelPanel1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

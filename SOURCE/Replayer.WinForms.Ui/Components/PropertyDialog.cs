@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using System.Windows.Forms;
 
 namespace Replayer.WinForms.Ui.Gui {
     /// <summary>
@@ -15,5 +16,19 @@ namespace Replayer.WinForms.Ui.Gui {
             Text = title;
             propertyGrid1.SelectedObject = settings;
         }
+
+        private void PropertyDialog_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Escape) {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+
+            if (e.KeyCode == Keys.Enter) {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+
     }
 }
