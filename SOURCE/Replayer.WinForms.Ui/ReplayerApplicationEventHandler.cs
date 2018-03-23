@@ -100,6 +100,7 @@ namespace Replayer.WinForms.Ui {
                         {
                             Cue cloneCue = Core.Model.Instance.SelectedCue.Clone(); //clone for private manipulation
                             using (var propertyDialog = new PropertyDialog(cloneCue, "Edit cue")) {
+                                propertyDialog.Height = 353;
                                 if (propertyDialog.ShowDialog() == DialogResult.OK) {
                                     Core.Model.Instance.SelectedTrack.Cues.Replace(Core.Model.Instance.SelectedCue, cloneCue);
                                     //assign back, causing an update of the model
@@ -120,6 +121,8 @@ namespace Replayer.WinForms.Ui {
                             var displayTrack = new DisplayTrack(Core.Model.Instance.SelectedTrack.Clone());
                             //clone for private manipulation
                             using (var propertyDialog = new PropertyDialog(displayTrack, "Edit track")) {
+                                propertyDialog.Height = 393;
+                                propertyDialog.Width = 800; //to have more room for the file name.
                                 if (propertyDialog.ShowDialog() == DialogResult.OK) {
                                     Core.Model.Instance.Compilation.Tracks.Replace(Core.Model.Instance.SelectedTrack,
                                                                                    displayTrack.Model);
