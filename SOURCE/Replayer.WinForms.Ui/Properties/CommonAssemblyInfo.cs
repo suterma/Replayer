@@ -11,5 +11,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("GPL-v3")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: AssemblyVersion("1.6.2")]
 
 [assembly: XmlConfigurator(Watch = true)]

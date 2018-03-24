@@ -64,6 +64,8 @@ namespace Replayer.WinForms.Ui.Components {
             // logoPictureBox
             // 
             this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logoPictureBox.Image = global::Replayer.WinForms.Ui.Properties.Resources.Cue_Icon_256x256;
+            this.logoPictureBox.InitialImage = global::Replayer.WinForms.Ui.Properties.Resources.Cue_Icon_256x256;
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);

@@ -47,21 +47,18 @@
             // 
             // wizardControl1
             // 
-            this.wizardControl1.BackButtonEnabled = false;
+            this.wizardControl1.BackButtonEnabled = true;
             this.wizardControl1.BackButtonVisible = true;
             this.wizardControl1.CancelButtonEnabled = true;
             this.wizardControl1.CancelButtonVisible = true;
             this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardControl1.EulaButtonEnabled = false;
-            this.wizardControl1.EulaButtonText = "eula";
-            this.wizardControl1.EulaButtonVisible = false;
             this.wizardControl1.HelpButtonEnabled = true;
             this.wizardControl1.HelpButtonVisible = false;
             this.wizardControl1.Location = new System.Drawing.Point(0, 0);
             this.wizardControl1.Name = "wizardControl1";
             this.wizardControl1.NextButtonEnabled = true;
             this.wizardControl1.NextButtonVisible = true;
-            this.wizardControl1.Size = new System.Drawing.Size(443, 256);
+            this.wizardControl1.Size = new System.Drawing.Size(887, 309);
             this.wizardControl1.WizardSteps.AddRange(new WizardBase.WizardStep[] {
             this.startStep1,
             this.intermediateStep1,
@@ -88,8 +85,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.18285F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.81715F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.1894F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.8106F));
             this.tableLayoutPanel1.Controls.Add(this._tbCommonArtist, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this._tbCommonAlbum, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this._lblCommonAlbum, 0, 2);
@@ -103,23 +100,23 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 0);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(887, 269);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // _tbCommonArtist
             // 
             this._tbCommonArtist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tbCommonArtist.Location = new System.Drawing.Point(3, 3);
+            this._tbCommonArtist.Location = new System.Drawing.Point(324, 181);
             this._tbCommonArtist.Name = "_tbCommonArtist";
-            this._tbCommonArtist.Size = new System.Drawing.Size(1, 20);
+            this._tbCommonArtist.Size = new System.Drawing.Size(560, 21);
             this._tbCommonArtist.TabIndex = 6;
             // 
             // _tbCommonAlbum
             // 
             this._tbCommonAlbum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tbCommonAlbum.Location = new System.Drawing.Point(3, 3);
+            this._tbCommonAlbum.Location = new System.Drawing.Point(324, 92);
             this._tbCommonAlbum.Name = "_tbCommonAlbum";
-            this._tbCommonAlbum.Size = new System.Drawing.Size(1, 20);
+            this._tbCommonAlbum.Size = new System.Drawing.Size(560, 21);
             this._tbCommonAlbum.TabIndex = 5;
             // 
             // _lblCommonAlbum
@@ -127,9 +124,9 @@
             this._lblCommonAlbum.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this._lblCommonAlbum.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             this._lblCommonAlbum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._lblCommonAlbum.Location = new System.Drawing.Point(3, 3);
+            this._lblCommonAlbum.Location = new System.Drawing.Point(3, 181);
             this._lblCommonAlbum.Name = "_lblCommonAlbum";
-            this._lblCommonAlbum.Size = new System.Drawing.Size(1, 0);
+            this._lblCommonAlbum.Size = new System.Drawing.Size(315, 13);
             this._lblCommonAlbum.TabIndex = 4;
             this._lblCommonAlbum.Text = "Common Album of all Tracks (if any)";
             // 
@@ -137,9 +134,9 @@
             // 
             this._lblCommonArtist.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             this._lblCommonArtist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._lblCommonArtist.Location = new System.Drawing.Point(3, 3);
+            this._lblCommonArtist.Location = new System.Drawing.Point(3, 92);
             this._lblCommonArtist.Name = "_lblCommonArtist";
-            this._lblCommonArtist.Size = new System.Drawing.Size(1, 0);
+            this._lblCommonArtist.Size = new System.Drawing.Size(315, 13);
             this._lblCommonArtist.TabIndex = 2;
             this._lblCommonArtist.Text = "Common Artist of all Tracks (if any)";
             // 
@@ -150,16 +147,16 @@
             this._lblCollectionName.Dock = System.Windows.Forms.DockStyle.Fill;
             this._lblCollectionName.Location = new System.Drawing.Point(3, 3);
             this._lblCollectionName.Name = "_lblCollectionName";
-            this._lblCollectionName.Size = new System.Drawing.Size(1, 0);
+            this._lblCollectionName.Size = new System.Drawing.Size(315, 13);
             this._lblCollectionName.TabIndex = 0;
             this._lblCollectionName.Text = "Collection name:";
             // 
             // _tbCollectionName
             // 
             this._tbCollectionName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tbCollectionName.Location = new System.Drawing.Point(3, 3);
+            this._tbCollectionName.Location = new System.Drawing.Point(324, 3);
             this._tbCollectionName.Name = "_tbCollectionName";
-            this._tbCollectionName.Size = new System.Drawing.Size(1, 20);
+            this._tbCollectionName.Size = new System.Drawing.Size(560, 21);
             this._tbCollectionName.TabIndex = 1;
             // 
             // intermediateStep2
@@ -217,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 256);
+            this.ClientSize = new System.Drawing.Size(887, 309);
             this.Controls.Add(this.wizardControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateNewCompilationWizard";

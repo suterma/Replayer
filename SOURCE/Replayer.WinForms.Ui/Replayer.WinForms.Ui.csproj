@@ -449,6 +449,8 @@
     <Content Include="Resources\AudioShuffle_Icon_16x16.png" />
     <Content Include="Resources\AudioStop_Icon_16x16.png" />
     <Content Include="Resources\AudioUnmute_Icon_16x16.png" />
+    <Content Include="Resources\Replayer_App_Icon_256x256.ico" />
+    <Content Include="Resources\replayer_app_icon_256x256.png" />
     <None Include="FodyWeavers.xml" />
     <Content Include="Replayer_App_Icon_256x256.ico" />
     <None Include="Resources\CompilationEdit_Icon_256x256.png" />
