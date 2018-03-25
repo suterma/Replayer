@@ -54,14 +54,14 @@
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
             this._cmsTracks.Name = "_cmsTracks";
-            this._cmsTracks.Size = new System.Drawing.Size(219, 178);
+            this._cmsTracks.Size = new System.Drawing.Size(219, 156);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.TrackEdit_Icon_256x256;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
@@ -69,7 +69,7 @@
             // 
             this.deleteToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.TrackRemove_Icon_256x256;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 

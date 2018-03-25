@@ -420,7 +420,6 @@ namespace Replayer.Core {
                 Track trackToRemove = SelectedTrack; //keep reference
                 SelectedTrack = null;
                 int indexOfTrackToRemove = Compilation.Tracks.IndexOf(trackToRemove);
-                //Compilation.Tracks.Remove(trackToRemove);   //             Why does removal give a nullreferenceexception in the Accordion?
                 Compilation.Tracks.RemoveAt(indexOfTrackToRemove);
                 OnPropertyChanged("SelectedTrack"); //intended to force a visual update of the tracks
             }

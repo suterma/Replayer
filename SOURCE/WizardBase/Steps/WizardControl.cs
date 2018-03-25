@@ -10,7 +10,6 @@ namespace WizardBase {
     public class WizardControl : Control {
         #region Private Fields
 
-        private readonly LinkLabel EulaLabel = new LinkLabel();
         private readonly Panel buttonHost = new Panel();
         private readonly Panel controlHost = new Panel();
         private readonly GenericCollection<WizardStep> wizardStepCollection;
@@ -22,6 +21,30 @@ namespace WizardBase {
         private string finishButtonText;
         internal int indexer;
         private string nextButtonText;
+
+        /// <summary>
+        /// Gets the next button control.
+        /// </summary>
+        /// <value>
+        /// The next button control.
+        /// </value>
+        public SimpleButton NextButtonControl => NextButton;
+
+        /// <summary>
+        /// Gets the cancel button control.
+        /// </summary>
+        /// <value>
+        /// The cancel button control.
+        /// </value>
+        public SimpleButton CancelButtonControl => CancelButton;
+
+        /// <summary>
+        /// Gets the back button control.
+        /// </summary>
+        /// <value>
+        /// The back button control.
+        /// </value>
+        public SimpleButton BackButtonControl => BackButton;
 
         #endregion
 
@@ -39,18 +62,8 @@ namespace WizardBase {
         [Description("The finish button is clicked."), Category("Button events")]
         public event EventHandler FinishButtonClick;
 
-        [Category("Button events"), Description("The help button is clicked.")]
-        public event EventHandler HelpButtonClick;
-
         [Description("The next button is clicked."), Category("Button events")]
         public event GenericCancelEventHandler<WizardControl> NextButtonClick;
-
-
-        /// <summary>
-        /// </summary>
-        [Category("Button events")]
-        [Description("The eula button is clicked.")]
-        public event EventHandler EulaButtonClick;
 
         #endregion
 
@@ -99,25 +112,15 @@ namespace WizardBase {
 
         private void InitializeComponent() {
             SuspendLayout();
-            BackButton.Location = new Point(213, 7);
-            BackButton.Size = new Size(75, 23);
+            BackButton.Location = new Point(100, 7);
+            BackButton.Size = new Size(120, 32);
             BackButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             BackButton.Text = "< Back";
             BackButton.Name = "BackButton";
             BackButton.Click += OnBackButtonClick;
-            EulaLabel.Location = new Point(16, 8);
-            EulaLabel.Font = new Font(Font.FontFamily, 10, Font.Style & FontStyle.Bold, Font.Unit);
-            EulaLabel.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            EulaLabel.Text = "eula";
-            EulaLabel.AutoSize = true;
-            EulaLabel.Name = "EulaLabel";
-            EulaLabel.Click += delegate (object sender, EventArgs e) {
-                if (EulaButtonClick != null) {
-                    EulaButtonClick(sender, e);
-                }
-            };
-            NextButton.Location = new Point(288, 7);
-            NextButton.Size = new Size(75, 23);
+
+            NextButton.Location = new Point(225, 7);
+            NextButton.Size = new Size(120, 32);
             NextButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             NextButton.Text = "Next >";
             NextButton.Name = "NextButton";
@@ -130,8 +133,8 @@ namespace WizardBase {
                 }
                 OnNextButtonClick(sender, e);
             };
-            CancelButton.Location = new Point(370, 7);
-            CancelButton.Size = new Size(75, 23);
+            CancelButton.Location = new Point(350, 7);
+            CancelButton.Size = new Size(120, 32);
             CancelButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             CancelButton.Text = "Cancel";
             CancelButton.Name = "CancelButton";
@@ -140,31 +143,20 @@ namespace WizardBase {
                     CancelButtonClick(sender, e);
                 }
             };
-            HelpButton.Location = new Point(453, 7);
-            HelpButton.Size = new Size(75, 23);
-            HelpButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            HelpButton.Text = "Help";
-            HelpButton.Name = "HelpButton";
-            HelpButton.Click += delegate (object sender, EventArgs e) {
-                if (HelpButtonClick != null) {
-                    HelpButtonClick(sender, e);
-                }
-            };
-            controlHost.Size = new Size(534, 363);
+
+            controlHost.Size = new Size(534, 353);
             controlHost.Location = Point.Empty;
             controlHost.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
             controlHost.Name = "WizardStepsPanel";
             controlHost.Visible = false;
-            buttonHost.Size = new Size(534, 38);
-            buttonHost.Location = new Point(0, 365);
+            buttonHost.Size = new Size(534, 48);
+            buttonHost.Location = new Point(0, 355);
             buttonHost.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom;
             buttonHost.Name = "ButtonsPanel";
             buttonHost.Visible = false;
-            buttonHost.Controls.Add(EulaLabel);
             buttonHost.Controls.Add(BackButton);
             buttonHost.Controls.Add(NextButton);
             buttonHost.Controls.Add(CancelButton);
-            buttonHost.Controls.Add(HelpButton);
             Size = new Size(534, 403);
             Controls.Add(controlHost);
             Controls.Add(buttonHost);
@@ -766,25 +758,6 @@ namespace WizardBase {
             }
         }
 
-        /// <summary>
-        /// </summary>
-        [Description("Defines the visibility of the eula label.")]
-        [Category("WizardControl Buttons Behavior")]
-        public bool EulaButtonVisible {
-            get { return EulaLabel.Visible; }
-            set { EulaLabel.Visible = value; }
-        }
-
-        /// <summary>
-        /// </summary>
-        [Description("Defines if the eula label is enabled or disabled.")]
-        [Category("WizardControl Buttons Behavior")]
-        public bool EulaButtonEnabled {
-            get { return EulaLabel.Enabled; }
-            set { EulaLabel.Enabled = value; }
-        }
-
-
         [Description("Defines if the help button is enabled or disabled."), Category("WizardControl Buttons Behavior")]
         public bool HelpButtonEnabled {
             get { return HelpButton.Enabled; }
@@ -822,17 +795,6 @@ namespace WizardBase {
                 }
                 NextButton.Text = finishButtonText;
             }
-        }
-
-
-        /// <summary>
-        /// </summary>
-        [Category("WizardControl Buttons Appearance")]
-        [Description("Gets or sets the eula button text.")]
-        [DefaultValue("Help")]
-        public string EulaButtonText {
-            get { return EulaLabel.Text; }
-            set { EulaLabel.Text = value; }
         }
 
         [Category("WizardControl Buttons Behavior"), Description("Defines the visibility of the next button.")]

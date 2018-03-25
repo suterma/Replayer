@@ -48,6 +48,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uISettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playModeexperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,22 +91,23 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.openCompilationToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationOpen_Icon_256x256;
             this.openCompilationToolStripMenuItem.Name = "openCompilationToolStripMenuItem";
             this.openCompilationToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.openCompilationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.openCompilationToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.openCompilationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openCompilationToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.openCompilationToolStripMenuItem.Text = "Open...";
             // 
             // createNewCompilationToolStripMenuItem
             // 
             this.createNewCompilationToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationNew_Icon_256x256;
             this.createNewCompilationToolStripMenuItem.Name = "createNewCompilationToolStripMenuItem";
-            this.createNewCompilationToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.createNewCompilationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.createNewCompilationToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.createNewCompilationToolStripMenuItem.Text = "Create New...";
             // 
             // editCompilationToolStripMenuItem
             // 
             this.editCompilationToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationEdit_Icon_256x256;
             this.editCompilationToolStripMenuItem.Name = "editCompilationToolStripMenuItem";
-            this.editCompilationToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.editCompilationToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.editCompilationToolStripMenuItem.Text = "Edit...";
             this.editCompilationToolStripMenuItem.Click += new System.EventHandler(this.editCompilationToolStripMenuItem_Click);
             // 
@@ -113,14 +115,17 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.saveCompilationToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationSave_Icon_256x256;
             this.saveCompilationToolStripMenuItem.Name = "saveCompilationToolStripMenuItem";
-            this.saveCompilationToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.saveCompilationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveCompilationToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.saveCompilationToolStripMenuItem.Text = "Save...";
             // 
             // saveCompilationAsToolStripMenuItem
             // 
             this.saveCompilationAsToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationSaveAs_Icon_256x256;
             this.saveCompilationAsToolStripMenuItem.Name = "saveCompilationAsToolStripMenuItem";
-            this.saveCompilationAsToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.saveCompilationAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveCompilationAsToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.saveCompilationAsToolStripMenuItem.Text = "Save As...";
             this.saveCompilationAsToolStripMenuItem.Click += new System.EventHandler(this.saveCompilationAsToolStripMenuItem_Click);
             // 
@@ -128,7 +133,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.exportToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CompilationSaveAs_Icon_256x256;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(238, 38);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(317, 38);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -214,10 +219,11 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // applicationToolStripMenuItem
             // 
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem1,
             this.settingsToolStripMenuItem,
             this.uISettingsToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.aboutToolStripMenuItem1,
+            this.exitToolStripMenuItem,
+            this.playModeexperimentalToolStripMenuItem});
             this.applicationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("applicationToolStripMenuItem.Image")));
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(169, 36);
@@ -227,7 +233,8 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.aboutToolStripMenuItem1.Image = global::Replayer.WinForms.Ui.Properties.Resources.About_Icon_256x256;
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(219, 38);
+            this.aboutToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(427, 38);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
             // 
@@ -235,7 +242,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.settingsToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.Settings_Icon_256x256;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(219, 38);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(427, 38);
             this.settingsToolStripMenuItem.Text = "Settings...";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItemClick);
             // 
@@ -243,7 +250,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.uISettingsToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.Settings_Icon_256x256;
             this.uISettingsToolStripMenuItem.Name = "uISettingsToolStripMenuItem";
-            this.uISettingsToolStripMenuItem.Size = new System.Drawing.Size(219, 38);
+            this.uISettingsToolStripMenuItem.Size = new System.Drawing.Size(427, 38);
             this.uISettingsToolStripMenuItem.Text = "UI Settings...";
             this.uISettingsToolStripMenuItem.Click += new System.EventHandler(this.uISettingsToolStripMenuItem_Click);
             // 
@@ -251,9 +258,17 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.exitToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.cancel_64x64;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(219, 38);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(427, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // playModeexperimentalToolStripMenuItem
+            // 
+            this.playModeexperimentalToolStripMenuItem.Name = "playModeexperimentalToolStripMenuItem";
+            this.playModeexperimentalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.playModeexperimentalToolStripMenuItem.Size = new System.Drawing.Size(427, 38);
+            this.playModeexperimentalToolStripMenuItem.Text = "Play mode (experimental)";
             // 
             // StandardMenuView
             // 
@@ -293,5 +308,6 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
         private System.Windows.Forms.ToolStripMenuItem editCompilationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uISettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playModeexperimentalToolStripMenuItem;
     }
 }

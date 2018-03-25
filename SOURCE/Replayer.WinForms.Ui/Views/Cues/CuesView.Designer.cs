@@ -53,14 +53,14 @@
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
             this._cmsCues.Name = "_cmsCues";
-            this._cmsCues.Size = new System.Drawing.Size(219, 178);
+            this._cmsCues.Size = new System.Drawing.Size(219, 156);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueEdit_Icon_256x256;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItemClick);
             // 
@@ -68,7 +68,7 @@
             // 
             this.deleteToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueDelete_Icon_256x256;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItemClick);
             // 
@@ -76,7 +76,7 @@
             // 
             this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
             this.moveUpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
-            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.moveUpToolStripMenuItem.Text = "Move up";
             this.moveUpToolStripMenuItem.Click += new System.EventHandler(this.moveUpToolStripMenuItem_Click);
             // 

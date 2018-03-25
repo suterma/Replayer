@@ -127,18 +127,7 @@ namespace Replayer.WinForms.Ui {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ReplayerLiveApplicationForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (
-                (Core.Model.Instance.Compilation != null) &&
-                (Core.Model.Instance.Compilation.IsDirty)
-                ) //do we have unsaved changes?
-            {
-                if (new Question("Save changes to compilation before exit?").Ask().Equals(DialogResult.OK)) {
-                    //yes, then save
-                    EventBroker.Instance.IssueEvent("Menu:SaveFile");
-                }
-            }
-
-            //save the path of the loaded compilation to the settings for later retrieval
+                   //save the path of the loaded compilation to the settings for later retrieval
             if (Core.Model.Instance.Compilation != null) //there is any?
             {
                 Settings.Default.LastLoadedCompilationPath = Core.Model.Instance.Compilation.Url;
@@ -147,8 +136,21 @@ namespace Replayer.WinForms.Ui {
                 Settings.Default.LastLoadedCompilationPath = String.Empty;
             }
             Settings.Default.Save();
-            Log.Info("### Replayer shutdown ###");
 
+            if (
+                (Core.Model.Instance.Compilation != null) &&
+                (Core.Model.Instance.Compilation.IsDirty)
+                ) //do we have unsaved changes?
+            {
+                using (var question = new Question("Save changes to compilation before exit?")) {
+                    if (question.Ask().Equals(DialogResult.OK)) {
+                        //yes, then save
+                        EventBroker.Instance.IssueEvent("Menu:SaveFile");
+                    }
+                    question.Close();                    
+                }
+            }
+            Log.Info("### Replayer shutdown ###");
         }
 
         /// <summary>

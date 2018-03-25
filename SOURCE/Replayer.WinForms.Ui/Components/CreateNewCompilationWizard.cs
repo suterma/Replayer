@@ -16,6 +16,36 @@ namespace Replayer.WinForms.Ui.Gui {
         public CreateNewCompilationWizard() {
             InitializeComponent();
             wizardControl1.FinishButtonClick += WizardControl1_FinishButtonClick;
+            wizardControl1.CurrentStepIndexChanged += WizardControl1_CurrentStepIndexChanged;
+            InitializeCurrentStep();
+        }
+
+        /// <summary>
+        /// Handles the CurrentStepIndexChanged event of the WizardControl1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void WizardControl1_CurrentStepIndexChanged(object sender, EventArgs e) {
+            InitializeCurrentStep();
+        }
+
+        /// <summary>
+        /// Initializes the current step.
+        /// </summary>
+        private void InitializeCurrentStep() {
+            if (wizardControl1.CurrentStepIndex == 0 /* Intro */) {
+                //Easy move to next step with enter button
+                wizardControl1.NextButtonControl.Focus();
+                this.AcceptButton = wizardControl1.NextButtonControl;
+            }
+            else if (wizardControl1.CurrentStepIndex == 1 /*Collection properties*/) {
+                //Set focus on first input
+                _tbCollectionName.Focus();
+            }
+            else if (wizardControl1.CurrentStepIndex == 2 /*select media files*/) {
+                //Set focus on open files button
+                _btnBrowserForTracks.Focus();
+            }
         }
 
         /// <summary>

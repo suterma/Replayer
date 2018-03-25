@@ -69,30 +69,37 @@ namespace Replayer.WinForms.Ui {
 
                 case "Menu:CreateCueHereClicked": {
                         Core.Model.Instance.CreateCueHere();
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:DeleteSelectedCue": {
                         Core.Model.Instance.RemoveSelectedCue();
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:MoveUpSelectedCue": {
                         Core.Model.Instance.MoveSelectedCue(-1);
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:MoveDownSelectedCue": {
                         Core.Model.Instance.MoveSelectedCue(+1);
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:MoveUpSelectedTrack": {
                         Core.Model.Instance.MoveSelectedTrack(-1);
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:MoveDownSelectedTrack": {
                         Core.Model.Instance.MoveSelectedTrack(+1);
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:DeleteSelectedTrack": {
                         Core.Model.Instance.RemoveSelectedTrack();
+                        Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
                 case "Menu:EditSelectedCue": {
@@ -105,6 +112,7 @@ namespace Replayer.WinForms.Ui {
                                     Core.Model.Instance.SelectedTrack.Cues.Replace(Core.Model.Instance.SelectedCue, cloneCue);
                                     //assign back, causing an update of the model
                                     Core.Model.Instance.SelectedCue = cloneCue; //use the new as selected
+                                    Core.Model.Instance.Compilation.IsDirty = true;
                                 }
                             }
                         }
@@ -128,6 +136,7 @@ namespace Replayer.WinForms.Ui {
                                                                                    displayTrack.Model);
                                     //assign back, causing an update of the model
                                     Core.Model.Instance.SelectedTrack = displayTrack.Model; //use the new as selected
+                                    Core.Model.Instance.Compilation.IsDirty = true;
                                 }
                             }
                         }
@@ -214,6 +223,7 @@ namespace Replayer.WinForms.Ui {
                 using (var propertyDialog = new PropertyDialog(displayCompilation, "Edit compilation")) {
                     if (propertyDialog.ShowDialog() == DialogResult.OK) {
                         Core.Model.Instance.Compilation.Title = displayCompilation.Title; //use the changed data
+                        Core.Model.Instance.Compilation.IsDirty = true;
                     }
                 }
             }
@@ -281,6 +291,7 @@ namespace Replayer.WinForms.Ui {
                 if (Core.Model.Instance.Compilation != null) //there is any?
                 {
                     Core.Model.Instance.Compilation.Store();
+                    Core.Model.Instance.Compilation.IsDirty = false;
                 }
             }
             catch (ArgumentException) //if the file path is invalid
@@ -342,6 +353,7 @@ namespace Replayer.WinForms.Ui {
                         Time = 0
                     });
                 Core.Model.Instance.Compilation.Tracks.Add(newTrack);
+                Core.Model.Instance.Compilation.IsDirty = true;
             }
             return;
         }
@@ -369,6 +381,7 @@ namespace Replayer.WinForms.Ui {
             if (propDialog.ShowDialog() == DialogResult.OK) {
                 //add cue
                 Core.Model.Instance.SelectedTrack.Cues.Add(newCue);
+                Core.Model.Instance.Compilation.IsDirty = true;
             }
             return;
         }
@@ -416,7 +429,7 @@ namespace Replayer.WinForms.Ui {
         ///     Handles the exit clicked event.
         /// </summary>
         private void HandleExitClickedEvent() {
-            Application.Exit();
+            //Application.Exit();
         }
 
         /// <summary>

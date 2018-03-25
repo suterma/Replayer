@@ -46,7 +46,7 @@ namespace Replayer.Model {
         ObservableCollection<Track> Tracks { get; set; }
 
         /// <summary>
-        ///     Gets whether the collection is dirty and needs to be persisted to keep changes permanently.
+        ///     Gets or sets whether the collection is dirty and needs to be persisted to keep changes permanently.
         /// </summary>
         bool IsDirty { get; set; }
 
