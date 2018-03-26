@@ -1,5 +1,8 @@
 # Release notes for Replayer 
 See also https://github.com/suterma/Replayer
+## Release 0.6.2 (RC3 with NAudio)
+ - Added better Navigation in the UI (Keyboard shortcuts)
+ - Improved the UI Layout in some details
 ## Release 0.6.1 (beta RC2 with NAudio)
  - Updated UI with nicer colors
  - Removed Device selection
