@@ -17,6 +17,6 @@ Then, using Replayer and your laptop computer, you can rehearse any portion of y
 Use the navigation features on the numeric keypad. 
 
 ## Documentation
-See the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/user-manual.pdf) for detailed information.
+See the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/User-Manual.pdf) for detailed information.
 
 _Replayer_ is created by [codeministry.ch](https://codeministry.ch)
