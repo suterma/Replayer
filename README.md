@@ -4,7 +4,7 @@ _Replayer_ is a free media player for use during rehearsals with playback music.
 ![Visual Functioning Overview](/DOC/Visual%20Funtioning%20Overview.png)
 
 ## Installation
-Get the [Replayer executable from the latest release](/releases/latest) and start with a double-click.
+Get the [Replayer executable from the latest release](https://github.com/suterma/Replayer/releases/latest) and start with a double-click.
 
 ## Getting started
 First, you create a compilation of tracks and cues once, using a wizard from within Replayer. 
