@@ -133,6 +133,7 @@
       <HintPath>..\Externals\Microsoft.ExceptionMessageBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -267,6 +268,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="Views\Cues\CuesPresenter.cs" />
     <Compile Include="Views\Cues\CuesView.cs">
       <SubType>UserControl</SubType>
@@ -353,6 +361,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Cues\CuesView.resx">
       <DependentUpon>CuesView.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,19 +449,19 @@
     <None Include="Resources\CueEdit_Icon_256x256.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AudioBack_Icon_16x16.png" />
-    <Content Include="Resources\AudioForward_Icon_16x16.png" />
-    <Content Include="Resources\AudioLoop_Icon_16x16.png" />
-    <Content Include="Resources\AudioMute_Icon_16x16.png" />
-    <Content Include="Resources\FileOpen_Icon_16x16.png" />
-    <Content Include="Resources\AudioPause_Icon_16x16.png" />
-    <Content Include="Resources\AudioPlay_Icon_16x16.png" />
-    <Content Include="Resources\AudioRewind_Icon_16x16.png" />
-    <Content Include="Resources\AudioShuffle_Icon_16x16.png" />
-    <Content Include="Resources\AudioStop_Icon_16x16.png" />
-    <Content Include="Resources\AudioUnmute_Icon_16x16.png" />
-    <Content Include="Resources\Replayer_App_Icon_256x256.ico" />
-    <Content Include="Resources\replayer_app_icon_256x256.png" />
+    <None Include="Resources\AudioBack_Icon_16x16.png" />
+    <None Include="Resources\AudioForward_Icon_16x16.png" />
+    <None Include="Resources\AudioLoop_Icon_16x16.png" />
+    <None Include="Resources\AudioMute_Icon_16x16.png" />
+    <None Include="Resources\FileOpen_Icon_16x16.png" />
+    <None Include="Resources\AudioPause_Icon_16x16.png" />
+    <None Include="Resources\AudioPlay_Icon_16x16.png" />
+    <None Include="Resources\AudioRewind_Icon_16x16.png" />
+    <None Include="Resources\AudioShuffle_Icon_16x16.png" />
+    <None Include="Resources\AudioStop_Icon_16x16.png" />
+    <None Include="Resources\AudioUnmute_Icon_16x16.png" />
+    <None Include="Resources\Replayer_App_Icon_256x256.ico" />
+    <None Include="Resources\replayer_app_icon_256x256.png" />
     <None Include="FodyWeavers.xml" />
     <Content Include="Replayer_App_Icon_256x256.ico" />
     <None Include="Resources\CompilationEdit_Icon_256x256.png" />
