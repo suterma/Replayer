@@ -5,12 +5,14 @@ using System.Windows.Forms;
 using Microsoft.SqlServer.MessageBox;
 
 namespace Replayer.WinForms.Ui {
+
+
     internal static class Program {
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        private static void Main() {
+        private static void Main(string[] args) {
             // Add the event handler for handling UI thread exceptions to the event.
             Application.ThreadException += Form1_UIThreadException;
 
@@ -25,7 +27,8 @@ namespace Replayer.WinForms.Ui {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new ReplayerApplicationForm());
+
+            new Startup().Run(args);
         }
 
         // Handle the UI exceptions by showing a dialog box, and asking the user whether
@@ -57,7 +60,7 @@ namespace Replayer.WinForms.Ui {
         // or not they wish to abort execution.
         // NOTE: This exception cannot be kept from terminating the application - it can only 
         // log the event, and inform the user about it. 
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+        private static void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e) {
             try {
                 var ex = (Exception)e.ExceptionObject;
                 string errorMsg = "An application error occurred. Please contact the adminstrator " +
