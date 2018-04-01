@@ -1,6 +1,5 @@
 ﻿using log4net.Config;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -8,7 +7,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("codeministry.ch")]
 [assembly: AssemblyProduct("Replayer")]
-[assembly: AssemblyCopyright("GPL-v3")]
+[assembly: AssemblyCopyright("(c) 2018 by codeministry.ch, GPL-v3 licensed")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.6.2")]
