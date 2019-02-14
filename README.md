@@ -19,4 +19,4 @@ Use the navigation features on the numeric keypad.
 ## Documentation
 See the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/User-Manual.pdf) for detailed information.
 
-_Replayer_ is created by [codeministry.ch](https://codeministry.ch)
+_Replayer_ is created by [marcelsuter.ch](https://marcelsuter.ch)
