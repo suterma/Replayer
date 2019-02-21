@@ -1,5 +1,8 @@
 # Replayer
 ![License](https://img.shields.io/github/license/suterma/Replayer.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/suterma/Replayer/total.svg)
+![Release](https://img.shields.io/github/release/suterma/Replayer.svg)
+![Language](https://img.shields.io/github/languages/top/suterma/Replayer.svg)
 
 _Replayer_ is a free media player for use during rehearsals with playback music. It's main feature is fast navigation to predefined cue points in the playback media.
 
