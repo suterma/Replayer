@@ -36,8 +36,8 @@
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>47</ApplicationRevision>
-    <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
+    <ApplicationRevision>48</ApplicationRevision>
+    <ApplicationVersion>0.5.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -518,20 +518,7 @@
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <FileAssociation Include=".rex">
-      <Visible>False</Visible>
-      <Description>Replayer xml compilation</Description>
-      <Progid>ReplayerXmlCompilation</Progid>
-      <DefaultIcon>Replayer_App_Icon_256x256.ico</DefaultIcon>
-    </FileAssociation>
-    <FileAssociation Include=".rez">
-      <Visible>False</Visible>
-      <Description>Replayer zipped compilation</Description>
-      <Progid>ReplayerZippedCompilation</Progid>
-      <DefaultIcon>Replayer_App_Icon_256x256.ico</DefaultIcon>
-    </FileAssociation>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
