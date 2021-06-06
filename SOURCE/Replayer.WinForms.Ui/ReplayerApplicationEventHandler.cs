@@ -436,7 +436,7 @@ namespace Replayer.WinForms.Ui {
         ///     Handles the online help clicked event.
         /// </summary>
         private void HandleOnlineHelpClickedEvent() {
-            Process.Start("iexplore.exe", "replayer.codeministry.ch");
+            Process.Start("iexplore.exe", "replayer.ch");
         }
 
         /// <summary>

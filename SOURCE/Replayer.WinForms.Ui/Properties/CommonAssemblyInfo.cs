@@ -5,11 +5,11 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyCompany("codeministry.ch")]
+[assembly: AssemblyCompany("replayer.ch")]
 [assembly: AssemblyProduct("Replayer")]
-[assembly: AssemblyCopyright("(c) 2018 by codeministry.ch, GPL-v3 licensed")]
+[assembly: AssemblyCopyright("(c) 2012-2021 by Marcel Suter, GPL-v3 licensed")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.6.2")]
+[assembly: AssemblyVersion("1.7.0")]
 
 [assembly: XmlConfigurator(Watch = true)]

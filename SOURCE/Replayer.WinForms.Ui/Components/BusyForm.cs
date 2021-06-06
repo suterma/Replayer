@@ -47,7 +47,7 @@ namespace Replayer.WinForms.Ui.Components {
         ///     The <see cref="System.EventArgs" /> instance containing the event data.
         /// </param>
         private void labelControl1_Click(object sender, EventArgs e) {
-            ShowBrowser(@"http://www.codeministry.ch");
+            ShowBrowser(@"https://replayer.ch");
         }
 
         /// <summary>

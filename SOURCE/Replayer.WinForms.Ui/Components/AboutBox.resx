@@ -125,6 +125,7 @@ Zip Library: SharpzipLib, http://icsharpcode.github.io/SharpZipLib/
 Audio Library: NAudio, https://github.com/naudio/NAudio
 Exception Message, IDE, Framwork: Microsoft
 UI controls: DevExpress, http://www.devexpress.com/
-Templating Engine: DotLiquid, http://dotliquidmarkup.org/</value>
+Templating Engine: DotLiquid, http://dotliquidmarkup.org/
+Integration: Fody/Costura.Fody, https://github.com/Fody</value>
   </data>
 </root>
