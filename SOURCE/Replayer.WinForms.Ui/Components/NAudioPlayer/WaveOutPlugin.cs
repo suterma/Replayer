@@ -20,7 +20,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         public IWavePlayer CreateDevice(int latency) {
             IWavePlayer device;
             //Existing Window is the default, probably most suitable for Replayer.
-            var strategy = WaveCallbackStrategy.ExistingWindow;
+            WaveCallbackStrategy strategy = WaveCallbackStrategy.ExistingWindow;
                 WaveCallbackInfo callbackInfo = strategy == WaveCallbackStrategy.NewWindow ? WaveCallbackInfo.NewWindow() : WaveCallbackInfo.FunctionCallback();
                 WaveOut outputDevice = new WaveOut(callbackInfo) {
                     DeviceNumber = waveOutSettingsPanel.SelectedDeviceNumber,

@@ -76,7 +76,7 @@ namespace WizardBase {
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public object Clone() {
-            var appearence = new TextAppearence();
+            TextAppearence appearence = new TextAppearence();
             appearence.TextColor = TextColor;
             appearence.TextShadowColor = TextShadowColor;
             appearence.Xshift = Xshift;
@@ -120,7 +120,7 @@ namespace WizardBase {
         /// </param>
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj) {
-            var app = obj as TextAppearence;
+            TextAppearence app = obj as TextAppearence;
             if (app != null) {
                 return app.textColor.Equals(TextColor) && app.TextShadowColor.Equals(TextShadowColor) &&
                        app.xshift == xshift && app.yshift == yshift;
@@ -227,15 +227,15 @@ namespace WizardBase {
 
             public override void PaintValue(PaintValueEventArgs e) {
                 base.PaintValue(e);
-                var app = e.Value as TextAppearence;
+                TextAppearence app = e.Value as TextAppearence;
                 if (app != null) {
                     e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                    var format = new StringFormat();
+                    StringFormat format = new StringFormat();
                     format.Trimming = StringTrimming.EllipsisCharacter;
                     format.Alignment = StringAlignment.Center;
                     format.LineAlignment = StringAlignment.Center;
-                    var brush = new SolidBrush(app.textShadowColor);
-                    var font = new Font("Microsoft Sans Serif", 8f);
+                    SolidBrush brush = new SolidBrush(app.textShadowColor);
+                    Font font = new Font("Microsoft Sans Serif", 8f);
                     RectangleF rect = e.Bounds;
                     e.Graphics.DrawString("ab", font, brush, rect, format);
                     brush = new SolidBrush(app.textColor);

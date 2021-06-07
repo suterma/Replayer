@@ -53,7 +53,7 @@ namespace WizardBase {
         public GenericCollection(GenericCollection<T> items)
             : this() {
             foreach (T item in items) {
-                var newItem = (T)(item is ICloneable ? (item as ICloneable).Clone() : item);
+                T newItem = (T)(item is ICloneable ? (item as ICloneable).Clone() : item);
 #pragma warning disable DoNotCallOverridableMethodsInConstructor
                 OnInsert(InnerList.Count, newItem);
 #pragma warning restore DoNotCallOverridableMethodsInConstructor
@@ -245,7 +245,7 @@ namespace WizardBase {
         ///     instance.
         /// </summary>
         protected override void OnClear() {
-            var e = new GenericCancelEventArgs<GenericCollection<T>>(this);
+            GenericCancelEventArgs<GenericCollection<T>> e = new GenericCancelEventArgs<GenericCollection<T>>(this);
             if (Clearing != null) {
                 Clearing(e);
                 if (e.Cancel) {
@@ -279,7 +279,7 @@ namespace WizardBase {
         /// <param name="value">The new value of the element at index.</param>
         /// <param name="index">The zero-based index at which to insert value.</param>
         protected override void OnInsert(int index, object value) {
-            var e = new GenericCancelEventArgs<T>((T)value);
+            GenericCancelEventArgs<T> e = new GenericCancelEventArgs<T>((T)value);
             if (Inserting != null) {
                 Inserting(index, e);
                 if (e.Cancel) {
@@ -315,7 +315,7 @@ namespace WizardBase {
         /// <param name="value">The value of the element to remove from index.</param>
         /// <param name="index">The zero-based index at which value can be found.</param>
         protected override void OnRemove(int index, object value) {
-            var e = new GenericCancelEventArgs<T>((T)value);
+            GenericCancelEventArgs<T> e = new GenericCancelEventArgs<T>((T)value);
             if (Removing != null) {
                 Removing(index, e);
                 if (e.Cancel) {
@@ -362,7 +362,7 @@ namespace WizardBase {
         /// <param name="newValue">The new value of the element at index.</param>
         /// <param name="index">The zero-based index at which oldValue can be found.</param>
         protected override void OnSet(int index, object oldValue, object newValue) {
-            var e = new GenericChangeEventArgs<T>((T)oldValue, (T)newValue);
+            GenericChangeEventArgs<T> e = new GenericChangeEventArgs<T>((T)oldValue, (T)newValue);
             if (Changing != null) {
                 Changing(index, e);
                 if (e.Cancel) {
@@ -468,7 +468,7 @@ namespace WizardBase {
 
         public void Sort(IComparer comparer) {
             if ((List.Count > 0) && (comparer != null)) {
-                var array = new object[List.Count];
+                object[] array = new object[List.Count];
                 for (int i = 0; i < List.Count; i++) {
                     array[i] = List[i];
                 }

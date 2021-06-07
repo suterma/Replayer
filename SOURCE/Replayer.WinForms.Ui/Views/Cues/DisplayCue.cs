@@ -7,7 +7,6 @@ namespace Replayer.WinForms.Ui.Views.Cues {
     /// <summary>
     /// A displayable object for a cue.
     /// </summary>
-    /// <seealso cref="System.IEquatable{Replayer.WinForms.Ui.Views.Cues.DisplayCue}" />
     [DebuggerDisplay("\\{ Description = {Description}, Item = {Item} \\}")]
     public sealed class DisplayCue : IEquatable<DisplayCue> {
         private readonly string _Description;

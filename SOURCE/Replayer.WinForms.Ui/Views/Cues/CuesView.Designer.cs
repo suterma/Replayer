@@ -53,7 +53,7 @@
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
             this._cmsCues.Name = "_cmsCues";
-            this._cmsCues.Size = new System.Drawing.Size(219, 156);
+            this._cmsCues.Size = new System.Drawing.Size(219, 178);
             // 
             // editToolStripMenuItem
             // 
@@ -68,6 +68,7 @@
             // 
             this.deleteToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueDelete_Icon_256x256;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.Delete)));
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(218, 38);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItemClick);

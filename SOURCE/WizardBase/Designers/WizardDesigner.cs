@@ -39,23 +39,23 @@ namespace WizardBase {
         }
 
         protected override void Dispose(bool disposing) {
-            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService service = (ISelectionService)GetService(typeof(ISelectionService));
             if (service != null) {
                 service.SelectionChanged -= OnSelectionChanged;
             }
-            var control = (WizardControl)Control;
+            WizardControl control = (WizardControl)Control;
             control.CurrentStepIndexChanged -= CurrentStepIndexChanged;
             control.WizardSteps.Inserted -= RefreshComponent;
-            var host = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost host = (IDesignerHost)GetService(typeof(IDesignerHost));
             IEnumerator enumerator = control.WizardSteps.GetEnumerator();
             try {
                 if (enumerator.MoveNext()) {
-                    var component = (WizardStep)enumerator.Current;
+                    WizardStep component = (WizardStep)enumerator.Current;
                     host.DestroyComponent(component);
                 }
             }
             finally {
-                var disposable = enumerator as IDisposable;
+                IDisposable disposable = enumerator as IDisposable;
                 if (disposable != null) {
                     disposable.Dispose();
                 }
@@ -68,7 +68,7 @@ namespace WizardBase {
         }
 
         private WizardStepDesigner GetDesigner() {
-            var control = Control as WizardControl;
+            WizardControl control = Control as WizardControl;
             WizardStep component = null;
             IDesignerHost service = null;
             WizardStepDesigner designer = null;
@@ -157,7 +157,7 @@ namespace WizardBase {
         }
 
         private WizardStepDesigner GetWizardStepDesigner(IComponent step) {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             WizardStepDesigner designer = null;
             if (service == null) {
                 return designer;
@@ -175,11 +175,11 @@ namespace WizardBase {
         public override void Initialize(IComponent component) {
             base.Initialize(component);
             AutoResizeHandles = true;
-            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService service = (ISelectionService)GetService(typeof(ISelectionService));
             if (service != null) {
                 service.SelectionChanged += OnSelectionChanged;
             }
-            var control = (WizardControl)Control;
+            WizardControl control = (WizardControl)Control;
             wizardDesignerActionList = new WizardDesignerActionList(control);
             actionListCollection.Add(wizardDesignerActionList);
             control.CurrentStepIndexChanged += CurrentStepIndexChanged;
@@ -189,21 +189,21 @@ namespace WizardBase {
         /// <param name="defaultValues">TBD</param>
         public override void InitializeNewComponent(IDictionary defaultValues) {
             base.InitializeNewComponent(defaultValues);
-            var control = Control as WizardControl;
+            WizardControl control = Control as WizardControl;
             if (control == null) {
                 return;
             }
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (service == null) {
                 return;
             }
-            var step = (StartStep)service.CreateComponent(typeof(StartStep));
+            StartStep step = (StartStep)service.CreateComponent(typeof(StartStep));
             control.WizardSteps.Add(step);
-            var licStep = (LicenceStep)service.CreateComponent(typeof(LicenceStep));
+            LicenceStep licStep = (LicenceStep)service.CreateComponent(typeof(LicenceStep));
             control.WizardSteps.Add(licStep);
-            var step2 = (IntermediateStep)service.CreateComponent(typeof(IntermediateStep));
+            IntermediateStep step2 = (IntermediateStep)service.CreateComponent(typeof(IntermediateStep));
             control.WizardSteps.Add(step2);
-            var step3 = (FinishStep)service.CreateComponent(typeof(FinishStep));
+            FinishStep step3 = (FinishStep)service.CreateComponent(typeof(FinishStep));
             control.WizardSteps.Add(step3);
         }
 
@@ -249,7 +249,7 @@ namespace WizardBase {
         ///     A <see cref="T:System.Windows.Forms.DragEventArgs"></see> that provides data for the event.
         /// </param>
         protected override void OnDragEnter(DragEventArgs de) {
-            var control = (WizardControl)Control;
+            WizardControl control = (WizardControl)Control;
             if (control.WizardSteps.Count <= 0) {
                 base.OnDragEnter(de);
                 return;
@@ -291,7 +291,7 @@ namespace WizardBase {
         ///     A <see cref="T:System.Windows.Forms.DragEventArgs"></see> that provides data for the event.
         /// </param>
         protected override void OnDragOver(DragEventArgs de) {
-            var control = Control as WizardControl;
+            WizardControl control = Control as WizardControl;
             if (control == null || control.WizardSteps.Count <= 0) {
                 de.Effect = DragDropEffects.None;
                 return;
@@ -348,14 +348,14 @@ namespace WizardBase {
         ///     A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that provides data for the event.
         /// </param>
         protected override void OnPaintAdornments(PaintEventArgs pe) {
-            var control = (WizardControl)Control;
+            WizardControl control = (WizardControl)Control;
             if (control == null) {
                 return;
             }
             if (control.WizardSteps.Count != 0) {
                 return;
             }
-            var pen = new Pen(SystemColors.ControlDark);
+            Pen pen = new Pen(SystemColors.ControlDark);
             try {
                 pen.DashStyle = DashStyle.Dash;
                 Rectangle rect = control.Bounds;
@@ -371,7 +371,7 @@ namespace WizardBase {
         }
 
         private void OnSelectionChanged(object sender, EventArgs e) {
-            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService service = (ISelectionService)GetService(typeof(ISelectionService));
             if (service == null) {
                 return;
             }
@@ -380,7 +380,7 @@ namespace WizardBase {
             if (selectedComponents == null) {
                 return;
             }
-            var control = (WizardControl)Control;
+            WizardControl control = (WizardControl)Control;
             IEnumerator enumerator = selectedComponents.GetEnumerator();
             if (enumerator == null) {
                 return;
@@ -395,14 +395,14 @@ namespace WizardBase {
                 }
             }
             finally {
-                var disposable = enumerator as IDisposable;
+                IDisposable disposable = enumerator as IDisposable;
                 if (disposable != null)
                     disposable.Dispose();
             }
         }
 
         private void RefreshComponent(int index, WizardStep value) {
-            var service = GetService(typeof(DesignerActionUIService)) as DesignerActionUIService;
+            DesignerActionUIService service = GetService(typeof(DesignerActionUIService)) as DesignerActionUIService;
             if (service == null) {
                 return;
             }

@@ -14,7 +14,7 @@ namespace Replayer.Model.Persistence {
         ///     A Quirli Track
         /// </returns>
         public static Quirli.Api.Track CreateFrom(Track track, Uri uri = null) {
-            var quirliTrack = new Quirli.Api.Track();
+            Quirli.Api.Track quirliTrack = new Quirli.Api.Track();
             quirliTrack.Album = track.Album;
             quirliTrack.Artist = track.Artist;
             quirliTrack.Title = track.Name;

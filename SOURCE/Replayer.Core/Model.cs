@@ -130,6 +130,24 @@ namespace Replayer.Core {
             }
         }
 
+        /// <summary>
+        ///     Clones the selected track in the set of tracks of the loaded compilation, if there is any.
+        /// </summary>
+        public void CloneSelectedTrack() {
+            if (
+                (Compilation != null) && //there is any?
+                (SelectedTrack != null) //and one selected at all?
+                ) {
+                Track trackToClone = SelectedTrack; //keep reference
+                int indexOfTrackToClone = Compilation.Tracks.IndexOf(trackToClone);
+                Track clone = trackToClone.Clone();
+                clone.Name += "(Clone)";
+                Compilation.Tracks.Insert(indexOfTrackToClone + 1, clone);
+                SelectedTrack = clone;
+                OnPropertyChanged("SelectedTrack"); //intended to force a visual update of the tracks
+            }
+        }
+
 
         /// <summary>
         ///     Gets the instance of the model.
@@ -310,7 +328,7 @@ namespace Replayer.Core {
                 //add a cue to the current track
                 TimeSpan position = Player.Position; //get position of the cursor 
 
-                var cue = new Cue {
+                Cue cue = new Cue {
                     Description = String.Format("Cue at {0}",
                                                 (DateTime.MinValue +
                                                  new TimeSpan(0, 0, position.Minutes, position.Seconds,
@@ -364,7 +382,7 @@ namespace Replayer.Core {
                                             select cue.Shortcut;
 
             //find hightest numerical shortcut
-            var numberShortcuts = new List<int>();
+            List<int> numberShortcuts = new List<int>();
             foreach (string shortcut in shortcuts) {
                 int number;
                 bool parsed = int.TryParse(shortcut, out number);

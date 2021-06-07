@@ -44,11 +44,12 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.deleteSelectedCueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSelectedCueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uISettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playModeexperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cloneSelectedTrackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +143,8 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.trackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTrackToolStripMenuItem,
             this.deleteSelectedTrackToolStripMenuItem,
-            this.editSelectedTrackToolStripMenuItem});
+            this.editSelectedTrackToolStripMenuItem,
+            this.cloneSelectedTrackToolStripMenuItem});
             this.trackToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.Track_Icon_256x256;
             this.trackToolStripMenuItem.Name = "trackToolStripMenuItem";
             this.trackToolStripMenuItem.Size = new System.Drawing.Size(108, 36);
@@ -189,7 +191,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.createCueHereToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueCreateHere_Icon_256x256;
             this.createCueHereToolStripMenuItem.Name = "createCueHereToolStripMenuItem";
             this.createCueHereToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.createCueHereToolStripMenuItem.Size = new System.Drawing.Size(306, 38);
+            this.createCueHereToolStripMenuItem.Size = new System.Drawing.Size(393, 38);
             this.createCueHereToolStripMenuItem.Text = "Create Cue here!";
             this.createCueHereToolStripMenuItem.Click += new System.EventHandler(this.CreateCueHereToolStripMenuItemClick);
             // 
@@ -197,14 +199,15 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.addCueToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueAdd_Icon_256x256;
             this.addCueToolStripMenuItem.Name = "addCueToolStripMenuItem";
-            this.addCueToolStripMenuItem.Size = new System.Drawing.Size(306, 38);
+            this.addCueToolStripMenuItem.Size = new System.Drawing.Size(393, 38);
             this.addCueToolStripMenuItem.Text = "Add Cue...";
             // 
             // deleteSelectedCueToolStripMenuItem
             // 
             this.deleteSelectedCueToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueDelete_Icon_256x256;
             this.deleteSelectedCueToolStripMenuItem.Name = "deleteSelectedCueToolStripMenuItem";
-            this.deleteSelectedCueToolStripMenuItem.Size = new System.Drawing.Size(306, 38);
+            this.deleteSelectedCueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.Delete)));
+            this.deleteSelectedCueToolStripMenuItem.Size = new System.Drawing.Size(393, 38);
             this.deleteSelectedCueToolStripMenuItem.Text = "Delete Selected Cue";
             this.deleteSelectedCueToolStripMenuItem.Click += new System.EventHandler(this.DeleteSelectedCueToolStripMenuItemClick);
             // 
@@ -212,7 +215,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             // 
             this.editSelectedCueToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.CueEdit_Icon_256x256;
             this.editSelectedCueToolStripMenuItem.Name = "editSelectedCueToolStripMenuItem";
-            this.editSelectedCueToolStripMenuItem.Size = new System.Drawing.Size(306, 38);
+            this.editSelectedCueToolStripMenuItem.Size = new System.Drawing.Size(393, 38);
             this.editSelectedCueToolStripMenuItem.Text = "Edit Selected Cue";
             this.editSelectedCueToolStripMenuItem.Click += new System.EventHandler(this.EditSelectedCueToolStripMenuItemClick);
             // 
@@ -228,15 +231,6 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(169, 36);
             this.applicationToolStripMenuItem.Text = "Application";
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Image = global::Replayer.WinForms.Ui.Properties.Resources.About_Icon_256x256;
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(427, 38);
-            this.aboutToolStripMenuItem1.Text = "About";
-            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -254,6 +248,15 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.uISettingsToolStripMenuItem.Text = "UI Settings...";
             this.uISettingsToolStripMenuItem.Click += new System.EventHandler(this.uISettingsToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Image = global::Replayer.WinForms.Ui.Properties.Resources.About_Icon_256x256;
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(427, 38);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::Replayer.WinForms.Ui.Properties.Resources.cancel_64x64;
@@ -269,6 +272,13 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             this.playModeexperimentalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
             this.playModeexperimentalToolStripMenuItem.Size = new System.Drawing.Size(427, 38);
             this.playModeexperimentalToolStripMenuItem.Text = "Play mode (experimental)";
+            // 
+            // cloneSelectedTrackToolStripMenuItem
+            // 
+            this.cloneSelectedTrackToolStripMenuItem.Name = "cloneSelectedTrackToolStripMenuItem";
+            this.cloneSelectedTrackToolStripMenuItem.Size = new System.Drawing.Size(305, 38);
+            this.cloneSelectedTrackToolStripMenuItem.Text = "Clone Selected Track";
+            this.cloneSelectedTrackToolStripMenuItem.Click += new System.EventHandler(this.cloneSelectedTrackToolStripMenuItem_Click);
             // 
             // StandardMenuView
             // 
@@ -309,5 +319,6 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
         private System.Windows.Forms.ToolStripMenuItem uISettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playModeexperimentalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cloneSelectedTrackToolStripMenuItem;
     }
 }

@@ -136,7 +136,7 @@ namespace Replayer.Model.Persistence {
         /// <returns></returns>
         [Browsable(false)]
         public override String Find(Track track) {
-            var places = new List<string> { MediaPath };
+            List<string> places = new List<string> { MediaPath };
             string path = TrackFinder.Find(track.Url, places);
 
             //before returning the path, check if found, otherwise request user input, if not found successfully
@@ -162,15 +162,15 @@ namespace Replayer.Model.Persistence {
         /// <param name="OutputDir">Das Ausgabeverzeichnis wo die ZIP Datei gespeichert werden soll.</param>
         /// <remarks></remarks>
         public void CompressFiles(IEnumerable<string> InputFiles, string FileName, string OutputDir) {
-            var ZFS = new FileStream(OutputDir + "\\" + Path.GetFileNameWithoutExtension(FileName) + DefaultExtension,
+            FileStream ZFS = new FileStream(OutputDir + "\\" + Path.GetFileNameWithoutExtension(FileName) + DefaultExtension,
                                      FileMode.Create);
-            var ZOut = new ZipOutputStream(ZFS);
+            ZipOutputStream ZOut = new ZipOutputStream(ZFS);
 
             ZOut.SetLevel(0); //Store only, do not compress. This ensures best performance with the zip archive
 
             ZipEntry ZipEntry = default(ZipEntry);
 
-            var Buffer = new byte[4097];
+            byte[] Buffer = new byte[4097];
             int ByteLen = 0;
             FileStream FS = null;
 
@@ -204,13 +204,13 @@ namespace Replayer.Model.Persistence {
         /// <param name="FileName">Die Datei die dekomprimiert werden soll.</param>
         /// <param name="OutputDir">Das Verzeichnis in dem die Dateien dekomprimiert werden sollen.</param>
         public static IEnumerable<string> DecompressFile(string FileName, string OutputDir) {
-            var fileNames = new List<string>();
-            var ZFS = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var ZIN = new ZipInputStream(ZFS);
+            List<string> fileNames = new List<string>();
+            FileStream ZFS = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            ZipInputStream ZIN = new ZipInputStream(ZFS);
 
             ZipEntry ZipEntry = default(ZipEntry);
 
-            var Buffer = new byte[4097];
+            byte[] Buffer = new byte[4097];
             int ByteLen = 0;
             FileStream FS = null;
 
@@ -283,7 +283,7 @@ namespace Replayer.Model.Persistence {
             Url = url; //use this from now on.
 
             //store Compilation back to file
-            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
+            XmlSerializer CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
             using (TextWriter writeFileStream = new StreamWriter(ExtractionPath + EmbeddedXmlCompilationFilename)) {
                 CompilationSerializer.Serialize(writeFileStream, InnerCompilation);
             }
@@ -301,7 +301,7 @@ namespace Replayer.Model.Persistence {
         ///     Retrieves the stored Compilation from the specified url.
         /// </summary>
         public override ICompilation Retrieve(String url) {
-            var retrieved = new ZipCompilation();
+            ZipCompilation retrieved = new ZipCompilation();
             retrieved.ExtractionPath = Path.GetTempPath(); //set extraction path for the retrieved Compilation
 
             IEnumerable<string> filenames = DecompressFile(url, retrieved.ExtractionPath);
@@ -314,11 +314,11 @@ namespace Replayer.Model.Persistence {
                                                   select unzipfileName).First();
 
 
-            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
+            XmlSerializer CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
             using (
-                var readFileStream = new FileStream(CompilationUnzippedFileName, FileMode.Open, FileAccess.Read,
+                FileStream readFileStream = new FileStream(CompilationUnzippedFileName, FileMode.Open, FileAccess.Read,
                                                     FileShare.Read)) {
-                var xmlCompilation = (XmlCompilation)CompilationSerializer.Deserialize(readFileStream);
+                XmlCompilation xmlCompilation = (XmlCompilation)CompilationSerializer.Deserialize(readFileStream);
 
                 //now with the retrived XML Compilation, fill the properties of the retrieved instance
                 retrieved.Tracks = xmlCompilation.Tracks;

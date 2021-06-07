@@ -152,7 +152,7 @@ namespace WizardBase {
         }
 
         protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect, Graphics graphics) {
-            var format = new StringFormat(StringFormatFlags.FitBlackBox);
+            StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
             format.Trimming = StringTrimming.EllipsisCharacter;
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
@@ -247,13 +247,13 @@ namespace WizardBase {
         }
 
         protected virtual bool ShouldSerializeSubtitleAppearence() {
-            var sa = new TextAppearence();
+            TextAppearence sa = new TextAppearence();
             sa.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
             return SubtitleAppearence != sa;
         }
 
         protected virtual bool ShouldSerializeTitleAppearence() {
-            var ta = new TextAppearence();
+            TextAppearence ta = new TextAppearence();
             ta.Font = new Font("Verdana", 12f, FontStyle.Bold, GraphicsUnit.Point);
             return TitleAppearence != ta;
         }
@@ -269,7 +269,7 @@ namespace WizardBase {
         }
 
         protected virtual bool ShouldSerializeLeftPair() {
-            var pa = new ColorPair(Color.Orange, Color.White, 270);
+            ColorPair pa = new ColorPair(Color.Orange, Color.White, 270);
             return leftPair != pa;
         }
 

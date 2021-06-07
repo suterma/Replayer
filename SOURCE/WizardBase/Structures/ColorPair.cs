@@ -90,7 +90,7 @@ namespace WizardBase {
         /// </param>
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj) {
-            var pair = obj as ColorPair;
+            ColorPair pair = obj as ColorPair;
             if (pair != null) {
                 return pair.BackColor1.Equals(backColor1) && pair.BackColor2.Equals(backColor2) &&
                        pair.Gradient.Equals(gradient);
@@ -173,7 +173,7 @@ namespace WizardBase {
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public object Clone() {
-            var pair = new ColorPair();
+            ColorPair pair = new ColorPair();
             pair.backColor1 = backColor1;
             pair.backColor2 = backColor2;
             pair.gradient = gradient;
@@ -249,7 +249,7 @@ namespace WizardBase {
             /// </param>
             public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
                 if (provider != null) {
-                    var edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+                    IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
                     if (edSvc == null) {
                         return value;
                     }
@@ -326,9 +326,9 @@ namespace WizardBase {
             /// </param>
             public override void PaintValue(PaintValueEventArgs e) {
                 base.PaintValue(e);
-                var pair = e.Value as ColorPair;
+                ColorPair pair = e.Value as ColorPair;
                 if (pair != null) {
-                    var br = new LinearGradientBrush(e.Bounds, pair.BackColor1, pair.BackColor2, pair.Gradient);
+                    LinearGradientBrush br = new LinearGradientBrush(e.Bounds, pair.BackColor1, pair.BackColor2, pair.Gradient);
                     e.Graphics.FillRectangle(br, e.Bounds);
                 }
             }
@@ -385,7 +385,7 @@ namespace WizardBase {
             #region Private Methods
 
             private void PaintPanel(PaintEventArgs e) {
-                var brush1 = new LinearGradientBrush(pnlPreview.ClientRectangle, value.BackColor1, value.BackColor2,
+                LinearGradientBrush brush1 = new LinearGradientBrush(pnlPreview.ClientRectangle, value.BackColor1, value.BackColor2,
                                                      value.Gradient);
                 e.Graphics.FillRectangle(brush1, pnlPreview.ClientRectangle);
             }
@@ -584,7 +584,7 @@ namespace WizardBase {
             }
 
             private void pnlNewBack2_Click(object sender, EventArgs e) {
-                var dlg = new ColorDialog();
+                ColorDialog dlg = new ColorDialog();
                 dlg.AllowFullOpen = true;
                 dlg.AnyColor = true;
                 dlg.Color = value.BackColor2;
@@ -597,7 +597,7 @@ namespace WizardBase {
             }
 
             private void pnlNewBack1_Click(object sender, EventArgs e) {
-                var dlg = new ColorDialog();
+                ColorDialog dlg = new ColorDialog();
                 dlg.AllowFullOpen = true;
                 dlg.AnyColor = true;
                 dlg.Color = value.BackColor1;
@@ -684,7 +684,7 @@ namespace WizardBase {
                         value = 0;
                     }
                     if (editorService != null) {
-                        var currentValue = (int)value;
+                        int currentValue = (int)value;
                         editor = new GradientEditorUI(currentValue);
                         editor.Dock = DockStyle.Fill;
                         editorService.DropDownControl(editor);
@@ -802,14 +802,14 @@ namespace WizardBase {
                 }
 
                 private bool HitTest(Point point) {
-                    var distance =
+                    int distance =
                         (int)Math.Sqrt((point.X - midx) * (point.X - midx) + (point.Y - midy) * (point.Y - midy));
                     return distance <= (diameter * 0.7) / 2;
                 }
 
                 private int GetAngle(Point p) {
                     if ((p.X - midx) != 0) {
-                        var ret = (int)((Math.Atan((p.Y - midy) / (float)(p.X - midx))) * (180) / Math.PI);
+                        int ret = (int)((Math.Atan((p.Y - midy) / (float)(p.X - midx))) * (180) / Math.PI);
                         if ((p.Y - midy) >= 0 && (p.X - midx) <= 0) {
                             ret = 180 + ret;
                         }
@@ -852,7 +852,7 @@ namespace WizardBase {
                 }
 
                 private void DrawLine(PaintEventArgs e, int val, Color color) {
-                    var p = new Pen(color, 2);
+                    Pen p = new Pen(color, 2);
                     Point current = GetCurrentPoint(val);
                     e.Graphics.DrawLine(p, midx, midy, current.X, current.Y);
                 }
@@ -911,8 +911,8 @@ namespace WizardBase {
                 }
 
                 private void DrawFrame(PaintEventArgs e) {
-                    var p = new Pen(Color.Black, 2);
-                    var drawRect = new Rectangle((int)(midx - 0.7 * diameter / 2), (int)(midy - 0.7 * diameter / 2),
+                    Pen p = new Pen(Color.Black, 2);
+                    Rectangle drawRect = new Rectangle((int)(midx - 0.7 * diameter / 2), (int)(midy - 0.7 * diameter / 2),
                                                  (int)(0.7 * diameter), (int)(0.7 * diameter));
                     e.Graphics.DrawEllipse(p, drawRect);
                     drawRect.Inflate(1, 1);

@@ -35,11 +35,11 @@ namespace WizardBase {
         }
 
         protected internal virtual void AddFinishStep() {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (FinishStep)service.CreateComponent(typeof(FinishStep));
+            FinishStep step = (FinishStep)service.CreateComponent(typeof(FinishStep));
             if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
@@ -52,11 +52,11 @@ namespace WizardBase {
         }
 
         protected internal virtual void AddCustomStep() {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (IntermediateStep)service.CreateComponent(typeof(IntermediateStep));
+            IntermediateStep step = (IntermediateStep)service.CreateComponent(typeof(IntermediateStep));
             if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
@@ -70,11 +70,11 @@ namespace WizardBase {
         }
 
         protected internal virtual void AddStartStep() {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (WizardControl == null || service == null) {
                 return;
             }
-            var step = (StartStep)service.CreateComponent(typeof(StartStep));
+            StartStep step = (StartStep)service.CreateComponent(typeof(StartStep));
             if (WizardControl.WizardSteps.Count != 0) {
                 WizardControl.WizardSteps.Insert(WizardControl.CurrentStepIndex, step);
                 RemoveWizardFromSelection();
@@ -94,7 +94,7 @@ namespace WizardBase {
                 return new DesignerActionItemCollection();
             }
             if (WizardControl.CurrentStepIndex != -1) {
-                var items = new DesignerActionItemCollection();
+                DesignerActionItemCollection items = new DesignerActionItemCollection();
                 items.Add(new DesignerActionHeaderItem("Add Steps"));
                 items.Add(new DesignerActionPropertyItem("WizardSteps", "New Wizard Step", "Add Steps"));
                 items.Add(new DesignerActionMethodItem(this, "AddStartStep", "Add Start Step", "Add Steps", true));
@@ -143,7 +143,7 @@ namespace WizardBase {
         }
 
         protected internal virtual void RemoveAllSteps() {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (WizardControl == null || service == null) {
                 return;
             }
@@ -153,7 +153,7 @@ namespace WizardBase {
                 DialogResult.Yes) {
                 return;
             }
-            var array = new WizardStep[WizardControl.WizardSteps.Count];
+            WizardStep[] array = new WizardStep[WizardControl.WizardSteps.Count];
             ((ICollection)WizardControl.WizardSteps).CopyTo(array, 0);
             WizardControl.WizardSteps.Clear();
             WizardStep[] stepArray2 = array;
@@ -166,7 +166,7 @@ namespace WizardBase {
         }
 
         protected internal virtual void RemoveStep() {
-            var service = (IDesignerHost)GetService(typeof(IDesignerHost));
+            IDesignerHost service = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (WizardControl == null || service == null) {
                 return;
             }
@@ -183,21 +183,21 @@ namespace WizardBase {
         }
 
         protected void RemoveWizardFromSelection() {
-            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService service = (ISelectionService)GetService(typeof(ISelectionService));
             if (WizardControl == null || service == null) {
                 return;
             }
-            var components = new object[] { WizardControl };
+            object[] components = new object[] { WizardControl };
             service.SetSelectedComponents(components, SelectionTypes.Remove);
             return;
         }
 
         protected void SelectWizard() {
-            var service = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService service = (ISelectionService)GetService(typeof(ISelectionService));
             if (WizardControl == null || service == null) {
                 return;
             }
-            var components = new object[] { WizardControl };
+            object[] components = new object[] { WizardControl };
             service.SetSelectedComponents(components, SelectionTypes.Replace);
             return;
         }

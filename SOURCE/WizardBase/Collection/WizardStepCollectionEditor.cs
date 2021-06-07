@@ -12,9 +12,9 @@ namespace WizardBase {
         }
 
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
-            var steps = (GenericCollection<WizardStep>)value;
-            var owner = (WizardControl)steps.Owner;
-            var container = (IDesignerHost)context.Container;
+            GenericCollection<WizardStep> steps = (GenericCollection<WizardStep>)value;
+            WizardControl owner = (WizardControl)steps.Owner;
+            IDesignerHost container = (IDesignerHost)context.Container;
             int count = steps.Count;
             object obj2 = base.EditValue(context, provider, value);
             if (steps.Count >= count) {
@@ -32,15 +32,15 @@ namespace WizardBase {
                 return;
             }
             while (true) {
-                var designer = (WizardDesigner)host.GetDesigner(wizardControl);
+                WizardDesigner designer = (WizardDesigner)host.GetDesigner(wizardControl);
                 if (designer == null) {
                     return;
                 }
-                var service = (ISelectionService)host.GetService(typeof(ISelectionService));
+                ISelectionService service = (ISelectionService)host.GetService(typeof(ISelectionService));
                 if (service == null) {
                     return;
                 }
-                var components = new object[] { wizardControl };
+                object[] components = new object[] { wizardControl };
                 service.SetSelectedComponents(components, SelectionTypes.Replace);
                 return;
             }

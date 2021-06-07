@@ -74,7 +74,7 @@ namespace Replayer.WinForms.Ui.Views.Cues {
         private void _lbcCuesMouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Right) {
                 //select the item under the mouse
-                var vi = _lbcCues.GetViewInfo() as BaseListBoxViewInfo;
+                BaseListBoxViewInfo vi = _lbcCues.GetViewInfo() as BaseListBoxViewInfo;
                 BaseListBoxViewInfo.ItemInfo ii = vi.GetItemInfoByPoint(e.Location);
                 if (ii != null) {
                     _lbcCues.SelectedIndex = ii.Index;

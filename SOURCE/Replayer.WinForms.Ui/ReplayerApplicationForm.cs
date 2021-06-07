@@ -108,7 +108,7 @@ namespace Replayer.WinForms.Ui {
                     }
                     else {
                         //first use, try to load a local (in the same directory) compilation
-                        var firstLocalCompilation = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rez", SearchOption.TopDirectoryOnly)
+                        string firstLocalCompilation = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rez", SearchOption.TopDirectoryOnly)
                             .Concat(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rex", SearchOption.TopDirectoryOnly)).FirstOrDefault();
                         if (!string.IsNullOrEmpty(firstLocalCompilation)) {
                             Core.Model.Instance.Retrieve(firstLocalCompilation);
@@ -142,7 +142,7 @@ namespace Replayer.WinForms.Ui {
                 (Core.Model.Instance.Compilation.IsDirty)
                 ) //do we have unsaved changes?
             {
-                using (var question = new Question("Save changes to compilation before exit?")) {
+                using (Question question = new Question("Save changes to compilation before exit?")) {
                     if (question.Ask().Equals(DialogResult.OK)) {
                         //yes, then save
                         EventBroker.Instance.IssueEvent("Menu:SaveFile");

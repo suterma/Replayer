@@ -155,7 +155,7 @@ namespace Replayer.Core.Input {
         private void OnKeySequenceChanged() {
             if (KeySequenceChanged != null) //anyone listening
             {
-                var args = new EventArgs<String>();
+                EventArgs<string> args = new EventArgs<String>();
                 args.Data = CurrentDetectedKeySequence;
                 KeySequenceChanged(this, args);
             }
@@ -268,7 +268,7 @@ namespace Replayer.Core.Input {
         private void OnKeySequenceDetected() {
             if (KeySequenceDetected != null) //anyone listening
             {
-                var args = new EventArgs<String>();
+                EventArgs<string> args = new EventArgs<String>();
                 args.Data = CurrentDetectedKeySequence;
                 KeySequenceDetected(this, args);
             }
@@ -283,7 +283,7 @@ namespace Replayer.Core.Input {
         private void OnCommandIssued(InputCommand action) {
             if (CommandIssued != null) //anyone listening
             {
-                var args = new EventArgs<InputCommand>();
+                EventArgs<InputCommand> args = new EventArgs<InputCommand>();
                 args.Data = action;
                 CommandIssued(this, args);
             }

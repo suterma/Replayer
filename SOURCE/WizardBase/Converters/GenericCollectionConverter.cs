@@ -126,9 +126,9 @@ namespace WizardBase {
         /// </param>
         public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value,
                                                                    Attribute[] attributes) {
-            var collection = value as GenericCollection<T>;
+            GenericCollection<T> collection = value as GenericCollection<T>;
             if (collection != null) {
-                var properties = new PropertyDescriptor[collection.Count];
+                PropertyDescriptor[] properties = new PropertyDescriptor[collection.Count];
                 for (int i = 0; i < collection.Count; i++) {
                     try {
                         properties[i] = (new PDesc<T>(collection[i]));

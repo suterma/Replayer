@@ -110,7 +110,7 @@ namespace WizardBase {
         /// </param>
         /// <exception cref="T:System.NotSupportedException">The conversion cannot be performed. </exception>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
-            var text = value as string;
+            string text = value as string;
             if (text == null) {
                 return base.ConvertFrom(context, culture, value);
             }
@@ -241,13 +241,13 @@ namespace WizardBase {
             }
             if (value is T) {
                 if (destinationType == typeof(string)) {
-                    var tVal = (T)value;
+                    T tVal = (T)value;
                     if (culture == null) {
                         culture = CultureInfo.CurrentCulture;
                     }
                     PropertyInfo[] properties = tVal.GetType().GetProperties();
                     string separator = culture.TextInfo.ListSeparator[0].ToString();
-                    var textArray = new string[properties.Length];
+                    string[] textArray = new string[properties.Length];
                     for (int i = 0; i < properties.Length; i++) {
                         if (properties[i].CanWrite) {
                             textArray[i] = properties[i].Name + "=[" +

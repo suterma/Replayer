@@ -102,11 +102,16 @@ namespace Replayer.WinForms.Ui {
                         Core.Model.Instance.Compilation.IsDirty = true;
                         break;
                     }
+                case "Menu:CloneSelectedTrack": {
+                        Core.Model.Instance.CloneSelectedTrack();
+                        Core.Model.Instance.Compilation.IsDirty = true;
+                        break;
+                    }
                 case "Menu:EditSelectedCue": {
                         if (Core.Model.Instance.SelectedCue != null) //there is any selected?
                         {
                             Cue cloneCue = Core.Model.Instance.SelectedCue.Clone(); //clone for private manipulation
-                            using (var propertyDialog = new PropertyDialog(cloneCue, "Edit cue")) {
+                            using (PropertyDialog propertyDialog = new PropertyDialog(cloneCue, "Edit cue")) {
                                 propertyDialog.Height = 353;
                                 if (propertyDialog.ShowDialog() == DialogResult.OK) {
                                     Core.Model.Instance.SelectedTrack.Cues.Replace(Core.Model.Instance.SelectedCue, cloneCue);
@@ -126,9 +131,9 @@ namespace Replayer.WinForms.Ui {
                 case "Menu:EditSelectedTrack": {
                         if (Core.Model.Instance.SelectedTrack != null) //there is any selected?
                         {
-                            var displayTrack = new DisplayTrack(Core.Model.Instance.SelectedTrack.Clone());
+                            DisplayTrack displayTrack = new DisplayTrack(Core.Model.Instance.SelectedTrack.Clone());
                             //clone for private manipulation
-                            using (var propertyDialog = new PropertyDialog(displayTrack, "Edit track")) {
+                            using (PropertyDialog propertyDialog = new PropertyDialog(displayTrack, "Edit track")) {
                                 propertyDialog.Height = 393;
                                 propertyDialog.Width = 800; //to have more room for the file name.
                                 if (propertyDialog.ShowDialog() == DialogResult.OK) {
@@ -171,9 +176,9 @@ namespace Replayer.WinForms.Ui {
         /// <param name="filename"></param>
         /// <returns></returns>
         private String EncodeFileName(String filename) {
-            var toAlphanumeric = new Regex("[^a-zA-Z0-9]");
+            Regex toAlphanumeric = new Regex("[^a-zA-Z0-9]");
             string encoded = toAlphanumeric.Replace(filename, "-");
-            var toSingleDash = new Regex("--+");
+            Regex toSingleDash = new Regex("--+");
             string simplified = toSingleDash.Replace(encoded, "-");
             return simplified;
         }
@@ -185,7 +190,7 @@ namespace Replayer.WinForms.Ui {
             if (Core.Model.Instance.Compilation != null) //there is any?
             {
                 // Displays a ExportFileDialog so the user can export the compilaton
-                using (var exportFileDialog = new SaveFileDialog {
+                using (SaveFileDialog exportFileDialog = new SaveFileDialog {
                     Filter = "Quirli compilation (EXPERIMENTAL)|*.html",
                     Title = "Export the compilation to a location.",
                     InitialDirectory = Core.Model.Instance.Settings.DefaultCompilationLookupDirectory,
@@ -219,8 +224,8 @@ namespace Replayer.WinForms.Ui {
             if (Core.Model.Instance.Compilation != null) //there is any?
             {
                 //create visual copy
-                var displayCompilation = new DisplayCompilation(Core.Model.Instance.Compilation);
-                using (var propertyDialog = new PropertyDialog(displayCompilation, "Edit compilation")) {
+                DisplayCompilation displayCompilation = new DisplayCompilation(Core.Model.Instance.Compilation);
+                using (PropertyDialog propertyDialog = new PropertyDialog(displayCompilation, "Edit compilation")) {
                     if (propertyDialog.ShowDialog() == DialogResult.OK) {
                         Core.Model.Instance.Compilation.Title = displayCompilation.Title; //use the changed data
                         Core.Model.Instance.Compilation.IsDirty = true;
@@ -236,7 +241,7 @@ namespace Replayer.WinForms.Ui {
             if (Core.Model.Instance.Compilation != null) //there is any?
             {
                 // Displays a SaveFileDialog so the user can save the compilaton
-                using (var saveFileDialog = new SaveFileDialog {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog {
                     Filter = "Zip compilation|*.rez|XML compilation|*.rex|Quirli compilation (EXPERIMENTAL)|*.html",
                     Title = "Save a compilation to a new location.",
                     InitialDirectory =
@@ -307,7 +312,7 @@ namespace Replayer.WinForms.Ui {
         /// </summary>
         private void HandleCreateNewCompilationClickedEvent() {
             PreventDiscadingUnsavedCompilation();
-            var wiz = new CreateNewCompilationWizard();
+            CreateNewCompilationWizard wiz = new CreateNewCompilationWizard();
             wiz.ShowDialog();
             return;
         }
@@ -339,10 +344,10 @@ namespace Replayer.WinForms.Ui {
                 return;
             }
 
-            var newTrack = new Track();
-            var displayTrack = new DisplayTrack(newTrack);
+            Track newTrack = new Track();
+            DisplayTrack displayTrack = new DisplayTrack(newTrack);
 
-            var propDialog = new PropertyDialog(displayTrack, "Enter track details");
+            PropertyDialog propDialog = new PropertyDialog(displayTrack, "Enter track details");
 
             if (propDialog.ShowDialog() == DialogResult.OK) {
                 //create initial cue
@@ -373,10 +378,10 @@ namespace Replayer.WinForms.Ui {
                 return;
             }
 
-            var newCue = new Cue();
+            Cue newCue = new Cue();
             //DisplayCue displayCue = new DisplayCue(String.Empty, newCue);
 
-            var propDialog = new PropertyDialog(newCue, "Enter cue details");
+            PropertyDialog propDialog = new PropertyDialog(newCue, "Enter cue details");
 
             if (propDialog.ShowDialog() == DialogResult.OK) {
                 //add cue
@@ -393,7 +398,7 @@ namespace Replayer.WinForms.Ui {
         private void HandleSettingsClickedEvent() {
             Core.Model.Instance.Settings.Save(); //be sure to let everything persist before any possible change
             using (
-                var dlg = new PropertyDialog(new DisplayableCoreSettings(Core.Model.Instance.Settings), "Behavioral Settings")
+                PropertyDialog dlg = new PropertyDialog(new DisplayableCoreSettings(Core.Model.Instance.Settings), "Behavioral Settings")
                 ) {
                 DialogResult result = dlg.ShowDialog();
                 if (result.Equals(DialogResult.OK)) //confirmed?
@@ -412,7 +417,7 @@ namespace Replayer.WinForms.Ui {
         /// </summary>
         private void HandleUiSettingsClickedEvent() {
             Settings.Default.Save(); //save any previous changes, to be sure the most current settings are persisted.
-            using (var dlg = new PropertyDialog(new DisplayableUiSettings(Settings.Default), "UI Settings")) {
+            using (PropertyDialog dlg = new PropertyDialog(new DisplayableUiSettings(Settings.Default), "UI Settings")) {
                 DialogResult result = dlg.ShowDialog();
                 if (result.Equals(DialogResult.OK)) //confirmed?
                 {
@@ -443,7 +448,7 @@ namespace Replayer.WinForms.Ui {
         ///     Handles the about clicked event.
         /// </summary>
         private void HandleAboutClickedEvent() {
-            using (var aboutBox = new AboutBox()) {
+            using (AboutBox aboutBox = new AboutBox()) {
                 aboutBox.ShowDialog();
             }
         }
@@ -455,7 +460,7 @@ namespace Replayer.WinForms.Ui {
         private void HandleOpenCompilationClickedEvent() {
             PreventDiscadingUnsavedCompilation();
 
-            var openFileDialog = new OpenFileDialog {
+            OpenFileDialog openFileDialog = new OpenFileDialog {
                 InitialDirectory = Core.Model.Instance.Settings.DefaultCompilationLookupDirectory,
                 Filter =
                 "Compilation files (*.rez (zipped), *.rex(xml), *.zip(deprecated))|*.rez;*.rex;*.zip",

@@ -67,13 +67,13 @@ namespace WizardBase {
         }
 
         protected virtual bool ShouldSerializeTitleAppearence() {
-            var ta = new TextAppearence();
+            TextAppearence ta = new TextAppearence();
             ta.Font = new Font("Microsoft Sans", 8.25f, FontStyle.Bold, GraphicsUnit.Point);
             return ta != titleAppearence;
         }
 
         protected virtual bool ShouldSerializeSubtitleAppearence() {
-            var sa = new TextAppearence();
+            TextAppearence sa = new TextAppearence();
             sa.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
             return sa != subtitleAppearence;
         }
@@ -174,7 +174,7 @@ namespace WizardBase {
 
         protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect,
                                              out RectangleF descriptionRect, Graphics graphics) {
-            var format = new StringFormat(StringFormatFlags.NoClip);
+            StringFormat format = new StringFormat(StringFormatFlags.NoClip);
             format.Trimming = StringTrimming.EllipsisCharacter;
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;

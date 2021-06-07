@@ -34,7 +34,7 @@ namespace Replayer.WinForms.Ui {
         // Handle the UI exceptions by showing a dialog box, and asking the user whether
         // or not they wish to abort execution.
         private static void Form1_UIThreadException(object sender, ThreadExceptionEventArgs t) {
-            var result = DialogResult.Cancel;
+            DialogResult result = DialogResult.Cancel;
             try {
                 result =
                     new ExceptionMessageBox(t.Exception, ExceptionMessageBoxButtons.AbortRetryIgnore,
@@ -62,7 +62,7 @@ namespace Replayer.WinForms.Ui {
         // log the event, and inform the user about it. 
         private static void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e) {
             try {
-                var ex = (Exception)e.ExceptionObject;
+                Exception ex = (Exception)e.ExceptionObject;
                 string errorMsg = "An application error occurred. Please contact the adminstrator " +
                                   "with the following information:\n\n";
 
@@ -75,7 +75,7 @@ namespace Replayer.WinForms.Ui {
                 }
 
                 // Create an EventLog instance and assign its source.
-                var myLog = new EventLog();
+                EventLog myLog = new EventLog();
                 myLog.Source = "ThreadException";
                 myLog.WriteEntry(errorMsg + ex.Message + "\n\nStack Trace:\n" + ex.StackTrace);
             }

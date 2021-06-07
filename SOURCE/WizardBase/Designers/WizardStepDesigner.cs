@@ -22,8 +22,8 @@ namespace WizardBase {
         /// </returns>
         public override DesignerActionListCollection ActionLists {
             get {
-                var actionListCollection = new DesignerActionListCollection();
-                var designerActionList = new WizardStepDesignerActionList(wizardStep);
+                DesignerActionListCollection actionListCollection = new DesignerActionListCollection();
+                WizardStepDesignerActionList designerActionList = new WizardStepDesignerActionList(wizardStep);
                 actionListCollection.Add(designerActionList);
                 return actionListCollection;
             }
@@ -105,7 +105,7 @@ namespace WizardBase {
             ///     A <see cref="T:System.ComponentModel.Design.DesignerActionItem"></see> array that contains the items in this list.
             /// </returns>
             public override DesignerActionItemCollection GetSortedActionItems() {
-                var items = new DesignerActionItemCollection();
+                DesignerActionItemCollection items = new DesignerActionItemCollection();
                 items.Add(new DesignerActionHeaderItem("Appearence", "Appearence"));
                 items.Add(new DesignerActionMethodItem(this, "ResetAppearence", "Reset Appearence", "Appearence", true));
                 if (WizardStep is StartStep) {

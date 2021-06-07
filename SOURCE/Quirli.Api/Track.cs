@@ -59,10 +59,10 @@ namespace Quirli.Api {
         /// <returns>The content of this instance is serialized into a track url.</returns>
         public String TrackUrl {
             get {
-                var trackUrl = new StringBuilder();
+                StringBuilder trackUrl = new StringBuilder();
                 trackUrl.Append(Player.Url + "?");
 
-                var parameters = new List<String>();
+                List<string> parameters = new List<String>();
                 if (MediaUrl != null) {
                     string uri = MediaUrl.IsAbsoluteUri ? MediaUrl.AbsoluteUri : MediaUrl.OriginalString;
                     parameters.Add(String.Format("media={0}", HttpUtility.UrlEncode(uri)));
@@ -106,7 +106,7 @@ namespace Quirli.Api {
         /// </summary>
         /// <param name="trackUrl">The track URL to create this instance from.</param>
         private void Parse(string trackUrl) {
-            var url = new Uri(trackUrl);
+            Uri url = new Uri(trackUrl);
             string query = url.Query.Substring(1); //omit the question mark
 
             string[] items = query.Split('&');
@@ -114,7 +114,7 @@ namespace Quirli.Api {
                                                                        item => item.Split('=').Last());
 
             //now go thru the parameters
-            foreach (var parameter in parameters) {
+            foreach (KeyValuePair<string, string> parameter in parameters) {
                 string decodedKey = HttpUtility.UrlDecode(parameter.Key);
                 string decodedValue = HttpUtility.UrlDecode(parameter.Value);
 

@@ -33,7 +33,7 @@ namespace Replayer.WinForms.Ui.Components {
                 object[] attributes =
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
                 if (attributes.Length > 0) {
-                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
                     if (titleAttribute.Title != "") {
                         return titleAttribute.Title;
                     }

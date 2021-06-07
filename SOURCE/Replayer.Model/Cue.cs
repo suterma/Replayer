@@ -85,7 +85,7 @@ namespace Replayer.Model {
             }
 
             // If parameter cannot be cast return false.
-            var p = obj as Cue;
+            Cue p = obj as Cue;
             if (p == null) {
                 return false;
             }
@@ -117,7 +117,7 @@ namespace Replayer.Model {
         /// </summary>
         /// <returns></returns>
         public Cue Clone() {
-            var clone = new Cue();
+            Cue clone = new Cue();
             clone.Description = Description;
             clone.Id = Guid.NewGuid();
             clone.Shortcut = Shortcut;

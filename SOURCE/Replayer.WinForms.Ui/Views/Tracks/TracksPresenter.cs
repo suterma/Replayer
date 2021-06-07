@@ -38,7 +38,7 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
                 ExhibitNewCompilation();
             }
             else if (e.PropertyName.Equals("SelectedTrack")) {
-                var items = View.Tracks.DataSource as List<DisplayTrack>;
+                List<DisplayTrack> items = View.Tracks.DataSource as List<DisplayTrack>;
                 View.Tracks.SelectedItem =
                     (from item in items where item.Model.Equals(Core.Model.Instance.SelectedTrack) select item)
                         .SingleOrDefault(); //default in case no track is selected in the model

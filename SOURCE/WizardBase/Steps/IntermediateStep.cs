@@ -37,7 +37,7 @@ namespace WizardBase {
         #region Virtual Methods
 
         protected virtual void GetTextBounds(out RectangleF titleRect, out RectangleF subtitleRect, Graphics graphics) {
-            var format = new StringFormat(StringFormatFlags.FitBlackBox);
+            StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
             format.Trimming = StringTrimming.EllipsisCharacter;
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
@@ -227,7 +227,7 @@ namespace WizardBase {
         #region Should Serialize implementation
 
         protected virtual bool ShouldSerializeSubtitleAppearence() {
-            var sa = new TextAppearence();
+            TextAppearence sa = new TextAppearence();
             sa.Font = new Font("Microsoft Sans", 8.25f, GraphicsUnit.Point);
             return SubtitleAppearence != sa;
         }

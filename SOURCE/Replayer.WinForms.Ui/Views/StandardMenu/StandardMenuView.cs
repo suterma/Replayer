@@ -45,6 +45,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
 
             editSelectedTrackToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedTrack != null);
             deleteSelectedTrackToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedTrack != null);
+            cloneSelectedTrackToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedTrack != null);
             addTrackToolStripMenuItem.Enabled = (Core.Model.Instance.Compilation != null);
 
             editSelectedCueToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedCue != null);
@@ -103,6 +104,10 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e) {
             EventBroker.Instance.IssueEvent("Menu:ExportFile");
+        }
+
+        private void cloneSelectedTrackToolStripMenuItem_Click(object sender, EventArgs e) {
+            EventBroker.Instance.IssueEvent("Menu:CloneSelectedTrack");
         }
     }
 }

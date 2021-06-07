@@ -57,7 +57,7 @@ namespace Quirli.Api {
                 @"""tracks"": [" + Environment.NewLine;
 
             String body = String.Empty;
-            var trackObjects = new List<String>();
+            List<string> trackObjects = new List<String>();
             foreach (Track track in Tracks.Take(38)) {
                 //escape for JSON
                 string escapedTitle = track.Title.Replace(@"""", @"\""");
@@ -81,9 +81,9 @@ namespace Quirli.Api {
             string playerDirectory = Path.GetDirectoryName(Player.Url.LocalPath);
             Directory.CreateDirectory(playerDirectory);
             using (
-                var fs = new FileStream(playerDirectory + @"\" + "playlistcontent" + ".jsonp",
+                FileStream fs = new FileStream(playerDirectory + @"\" + "playlistcontent" + ".jsonp",
                                         FileMode.Create)) {
-                using (var w = new StreamWriter(fs, Encoding.UTF8)) {
+                using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8)) {
                     w.Write(Jsonp);
                 }
             }

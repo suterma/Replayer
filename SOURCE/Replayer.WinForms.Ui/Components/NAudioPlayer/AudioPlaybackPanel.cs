@@ -44,7 +44,6 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         ~AudioPlaybackPanel() {
             Log.Info("AudioPlaybackPanel finalized.");
-
         }
 
         /// <summary>
@@ -279,7 +278,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
             }
             set {
                 //limit
-                var limitedValue = Math.Max(0, Math.Min(100, value));
+                double limitedValue = Math.Max(0, Math.Min(100, value));
 
                 //apply change if necessary
                 //if (volumePot?.Value != limitedValue)
@@ -296,7 +295,7 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// </summary>
         private void UpdateWaveoutVolume() {
             if (waveOut != null) {
-                var volume = (float)volumePot.Volume;
+                float volume = (float)volumePot.Volume;
                 if (waveOut.Volume != volume) {
                     waveOut.Volume = volume;
                     Log.Info($"Volume set to {volume}");
@@ -307,8 +306,8 @@ namespace NAudioDemo.AudioPlaybackDemo {
         private ISampleProvider CreateInputStream(string fileName) {
             audioFileReader = new AudioFileReader(fileName);
 
-            var sampleChannel = new SampleChannel(audioFileReader, true);
-            var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+            SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
+            MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
             postVolumeMeter.StreamVolume += OnPostVolumeMeter;
 
             return postVolumeMeter;
@@ -393,8 +392,8 @@ namespace NAudioDemo.AudioPlaybackDemo {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TrackBarPosition_Scroll(object sender, EventArgs e) {
-            var secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
-            var position = TimeSpan.FromSeconds(secondsPosition);
+            double secondsPosition = audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / trackbarMax;
+            TimeSpan position = TimeSpan.FromSeconds(secondsPosition);
             if (Position != position)
                 Position = position;
 

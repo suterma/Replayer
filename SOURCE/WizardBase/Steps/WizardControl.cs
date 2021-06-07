@@ -263,7 +263,7 @@ namespace WizardBase {
                 return;
             }
             else {
-                var args = new CancelEventArgs();
+                CancelEventArgs args = new CancelEventArgs();
                 BackButtonClick(this, args);
                 if (args.Cancel) {
                     return;
@@ -338,7 +338,7 @@ namespace WizardBase {
                 }
             }
             else {
-                var args = new GenericCancelEventArgs<WizardControl>(this);
+                GenericCancelEventArgs<WizardControl> args = new GenericCancelEventArgs<WizardControl>(this);
                 NextButtonClick(this, args);
                 if (args.Cancel) {
                     return;
@@ -399,7 +399,7 @@ namespace WizardBase {
             controlHost.Visible = false;
             BackButton.Enabled = true;
             currentStepIndex = -1;
-            var rectangle = new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2);
+            Rectangle rectangle = new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2);
             Invalidate(rectangle, false);
             ResumeLayout();
             if (CurrentStepIndexChanged != null) {
@@ -412,7 +412,7 @@ namespace WizardBase {
             SuspendLayout();
             controlHost.Visible = true;
             buttonHost.Visible = true;
-            var rectangle = new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2);
+            Rectangle rectangle = new Rectangle(buttonHost.Left, buttonHost.Top - 2, buttonHost.Width, 2);
             Invalidate(rectangle, false);
             ResumeLayout();
         }

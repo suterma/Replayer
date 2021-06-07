@@ -49,7 +49,7 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer {
             base.OnLoad(e);
 
             //Add a label
-            var boxSize = Size;
+            Size boxSize = Size;
 
             _valueLabel = new DevExpress.XtraEditors.LabelControl();
             _valueLabel.Text = "- dB";
@@ -96,16 +96,16 @@ namespace Replayer.WinForms.Ui.Components.NAudioPlayer {
         /// <returns></returns>
         private void Transform(double value) {
             //limit to 0-100
-            var input = Math.Min(Math.Max(value, lowerInputBound), upperInputBound);
+            double input = Math.Min(Math.Max(value, lowerInputBound), upperInputBound);
 
             //Log with base 2
-            var volume = Math.Pow(input / upperInputBound, 2);
+            double volume = Math.Pow(input / upperInputBound, 2);
 
             //limit the output to 0-1
-            var limited = Math.Min(Math.Max(volume, 0), 1);
+            double limited = Math.Min(Math.Max(volume, 0), 1);
 
             //Show the dB level
-            var dbLevel = 10 * Math.Log10(limited / 1);
+            double dbLevel = 10 * Math.Log10(limited / 1);
             if (_valueLabel != null) {
                 _valueLabel.Text = $"{dbLevel:#.#}dB";
             }

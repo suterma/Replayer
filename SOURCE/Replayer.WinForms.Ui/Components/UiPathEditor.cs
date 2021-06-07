@@ -45,7 +45,7 @@ namespace Replayer.WinForms.Ui.Gui {
             }
 
             //Retrieve our settings attribute (if one is specified)
-            var sa = (OfdParamsAttribute)context.PropertyDescriptor.Attributes[typeof(OfdParamsAttribute)];
+            OfdParamsAttribute sa = (OfdParamsAttribute)context.PropertyDescriptor.Attributes[typeof(OfdParamsAttribute)];
             if (sa != null) {
                 m_Settings = sa; //Store it in the editor
             }
@@ -67,7 +67,7 @@ namespace Replayer.WinForms.Ui.Gui {
             }
 
             //Initialize the file dialog with our settings
-            var dlg = new OpenFileDialog {
+            OpenFileDialog dlg = new OpenFileDialog {
                 Filter = m_Settings.Filter,
                 CheckFileExists = true,
                 Title = m_Settings.Title,
@@ -75,7 +75,7 @@ namespace Replayer.WinForms.Ui.Gui {
             };
 
             //Find if the current value is legitimate
-            var filename = (string)value;
+            string filename = (string)value;
             if (!File.Exists(filename)) {
                 filename = null;
             }

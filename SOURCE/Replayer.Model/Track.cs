@@ -162,18 +162,30 @@ namespace Replayer.Model {
 
 
         /// <summary>
-        ///     Creates a fully identical clone (except the Id property, which gets a new Id) of this instance.
+        ///     Creates a fully identical deep clone (except the Id property, which gets a new Id) of this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The clone</returns>
         public Track Clone() {
-            var clone = new Track();
+            Track clone = new Track();
             clone.Album = Album;
             clone.Artist = Artist;
-            clone.Cues = Cues;
+            clone.Cues = Clone(Cues);
             clone.Id = Guid.NewGuid();
             clone.Measure = Measure;
             clone.Name = Name;
             clone.Url = Url;
+            return clone;
+        }
+
+        /// <summary>
+        ///     Clones a set of observable cues (except the Id property, which gets a new Id)
+        /// </summary>
+        /// <returns>The clone</returns>
+        private static ObservableCollection<Cue> Clone(ObservableCollection<Cue>  cues) {
+            ObservableCollection<Cue> clone = new ObservableCollection<Cue>(); 
+            foreach (Cue cue in cues) {
+                clone.Add(cue.Clone());
+            }
             return clone;
         }
 

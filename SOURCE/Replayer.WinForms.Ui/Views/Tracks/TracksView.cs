@@ -82,7 +82,7 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
         private void _lbcTracks_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Right) {
                 //select the item under the mouse
-                var vi = _lbcTracks.GetViewInfo() as BaseListBoxViewInfo;
+                BaseListBoxViewInfo vi = _lbcTracks.GetViewInfo() as BaseListBoxViewInfo;
                 BaseListBoxViewInfo.ItemInfo ii = vi.GetItemInfoByPoint(e.Location);
                 if (ii != null) {
                     _lbcTracks.SelectedIndex = ii.Index;
@@ -111,6 +111,21 @@ namespace Replayer.WinForms.Ui.Views.Tracks {
         /// </param>
         private void moveDownToolStripMenuItem_Click(object sender, EventArgs e) {
             EventBroker.Instance.IssueEvent("Menu:MoveDownSelectedTrack");
+        }
+
+        private void _cmsTracks_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+
+        }
+
+        /// <summary>
+        ///     Handles the Click event of the cloneToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        ///     The <see cref="System.EventArgs" /> instance containing the event data.
+        /// </param>
+        private void cloneToolStripMenuItem_Click(object sender, EventArgs e) {
+            EventBroker.Instance.IssueEvent("Menu:CloneSelectedTrack");
         }
     }
 }

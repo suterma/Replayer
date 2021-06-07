@@ -60,7 +60,7 @@ namespace Replayer.WinForms.Ui.Gui {
 
             //create tracks
             foreach (string trackMediaFile in _tbTrackMediaFiles.Lines) {
-                var newTrack = new Track {
+                Track newTrack = new Track {
                     Album = _tbCommonAlbum.Text,
                     Artist = _tbCommonArtist.Text,
                     Name = Path.GetFileNameWithoutExtension(trackMediaFile),
@@ -87,7 +87,7 @@ namespace Replayer.WinForms.Ui.Gui {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void _btnBrowserForTracks_Click(object sender, EventArgs e) {
-            var otfd = new OpenTrackFileDialog();
+            OpenTrackFileDialog otfd = new OpenTrackFileDialog();
             if (otfd.ShowDialog(true) == DialogResult.OK) //pressed ok by the user?
             {
                 _tbTrackMediaFiles.Lines = otfd.FileNames;

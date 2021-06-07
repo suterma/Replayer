@@ -62,7 +62,7 @@ namespace Replayer.Model.Persistence {
         /// <param name="track"></param>
         /// <returns></returns>
         public override String Find(Track track) {
-            var places = new List<string> { MediaPath, Url }; //first use the specified media path, but as backup also the place where the compliation is stored
+            List<string> places = new List<string> { MediaPath, Url }; //first use the specified media path, but as backup also the place where the compliation is stored
             string path = TrackFinder.Find(track.Url, places);
 
             //we now have the best guess about where that media file is, so save it here
@@ -87,7 +87,7 @@ namespace Replayer.Model.Persistence {
         public override void Store(String url) {
             Url = url; //use this from now on.
             //store back to file
-            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
+            XmlSerializer CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
             using (TextWriter writeFileStream = new StreamWriter(Url)) {
                 CompilationSerializer.Serialize(writeFileStream, this);
             }
@@ -98,9 +98,9 @@ namespace Replayer.Model.Persistence {
         ///     Retrieves the Compilation at the specified url.
         /// </summary>
         public override ICompilation Retrieve(String fileName) {
-            var CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
-            using (var readFileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-                var Compilation = (XmlCompilation)CompilationSerializer.Deserialize(readFileStream);
+            XmlSerializer CompilationSerializer = new XmlSerializer(typeof(XmlCompilation));
+            using (FileStream readFileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+                XmlCompilation Compilation = (XmlCompilation)CompilationSerializer.Deserialize(readFileStream);
                 Compilation.Url = readFileStream.Name;
                 //keep the filename of the storage used (use the path from the filestream, because it is absolute; the current directory was applied if no path was available beforehand)
                 Compilation.IsDirty = false; //explicitly set false, since we just have loaded the data

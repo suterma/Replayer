@@ -55,7 +55,7 @@ namespace Replayer.WinForms.Ui.Components {
         /// </summary>
         /// <param name="link">The link.</param>
         public void ShowBrowser(string link) {
-            var process = new Process();
+            Process process = new Process();
             process.StartInfo.FileName = link;
             process.StartInfo.Verb = "open";
             process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;

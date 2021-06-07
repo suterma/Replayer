@@ -53,7 +53,7 @@ namespace Replayer.Model.Persistence {
             const string resourceName = "Replayer.Model.Persistence.quirliplaylist.inlinetemplate.html";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
-                using (var reader = new StreamReader(stream)) {
+                using (StreamReader reader = new StreamReader(stream)) {
                     string result = reader.ReadToEnd();
                     return result;
                 }
@@ -65,7 +65,7 @@ namespace Replayer.Model.Persistence {
             const string resourceName = "Replayer.Model.Persistence.quirliplayer.inline.html";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
-                using (var reader = new StreamReader(stream)) {
+                using (StreamReader reader = new StreamReader(stream)) {
                     string player = reader.ReadToEnd();
 
                     //get the path to store the player
@@ -85,9 +85,9 @@ namespace Replayer.Model.Persistence {
         /// </summary>
         public override void Store(String url) {
             Url = url; //use this from now on.
-            var quirliPlaylist = new List<Quirli.Api.Track>();
+            List<Quirli.Api.Track> quirliPlaylist = new List<Quirli.Api.Track>();
             string targetDirectory = Path.GetDirectoryName(url) + @"\";
-            var urlRoot = new Uri(targetDirectory);
+            Uri urlRoot = new Uri(targetDirectory);
 
             //create a deployment information with all relevant stuff per track
             int index = 0;
