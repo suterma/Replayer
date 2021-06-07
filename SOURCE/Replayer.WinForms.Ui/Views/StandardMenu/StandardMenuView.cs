@@ -42,6 +42,7 @@ namespace Replayer.WinForms.Ui.Views.StandardMenu {
             saveCompilationAsToolStripMenuItem.Enabled = (Core.Model.Instance.Compilation != null);
             saveCompilationToolStripMenuItem.Enabled = (Core.Model.Instance.Compilation != null);
             editCompilationToolStripMenuItem.Enabled = (Core.Model.Instance.Compilation != null);
+            exportToolStripMenuItem.Enabled = (Core.Model.Instance.Compilation != null);
 
             editSelectedTrackToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedTrack != null);
             deleteSelectedTrackToolStripMenuItem.Enabled = (Core.Model.Instance.SelectedTrack != null);
