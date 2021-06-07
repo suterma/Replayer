@@ -227,7 +227,6 @@ namespace Replayer.Core {
                     SelectedCue = null; //unselect any cue, as we dont know what to select for this new track first
                     OnPropertyChanged("SelectedTrack");
 
-                    //TODO check with winforms app, this code is new
                     if (_selectedTrack != null) //any selected?
                     {
                         //provide absolute url to the player
@@ -418,12 +417,23 @@ namespace Replayer.Core {
         ///     Removes the selected cue from the selected track of the loaded compilation, if there is any.
         /// </summary>
         public void RemoveSelectedCue() {
-            if (SelectedTrack != null) //any one selected?
-            {
-                SelectedTrack.Cues.Remove(SelectedCue);
-                SelectedCue = null;
-                OnPropertyChanged("SelectedTrack");
-                //intended to force a visual update of the cues of the selected track wich are now changed
+            if (
+                (SelectedTrack != null) && //any one selected?
+                (SelectedCue != null)
+            ) {
+                Cue cueToRemove = SelectedCue; //keep reference
+                int indexOfCueToRemove = SelectedTrack.Cues.IndexOf(cueToRemove);
+                SelectedTrack.Cues.RemoveAt(indexOfCueToRemove);
+
+                //Select the cue at the same position if available
+                if (SelectedTrack.Cues.Count > indexOfCueToRemove) {
+                    SelectedCue = SelectedTrack.Cues[indexOfCueToRemove];
+                }
+                else {
+                    SelectedCue = SelectedTrack.Cues.LastOrDefault();
+                }
+
+                OnPropertyChanged("SelectedCue"); //intended to force a visual update of the cues of the selected track wich are now changed
             }
         }
 
@@ -436,9 +446,17 @@ namespace Replayer.Core {
                 (SelectedTrack != null) //and one selected at all?
                 ) {
                 Track trackToRemove = SelectedTrack; //keep reference
-                SelectedTrack = null;
                 int indexOfTrackToRemove = Compilation.Tracks.IndexOf(trackToRemove);
                 Compilation.Tracks.RemoveAt(indexOfTrackToRemove);
+
+                //Select the track at the same position if available
+                if (Compilation.Tracks.Count > indexOfTrackToRemove) {
+                    SelectedTrack = Compilation.Tracks[indexOfTrackToRemove];
+                }
+                else {
+                    SelectedTrack = Compilation.Tracks.LastOrDefault();
+                }
+
                 OnPropertyChanged("SelectedTrack"); //intended to force a visual update of the tracks
             }
         }
