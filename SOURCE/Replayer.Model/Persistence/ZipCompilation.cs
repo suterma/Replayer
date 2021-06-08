@@ -157,7 +157,7 @@ namespace Replayer.Model.Persistence {
         /// <summary>
         ///     Diese Funktion komprimiert Dateien zu einem ZIP-Archiv.
         /// </summary>
-        /// <param name="InputFiles">Die Liste mit Dateien die komprimiert werden soll.</param>
+        /// <param name="InputFiles">Die Liste mit Dateien die komprimiert werden soll (mehrfache Einträge werden nur 1 mal verarbeitet).</param>
         /// <param name="FileName">Der Dateiname der ZIP-Datei (ohne Pfad).</param>
         /// <param name="OutputDir">Das Ausgabeverzeichnis wo die ZIP Datei gespeichert werden soll.</param>
         /// <remarks></remarks>
@@ -174,9 +174,7 @@ namespace Replayer.Model.Persistence {
             int ByteLen = 0;
             FileStream FS = null;
 
-
-            //for (int i = 0; i <= InputFiles.Count - 1; i++)
-            foreach (string file in InputFiles) {
+            foreach (string file in InputFiles.Distinct()) {
                 //ZipEntry erstellen
                 ZipEntry = new ZipEntry(Path.GetFileName(file));
                 ZipEntry.DateTime = DateTime.Now;
