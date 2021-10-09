@@ -4,7 +4,7 @@
 ![Release](https://img.shields.io/github/release/suterma/Replayer.svg)
 ![Language](https://img.shields.io/github/languages/top/suterma/Replayer.svg)
 
-_Replayer_ is a free media player for use during rehearsals with playback music. It's main feature is fast navigation to predefined cue points in the playback media.
+Replayer is a free, cue-based media player for rehearsals with playback music. By the click of a button, you can start to play at predefined times in the audio file.
 
 ![Visual Functioning Overview](/DOC/Visual%20Funtioning%20Overview.png)
 
@@ -22,6 +22,6 @@ Then, using Replayer and your laptop computer, you can rehearse any portion of y
 Use the navigation features on the numeric keypad. 
 
 ## Documentation
-Go to the [official website, replayer.ch](https://replayer.ch), or directly download the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/User-Manual.pdf) for detailed information.
+Go to the [official website, replayer.ch](https://replayer.app/), or directly download the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/User-Manual.pdf) for detailed information.
 
-_Replayer_ is created by [marcelsuter.ch](https://marcelsuter.ch)
+Replayer is created by [marcelsuter.ch](https://marcelsuter.ch)
