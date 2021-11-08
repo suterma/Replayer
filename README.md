@@ -11,23 +11,10 @@ Replayer is a free, cue-based media player for rehearsals with playback music. B
 
 ## Installation
 
-Get the [Replayer executable from the latest release](https://github.com/suterma/Replayer/releases/latest) and start with a double-click.
-
-## Getting started
-
-First, you create a compilation of tracks and cues once, using a wizard from within Replayer.
-
-## Rehearse
-
-Then, using Replayer and your laptop computer, you can rehearse any portion of your set with ease.
-
-## Fast
-
-<img src="/DOC/Keyboard%20Navigation.png" width="50%">
-Use the navigation features on the numeric keypad.
+Get the [Replayer](https://github.com/suterma/Replayer/releases/latest) executable for Windows from the latest release and start with a double-click.
 
 ## Documentation
 
-Go to the [official website, replayer.app](https://replayer.app/), or directly download the [Leaflet](/DOC/Leaflet.pdf) for an overview, or the [User Manual](/DOC/User-Manual.pdf) for detailed information.
+Go to the [official website](https://replayer.app) for more information, or directly to the [complete documentation](https://replayer.app/documentation).
 
-Replayer is created by [marcelsuter.ch](https://marcelsuter.ch)
+[Replayer](https://replayer.app) is created with love by [marcelsuter.ch](https://marcelsuter.ch)
