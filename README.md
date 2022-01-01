@@ -7,9 +7,12 @@
 
 Replayer is a free, cue-based media player for rehearsals with playback music. By the click of a button, Replayer starts to play at predefined times in the audio file.
 
-Replayer is available as a **Windows Desktop application**, as well as an installable **progressive Web App** (online or offline usage with a modern Broswer).
-
 ![Visual Functioning Overview](/DOC/visual-function-classic-horizontal-1440p.webp)
+
+Replayer is available as
+
+- **Windows Desktop application**
+- **progressive Web App** (online or offline usage with a modern Broswer).
 
 ## Installation
 
