@@ -7,11 +7,14 @@
 
 Replayer is a free, cue-based media player for rehearsals with playback music. By the click of a button, Replayer starts to play at predefined times in the audio file.
 
+Replayer is available as a **Windows Desktop application**, as well as an installable **progressive Web App** (online or offline usage with a modern Broswer).
+
 ![Visual Functioning Overview](/DOC/visual-function-classic-horizontal-1440p.webp)
 
 ## Installation
 
-Get the [Replayer](https://github.com/suterma/Replayer/releases/latest) executable for Windows from the latest release and start with a double-click.
+- Download the **[Replayer Executable](https://github.com/suterma/Replayer/releases/latest) for Windows** from the latest release and start with a double-click.
+- Try the **[Replayer Web App](https://web.replayer.app) for the browser** online. It's installable for offline usage directly from the browser.
 
 ## Documentation
 
