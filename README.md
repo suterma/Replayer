@@ -12,7 +12,7 @@ Replayer is a free, cue-based media player for rehearsals with playback music. B
 Replayer is available as
 
 - **Windows Desktop application** (this repository)
-- **progressive Web App** (online or offline usage with a modern Broswer) (in the [replayer-pwa](https://github.com/suterma/replayer-pwa) repository).
+- **progressive Web App** (in the [replayer-pwa](https://github.com/suterma/replayer-pwa) repository) (online or offline usage with a modern Browser) .
 
 ## Installation
 
