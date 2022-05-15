@@ -1,9 +1,11 @@
-# Replayer
+# Replayer (Windows)
 
 ![License](https://img.shields.io/github/license/suterma/Replayer.svg)
 ![GitHub All Releases](https://img.shields.io/github/downloads/suterma/Replayer/total.svg)
 ![Release](https://img.shields.io/github/release/suterma/Replayer.svg)
 ![Language](https://img.shields.io/github/languages/top/suterma/Replayer.svg)
+
+## :exclamation: **For the web app, see the [replayer-pwa](https://github.com/suterma/replayer-pwa) repository.**
 
 Replayer is a free, cue-based media player for rehearsals with playback music. By the click of a button, Replayer starts to play at predefined times in the audio file.
 
